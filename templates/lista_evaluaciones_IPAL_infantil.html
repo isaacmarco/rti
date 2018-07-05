@@ -1,0 +1,98 @@
+{% load staticfiles %}
+
+<html>
+
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<link rel="stylesheet" href="{% static 'css/rti.css' %}">
+</head>
+
+<body>
+
+
+<div class="form-style-1">
+	<h1>Evaluaciones IPAL INFANTIL</h1>
+    <h2>{{ alumno.nombre }}</h2>
+    <br>
+</div>
+
+<div class="form-style-1">
+	<form>
+	<button type="button" class="save btn btn-default"
+	onclick="window.location.href='{{ server_url }}'">🚀 Inicio</button>
+
+	<button type="button" class="save btn btn-default"
+	onclick="window.location.href='{{ server_url }}lista-alumnos-grupo/?idGrupo={{ alumno.grupo.pk }}'">👈 Volver</button>
+
+    <button type="button" class="save btn btn-default"
+	onclick="window.location.href='{{ server_url }}nueva-evaluacion-ipal-infantil/?idAlumno={{alumno.pk | safe}}'" >📆 Nueva evaluación IPAL</button>
+	</form>
+    <hr>
+</div>
+
+	<table>
+	<tr>
+
+		<th>Tipo</th>
+		<th>Momento</th>
+		<th>Mes</th>
+		<th>Omnibus</th>
+		<th>Riesgo</th>
+		<th>Editar</th>
+		<th>Curso académico</th>
+
+	</tr>
+
+		{% for evaluacion in evaluaciones %}
+
+		<tr>
+
+			<!-- Tipo de evaluacion -->
+			<td>
+				{% if evaluacion.tipo == "PR" %}
+					🔎 PROGRESO
+				{% else %}
+					📆 CRIBADO
+				{% endif %}
+			</td>
+
+			<!-- Momento de evaluacion -->
+			<td>
+				{% if evaluacion.tipo == "PR" %}
+					X
+				{% else %}
+					{{ evaluacion.momento }}
+				{% endif %}
+			</td>
+
+			<td>{{ evaluacion.mes_leible }}</td>
+
+			<td>{{ evaluacion.omnibus }}</td>
+
+			<!-- Nivel de riesgo -->
+			<td>
+				<!--{{ evaluacion.riesgo }}-->
+                {% with 'imagenes/'|add:evaluacion.riesgo|add:'.png' as indicador %}
+				<img  style="width:20px;height:20px;" align="top"
+                src="{% static indicador %}">
+                {% endwith %}
+			</td>
+
+			<!-- editar evaluacion -->
+			<td>
+				<a href="{{ server_url }}editar-evaluacion-ipal-infantil/
+				?idEvaluacion={{evaluacion.pk | safe}}" style="font-size:20px" >📋</a>
+			</td>
+
+			<td>{{ evaluacion.curso_academico }}</td>
+
+		</tr>
+
+		{% endfor %}
+
+	</table>
+
+
+
+</body>
+</html>

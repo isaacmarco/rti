@@ -1,0 +1,950 @@
+from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth import authenticate, login, logout
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.models import User
+from django.shortcuts import redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from .models import Grupo, Alumno, Evaluacion, Evaluador
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
+
+from .forms import FormGrupo, FormAlumno, FormAlumnoPOST, FormEvaluador, FormAlumnoGrupoForzado,\
+    Form_Evaluacion_IPAL_INFANTIL, Form_Evaluacion_IPAL_PRIMERO, Form_Evaluacion_IPAL_SEGUNDO, \
+    Form_Evaluacion_IPAM_INFANTIL, Form_Evaluacion_IPAM_PRIMERO, Form_Evaluacion_IPAM_SEGUNDO, \
+    Form_Evaluacion_IPAM_TERCERO, Form_Evaluacion_IPAE_PRIMERO, Form_Evaluacion_IPAE_SEGUNDO, \
+    Form_Evaluacion_IPAE_TERCERO,SignUpForm
+
+from .models import \
+    Evaluacion_IPAL_INFANTIL, Evaluacion_IPAL_PRIMERO, Evaluacion_IPAL_SEGUNDO,\
+    Evaluacion_IPAM_INFANTIL, Evaluacion_IPAM_PRIMERO, Evaluacion_IPAM_SEGUNDO, Evaluacion_IPAM_TERCERO, \
+    Evaluacion_IPAE_PRIMERO, Evaluacion_IPAE_SEGUNDO, Evaluacion_IPAE_TERCERO
+
+import rtiapp.omnibus_ipal as OmnibusIPAL
+import rtiapp.omnibus_ipam as OmnibusIPAM
+import rtiapp.omnibus_ipae as OmnibusIPAE
+import rtiapp.riesgo_ipal as RiesgoIPAL
+import rtiapp.riesgo_ipam as RiesgoIPAM
+import rtiapp.riesgo_ipae as RiesgoIPAE
+import rtiapp.constantes as Globales
+from django.db.models import Q
+import itertools
+import csv
+
+server_url = 'http://127.0.0.1:8000/'
+lista_grupos_url = 'lista-grupos'
+editar_grupo_url = 'editar-grupo'
+lista_alumnos_grupo_url = 'lista-alumnos-grupo'
+
+clases = {
+    'IPAL-INFANTIL': Evaluacion_IPAL_INFANTIL,
+    'IPAL-PRIMERO': Evaluacion_IPAL_PRIMERO,
+    'IPAL-SEGUNDO': Evaluacion_IPAL_SEGUNDO,
+    'IPAM-INFANTIL': Evaluacion_IPAM_INFANTIL,
+    'IPAM-PRIMERO': Evaluacion_IPAM_PRIMERO,
+    'IPAM-SEGUNDO': Evaluacion_IPAM_SEGUNDO,
+    'IPAM-TERCERO': Evaluacion_IPAM_TERCERO,
+    'IPAE-PRIMERO': Evaluacion_IPAE_PRIMERO,
+    'IPAE-SEGUNDO': Evaluacion_IPAE_SEGUNDO,
+    'IPAE-TERCERO': Evaluacion_IPAE_TERCERO,
+}
+formularios = {
+    'IPAL-INFANTIL': Form_Evaluacion_IPAL_INFANTIL,
+    'IPAL-PRIMERO': Form_Evaluacion_IPAL_PRIMERO,
+    'IPAL-SEGUNDO': Form_Evaluacion_IPAL_SEGUNDO,
+    'IPAM-INFANTIL': Form_Evaluacion_IPAM_INFANTIL,
+    'IPAM-PRIMERO': Form_Evaluacion_IPAM_PRIMERO,
+    'IPAM-SEGUNDO': Form_Evaluacion_IPAM_SEGUNDO,
+    'IPAM-TERCERO': Form_Evaluacion_IPAM_TERCERO,
+    'IPAE-PRIMERO': Form_Evaluacion_IPAE_PRIMERO,
+    'IPAE-SEGUNDO': Form_Evaluacion_IPAE_SEGUNDO,
+    'IPAE-TERCERO': Form_Evaluacion_IPAE_TERCERO,
+}
+colores_riesgo = {
+  "NOEV": "#ffffff",
+  "ALTR": "#850202",
+  "RIES": "#f00",
+  "BAJO": "#ffa500",
+  "NORM": "#009fff",
+  "OPTI": "#1ae36e"#
+}
+
+
+ERROR_ALUMNO_YA_TIENE_EVALUACION_ANUAL = 'Este alumno ya tiene registros de evaluación para el curso '
+ERROR_INFORME_IPAE_INFANTIL = 'La prueba IPAE no tiene una versión para Infantil'
+ERROR_EVALUADOR_NO_EXISTE = 'El número de identificación del otro evaluador es incorrecto'
+ERROR_LISTADO_GRUPOS = 'No ha creado ningun grupo'
+
+
+def index(request):
+    return render(request,'principal.html')
+
+def documentos(request):
+    return render(request,'documentos.html', {'server_url':server_url})
+
+def exportar(request):
+    print('>>> Exportando datos')
+
+    # respuesta
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="somefilename.csv"'
+    writer = csv.writer(response)
+
+    # obtenemos todos los alumnos y los volcamos en el fichero
+    # linea a linea
+    alumnos = Alumno.objects.all()
+
+    for alumno in alumnos:
+        writer.writerow([alumno.CIAL, alumno.nombre, alumno.curso, alumno.grupo])
+
+
+
+    # devolver el fichero para descargar
+    return response
+
+
+
+def compartir_grupo(request):
+    print('>>> Compartiendo grupo con otro evaluador')
+    id_grupo = request.GET['idGrupo']
+    grupo = Grupo.objects.get(pk=id_grupo)
+    return render(request, 'compartir_grupo.html', {
+        'server_url': server_url, 'grupo': grupo})
+
+
+def actualizar_grupo_compartido(request):
+    # obtenemos el evaluador seleccionado y
+    # comprobamos que es valido
+    id_evaluador = request.GET['idEvaluador']
+    id_grupo = request.GET['idGrupo']
+
+    try:
+        evaluador = Evaluador.objects.get(pk=id_evaluador)
+        grupo = Grupo.objects.get(pk=id_grupo)
+        # agregar al grupo un nuevo evaluador
+        grupo.evaluadores.add(evaluador.usuario)
+        grupo.save()
+        print('>>> Nuevo grupo ' + grupo.nombre + ' compartido con ' + evaluador.nombre)
+        return redirect(server_url)
+
+    except ObjectDoesNotExist:
+        return render(request,
+                      'error.html', {'error': ERROR_EVALUADOR_NO_EXISTE})
+
+
+def establecer_curso(request):
+    print('>>> Estableciendo curso academico')
+    # obtener el curso actual desde el
+    # perfil del evaluador y pasarlo como parametro
+    evaluador = Evaluador.objects.get(usuario=request.user)
+    curso = evaluador.curso_academico
+    # url_retorno = server_url + lista_alumnos_grupo_url + '/?idGrupo=' + id_grupo
+    return render(request, 'establecer_curso.html', {
+        'server_url': server_url, 'curso': curso})
+
+
+# almacena el nuevo curso academico establecido
+# en la base de datos
+def actualizar_curso(request):
+    evaluador = Evaluador.objects.get(usuario=request.user)
+    curso = request.GET['curso']
+    evaluador.curso_academico = curso
+    evaluador.save()
+    print('>>> Guardando nuevo curso academico: ' + curso)
+    return redirect(server_url)
+
+
+# generar datos y mostrar el informe general
+# de grupo
+def informe_grupo(request):
+
+    print('>>> Informe de grupo')
+    # obtener el grupo y recuperar los alumnos
+    id_grupo = request.GET['idGrupo']
+    grupo = Grupo.objects.get(pk=id_grupo)
+    curso = grupo.curso
+    prueba = request.GET['prueba']
+    url_retorno = server_url + lista_alumnos_grupo_url + '/?idGrupo=' + id_grupo
+    print('>>> Grupo ' + grupo.nombre + ' ' + grupo.curso + ' ' + prueba)
+
+    # no hay pruebas de IPAE INFANTIL
+
+    if prueba == Globales.IPAE and curso == Globales.INFANTIL:
+        return render(request, 'error.html', {'error': ERROR_INFORME_IPAE_INFANTIL,
+        'server_url':url_retorno})
+
+    try:
+
+        # obtener alumnos solo de ese grupo y curso
+        alumnos = Alumno.objects.filter(evaluador=request.user, grupo=grupo, curso=grupo.curso)
+
+        # obtener las evaluaciones inicio-medio-fin de todos los
+        # alumnos recuperados
+
+        print('>>> Recuperando evaluaciones')
+        todas_evaluaciones = []# lista de evaluaciones
+
+        # obtener la clase
+        nombre_modelo = prueba + '-' + curso
+        modelo = clases[nombre_modelo]
+        for alumno in alumnos:
+
+            consulta_evaluaciones = modelo.objects.filter(
+                alumno=alumno).filter(
+                Q(mes=Globales.NOVIEMBRE) |
+                Q(mes=Globales.FEBRERO) |
+                Q(mes=Globales.MAYO)
+            )
+            # recorrer la queryset recuperando cada registro
+            # de evaluacion
+            for registro_evaluacion in consulta_evaluaciones:
+                print(registro_evaluacion.alumno.nombre + ' ' +
+                      registro_evaluacion.mes_leible + ' ' +
+                      registro_evaluacion.riesgo + ' ' +
+                      registro_evaluacion.get_tipo_display())
+                todas_evaluaciones.append(registro_evaluacion)
+
+
+        plantilla = 'informe_grupo.html'
+
+        return render(request, plantilla,
+                      {'grupo': grupo,
+                       'alumnos': alumnos,
+                       'evaluaciones': todas_evaluaciones,
+                       'colores_riesgo': colores_riesgo,
+                       'prueba': prueba,
+                       'curso': curso,
+                       'server_url': url_retorno}
+                      )
+
+    except ObjectDoesNotExist:
+        return render(request, 'error.html', {'error': "No tiene alumnos"})
+
+
+
+
+
+def alta_evaluador(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            # crear el nuevo usuario
+            form.save()
+            # crear el registro de Evaluador
+            nombre = form.cleaned_data.get('nombre')
+            email = form.cleaned_data.get('email')
+            centro = form.cleaned_data.get('centro')
+            pais = form.cleaned_data.get('pais')
+            sexo = form.cleaned_data.get('sexo')
+            nivel_academico = form.cleaned_data.get('nivel_academico')
+            profesion = form.cleaned_data.get('profesion')
+            zona = form.cleaned_data.get('zona')
+
+            evaluador = Evaluador(
+                nombre=nombre,
+                email=email,
+                centro=centro,
+                pais=pais,
+                sexo=sexo,
+                nivel_academico=nivel_academico,
+                profesion=profesion,
+                zona=zona
+            )
+
+            evaluador.save()
+
+            # hacer el login
+            #username = form.cleaned_data.get('username')
+            #raw_password = form.cleaned_data.get('password1')
+            #user = authenticate(username=username, password=raw_password)
+            #login(request, user)
+            return redirect(server_url)
+    else:
+        form = SignUpForm()
+    return render(request, 'signup.html', {'form': form, 'server_url': server_url})
+
+
+
+# devuelve verdadero si es cribado
+def evaluacion_es_cribado(evaluacion):
+    mes = evaluacion.mes
+    return mes == Globales.NOVIEMBRE or mes == Globales.FEBRERO or mes == Globales.MAYO
+
+
+# devuelve el momento de evaluacion dependiendo del mes
+def momento_evaluacion(evaluacion):
+    mes = evaluacion.mes
+    if mes == Globales.NOVIEMBRE:
+       return Globales.INICIO
+    if mes == Globales.FEBRERO:
+        return Globales.MEDIO
+    if mes == Globales.MAYO:
+        return Globales.FIN
+    return Globales.INICIO
+
+
+#
+# nuevas evaluaciones
+#
+
+
+def nueva_evaluacion(request):
+    print('>>> Nueva evaluacion anual')
+    id_alumno = request.GET['idAlumno']
+    tipo = request.GET['tipo']
+    alumno = Alumno.objects.get(pk=id_alumno)
+    evaluador = Evaluador.objects.get(usuario=request.user)
+    curso = alumno.curso
+    grupo = str(alumno.grupo.pk)
+    url_retorno = server_url + lista_alumnos_grupo_url + '/?idGrupo=' + grupo
+    print('>>> Nueva evaluacion ' + str(evaluador.curso_academico) + ' ' + tipo + ' ' + curso)
+
+    # nombre del modelo a instanciar
+    nombre_modelo = tipo + '-' + curso
+
+    # buscamos un registro que contenga una evaluacion
+    # de este alumno que coincida con la fecha del curso
+    # configurada en el perfil del evaluador, si existe
+    # no se permite crear mas
+    reg_evaluacion = clases[nombre_modelo].objects.filter(
+        alumno=alumno, curso_academico=evaluador.curso_academico)
+
+    if not reg_evaluacion:
+        print('>>> Comenzando a crear el registro anual para esta prueba')
+    else:
+        print(' >>> Ya existe un registro anual de esta prueba para este alumno: ABORTANDO')
+        return render(request, 'error.html',
+            {'error': ERROR_ALUMNO_YA_TIENE_EVALUACION_ANUAL +
+                      str(evaluador.curso_academico),'server_url': url_retorno})
+
+
+    # al crear una evaluacion anual para el alumno
+    # tenemos que crear 7 registros de evaluacion de la prueba
+    # correspondiente
+
+    meses_evaluacion = [
+        Globales.NOVIEMBRE,
+        Globales.DICIEMBRE,
+        Globales.ENERO,
+        Globales.FEBRERO,
+        Globales.MARZO,
+        Globales.ABRIL,
+        Globales.MAYO
+    ]
+
+
+    # creamos la nueva evaluacion para el mes correspondiente
+    for mes in meses_evaluacion:
+
+        evaluacion = clases[nombre_modelo](
+            mes=mes,
+            evaluador=request.user,
+            alumno=alumno,
+            curso_academico=evaluador.curso_academico
+        )
+
+        # comprobar si es de tipo cribado o progreso
+        cribado_progreso = Globales.PROGRESO
+        if mes == Globales.NOVIEMBRE or mes == Globales.FEBRERO or mes == Globales.MAYO:
+            cribado_progreso = Globales.CRIBADO
+        evaluacion.tipo = cribado_progreso
+
+        # asignar la prueba
+        evaluacion.prueba = tipo
+        # momento de evaluacion
+        evaluacion.mes_leible = evaluacion.get_mes_display()
+        momento = momento_evaluacion(evaluacion)
+        evaluacion.momento = momento
+        evaluacion.save()
+        print('>>> Creada evaluacion para ' + evaluacion.get_mes_display() )
+
+    return redirect(url_retorno)
+
+
+
+
+#
+# procesa una evaluacion al guardarla
+#
+
+def procesar_evaluacion(evaluacion):
+
+    alumno = evaluacion.alumno
+    prueba = evaluacion.prueba
+    curso = alumno.curso
+    cribado = evaluacion_es_cribado(evaluacion)
+
+    print('>>> Procesando evaluacion: ' + prueba + '-' + curso)
+
+    # calcular los valores de las subpruebas
+    # complementarias de IPAL segundo
+    if prueba == Globales.IPAL and curso == Globales.SEGUNDO:
+        print('>>> Evaluacion IPAL de SEGUNDO, procesando SUBPRUEBAS COMPLEMENTARIAS')
+        evaluacion.CSL = OmnibusIPAL.subprueba_complementaria_CSL(evaluacion)
+        evaluacion.CLE_TEXTOS = OmnibusIPAL.subprueba_complementaria_CLE_TEXTOS(evaluacion)
+        evaluacion.CFS = OmnibusIPAL.subprueba_complementaria_CFS(evaluacion)
+        evaluacion.VOC = OmnibusIPAL.subprueba_complementaria_VOC(evaluacion)
+
+    # comprobar si es de cribado progreso
+    if cribado:
+
+        print('>>> Evaluacion de cribado')
+
+        evaluacion.tipo = Globales.CRIBADO
+        momento = momento_evaluacion(evaluacion)
+        evaluacion.momento = momento
+
+        # calculo del OMNIBUS dependiendo del tipo de prueba
+
+        if prueba == Globales.IPAL:
+            if curso == Globales.INFANTIL:
+                omnibus = OmnibusIPAL.omnibus_INFANTIL(evaluacion, momento)
+            if curso == Globales.PRIMERO:
+                omnibus = OmnibusIPAL.omnibus_PRIMERO(evaluacion, momento)
+            if curso == Globales.SEGUNDO:
+                omnibus = OmnibusIPAL.omnibus_SEGUNDO(evaluacion, momento)
+
+        if prueba == Globales.IPAM:
+            if curso == Globales.INFANTIL:
+                omnibus = OmnibusIPAM.omnibus_INFANTIL(evaluacion, momento)
+            if curso == Globales.PRIMERO:
+                omnibus = OmnibusIPAM.omnibus_PRIMERO(evaluacion, momento)
+            if curso == Globales.SEGUNDO:
+                omnibus = OmnibusIPAM.omnibus_SEGUNDO(evaluacion, momento)
+            if curso == Globales.TERCERO:
+                omnibus = OmnibusIPAM.omnibus_TERCERO(evaluacion, momento)
+
+        if prueba == Globales.IPAE:
+            if curso == Globales.PRIMERO:
+                omnibus = OmnibusIPAE.omnibus_PRIMERO(evaluacion, momento)
+            if curso == Globales.SEGUNDO:
+                omnibus = OmnibusIPAE.omnibus_SEGUNDO(evaluacion, momento)
+            if curso == Globales.TERCERO:
+                omnibus = OmnibusIPAE.omnibus_TERCERO(evaluacion, momento)
+
+        # asignamos el omnibus
+        evaluacion.omnibus = omnibus
+
+        print('>>> Calculo OMNIBUS ' + momento + ' del mes ' + evaluacion.get_mes_display())
+        print(omnibus)
+
+        # calculo del RIESGO dependiendo del tipo de prueba
+        # siempre despues del calculo de omibus
+
+        if prueba == Globales.IPAL:
+            if curso == Globales.INFANTIL:
+                riesgo = RiesgoIPAL.riesgo_INFANTIL(omnibus, momento)
+            if curso == Globales.PRIMERO:
+                riesgo = RiesgoIPAL.riesgo_PRIMERO(omnibus, momento)
+            if curso == Globales.SEGUNDO:
+                riesgo = RiesgoIPAL.riesgo_SEGUNDO(omnibus, momento)
+
+
+        if prueba == Globales.IPAM:
+            if curso == Globales.INFANTIL:
+                riesgo = RiesgoIPAM.riesgo_INFANTIL(omnibus, momento)
+            if curso == Globales.PRIMERO:
+                riesgo = RiesgoIPAM.riesgo_PRIMERO(omnibus, momento)
+            if curso == Globales.SEGUNDO:
+                riesgo = RiesgoIPAM.riesgo_SEGUNDO(omnibus, momento)
+            if curso == Globales.TERCERO:
+                riesgo = RiesgoIPAM.riesgo_TERCERO(omnibus, momento)
+
+        if prueba == Globales.IPAE:
+            if curso == Globales.PRIMERO:
+                riesgo = RiesgoIPAE.riesgo_PRIMERO(omnibus, momento)
+            if curso == Globales.SEGUNDO:
+                riesgo = RiesgoIPAE.riesgo_SEGUNDO(omnibus, momento)
+            if curso == Globales.TERCERO:
+                riesgo = RiesgoIPAE.riesgo_TERCERO(omnibus, momento)
+
+
+        # el riesgo en el objeto evaluacion siempre se actualiza
+        evaluacion.riesgo = riesgo
+        evaluacion.alumno.save()
+
+        print('>>> Calculo RIESGO:')
+        print('>>> ' + evaluacion.get_riesgo_display())
+
+    else:
+
+        print('>>> Evaluacion de progreso de ' + evaluacion.get_mes_display())
+        evaluacion.tipo = Globales.PROGRESO
+
+    evaluacion.mes_leible = evaluacion.get_mes_display()
+    evaluacion.save()
+
+
+
+
+
+#
+# editar evaluaciones
+#
+
+def editar_evaluacion(request):
+    print('>>> Editando evaluacion generica')
+    id_evaluacion = request.GET['idEvaluacion']
+    tipo = request.GET['tipo']
+    curso = request.GET['curso']
+    nombre_clase = tipo + '-' + curso
+    evaluacion = get_object_or_404(clases[nombre_clase], pk=id_evaluacion)
+    url_retorno = server_url + 'lista-evaluaciones/?idAlumno=' + str(evaluacion.alumno.pk) + '&tipo=' + tipo
+    print('>>> Evaluacion de ' + evaluacion.prueba)
+
+    if request.method == "POST":
+        print('post')
+        form = formularios[nombre_clase](request.POST, instance=evaluacion)
+        if form.is_valid():
+            evaluacion = form.save(commit=False)
+            procesar_evaluacion(evaluacion)
+        return redirect(url_retorno)
+    else:
+        print('no post')
+        form = formularios[nombre_clase](instance=evaluacion)
+
+    plantilla = 'form_editar_evaluacion_' + tipo + '_' + curso + '.html'
+    return render(request, plantilla, {'form': form, 'server_url': url_retorno})
+
+
+
+
+
+
+
+
+
+def listar_evaluaciones(request):
+    print('>>> Lista generica de evaluaciones')
+    id_alumno = request.GET['idAlumno']
+    tipo = request.GET['tipo']
+    alumno = Alumno.objects.get(pk=id_alumno)
+    curso = alumno.curso
+    print('>>> Mostrando lista para ' + tipo + ' ' + curso)
+
+    try:
+
+        if tipo == Globales.IPAL:
+            if curso == Globales.INFANTIL:
+                evaluaciones = Evaluacion_IPAL_INFANTIL.objects.filter \
+                    (alumno=alumno).order_by('curso_academico', 'mes')#.reverse()
+            if curso == Globales.PRIMERO:
+                evaluaciones = Evaluacion_IPAL_PRIMERO.objects.filter \
+                    (alumno=alumno).order_by('curso_academico', 'mes')#.reverse()
+            if curso == Globales.SEGUNDO:
+                evaluaciones = Evaluacion_IPAL_SEGUNDO.objects.filter \
+                    (alumno=alumno).order_by('curso_academico', 'mes')#.reverse()
+
+        if tipo == Globales.IPAM:
+            if curso == Globales.INFANTIL:
+                evaluaciones = Evaluacion_IPAM_INFANTIL.objects.filter \
+                    (alumno=alumno).order_by('curso_academico', 'mes')#.reverse()
+            if curso == Globales.PRIMERO:
+                evaluaciones = Evaluacion_IPAM_PRIMERO.objects.filter \
+                    (alumno=alumno).order_by('curso_academico', 'mes')#.reverse()
+            if curso == Globales.SEGUNDO:
+                evaluaciones = Evaluacion_IPAM_SEGUNDO.objects.filter \
+                    (alumno=alumno).order_by('curso_academico', 'mes')#.reverse()
+            if curso == Globales.TERCERO:
+                evaluaciones = Form_Evaluacion_IPAM_TERCERO.objects.filter \
+                    (alumno=alumno).order_by('curso_academico', 'mes')#.reverse()
+
+        if tipo == Globales.IPAE:
+            if curso == Globales.PRIMERO:
+                evaluaciones = Evaluacion_IPAE_PRIMERO.objects.filter \
+                    (alumno=alumno).order_by('curso_academico', 'mes')#.reverse()
+            if curso == Globales.SEGUNDO:
+                evaluaciones = Evaluacion_IPAE_SEGUNDO.objects.filter \
+                    (alumno=alumno).order_by('curso_academico', 'mes')#.reverse()
+            if curso == Globales.TERCERO:
+                evaluaciones = Evaluacion_IPAE_TERCERO.objects.filter \
+                    (alumno=alumno).order_by('curso_academico', 'mes')#.reverse()
+
+        plantilla = 'lista_evaluaciones.html'
+
+        return render(request, plantilla,
+                      {'evaluaciones': evaluaciones,
+                       'alumno': alumno,
+                       'tipo': tipo,
+                       'curso': curso,
+                       'server_url': server_url})
+
+    except ObjectDoesNotExist:
+        return render(request, 'error.html', {'error': "No tiene evaluaciones"})
+
+
+
+
+
+
+
+
+
+
+
+
+
+# listar alumnos de un grupo
+def listar_alumnos_evaluador_en_grupo(request):
+
+    # grupo al que se agregara el alumno
+    id_grupo = request.GET['idGrupo']
+    grupo = Grupo.objects.get(pk=id_grupo)
+
+    print('>>> Listando alumnos del grupo ' + grupo.nombre)
+
+    try:
+
+        # obtener alumnos solo de ese grupo
+        # alumnos = Alumno.objects.filter(evaluador=request.user,grupo=grupo)
+
+        # TODO COMRPOBAR QUE ERES EL PROPIETARIO DEL GRUPO
+        # AHORA ESTA EL PROBLEMA DE QUE EL EVALUADOR DEBE APARECER
+        # EN LA LISTA 'EVALUADORES' DEL GRUPO !!!!
+        alumnos = Alumno.objects.filter(grupo=grupo)
+
+
+        # recuperar todas las evaluaciones asociadas
+        # de cada alumno con IPAL, IPAM, IPAE de los momentos
+        # INICIO, MEDIO, FIN
+
+        print('>>> Recuperando evaluaciones')
+        todas_evaluaciones = []  # lista de evaluaciones
+        evas = {}
+
+        for alumno in alumnos:
+
+            print('- recuperado ' + alumno.nombre)
+            # hacer las consultas
+            modelo_IPAL = 'IPAL-' + alumno.curso
+            modelo_IPAM = 'IPAM-' + alumno.curso
+            modelo_IPAE = 'IPAE-' + alumno.curso
+
+            IPAL = clases[modelo_IPAL]
+            IPAM = clases[modelo_IPAM]
+
+
+            consulta_evaluaciones_IPAL = IPAL.objects.filter(alumno=alumno).filter(
+                Q(mes=Globales.NOVIEMBRE) |
+                Q(mes=Globales.FEBRERO) |
+                Q(mes=Globales.MAYO)
+            )
+            consulta_evaluaciones_IPAM = IPAM.objects.filter(alumno=alumno).filter(
+                Q(mes=Globales.NOVIEMBRE) |
+                Q(mes=Globales.FEBRERO) |
+                Q(mes=Globales.MAYO)
+            )
+
+            if alumno.curso != Globales.INFANTIL:
+                IPAE = clases[modelo_IPAE]
+                consulta_evaluaciones_IPAE = IPAE.objects.filter(alumno=alumno).filter(
+                    Q(mes=Globales.NOVIEMBRE) |
+                    Q(mes=Globales.FEBRERO) |
+                    Q(mes=Globales.MAYO)
+                )
+                for registro_evaluacion in consulta_evaluaciones_IPAE:
+                    print(registro_evaluacion.alumno.nombre + ' ' +
+                          registro_evaluacion.mes_leible + ' ' +
+                          registro_evaluacion.riesgo + ' ' +
+                          registro_evaluacion.get_tipo_display())
+                    todas_evaluaciones.append(registro_evaluacion)
+                    key = str(alumno.pk) + registro_evaluacion.prueba + registro_evaluacion.momento
+                    evas[key] = registro_evaluacion.riesgo
+            
+            # recorrer la queryset recuperando cada registro
+            # de evaluacion
+            for registro_evaluacion in consulta_evaluaciones_IPAL:
+                print(registro_evaluacion.alumno.nombre + ' ' +
+                      registro_evaluacion.mes_leible + ' ' +
+                      registro_evaluacion.riesgo + ' ' +
+                      registro_evaluacion.get_tipo_display())
+                todas_evaluaciones.append(registro_evaluacion)
+                key = str(alumno.pk) + registro_evaluacion.prueba + registro_evaluacion.momento
+                evas[key] = registro_evaluacion.riesgo
+
+            for registro_evaluacion in consulta_evaluaciones_IPAM:
+                print(registro_evaluacion.alumno.nombre + ' ' +
+                      registro_evaluacion.mes_leible + ' ' +
+                      registro_evaluacion.riesgo + ' ' +
+                      registro_evaluacion.get_tipo_display())
+                todas_evaluaciones.append(registro_evaluacion)
+                key = str(alumno.pk) + registro_evaluacion.prueba + registro_evaluacion.momento
+                evas[key] = registro_evaluacion.riesgo
+
+
+        return render(request, 'lista_alumnos_grupo.html',
+                      { 'grupo': grupo,
+                        'alumnos': alumnos,
+                        'evaluaciones': todas_evaluaciones,
+                        'evas':evas,
+                        'server_url': server_url})
+    except ObjectDoesNotExist:
+        return render(request, 'error.html', {'error': "No tiene alumnos"})
+
+
+
+
+
+
+
+
+
+
+# listar grupos del evaluador
+@login_required
+def lista_grupos_evaluador(request):
+    try:
+        # obtenemos los grupos del usuario
+        grupos = Grupo.objects.filter(evaluadores__pk=request.user.pk).order_by('curso_academico').reverse()
+        return render(request, 'lista_grupos.html', {'grupos': grupos, 'server_url': server_url})
+
+    except ObjectDoesNotExist:
+        return render(request,
+                      'error.html', {'error': ERROR_LISTADO_GRUPOS})
+
+
+
+
+
+# nuevo grupo
+def nuevo_grupo(request):
+    print('>>> Creando nuevo grupo')
+    url_retorno = server_url + lista_grupos_url
+    if request.method == "POST":
+        form = FormGrupo(request.POST)
+        if form.is_valid():
+            grupo = form.save(commit=False)
+            # establecer al creador del grupo
+            # y agregarlo a la lista de evaluadores
+            grupo.evaluador = request.user
+            # agregar al grupo un nuevo evaluador
+            grupo.save()
+            grupo.evaluadores.add(request.user)
+
+            return redirect(url_retorno)
+    else:
+        form = FormGrupo()
+    return render(request, 'nuevo_grupo.html', {'form': form, 'server_url': url_retorno})
+
+
+# editar el perfil del evaluador
+def editar_evaluador(request):
+    print('>>> Editando perfil del evaluador')
+    url_retorno = server_url
+    evaluador = get_object_or_404(Evaluador, usuario=request.user)
+
+    if request.method == "POST":
+        form = FormEvaluador(request.POST, instance=evaluador)
+        if form.is_valid():
+            evaluador = form.save(commit=False)
+            evaluador.usuario = request.user
+            evaluador.save()
+            return redirect(url_retorno)
+    else:
+        form = FormEvaluador(instance=evaluador)
+    return render(request, 'form_editar_evaluador.html', {'form': form, 'server_url': url_retorno})
+
+
+# editar un grupo
+def editar_grupo(request):
+    print('>>> Editando grupo')
+    url_retorno = server_url + lista_grupos_url
+    id = request.GET['id']
+    grupo = get_object_or_404(Grupo, pk=id)
+    if request.method == "POST":
+        form = FormGrupo(request.POST, instance=grupo)
+        if form.is_valid():
+            grupo = form.save(commit=False)
+            # El evaluador que cree el grupo estara siempre
+            # en su campo evaluador. Este campo no se actualiza
+            # nunca mas
+            # OBSOLETO: grupo.evaluador = request.user
+            grupo.save()
+            return redirect(url_retorno)
+    else:
+        form = FormGrupo(instance=grupo)
+    return render(request, 'form_editar_grupo.html', {'form': form, 'server_url': url_retorno})
+
+
+
+
+
+
+
+# ver un alumno
+def alumno(request):
+    id = request.GET['id']
+    alumno = get_object_or_404(Alumno, pk=id)
+    return render(request, 'vista_alumno.html', {'post': alumno})
+
+
+
+# nuevo alumno sin que el evaluador pueda
+# seleccionar el grupo, se asigna automaticamente
+def nuevo_alumno(request):
+    print('>>> Nuevo alumno con grupo automatico')
+    id_grupo = request.GET['idGrupo']
+    grupo = get_object_or_404(Grupo, pk=id_grupo)
+    print('>>> Grupo al que pertenecera: ' + grupo.nombre + ' | ' + grupo.curso)
+    url_retorno = server_url + lista_alumnos_grupo_url + '/?idGrupo=' + id_grupo
+    if request.method == "POST":
+
+        form = FormAlumnoGrupoForzado(request.POST)
+
+        if form.is_valid():
+            alumno = form.save(commit=False)
+            alumno.evaluador = request.user
+            alumno.grupo = grupo
+            alumno.save()
+            return redirect(url_retorno)
+    else:
+        form = FormAlumnoGrupoForzado()
+    return render(request, 'form_nuevo_alumno.html',
+                  {'form': form, 'server_url': url_retorno})
+
+
+
+
+# crear un nuevo alumno permitiendo al evaluador
+# seleccionar el grupo al que pertenecera el alumno
+def nuevo_alumno_Grupo(request):
+    print('>>> Nuevo alumno')
+    id_grupo = request.GET['idGrupo']
+    grupo = get_object_or_404(Grupo, pk=id_grupo)
+    print('>>> Grupo al que pertenecera: ' + grupo.nombre + ' | ' + grupo.curso)
+    url_retorno = server_url + lista_alumnos_grupo_url + '/?idGrupo=' + id_grupo
+    if request.method == "POST":
+        form = FormAlumno(request.user, request.POST)
+
+        if form.is_valid():
+            alumno = form.save(commit=False)
+            alumno.evaluador = request.user
+            alumno.grupo = grupo
+            alumno.save()
+            return redirect(server_url )
+    else:
+        form = FormAlumno(request.user)
+    return render(request, 'form_nuevo_alumno.html',
+                  {'form': form, 'server_url': url_retorno})
+
+
+
+# editar un alumno
+def editar_alumno(request):
+    print('>>> Editando alumno')
+    id_alumno = request.GET['idAlumno']
+    id_grupo = request.GET['idGrupo']
+    alumno = get_object_or_404(Alumno, pk=id_alumno)
+    #grupo = get_object_or_404(Grupo, pk=id_grupo)
+    url_retorno = server_url + lista_alumnos_grupo_url + '/?idGrupo=' + id_grupo
+    if request.method == "POST":
+        form = FormAlumnoPOST(request.POST, instance=alumno)
+        if form.is_valid():
+            alumno = form.save(commit=False)
+            alumno.save()
+            return redirect(url_retorno)
+    else:
+        form = FormAlumno(request.user, instance=alumno)
+    return render(request, 'form_editar_alumno.html', {'form': form, 'server_url': url_retorno})
+
+
+
+# listar alumnos del evaluador
+# list todos los alumnos, no en uso todavia
+# SIN USO
+def listar_alumnos_evaluador(request):
+    try:
+        # obtener alumnos
+        alumnos = Alumno.objects.filter(evaluador=request.user)
+        return render(request, 'lista_alumnos.html', {'alumnos': alumnos })
+    except ObjectDoesNotExist:
+        return render(request, 'error.html', {'error': "No tiene alumnos"})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# CODIGO EXPLORADORES
+
+
+import math
+from .models import Ubicacion, Explorador, Emblema
+def puntuaciones(request):
+    print('>>> Mostrando puntuaciones')
+
+# recibe la ubicacion desde el sistema de ubicacion
+# del navegador como parametro
+def comprobar_ubicacion(request):
+    print('>>> Comprobando ubicacion')
+    latitud = request.GET['latitud']
+    longitud = request.GET['longitud']
+
+    explorador = Explorador.objects.get(usuario =request.user)
+
+    # obtenemos todas las ubicaciones
+    ubicaciones = Ubicacion.objects.filter()
+
+    # para cada ubicacion medimos la distancia
+    for ubicacion in ubicaciones:
+        # aqui solo usamos un punto, pero en la practica, cada
+        # ubicacion deberia contar con varios puntos para
+        # cubrir la zona completa
+        print('>>> Procesando distancia hasta la ubicacion: ' + ubicacion.nombre)
+        d = distancia(float(latitud), float(longitud), ubicacion.latitud, ubicacion.longitud)
+        distancia_metros = d * 1000
+        print(str(distancia_metros) + ' metros')
+        umbral_metros =0.025 # a 25 metros
+        if d < umbral_metros:
+            print('>>> El usuario ha llegado a: ' + ubicacion.nombre)
+            # consultamos la bd y actualizamos:
+            # lo primero es recibir un emblema basico por llegar
+            # lo segundo es comprobar si existe un emblema
+            # de primer lugar en la bd, si no existe
+            # creamos uno para este usuario
+
+            # creamos el emblema
+            emblema_basico = Emblema(explorador=explorador, ubicacion=ubicacion)
+            emblema_basico.save()
+            print('>>> Emblema creado')
+
+
+def ubicaciones(request):
+    print('>>> Mostrando ubicaciones')
+
+def otorgar_emblema(request):
+    print('>>> Otorgando emblema')
+
+
+def distancia(lat1, lon1, lat2, lon2):
+    radlat1 = math.pi * lat1 / 180
+    radlat2 = math.pi * lat2 / 180
+    theta = lon1-lon2
+    radtheta = math.pi * theta / 180
+    dist = math.sin(radlat1) * math.sin(radlat2) + math.cos(radlat1) * math.cos(radlat2) * math.cos(radtheta)
+    if dist > 1:
+        dist = 1
+    dist = math.acos(dist)
+    dist = dist * 180 / math.pi
+    dist = dist * 60 * 1.1515
+    dist = dist * 1.609344
+    return dist
+

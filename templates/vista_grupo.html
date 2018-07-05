@@ -1,0 +1,73 @@
+<html>
+
+<head>
+</head>
+
+<body>
+
+
+<div class="form-style-1">
+	<h1>ALUMNOS EN EL GRUPO</h1>
+</div>
+
+<div class="form-style-1">
+	<h2>Vista del grupo</h2>
+
+	<a href="{{ server_url }}nuevo-grupo/">XXX</a>
+</div>
+	
+	
+	
+	
+
+<style>
+	table {
+		border-collapse: collapse;
+		text-align: center;
+		width: 700px;
+		margin:0 auto;
+		font: 13px 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+	}
+	th, td {
+		padding: 8px;
+		text-align: center;
+		border-bottom: 1px solid #ddd;
+	}
+	tr:nth-child(even){background-color: #f2f2f2}		
+}
+
+</style>
+
+	<table>
+	<tr>
+		<!--
+		<th>Acceso</th>
+		<th>Editar</th>
+		-->
+		<th>Nombre</th>
+		<th>Curso</th>
+
+
+	</tr>  		
+		{% for alumno in alumnos %}
+		<tr>
+			<td>
+				<!-- usar este grupo
+				<a href="{{ server_url }}editar-grupo/?id={{grupo.pk | safe}}">Usar</a>-->
+			</td>
+			<td>{{ alumno.nombre }}</td>
+            <td>{{ alumno.curso }}</td>
+			<td>
+				<!-- editar grupo
+				<a href="{{ server_url }}editar-grupo/?id={{grupo.pk | safe}}">Editar</a>-->
+			</td>
+
+
+		</tr>
+		{% endfor %}
+	</table>
+
+
+
+</body>
+</html>

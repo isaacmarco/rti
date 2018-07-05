@@ -1,0 +1,507 @@
+
+                {% if evas|get_item:alumno.key_IPAL_INICIO == 'OPTI' %}
+                <div style = "background-color: blue;width:10px;height:10px;"></div>
+                {% endif %}
+
+
+
+"28-COLOR-RIESGO-INICIO"
+"28-COLOR-RIESGO-INICIO"
+
+        # construir acceso al atributo de riesgo
+        # correspondiente en el alumno
+        nombre_atributo = 'riesgo_' + prueba + '_' + momento
+        print('>>> Accediendo al atributo de riesgo del alumno: ' + nombre_atributo )
+
+
+        # comparamos el curso y el mes de la evaluacion mas
+        # reciente del alumno con la de esta evaluacion
+        actualizar_riesgo = False
+        print(str(evaluacion.curso_academico) + ' ' + evaluacion.get_mes_display() )
+        print(str(alumno.ultima_evaluacion_curso) + ' ' + alumno.get_ultima_evaluacion_mes_display())
+        if evaluacion.curso_academico > alumno.ultima_evaluacion_curso:
+            actualizar_riesgo = True
+        else:
+            if evaluacion.curso_academico == alumno.ultima_evaluacion_curso:
+                if evaluacion.mes > alumno.ultima_evaluacion_mes:
+                    actualizar_riesgo = True
+
+        # si esta evaluacion resulta ser la mas reciente, entonces
+        # permitimos actualizar los campos de riesgo almacenados
+        # en el alumno. De este modo, si el examinador actualizar
+        # una evaluacion antigua, no podra cambiar los riesgos
+        # actuales del alumno
+        if actualizar_riesgo:
+            print('>>> Es la evaluacion mas reciente, actualizamos el riesgo en el alumno')
+            # damos el valor de riesgo al atributo apropiado
+            # (ipal_inicio, ipal_medio, ipal_fin, ipam_inicio ...
+            setattr(alumno, nombre_atributo, riesgo)
+            # actualizamos el registro de evaluacion mas reciente en el alumno
+            alumno.ultima_evaluacion_curso = evaluacion.curso_academico
+            alumno.ultima_evaluacion_mes = evaluacion.mes
+        else:
+            print('>>> No es la evaluacion mas reciente, no actualizamos el riesgo en el alumno')
+
+        # obtenemos las evaluaciones de este alumno, y las ordenamos de modo
+        # que en el primer registro tengamos la evaluacion mas
+        # reciente de este alumno
+        #
+        # nombre_modelo = prueba + '-' + curso
+        # modelo = clases[nombre_modelo]
+        # evaluaciones = modelo.objects.filter(alumno=alumno).order_by('curso_academico', 'mes').reverse()
+        # evaluacion_mas_reciente = evaluaciones.first()
+
+
+{% if prueba == "IPAL" %}
+	    	"color-inicio": colores_riesgo["{{ alumno.riesgo_IPAL_INICIO }}"],
+        	"color-medio": colores_riesgo["{{ alumno.riesgo_IPAL_MEDIO }}"],
+        	"color-fin": colores_riesgo["{{ alumno.riesgo_IPAL_FIN }}"],
+        {% endif %}
+        {% if prueba == "IPAM" %}
+	    	"color-inicio": colores_riesgo["{{ alumno.riesgo_IPAM_INICIO }}"],
+        	"color-medio": colores_riesgo["{{ alumno.riesgo_IPAM_MEDIO }}"],
+        	"color-fin": colores_riesgo["{{ alumno.riesgo_IPAM_FIN }}"],
+        {% endif %}
+        {% if prueba == "IPAE" %}
+	    	"color-inicio": colores_riesgo["{{ alumno.riesgo_IPAE_INICIO }}"],
+        	"color-medio": colores_riesgo["{{ alumno.riesgo_IPAE_MEDIO }}"],
+        	"color-fin": colores_riesgo["{{ alumno.riesgo_IPAE_FIN }}"],
+        {% endif %}
+		
+		
+    #reg_evaluacion = clases[nombre_modelo].objects.get(alumno=alumno) #, curso_academico=evaluador.curso_academico)
+    #print(reg_evaluacion.get_tipo_display())
+    
+    if not reg_evaluacion:
+        print('>>> Comenzando a crear el registro anual para esta prueba')
+    else:
+        print(' >>> Ya existe un registro anual de esta prueba para este alumno: ABORTANDO')
+        return redirect(url_retorno)
+       
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+def nueva_evaluacion2(request):
+    print('>>> Nueva evaluacion generica')
+    id_alumno = request.GET['idAlumno']
+    tipo = request.GET['tipo']
+    alumno = Alumno.objects.get(pk=id_alumno)
+    curso = alumno.curso
+    grupo = str(alumno.grupo.pk)
+    url_retorno = server_url + lista_alumnos_grupo_url + '/?idGrupo=' + grupo
+    print('>>> Nueva evaluacion ' + tipo + ' ' + curso)
+    plantilla = 'error'
+    nombre_clase = tipo + '-' + curso
+
+
+    if request.method == "POST":
+        print('>>> metodo POST')
+        #form = Form_Evaluacion_IPAL_INFANTIL(request.POST)
+        form = formularios[nombre_clase](request.POST)
+        if form.is_valid():
+            evaluacion = form.save(commit=False)
+            evaluacion.evaluador = request.user
+            evaluacion.alumno = alumno
+            #evaluacion.prueba = Globales.IPAL
+            evaluacion.prueba = tipo
+            procesar_evaluacion(evaluacion)
+            return redirect(url_retorno)
+
+    else:
+
+        form = formularios[nombre_clase]
+
+
+
+    # nombre de la plantilla para mostrar el form
+    plantilla = 'form_nueva_evaluacion_' + tipo + '_' + curso + '.html'
+
+    return render(request,plantilla,{'form': form, 'server_url': url_retorno})
+
+
+
+
+# agregar alumno al grupo, pasando como parametros
+# el id del grupo y el id del alumno
+# OBSOLETO
+def agregar_alumno_grupo(request):
+    # obtenemos los dos objetos por su id
+    id_alumno = request.GET['idAlumno']
+    id_grupo = request.GET['idGrupo']
+    grupo = Grupo.objects.get(pk=id_grupo)
+    alumno = Alumno.objects.get(pk=id_alumno)
+    # creamos la nueva relacion
+    relacion = RelacionGrupoAlumno(grupo=grupo, alumno=alumno)
+    relacion.save()
+    # actualizamos la lista de alumnos del grupo
+    url_retorno = server_url + lista_alumnos_grupo_url
+    return redirect(url_retorno)
+
+
+   #for grupo in grupos:
+   #    print(grupo.nombre_grupo)
+
+
+# ver un grupo
+
+# def vista_grupo(request):
+    #     url_retorno = server_url + lista_grupos_url
+    # id = request.GET['id'] # id del grupo
+    # grupo = get_object_or_404(Grupo, pk=id)
+    # obtener todos los alumnos en ese grupo
+    # consultando la relacion GrupoAlumno
+    # alumnos = RelacionGrupoAlumno.objects.filter(grupo=grupo)
+# return render(request, 'vista_grupo.html', {'alumnos': alumnos})
+ '''
+        if tipo == Globales.IPAL:
+            if curso == Globales.INFANTIL:
+                form = Form_Evaluacion_IPAL_INFANTIL()
+            if curso == Globales.PRIMERO:
+                form = Form_Evaluacion_IPAL_PRIMERO()
+            if curso == Globales.SEGUNDO:
+                form = Form_Evaluacion_IPAL_SEGUNDO()
+
+        if tipo == Globales.IPAM:
+            if curso == Globales.INFANTIL:
+                form = Form_Evaluacion_IPAM_INFANTIL()
+            if curso == Globales.PRIMERO:
+                form = Form_Evaluacion_IPAM_PRIMERO()
+            if curso == Globales.SEGUNDO:
+                form = Form_Evaluacion_IPAM_SEGUNDO()
+            if curso == Globales.TERCERO:
+                form = Form_Evaluacion_IPAM_TERCERO()
+
+        if tipo == Globales.IPAE:
+            if curso == Globales.PRIMERO:
+                form = Form_Evaluacion_IPAE_PRIMERO()
+            if curso == Globales.SEGUNDO:
+                form = Form_Evaluacion_IPAE_SEGUNDO()
+            if curso == Globales.TERCERO:
+                form = Form_Evaluacion_IPAE_TERCERO()
+        '''
+
+def listar_evaluaciones_IPAE_PRIMERO(request):
+    print('>>> Listar evaluaciones IPAE PRIMERO')
+    id_alumno = request.GET['idAlumno']
+    alumno = Alumno.objects.get(pk=id_alumno)
+    try:
+        # obtener evaluaciones del alumno
+        evaluaciones_IPAE = \
+            Evaluacion_IPAE_PRIMERO.objects.filter\
+                (alumno=alumno).order_by('curso_academico', 'mes').reverse()
+        return render(request, 'lista_evaluaciones_IPAE_primero.html',
+                      {'evaluaciones': evaluaciones_IPAE,
+                       'alumno': alumno,
+                       'server_url': server_url})
+    except ObjectDoesNotExist:
+        return render(request, 'error.html', {'error': "No tiene evaluaciones"})
+
+
+
+def listar_evaluaciones_IPAL_INFANTIL(request):
+    print('>>> Listar evaluaciones IPAL INFANTIL')
+    id_alumno = request.GET['idAlumno']
+    alumno = Alumno.objects.get(pk=id_alumno)
+    try:
+        # obtener evaluaciones del alumno
+        evaluaciones_IPAL = \
+            Evaluacion_IPAL_INFANTIL.objects.filter\
+                (alumno=alumno).order_by('curso_academico', 'mes').reverse()
+
+        return render(request, 'lista_evaluaciones_IPAL_infantil.html',
+                      {'evaluaciones': evaluaciones_IPAL,
+                       'alumno': alumno,
+                       'server_url': server_url})
+    except ObjectDoesNotExist:
+        return render(request, 'error.html', {'error': "No tiene evaluaciones"})
+
+
+
+def listar_evaluaciones_IPAL_PRIMERO(request):
+    print('>>> Listar evaluaciones IPAL PRIMERO')
+    id_alumno = request.GET['idAlumno']
+    alumno = Alumno.objects.get(pk=id_alumno)
+    try:
+        # obtener evaluaciones del alumno
+        evaluaciones_IPAL = \
+            Evaluacion_IPAL_PRIMERO.objects.filter\
+                (alumno=alumno).order_by('curso_academico', 'mes').reverse()
+
+        return render(request, 'lista_evaluaciones_IPAL_primero.html',
+                      {'evaluaciones': evaluaciones_IPAL,
+                       'alumno': alumno,
+                       'server_url': server_url})
+    except ObjectDoesNotExist:
+        return render(request, 'error.html', {'error': "No tiene evaluaciones"})
+
+
+
+def listar_evaluaciones_IPAM_PRIMERO(request):
+    print('>>> Listar evaluaciones IPAM PRIMERO')
+    id_alumno = request.GET['idAlumno']
+    alumno = Alumno.objects.get(pk=id_alumno)
+    try:
+        # obtener evaluaciones del alumno
+        evaluaciones_IPAM = \
+            Evaluacion_IPAM_PRIMERO.objects.filter\
+                (alumno=alumno).order_by('curso_academico', 'mes').reverse()
+
+        return render(request, 'lista_evaluaciones_IPAM_primero.html',
+                      {'evaluaciones': evaluaciones_IPAM,
+                       'alumno': alumno,
+                       'server_url': server_url})
+    except ObjectDoesNotExist:
+        return render(request, 'error.html', {'error': "No tiene evaluaciones"})
+
+
+
+
+def listar_evaluaciones_IPAL(request):
+    id_Alumno = request.GET['idAlumno']
+    id_Grupo = request.GET['idGrupo']
+    alumno = get_object_or_404(Alumno, pk=id_Alumno)
+    curso = alumno.curso
+    url_infantil = server_url + 'lista-evaluaciones-ipal-infantil/?idAlumno=' + id_Alumno + '&idGrupo=' + id_Grupo
+    url_primero = server_url + 'lista-evaluaciones-ipal-primero/?idAlumno=' + id_Alumno + '&idGrupo=' + id_Grupo
+    url_segundo = server_url + 'lista-evaluaciones-ipal-segundo/?idAlumno=' + id_Alumno + '&idGrupo=' + id_Grupo
+    print('>>> Accediendo a IPAL ' + curso)
+    if curso == Globales.INFANTIL:
+        return redirect(url_infantil)
+    if curso == Globales.PRIMERO:
+        return redirect(url_primero)
+    if curso == Globales.SEGUNDO:
+        return redirect(url_segundo)
+    print('>>> Error recuperando el tipo de prueba IPAL')
+    return redirect(server_url)
+
+
+def listar_evaluaciones_IPAM(request):
+    id_Alumno = request.GET['idAlumno']
+    id_Grupo = request.GET['idGrupo']
+    alumno = get_object_or_404(Alumno, pk=id_Alumno)
+    curso = alumno.curso
+    url_infantil = server_url + 'lista-evaluaciones-ipam-infantil/?idAlumno=' + id_Alumno + '&idGrupo=' + id_Grupo
+    url_primero = server_url + 'lista-evaluaciones-ipam-primero/?idAlumno=' + id_Alumno + '&idGrupo=' + id_Grupo
+    url_segundo = server_url + 'lista-evaluaciones-ipam-segundo/?idAlumno=' + id_Alumno + '&idGrupo=' + id_Grupo
+    url_tercero = server_url + 'lista-evaluaciones-ipam-tercero/?idAlumno=' + id_Alumno + '&idGrupo=' + id_Grupo
+    print('>>> Accediendo a IPAM ' + curso)
+    if curso == Globales.INFANTIL:
+        return redirect(url_infantil)
+    if curso == Globales.PRIMERO:
+        return redirect(url_primero)
+    if curso == Globales.SEGUNDO:
+        return redirect(url_segundo)
+    if curso == Globales.TERCERO:
+        return redirect(url_tercero)
+    print('>>> Error recuperando el tipo de prueba IPAM')
+    return redirect(server_url)
+
+
+def listar_evaluaciones_IPAE(request):
+    id_Alumno = request.GET['idAlumno']
+    id_Grupo = request.GET['idGrupo']
+    alumno = get_object_or_404(Alumno, pk=id_Alumno)
+    curso = alumno.curso
+    url_primero = server_url + 'lista-evaluaciones-ipae-primero/?idAlumno=' + id_Alumno + '&idGrupo=' + id_Grupo
+    url_segundo = server_url + 'lista-evaluaciones-ipae-segundo/?idAlumno=' + id_Alumno + '&idGrupo=' + id_Grupo
+    url_tercero = server_url + 'lista-evaluaciones-ipae-tercero/?idAlumno=' + id_Alumno + '&idGrupo=' + id_Grupo
+    print('>>> Accediendo a IPAE ' + curso)
+    if curso == Globales.PRIMERO:
+        return redirect(url_primero)
+    if curso == Globales.SEGUNDO:
+        return redirect(url_segundo)
+    if curso == Globales.TERCERO:
+        return redirect(url_tercero)
+    print('>>> Error recuperando el tipo de prueba IPAE')
+    return redirect(server_url)
+
+
+#
+# nueva evaluacion concreta
+#
+
+
+def nueva_evaluacion_IPAL_INFANTIL(request):
+    print('>>> Nueva evaluacion IPAL INFANTIL')
+    id_Alumno = request.GET['idAlumno']
+    alumno = get_object_or_404(Alumno, pk=id_Alumno)
+    id_grupo = str(alumno.grupo.pk)
+    url_retorno = server_url + lista_alumnos_grupo_url + '/?idGrupo=' + id_grupo
+    if request.method == "POST":
+        form = Form_Evaluacion_IPAL_INFANTIL(request.POST)
+        if form.is_valid():
+            evaluacion = form.save(commit=False)
+            evaluacion.evaluador = request.user
+            evaluacion.alumno = alumno
+            evaluacion.prueba = Globales.IPAL
+            procesar_evaluacion(evaluacion)
+            return redirect(url_retorno)
+    else:
+        form = Form_Evaluacion_IPAL_INFANTIL()
+    return render(request, 'form_nueva_evaluacion_IPAL_INFANTIL.html',
+                  {'form': form, 'server_url': url_retorno})
+
+
+
+def nueva_evaluacion_IPAL_PRIMERO(request):
+    print('>>> Nueva evaluacion IPAL PRIMERO')
+    id_Alumno = request.GET['idAlumno']
+    alumno = get_object_or_404(Alumno, pk=id_Alumno)
+    id_grupo = str(alumno.grupo.pk)
+    url_retorno = server_url + lista_alumnos_grupo_url + '/?idGrupo=' + id_grupo
+    if request.method == "POST":
+        form = Form_Evaluacion_IPAL_PRIMERO(request.POST)
+        if form.is_valid():
+            evaluacion = form.save(commit=False)
+            evaluacion.evaluador = request.user
+            evaluacion.alumno = alumno
+            evaluacion.prueba = Globales.IPAL
+            procesar_evaluacion(evaluacion)
+            return redirect(url_retorno)
+    else:
+        form = Form_Evaluacion_IPAL_PRIMERO()
+    return render(request, 'form_nueva_evaluacion_IPAL_PRIMERO.html',
+                  {'form': form, 'server_url': url_retorno})
+
+
+
+def nueva_evaluacion_IPAM_PRIMERO(request):
+    print('>>> Nueva evaluacion IPAM PRIMERO')
+    id_Alumno = request.GET['idAlumno']
+    alumno = get_object_or_404(Alumno, pk=id_Alumno)
+    id_grupo = str(alumno.grupo.pk)
+    url_retorno = server_url + lista_alumnos_grupo_url + '/?idGrupo=' + id_grupo
+    if request.method == "POST":
+        form = Form_Evaluacion_IPAM_PRIMERO(request.POST)
+        if form.is_valid():
+            evaluacion = form.save(commit=False)
+            evaluacion.evaluador = request.user
+            evaluacion.alumno = alumno
+            evaluacion.prueba = Globales.IPAM
+            procesar_evaluacion(evaluacion)
+            return redirect(url_retorno)
+    else:
+        form = Form_Evaluacion_IPAM_PRIMERO()
+    return render(request, 'form_nueva_evaluacion_IPAM_PRIMERO.html',
+                  {'form': form, 'server_url': url_retorno})
+
+
+def nueva_evaluacion_IPAL(request):
+    id_Alumno = request.GET['idAlumno']
+    alumno = get_object_or_404(Alumno, pk=id_Alumno)
+    curso = alumno.curso
+    url_infantil = server_url + 'nueva-evaluacion-ipal-infantil/?idAlumno=' + id_Alumno
+    url_primero = server_url + 'nueva-evaluacion-ipal-primero/?idAlumno=' + id_Alumno
+    url_segundo = server_url
+    print('>>> Accediendo a IPAL ' + curso)
+    if curso == Globales.INFANTIL:
+        return redirect(url_infantil)
+    if curso == Globales.PRIMERO:
+        return redirect(url_primero)
+    if curso == Globales.SEGUNDO:
+        return redirect(url_segundo)
+    print('>>> Error recuperando el tipo de prueba IPAL')
+    return redirect(server_url)
+
+
+def nueva_evaluacion_IPAM(request):
+    id_Alumno = request.GET['idAlumno']
+    alumno = get_object_or_404(Alumno, pk=id_Alumno)
+    curso = alumno.curso
+    url_infantil = server_url
+    url_primero = server_url + 'nueva-evaluacion-ipam-primero/?idAlumno=' + id_Alumno
+    url_segundo = server_url
+    url_tercero = server_url
+    print('>>> Accediendo a IPAL ' + curso)
+    if curso == Globales.INFANTIL:
+        return redirect(url_infantil)
+    if curso == Globales.PRIMERO:
+        return redirect(url_primero)
+    if curso == Globales.SEGUNDO:
+        return redirect(url_segundo)
+    if curso == Globales.TERCERO:
+        return redirect(url_tercero)
+    print('>>> Error recuperando el tipo de prueba IPAM')
+    return redirect(server_url)
+
+
+def nueva_evaluacion_IPAE(request):
+    id_Alumno = request.GET['idAlumno']
+    alumno = get_object_or_404(Alumno, pk=id_Alumno)
+    curso = alumno.curso
+    url_primero = server_url + 'nueva-evaluacion-ipae-primero/?idAlumno=' + id_Alumno
+    url_segundo = server_url
+    url_tercero = server_url
+    print('>>> Accediendo a IPAE ' + curso)
+    if curso == Globales.PRIMERO:
+        return redirect(url_primero)
+    if curso == Globales.SEGUNDO:
+        return redirect(url_segundo)
+    if curso == Globales.TERCERO:
+        return redirect(url_tercero)
+    print('>>> Error recuperando el tipo de prueba IPAE')
+    return redirect(server_url)
+
+
+
+def editar_evaluacion_IPAL_PRIMERO(request):
+    print('>>> Editando evaluacion IPAL PRIMERO' )
+    id_evaluacion = request.GET['idEvaluacion']
+    evaluacion = get_object_or_404(Evaluacion_IPAL_PRIMERO, pk=id_evaluacion)
+
+    url_retorno = server_url + 'lista-evaluaciones/?idAlumno=' + str(evaluacion.alumno.pk) + '&tipo=IPAL'
+    if request.method == "POST":
+        form = Form_Evaluacion_IPAL_PRIMERO(request.POST, instance=evaluacion)
+        if form.is_valid():
+            evaluacion = form.save(commit=False)
+            procesar_evaluacion(evaluacion)
+        return redirect(url_retorno)
+    else:
+        form = Form_Evaluacion_IPAL_PRIMERO(instance=evaluacion)
+    return render(request, 'form_editar_evaluacion_IPAL_PRIMERO.html', {'form': form, 'server_url': url_retorno})
+
+
+
+def editar_evaluacion_IPAL_INFANTIL(request):
+    print('>>> Editando evaluacion IPAL INFANTIL' )
+    id_evaluacion = request.GET['idEvaluacion']
+    evaluacion = get_object_or_404(Evaluacion_IPAL_INFANTIL, pk=id_evaluacion)
+
+    url_retorno = server_url + 'lista-evaluaciones/?idAlumno=' + str(evaluacion.alumno.pk) + '&tipo=IPAL'
+    if request.method == "POST":
+        form = Form_Evaluacion_IPAL_INFANTIL(request.POST, instance=evaluacion)
+        if form.is_valid():
+            evaluacion = form.save(commit=False)
+            procesar_evaluacion(evaluacion)
+        return redirect(url_retorno)
+    else:
+        form = Form_Evaluacion_IPAL_INFANTIL(instance=evaluacion)
+    return render(request, 'form_editar_evaluacion_IPAL_INFANTIL.html', {'form': form, 'server_url': url_retorno})
+
+
+
+
+
+def editar_evaluacion_IPAM_PRIMERO(request):
+    print('>>> Editando evaluacion IPAM PRIMERO' )
+    id_evaluacion = request.GET['idEvaluacion']
+    evaluacion = get_object_or_404(Evaluacion_IPAM_PRIMERO, pk=id_evaluacion)
+
+
+    url_retorno = server_url + 'lista-evaluaciones/?idAlumno=' + str(evaluacion.alumno.pk) + '&tipo=IPAM'
+    if request.method == "POST":
+        form = Form_Evaluacion_IPAM_PRIMERO(request.POST, instance=evaluacion)
+        if form.is_valid():
+            evaluacion = form.save(commit=False)
+            procesar_evaluacion(evaluacion)
+        return redirect(url_retorno)
+    else:
+        form = Form_Evaluacion_IPAM_PRIMERO(instance=evaluacion)
+    return render(request, 'form_editar_evaluacion_IPAM_PRIMERO.html', {'form': form, 'server_url': url_retorno})
+
+
+

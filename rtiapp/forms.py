@@ -1,0 +1,157 @@
+from django import forms
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+import rtiapp.constantes as Globales
+
+from .models import Evaluador, Grupo, Alumno, \
+    Evaluacion_IPAL_INFANTIL, Evaluacion_IPAL_PRIMERO, Evaluacion_IPAL_SEGUNDO, \
+    Evaluacion_IPAM_INFANTIL, Evaluacion_IPAM_PRIMERO, Evaluacion_IPAM_SEGUNDO, Evaluacion_IPAM_TERCERO, \
+    Evaluacion_IPAE_PRIMERO, Evaluacion_IPAE_SEGUNDO, Evaluacion_IPAE_TERCERO
+
+
+class SignUpForm(UserCreationForm):
+
+    # campos complementarios
+    nombre = forms.CharField(max_length=50, required=True, help_text='Su nombre completo')
+    email = forms.EmailField(max_length=254, required=True, help_text='Direccion de correo')
+    centro = forms.CharField(max_length=50, required=True, help_text='Su centro')
+    pais = forms.ChoiceField(choices=Globales.PAIS_OPCIONES, required=True)
+    sexo = forms.ChoiceField( choices=Globales.SEXO_OPCIONES, required=True)
+    nivel_academico = forms.ChoiceField(choices=Globales.NIVEL_ACADEMICO_OPCIONES, required=True)
+    profesion = forms.ChoiceField(choices=Globales.PROFESION_OPCIONES, required=True)
+    zona = forms.ChoiceField(choices=Globales.ZONA_OPCIONES, required=True)
+
+
+    class Meta:
+        model = User
+        fields = ('username', 'nombre', 'email', 'password1', 'password2',
+                  'nivel_academico', 'profesion', 'zona','centro', 'pais', 'sexo' )
+
+
+
+
+
+
+
+
+# forms IPAE
+
+class Form_Evaluacion_IPAE_PRIMERO(forms.ModelForm):
+    class Meta:
+        model = Evaluacion_IPAE_PRIMERO
+        fields = '__all__'
+        exclude = ('curso_academico','mes','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
+
+class Form_Evaluacion_IPAE_SEGUNDO(forms.ModelForm):
+    class Meta:
+        model = Evaluacion_IPAE_SEGUNDO
+        fields = '__all__'
+        exclude = ('curso_academico','mes','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
+
+class Form_Evaluacion_IPAE_TERCERO(forms.ModelForm):
+    class Meta:
+        model = Evaluacion_IPAE_TERCERO
+        fields = '__all__'
+        exclude = ('curso_academico','mes','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
+
+
+# forms IPAM
+
+
+class Form_Evaluacion_IPAM_TERCERO(forms.ModelForm):
+    class Meta:
+        model = Evaluacion_IPAM_TERCERO
+        fields = '__all__'
+        exclude = ('curso_academico','mes','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador','mes_leible')
+
+class Form_Evaluacion_IPAM_SEGUNDO(forms.ModelForm):
+    class Meta:
+        model = Evaluacion_IPAM_SEGUNDO
+        fields = '__all__'
+        exclude = ('curso_academico','mes','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
+
+
+class Form_Evaluacion_IPAM_PRIMERO(forms.ModelForm):
+    class Meta:
+        model = Evaluacion_IPAM_PRIMERO
+        fields = '__all__'
+        exclude = ('curso_academico','mes','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
+
+class Form_Evaluacion_IPAM_INFANTIL(forms.ModelForm):
+    class Meta:
+        model = Evaluacion_IPAM_INFANTIL
+        fields = '__all__'
+        exclude = ('curso_academico','mes','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
+
+
+# forms IPAL
+
+class Form_Evaluacion_IPAL_INFANTIL(forms.ModelForm):
+    class Meta:
+        model = Evaluacion_IPAL_INFANTIL
+        fields = '__all__'
+        exclude = ('curso_academico','mes','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
+
+class Form_Evaluacion_IPAL_PRIMERO(forms.ModelForm):
+    class Meta:
+        model = Evaluacion_IPAL_PRIMERO
+        fields = '__all__'
+        exclude = ('curso_academico','mes','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
+
+
+class Form_Evaluacion_IPAL_SEGUNDO(forms.ModelForm):
+    class Meta:
+        model = Evaluacion_IPAL_SEGUNDO
+        fields = '__all__'
+        # la prueba IPAL segundo tiene una serie de subpruebas complementarias
+        # con puntuaciones directas que el programa debe calcular:
+        # CSL, CLE_TEXTO, CFS, VOC
+
+
+        exclude = ('curso_academico','mes','prueba','alumno', 'tipo', 'momento', 'riesgo', 'omnibus',
+                   'evaluador', 'observaciones', 'mes_leible',
+                   'CSL', 'CLE_TEXTO', 'CFS', 'VOC',)
+
+# formulario para grupos
+class FormGrupo(forms.ModelForm):
+    class Meta:
+        model = Grupo
+        fields = ('nombre', 'curso', 'curso_academico', 'centro')
+
+
+# formulario para enviar la edicion del nuevo alumno
+class FormAlumnoPOST(forms.ModelForm):
+    class Meta:
+        model = Alumno
+        fields = ('nombre', 'sexo', 'fecha_nacimiento', 'pais', 'curso', 'centro', 'grupo')
+
+
+# formulario para editar y crear nuevo alumno,
+# en el que el grupo esta forzado
+class FormAlumnoGrupoForzado(forms.ModelForm):
+    class Meta:
+        model = Alumno
+        fields = ('nombre', 'sexo', 'fecha_nacimiento', 'pais', 'curso', 'centro')
+
+
+# formulario para editar y crear nuevo alumno,
+# en el que se puede seleccionar el grupo
+class FormAlumno(forms.ModelForm):
+    class Meta:
+        model = Alumno
+        fields = ('nombre', 'sexo', 'fecha_nacimiento', 'pais', 'curso', 'centro', 'grupo')
+
+    def __init__(self, user_evaluador, *args, **kwargs):
+        super(FormAlumno, self).__init__(*args, **kwargs)
+        self.fields['grupo'].queryset = Grupo.objects.filter(evaluador=user_evaluador)
+
+
+
+# formulario para evaluadores
+class FormEvaluador(forms.ModelForm):
+    class Meta:
+        model = Evaluador
+        fields = '__all__'
+        exclude = ('usuario',)
+        #fields = ('nombre', 'sexo', 'nivel_academico','profesion', 'zona','centro', 'pais')
+

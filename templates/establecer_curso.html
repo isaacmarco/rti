@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+
+{% block content %}
+
+    {% load app_filters %}
+    <h1>Establecer año académico</h1>
+    <h2>El curso actual es {% get_curso curso %} </h2>
+    <br>
+
+    <form action="{{ server_url }}actualizar-curso\" class="post-form">
+
+        {% csrf_token %}
+        <input type="number" name="curso" value={{ curso }}>
+        <br><br><br>
+        <button type="submit" class="save btn btn-default">Guardar</button>
+        <button type="button" class="save btn btn-default" onclick="window.location.href='{{ server_url }}'"
+        >Cancelar</button>
+
+    </form>
+
+
+
+{% endblock %}
