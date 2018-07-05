@@ -1,0 +1,76 @@
+<html>
+
+<head>
+</head>
+
+<body>
+
+
+<div class="form-style-1">
+	<h1>ALUMNOS DEL EVALUADOR</h1>
+</div>
+
+<div class="form-style-1">
+
+	<h2>Lista de sus alumnos en el grupo {{ grupo.nombre }}</h2>
+	<a href="{{ server_url }}nuevo-grupo/">XXXX</a>
+</div>
+	
+	
+	
+	
+
+<style>
+	table {
+		border-collapse: collapse;
+		text-align: center;
+		width: 700px;
+		margin:0 auto;
+		font: 13px 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+	}
+	th, td {
+		padding: 8px;
+		text-align: center;
+		border-bottom: 1px solid #ddd;
+	}
+	tr:nth-child(even){background-color: #f2f2f2}		
+}
+
+</style>
+
+	<table>
+	<tr>
+		<th>Agregar</th>
+		<th>Nombre</th>
+		<th>Curso</th>
+		<th>Centro</th>
+		<th>Editar</th>
+
+	</tr>
+
+		{% for alumno in alumnos %}
+
+		<tr>
+			<td>
+				<!-- usar este grupo -->
+				<a href="{{ server_url }}listar_alumnos_evaluador/?id={{grupo.pk | safe}}">Usar</a>
+			</td>
+			<td>{{ alumno.nombre }}</td>
+            <td>{{ alumno.curso }}</td>
+			<td>{{ alumno.centro }}</td>
+			<td>
+				<!-- editar grupo -->
+				<a href="{{ server_url }}editar-grupo/?id={{grupo.pk | safe}}">Editar</a>
+			</td>
+
+
+		</tr>
+
+		{% endfor %}
+
+	</table>
+
+
+
+</body>
+</html>

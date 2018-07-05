@@ -1,0 +1,131 @@
+{% load staticfiles %}
+<html>
+
+<head>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<link rel="stylesheet" href="{% static 'css/rti.css' %}">
+
+</head>
+<body>
+
+
+<div class="form-style-1">
+
+	<h1>RTI ULL</h1>
+	<h2>Documentos</h2>
+	<hr>
+
+	<form>
+
+		<button type="button" class="save btn btn-default" onclick="window.location.href='{{ server_url }}'">🚀 Inicio</button>
+
+    </form>
+
+</div>
+
+<div class="form-style-1">
+
+	<!-- editar grupo
+	<a href="{{ server_url }}editar-grupo/?id={{grupo.pk | safe}}">👪 Editar</a>
+	 -->
+
+	<table>
+
+
+		  <thead>
+            <th colspan="5">🎓 Cuadernos del evaluador</th>
+		  </thead>
+
+	<tr>
+		<th>Prueba</th>
+		<th>Infantil</th>
+		<th>Primero</th>
+		<th>Segundo</th>
+		<th>Tercero</th>
+	</tr>
+
+
+
+		<tr>
+			<td>📕 IPAL</td>
+			<td>📄A 📄B 📄C</td>
+			<td>📄A 📄B 📄C</td>
+			<td>📄A 📄B 📄C</td>
+			<td>📄A 📄B 📄C</td>
+		</tr>
+
+		<tr>
+			<td>📏 IPAM</td>
+			<td>📄A 📄B 📄C</td>
+			<td>📄A 📄B 📄C</td>
+			<td>📄A 📄B 📄C</td>
+			<td>📄A 📄B 📄C</td>
+
+		</tr>
+
+		<tr>
+			<td>✍ IPAE</td>
+			<td>📄A 📄B 📄C</td>
+			<td>📄A 📄B 📄C</td>
+			<td>📄A 📄B 📄C</td>
+			<td>📄A 📄B 📄C</td>
+
+		</tr>
+
+	</table>
+
+
+	<br><br><br>
+
+	<table>
+
+
+		  <thead>
+            <th colspan="5">👧👦 Cuadernos del alumno</th>
+		  </thead>
+
+	<tr>
+		<th>Prueba</th>
+		<th>Infantil</th>
+		<th>Primero</th>
+		<th>Segundo</th>
+		<th>Tercero</th>
+	</tr>
+
+
+
+		<tr>
+			<td>📕 IPAL</td>
+			<td>📄A 📄B 📄C</td>
+			<td>📄A 📄B 📄C</td>
+			<td>📄A 📄B 📄C</td>
+			<td>📄A 📄B 📄C</td>
+		</tr>
+
+		<tr>
+			<td>📏 IPAM</td>
+			<td>📄A 📄B 📄C</td>
+			<td>📄A 📄B 📄C</td>
+			<td>📄A 📄B 📄C</td>
+			<td>📄A 📄B 📄C</td>
+		</tr>
+
+		<tr>
+			<td>✍ IPAE</td>
+			<td>📄A 📄B 📄C</td>
+			<td>📄A 📄B 📄C</td>
+			<td>📄A 📄B 📄C</td>
+			<td>📄A 📄B 📄C</td>
+
+		</tr>
+
+	</table>
+
+
+
+</div>
+
+
+</body>
+</html>

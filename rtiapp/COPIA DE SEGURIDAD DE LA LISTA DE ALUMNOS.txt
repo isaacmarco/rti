@@ -1,0 +1,206 @@
+{% load staticfiles %}
+{% load app_filters %}
+<html>
+
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<link rel="stylesheet" href="{% static 'css/rti.css' %}">
+</head>
+
+<body>
+
+
+<div class="form-style-1">
+	<h1>Lista de alumnos en el grupo</h1>
+	<h2>{{ grupo.nombre }}</h2>
+	<h2>{{ grupo.curso}}</h2>
+</div>
+
+<div class="form-style-1">
+	<br>
+	<form>
+	<button type="button" class="save btn btn-default"
+		onclick="window.location.href='{{ server_url }}'">🚀 Inicio</button>
+	<button type="button" class="save btn btn-default"
+		onclick="window.location.href='{{ server_url }}lista-grupos/?idGrupo={{ grupo.pk }}'">👪 Volver a mis grupos</button>
+	<button type="button" class="save btn btn-default"
+		onclick="window.location.href='{{ server_url }}nuevo-alumno/?idGrupo={{ grupo.pk }}'">👤 Nuevo alumno</button>
+	<button type="button" class="save btn btn-default"
+		onclick="window.location.href='#'">📅 Cambio de año académico</button>
+	<button type="button" class="save btn btn-default"
+		onclick="window.location.href='#'">🙋 Compartir grupo</button>
+	<br><br>
+			<button type="button" class="save btn btn-default"
+		onclick="window.location.href='{{ server_url }}informe-grupo/?idGrupo={{ grupo.pk }}&prueba=IPAL'">📊 Informe de grupo IPAL</button>
+	<button type="button" class="save btn btn-default"
+		onclick="window.location.href='{{ server_url }}informe-grupo/?idGrupo={{ grupo.pk }}&prueba=IPAM'">📊 Informe de grupo IPAM</button>
+	<button type="button" class="save btn btn-default"
+		onclick="window.location.href='{{ server_url }}informe-grupo/?idGrupo={{ grupo.pk }}&prueba=IPAE'">📊 Informe de grupo IPAE</button>
+
+	</form>
+    <hr>
+
+
+<script>
+
+
+// generar un diccionario con todos los riesgos
+// recibidos en el parametro %evaluaciones%
+
+var riesgos = {
+{% for evaluacion in evaluaciones %}
+    "{{ evaluacion.alumno.pk }}-RIESGO-{{ evaluacion.prueba }}-{{ evaluacion.momento}}" : "{{ evaluacion.color_riesgo }}",{% endfor %}
+};
+
+
+</script>
+
+</div>
+
+
+	<table>
+
+        <thead>
+            <th colspan="4">Datos del alumno</th>
+            <th colspan="3">Evaluaciones</th>
+        </thead>
+	<tr>
+        <th>Ficha</th>
+		<th>Nombre</th>
+        <th>Género</th>
+		<th>Curso</th>
+        <th>IPAL</th>
+        <th>IPAM</th>
+        <th>IPAE</th>
+
+	</tr>
+
+		{% for alumno in alumnos %}
+
+		<tr>
+
+             <td>
+				<!-- editar alumno -->
+				<a href="{{ server_url }}editar-alumno/?idAlumno={{alumno.pk | safe}}
+				&idGrupo={{alumno.grupo.pk | safe}}" style="font-size:23px" >📂</a>
+			</td>
+
+
+			<!-- controlamos el curso del alumno, si no coincide
+			con el curso asignado al grupo mostramos un indicador
+			de alerta al evaluador -->
+			<td style="  text-align: left;">
+				{% if alumno.curso != grupo.curso %}
+					<b  style="color:red">{{ alumno.nombre }} ⚠</b>
+				{% else %}
+					{{ alumno.nombre }}
+				{% endif %}
+			</td>
+
+
+
+            <td>{{ alumno.get_sexo_display }}</td>
+
+			<td>
+				{% if alumno.curso != grupo.curso %}
+					<b  style="color:red">{{ alumno.curso }}</b>
+				{% else %}
+					{{ alumno.curso }}
+				{% endif %}
+
+			</td>
+
+            <td>
+                <!-- ver informe IPAL -->
+				<a href="#" style="font-size:23px">📊</a>
+
+				<a href="{{ server_url }}lista-evaluaciones/
+				?idAlumno={{alumno.pk | safe}}
+				&tipo=IPAL
+				&idGrupo={{alumno.grupo.pk | safe}}" style="font-size:23px">📃</a>
+
+                <!-- riesgo IPAL -->
+                <div style = "display: inline-block;">
+                <div style = "display: inline-block;background-color: {% color evas|get_item:alumno.key_IPAL_INICIO %};width:10px;height:10px;"></div>
+                <div style = "display: inline-block;background-color: {% color evas|get_item:alumno.key_IPAL_MEDIO %};width:10px;height:10px;"></div>
+                <div style = "display: inline-block;background-color: {% color evas|get_item:alumno.key_IPAL_FIN %};width:10px;height:10px;"></div>
+                </div>
+
+            </td>
+
+            <td>
+				<!-- ver informe IPAM -->
+				<a href="#" style="font-size:23px">📊</a>
+
+				<a href="{{ server_url }}lista-evaluaciones/
+				?idAlumno={{alumno.pk | safe}}
+				&tipo=IPAM
+				&idGrupo={{alumno.grupo.pk | safe}}" style="font-size:23px">📃</a>
+
+
+                <!-- riesgo IPAM -->
+                {% load static %}
+                 {% with 'imagenes/'|add:alumno.riesgo_IPAM_INICIO|add:'.png' as riesgo_ipam %}
+				    <img  style="width:10px;height:10px;" align="top"
+                    src="{% static riesgo_ipam %}">
+                 {% endwith %}
+                 {% with 'imagenes/'|add:alumno.riesgo_IPAM_MEDIO|add:'.png' as riesgo_ipam %}
+				    <img  style="width:10px;height:10px;"
+                    src="{% static riesgo_ipam %}">
+                 {% endwith %}
+                 {% with 'imagenes/'|add:alumno.riesgo_IPAM_FIN|add:'.png' as riesgo_ipam %}
+				    <img  style="width:10px;height:10px;" align="top"
+                    src="{% static riesgo_ipam %}">
+                 {% endwith %}
+			</td>
+
+
+
+            <td>
+
+				<!-- IPAE no tiene version para INFANTIL,
+				no deberia mostrarse si el alumno es de INFANTIL
+				-->
+
+				{% if alumno.curso == "INFANTIL" %}
+					-
+				{% else %}
+
+
+                <!-- ver informe IPAE -->
+				<a href="#" style="font-size:23px">📊</a>
+
+				<a href="{{ server_url }}lista-evaluaciones/
+				?idAlumno={{alumno.pk | safe}}
+				&tipo=IPAE
+				&idGrupo={{alumno.grupo.pk | safe}}" style="font-size:23px">📃</a>
+
+
+                <!-- riesgo IPAE -->
+                {% load static %}
+                 {% with 'imagenes/'|add:alumno.riesgo_IPAE_INICIO|add:'.png' as riesgo_ipae %}
+				    <img  style="width:10px;height:10px;" align="top"
+                    src="{% static riesgo_ipae %}">
+                 {% endwith %}
+                 {% with 'imagenes/'|add:alumno.riesgo_IPAE_MEDIO|add:'.png' as riesgo_ipae %}
+				    <img  style="width:10px;height:10px;"
+                    src="{% static riesgo_ipae %}">
+                 {% endwith %}
+                 {% with 'imagenes/'|add:alumno.riesgo_IPAE_FIN|add:'.png' as riesgo_ipae %}
+				    <img  style="width:10px;height:10px;" align="top"
+                    src="{% static riesgo_ipae %}">
+                 {% endwith %}
+
+				{% endif %}
+
+            </td>
+		</tr>
+
+		{% endfor %}
+
+	</table>
+
+
+
+</body>
+</html>

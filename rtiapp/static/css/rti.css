@@ -1,0 +1,19 @@
+ 
+	table {
+		border-collapse: collapse;
+		text-align: center;
+		width: 1000px;
+		margin:0 auto;
+		//font: 23px 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+	}
+	th, td {
+		padding: 8px;
+		text-align: center;
+		border-bottom: 1px solid #ddd;
+	}
+	tr:nth-child(even){background-color: #f2f2f2}		
+	}
+	
+	
+	
+	
