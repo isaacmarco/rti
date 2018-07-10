@@ -147,6 +147,14 @@ class Evaluador(models.Model):
     centro = models.CharField(max_length=50, default="Centro del evaluador")
     email = models.EmailField(default='email@email.com')
 
+    # fecha en la que se registro el evaluador
+    fecha_alta = models.DateTimeField(auto_now_add=True)
+    ultima_modificacion = models.DateTimeField(auto_now=True)
+
+    # indica que el evaluador ha completado toda su
+    # informacion necesaria para usar la plataforma
+    informacion_adicional_completa = models.BooleanField(default=False)
+
     # curso academico en el que esta trabajando
     # actualmente en la plataforma
     curso_academico = models.IntegerField(default=2018)
@@ -207,6 +215,9 @@ class Grupo(models.Model):
     evaluador = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
     curso_academico = models.IntegerField(default=2018)#, help_text='Curso academico')
     centro = models.CharField(max_length=100, default="Centro")
+    fecha_alta = models.DateTimeField(auto_now_add=True)
+    ultima_modificacion = models.DateTimeField(auto_now=True)
+
     # todos los evaluadores que tienen acceso al grupo
     evaluadores = models.ManyToManyField(
         User, related_name='Evaluadores'
@@ -221,17 +232,18 @@ class Grupo(models.Model):
         return self.nombre
 
 
-
+import datetime
 class Alumno(models.Model):
 
-    nombre = models.CharField(max_length=100, default="Nombre del alumno")
-    CIAL = models.CharField(max_length=100, default="XXX-XXX")
-    fecha_nacimiento = models.IntegerField(default=0)
+    codigo = models.CharField(max_length=100, default="código del alumno")
+    fecha_nacimiento = models.DateField(default=datetime.date.today)
     centro = models.CharField(max_length=100, default="Centro")
     evaluador = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
     grupo = models.ForeignKey(Grupo, on_delete=models.CASCADE, default=0)
-
     curso_academico = models.IntegerField(default=2018)
+    # fechas de alta del alumno y actualizacion de su ficha
+    fecha_alta = models.DateTimeField(auto_now_add=True)
+    ultima_modificacion = models.DateTimeField(auto_now=True)
 
     curso = models.CharField(
         max_length=20,
@@ -275,7 +287,7 @@ class Alumno(models.Model):
 
 
     def __str__(self):
-        return self.nombre
+        return self.codigo
 
 
 
@@ -322,7 +334,8 @@ class Evaluacion(models.Model):
     omnibus = models.DecimalField(default=0, max_digits=12, decimal_places=10)
     curso_academico = models.IntegerField(default=2018)
     mes_leible = models.CharField(max_length=10, default='noviembre')
-
+    fecha_alta = models.DateTimeField(auto_now_add=True)
+    ultima_modificacion = models.DateTimeField(auto_now=True)
 
     prueba = models.CharField(
         max_length=4,
@@ -577,34 +590,5 @@ Escritura de una historia (PDC-5)
 
 
 
-
-
-
-# PROYECTO EXPLORADORES
-
-class Explorador(models.Model):
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
-    nombre = models.CharField(max_length=10, default='noviembre')
-    puntuacion = models.IntegerField(default=2018)
-
-    def __str__(self):
-        return self.nombre
-
-class Ubicacion(models.Model):
-    nombre = models.CharField(max_length=10, default='noviembre')
-    latitud = models.FloatField(default=0)
-    longitud = models.FloatField(default=0)
-
-    def __str__(self):
-        return self.nombre
-
-class Emblema(models.Model):
-    explorador = models.ForeignKey(Explorador, on_delete=models.CASCADE, default=0)
-    tipo = models.IntegerField(default=2018)
-    ubicacion = models.ForeignKey(Ubicacion, on_delete=models.CASCADE, default=0)
-    fecha = models.IntegerField(default=2018)
-
-    def __str__(self):
-        return self.explorador.nombre + '-' + self.ubicacion.nombre + '-' + str(self.tipo)
 
 

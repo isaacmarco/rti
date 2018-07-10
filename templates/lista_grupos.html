@@ -1,31 +1,19 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% load app_filters %}
-
-
 {% block content %}
 
-<div class="form-style-1">
-	<h1>Mis grupos</h1>
-</div>
+<h1>Mis grupos</h1>
 
-<div class="form-style-1">
+<div class="form-style-1" style="padding: 30px">
 
-	<br>
-	<form>
 	<button type="button" class="save btn btn-default"
-		onclick="window.location.href='{{ server_url }}'">🚀 Inicio</button>
-
-	 <button type="button" class="save btn btn-default"
 		onclick="window.location.href='{{ server_url }}nuevo-grupo/'">👪 Nuevo grupo</button>
-    </form>
-	<hr>
+
 </div>
-	
-	
 
 
-	<table>
+<table>
 	<tr>
 		<th>Acceso</th>
 		<th>Nombre</th>
@@ -51,7 +39,7 @@
 
 		</tr>
 		{% endfor %}
-	</table>
+</table>
 
 
 {% endblock %}

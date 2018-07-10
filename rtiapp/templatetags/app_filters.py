@@ -9,6 +9,10 @@ def get_curso(curso):
     siguiente = curso + 1
     return str(curso) + '-' + str(siguiente)
 
+# devuelve si estamos en la pagina de login
+#@register.simple_tag
+#def get_loggin(url):
+ #   return url == '/log/'
 
 # devuelve el color segun la constante de riesgo
 @register.simple_tag

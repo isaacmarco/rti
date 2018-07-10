@@ -5,7 +5,7 @@
 <script type="text/javascript" src="http://www.amcharts.com/lib/3/amcharts.js"></script>
 <script type="text/javascript" src="http://cdn.amcharts.com/lib/3/serial.js"></script>
 
-<h1>Informe grupal {{ prueba }}-{{ grupo.curso }}</h1>
+<h1>Informe individual {{ prueba }}-{{ curso }}</h1>
 <h2>{{ grupo.nombre }}</h2>
 
     <form style="padding: 30px">
@@ -16,18 +16,23 @@
     </form>
 
 
-<div id="contenedor">
-    <!-- contenedores de los graficos -->
-	<div id="inicio">
-		<div id="grafico-inicio" style="width: 100%; height: 400px; background-color: #FFFFFF;" ></div>
-	</div>
-	<div id="medio">
-		<div id="grafico-medio" style="width: 100%; height: 400px; background-color: #FFFFFF;" ></div>
-	</div>
-	<div id="fin">
-		<div id="grafico-fin" style="width: 100%; height: 400px; background-color: #FFFFFF;" ></div>
-	</div>
-</div>
+<!-- meno de tareas -->
+<table style="width:100%">
+  <tr>
+    <td><a onclick="cambiar_subprueba(0)" href="#chartdiv">Adivinanzas (ADV)</a></td>
+	<td><a onclick="cambiar_subprueba(1)" href="#chartdiv">Conciencia Fonológica Aislar (CFA)</a></td>
+	<td><a onclick="cambiar_subprueba(2)" href="#chartdiv">Conocimiento Sonido Letra (CSL)</a></td>
+	<td><a onclick="cambiar_subprueba(3)" href="#chartdiv">Conocimiento Nombre Letra (CNL)</a></td>
+  </tr>
+  <tr>
+	<td><a onclick="cambiar_subprueba(4)"  href="#chartdiv">CLE texto</a></td>
+	<td><a onclick="cambiar_subprueba(5)" href="#chartdiv">CLE imágenes</a></td>
+  </tr>
+</table>
+
+<!-- grafico por tarea -->
+<div id="chartdiv" style="width: 100%;height: 600px;background-color: #FFFFFF"></div>
+
 
 
 
@@ -37,17 +42,16 @@
 // NO EVALUDO, ALTO RIESGO, RIESGO, BAJO RIESGO,
 // NORMAL y OPTIMO
 
-
 // generar un diccionario con todas las evaluaciones
 // recibidas en el parametro %evaluaciones%
 
+/*
 var evaluaciones = {
 {% for evaluacion in evaluaciones %}
     "{{ evaluacion.alumno.pk }}-{{ evaluacion.momento}}" : "{{ evaluacion.omnibus }}",
     "{{ evaluacion.alumno.pk }}-COLOR-RIESGO-{{ evaluacion.momento}}" : "{{ evaluacion.color_riesgo }}",
 {% endfor %}
 };
-
 
 // crear diccionario de datos del grafico
 var datos = [
@@ -62,9 +66,71 @@ var datos = [
         "color-fin": evaluaciones["{{ alumno.pk }}-COLOR-RIESGO-FIN"]
     },{% endfor %}
 ];
+*/
+
+
 </script>
 
+<script>
 
+	/*
+		Grafico de subtareas, de momento solo voy a mostrar las evaluaciones
+		inicio, medio, fin. Despues tendre que preparar el grafico para que muestre
+		todas las evaluaciones. Para esto, cuando no tengamos datos de una evaluacion
+		de progreso, usaremos la ultima evaluacion conocida
+
+	*/
+
+	// configuracion del grafico
+	var max = 10;
+	var	punteado = 5;
+	var etiquetaEvaluado = "";
+	var etiquetaNoEvaluado = "No evaluado";
+
+	// evaluaciones, estos campos indican si el usuario esta evaluado,
+	// actualmente el campo es  evaluacion.riesgo => RIESGO_OPCIONES o SIN_EVALUAR
+	// TO-DO
+	var evaluaciones = ["[vacio]","[x5714]","[2vb2c4]","[b2cte4]","[bkicq4]","[1gkam4]","[77m134]","[83esd4]"];
+
+	// datasets para cada tarea
+	var dataset_ADIVINANZAS = [
+	{
+		"valor-maximo": 20,
+		"category": "Noviembre",
+		"estilo": evaluaciones[1] == "Evaluado" ? 0 : punteado,
+		"etiqueta": evaluaciones[1] == "Evaluado" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo": 8,
+		"rendimiento-bajo": 1,
+		"rendimiento-medio": 0,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("ADIVINANZAS", 1)	// [ubrcu4]
+	},
+	{
+		"valor-maximo": 20,
+		"category": "Febrero",
+		"estilo": evaluaciones[4] == "Evaluado" ? 0 : punteado,
+		"etiqueta": evaluaciones[4] == "Evaluado" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo": 9,
+		"rendimiento-bajo": 1,
+		"rendimiento-medio": 1,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("ADIVINANZAS", 4)// [5u7o54]
+	},
+	{
+		"valor-maximo": 20,
+		"category": "Mayo",
+		"estilo": evaluaciones[7] == "Evaluado" ? 0 : punteado,
+		"etiqueta": evaluaciones[7] == "Evaluado" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo": 9,
+		"rendimiento-bajo": 1,
+		"rendimiento-medio": 1,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno": ultima_evaluacion("ADIVINANZAS", 7)//[8fmr04]
+	}
+	];
+
+
+</script>
 
 
 <script type="text/javascript">

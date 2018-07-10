@@ -40,19 +40,19 @@ class Form_Evaluacion_IPAE_PRIMERO(forms.ModelForm):
     class Meta:
         model = Evaluacion_IPAE_PRIMERO
         fields = '__all__'
-        exclude = ('curso_academico','mes','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
+        exclude = ('curso_academico','mes','prueba','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
 
 class Form_Evaluacion_IPAE_SEGUNDO(forms.ModelForm):
     class Meta:
         model = Evaluacion_IPAE_SEGUNDO
         fields = '__all__'
-        exclude = ('curso_academico','mes','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
+        exclude = ('curso_academico','mes','prueba','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
 
 class Form_Evaluacion_IPAE_TERCERO(forms.ModelForm):
     class Meta:
         model = Evaluacion_IPAE_TERCERO
         fields = '__all__'
-        exclude = ('curso_academico','mes','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
+        exclude = ('curso_academico','mes','prueba','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
 
 
 # forms IPAM
@@ -62,7 +62,7 @@ class Form_Evaluacion_IPAM_TERCERO(forms.ModelForm):
     class Meta:
         model = Evaluacion_IPAM_TERCERO
         fields = '__all__'
-        exclude = ('curso_academico','mes','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador','mes_leible')
+        exclude = ('curso_academico','mes','prueba','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador','mes_leible')
 
 class Form_Evaluacion_IPAM_SEGUNDO(forms.ModelForm):
     class Meta:
@@ -70,18 +70,18 @@ class Form_Evaluacion_IPAM_SEGUNDO(forms.ModelForm):
         fields = '__all__'
         exclude = ('curso_academico','mes','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
 
-
+'prueba',
 class Form_Evaluacion_IPAM_PRIMERO(forms.ModelForm):
     class Meta:
         model = Evaluacion_IPAM_PRIMERO
         fields = '__all__'
-        exclude = ('curso_academico','mes','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
+        exclude = ('curso_academico','mes','prueba','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
 
 class Form_Evaluacion_IPAM_INFANTIL(forms.ModelForm):
     class Meta:
         model = Evaluacion_IPAM_INFANTIL
         fields = '__all__'
-        exclude = ('curso_academico','mes','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
+        exclude = ('curso_academico','mes','prueba','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
 
 
 # forms IPAL
@@ -90,13 +90,13 @@ class Form_Evaluacion_IPAL_INFANTIL(forms.ModelForm):
     class Meta:
         model = Evaluacion_IPAL_INFANTIL
         fields = '__all__'
-        exclude = ('curso_academico','mes','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
+        exclude = ('curso_academico','mes','prueba','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
 
 class Form_Evaluacion_IPAL_PRIMERO(forms.ModelForm):
     class Meta:
         model = Evaluacion_IPAL_PRIMERO
         fields = '__all__'
-        exclude = ('curso_academico','mes','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
+        exclude = ('curso_academico','prueba','mes','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
 
 
 class Form_Evaluacion_IPAL_SEGUNDO(forms.ModelForm):
@@ -121,25 +121,40 @@ class FormGrupo(forms.ModelForm):
 
 # formulario para enviar la edicion del nuevo alumno
 class FormAlumnoPOST(forms.ModelForm):
+
+    fecha_nacimiento = forms.DateField(widget=forms.DateInput(format='%d/%m/%Y'),
+                                       input_formats=('%d/%m/%Y',))
+
     class Meta:
         model = Alumno
-        fields = ('nombre', 'sexo', 'fecha_nacimiento', 'pais', 'curso', 'centro', 'grupo')
+        fields = ('codigo', 'sexo', 'fecha_nacimiento', 'curso_academico','pais', 'curso', 'centro', 'grupo')
+
 
 
 # formulario para editar y crear nuevo alumno,
 # en el que el grupo esta forzado
 class FormAlumnoGrupoForzado(forms.ModelForm):
+
+    fecha_nacimiento = forms.DateField(widget=forms.DateInput(format='%d/%m/%Y'),
+                                       input_formats=('%d/%m/%Y',))
+
     class Meta:
         model = Alumno
-        fields = ('nombre', 'sexo', 'fecha_nacimiento', 'pais', 'curso', 'centro')
+        fields = ('codigo', 'sexo', 'fecha_nacimiento', 'pais', 'curso', 'centro')
+
 
 
 # formulario para editar y crear nuevo alumno,
 # en el que se puede seleccionar el grupo
 class FormAlumno(forms.ModelForm):
+
+    fecha_nacimiento = forms.DateField(widget=forms.DateInput(format='%d/%m/%Y'),
+                                       input_formats=('%d/%m/%Y',))
+
     class Meta:
         model = Alumno
-        fields = ('nombre', 'sexo', 'fecha_nacimiento', 'pais', 'curso', 'centro', 'grupo')
+        fields = ('codigo', 'sexo', 'fecha_nacimiento', 'pais', 'curso', 'curso_academico', 'centro', 'grupo')
+
 
     def __init__(self, user_evaluador, *args, **kwargs):
         super(FormAlumno, self).__init__(*args, **kwargs)
@@ -152,6 +167,4 @@ class FormEvaluador(forms.ModelForm):
     class Meta:
         model = Evaluador
         fields = '__all__'
-        exclude = ('usuario',)
-        #fields = ('nombre', 'sexo', 'nivel_academico','profesion', 'zona','centro', 'pais')
-
+        exclude = ('usuario', 'informacion_adicional_completa')

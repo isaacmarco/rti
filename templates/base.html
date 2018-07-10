@@ -14,6 +14,11 @@
 <style>
 
 
+
+div.contenido {
+    padding-left: 15px;
+}
+
 .topnav {
   overflow: hidden;
   background-color: #333;
@@ -46,21 +51,34 @@
 <div class="topnav">
 
   	<a class="active" href="{{ server_url }}">🚀 Plataforma RTI</a>
-  	<a href="{{ server_url }}editar-evaluador">👤 Mi perfil de evaluador</a>
-  	<a href="{{ server_url }}lista-grupos">👪 Mis grupos</a>
-  	<a href="{{ server_url }}establecer-curso">📅 Establecer año académico</a>
-	<a href="{{ server_url }}documentos">💼 Documentos</a>
-	<a href="{{ server_url }}exportar">💾 Exportar datos</a>
-	<a href="#">🚪 Cerrar sesión</a>
+
+	<!-- solo se muestra el menu de navegacion si
+	el usuario esta logeado -->
+    {% if user.is_authenticated %}
+
+  		<a href="{{ index }}editar-evaluador">👤 Mi perfil de evaluador</a>
+  		<a href="{{ index }}lista-grupos">👪 Mis grupos</a>
+  		<a href="{{ index }}establecer-curso">📅 Establecer año académico</a>
+		<a href="{{ index }}documentos">💼 Documentos</a>
+		<a href="{{ index }}exportar">💾 Exportar datos</a>
+		<a href="{{ index }}cerrar-sesion">🔌 Cerrar sesión</a>
+
+	{% else %}
+
+		{% if  request.path != "/login/"  %}
+
+			<!-- mostramos la interfaz para permitir
+			el login -->
+			<a href="{{ index }}login">🚪 Iniciar sesión</a>
+
+		{% endif %}
+
+	{% endif %}
 
 </div>
 
-{{ titulo }}
-
-
 	{% block content %}
 	{% endblock %}
-	
 
 </body>
 </html>
