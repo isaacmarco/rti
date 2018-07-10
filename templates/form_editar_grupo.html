@@ -1,12 +1,12 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-
-
+{% extends 'base.html' %}
+{% load app_filters %}
 {% block content %}
 
-    <h1>Editar grupo</h1>
-    <br>
 
-    <form method="POST" class="post-form">
+    <h1>Editar grupo</h1>
+
+
+    <form method="POST" class="post-form" style="padding: 30px">
     {% csrf_token %}
 
     {{ form.non_field_errors }}
@@ -16,11 +16,11 @@
         {{ hidden_field }}
     {% endfor %}
 
-    <table border="0">
+    <table border="0" class="formularios">
         {% for field in form.visible_fields %}
         <tr>
-            <th>{{ field.label_tag }}</th>
-            <td>
+            <th   class="formularios">{{ field.label_tag }}</th>
+            <td  class="formularios">
             {{ field.errors }}
             {{ field }}
             {{ field.help_text }}

@@ -1,20 +1,45 @@
-<html>
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load app_filters %}
+{% block content %}
 
-<head>
+<h1>Plataforma RtI</h1>
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-
-
-</head>
-
-<body>
+<div class="form-style-1" style="padding: 30px; font-size: 20px; text-align: center;">
 
 
+    {% if user.is_authenticated %}
+
+    <!-- texto que se muestra cuando estas logeado -->
+
+
+
+    {% else %}
+
+    <!-- texto cuando no tienes acceso a la plataforma -->
+
+    Si ya cuenta con un nombre de usuario y una contraseña, puede acceder a la plataforma
+    mediante el botón <a href="{{ server_url }}login">🚪 Iniciar sesión</a> de la barra
+    de navegación.
+    <br>
+    Si desea registrarse en la plataforma como un nuevo evaluador, pulse el aquí
+    <a href="{{ server_url }}alta">🙋 Darse de alta</a>
+
+
+    {% endif %}
+
+
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+<!--
 <div class="form-style-1">
-
-	<h1>RTI ULL</h1>
-	<h2>Página de inicio</h2>
-	<hr>
 
 	<form>
 		<button type="button" class="save btn btn-default"
@@ -47,8 +72,4 @@
     </form>
 
 </div>
-
-	
-
-</body>
-</html>
+-->

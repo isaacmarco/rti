@@ -72,37 +72,75 @@ colores_riesgo = {
 }
 
 
-ERROR_ALUMNO_YA_TIENE_EVALUACION_ANUAL = 'Este alumno ya tiene registros de evaluación para el curso '
+ERROR_ALUMNO_YA_TIENE_EVALUACION_ANUAL = 'Este alumno ya tiene registros de evaluación para el curso'
 ERROR_INFORME_IPAE_INFANTIL = 'La prueba IPAE no tiene una versión para Infantil'
 ERROR_EVALUADOR_NO_EXISTE = 'El número de identificación del otro evaluador es incorrecto'
 ERROR_LISTADO_GRUPOS = 'No ha creado ningun grupo'
+ERROR_NO_HAY_EVALUACIONES = 'No existen evaluaciones para este alumno'
+ERROR_NO_HAY_ALUMNOS_EN_GRUPO = 'El grupo no contiene alumnos'
 
+from django.contrib.auth import logout
+from django.contrib.auth import authenticate, login
+
+def cerrar_sesion(request):
+    print('>>> Cerrando sesion de usuario')
+    logout(request)
+    return redirect(server_url)
 
 def index(request):
     return render(request,'principal.html')
 
 def documentos(request):
-    return render(request,'documentos.html', {'server_url':server_url})
+    return render(request,'documentos.html', {'index':server_url})
 
 def exportar(request):
-    print('>>> Exportando datos')
+    print('>>> Menu de exportar datos')
+    return render(request, 'exportar_datos.html', {'index': server_url})
+
+def exportar_CSV(request):
+    print('>>> Exportando CSV')
+    tipo_datos = request.GET['tipo']
 
     # respuesta
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="somefilename.csv"'
-    writer = csv.writer(response)
+    response['Content-Disposition'] = 'attachment; filename="datos.csv"'
+    writer = csv.writer(response, delimiter=',')
 
-    # obtenemos todos los alumnos y los volcamos en el fichero
-    # linea a linea
-    alumnos = Alumno.objects.all()
+    if tipo_datos == 'alumnos':
+        print('>>> Exportando alumnos')
+        # obtenemos todos los alumnos
+        alumnos = Alumno.objects.all()
+        # cabecera y fichero
+        writer.writerow(['código', 'sexo', 'curso', 'fecha nacimiento',
+                         'pais', 'centro', 'grupo', 'id grupo', 'id evaluador', 'año académico' ])
+        for alumno in alumnos:
+            writer.writerow([alumno.codigo, alumno.sexo, alumno.curso,
+            alumno.fecha_nacimiento, alumno.pais, alumno.centro, alumno.grupo.nombre,
+            alumno.grupo.pk, alumno.evaluador.pk, alumno.curso_academico
+        ])
 
-    for alumno in alumnos:
-        writer.writerow([alumno.CIAL, alumno.nombre, alumno.curso, alumno.grupo])
 
 
+
+    if tipo_datos == 'evaluadores':
+        print('>>> Exportando evaluadores')
+        # obtenemos todos los evaluadores
+        evaluadores = Evaluador.objects.all()
+        for evaluador in evaluadores:
+            writer.writerow([evaluador.usuario.pk, evaluador.nombre, evaluador.nivel_academico])
+
+    if tipo_datos == 'IAPL':
+        print('TODO')
+
+    if tipo_datos == 'IPAM':
+        print('TODO')
+
+    if tipo_datos == 'IPAE':
+        print('TODO')
 
     # devolver el fichero para descargar
     return response
+
 
 
 
@@ -111,6 +149,7 @@ def compartir_grupo(request):
     id_grupo = request.GET['idGrupo']
     grupo = Grupo.objects.get(pk=id_grupo)
     return render(request, 'compartir_grupo.html', {
+        'index':server_url,
         'server_url': server_url, 'grupo': grupo})
 
 
@@ -142,6 +181,7 @@ def establecer_curso(request):
     curso = evaluador.curso_academico
     # url_retorno = server_url + lista_alumnos_grupo_url + '/?idGrupo=' + id_grupo
     return render(request, 'establecer_curso.html', {
+        'index': server_url,
         'server_url': server_url, 'curso': curso})
 
 
@@ -154,6 +194,58 @@ def actualizar_curso(request):
     evaluador.save()
     print('>>> Guardando nuevo curso academico: ' + curso)
     return redirect(server_url)
+
+
+# generar datos y mostrar informe individual
+# test
+def informe_individual(request):
+    print('>>> Informe individual')
+    id_alumno = request.GET['idAlumno']
+    alumno = Alumno.objects.get(pk=id_alumno)
+    url_retorno = server_url # + lista_alumnos_grupo_url + '/?idGrupo=' + id_grupo
+    # para el informe individual se necesitan las evaluaciones
+    # de la tarea
+
+    # test IPAL-INFANTIL
+    try:
+
+        print('>>> Recuperando evaluaciones de ' + alumno.codigo)
+        evaluaciones = []# lista de evaluaciones
+
+        # obenemos todas las evaluaciones del alumno para el curso actual
+        # TODO o para el curso del alumno?¿ Todo esto debe detallarse
+        # correctamente en el manual o decidirlo con el grupo
+
+        consulta_evaluaciones = Evaluacion_IPAL_INFANTIL.objects.filter(
+            alumno=alumno, curso_academico=alumno.curso_academico)
+
+        # introducimos en el diccionario de evaluaciones
+        for registro_evaluacion in consulta_evaluaciones:
+            print(registro_evaluacion.alumno.codigo + ' ' +
+                  registro_evaluacion.mes_leible + ' ' +
+                  registro_evaluacion.riesgo + ' ' +
+                  registro_evaluacion.get_tipo_display())
+            evaluaciones.append(registro_evaluacion)
+
+
+        # pasamos a la plantillas las evaluaciones inicio, medio, fin
+        return render(request, 'informe_individual.html',
+                      {'grupo': alumno.grupo,
+                       'curso': alumno.curso,
+                       'evaluaciones': evaluaciones,
+                       'evaluacion-inicio': consulta_evaluaciones.filter(momento='INICIO'),
+                       'evaluacion-medio': consulta_evaluaciones.filter(momento='MEDIO'),
+                       'evaluacion-fin': consulta_evaluaciones.filter(momento='FIN'),
+                       'colores_riesgo': colores_riesgo,
+                       'index': server_url,
+                       'server_url': url_retorno}
+                      )
+
+    except ObjectDoesNotExist:
+        return render(request, 'error.html', {'error': ERROR_NO_HAY_EVALUACIONES})
+
+
+
 
 
 # generar datos y mostrar el informe general
@@ -200,7 +292,7 @@ def informe_grupo(request):
             # recorrer la queryset recuperando cada registro
             # de evaluacion
             for registro_evaluacion in consulta_evaluaciones:
-                print(registro_evaluacion.alumno.nombre + ' ' +
+                print(registro_evaluacion.alumno.codigo + ' ' +
                       registro_evaluacion.mes_leible + ' ' +
                       registro_evaluacion.riesgo + ' ' +
                       registro_evaluacion.get_tipo_display())
@@ -216,6 +308,7 @@ def informe_grupo(request):
                        'colores_riesgo': colores_riesgo,
                        'prueba': prueba,
                        'curso': curso,
+                       'index': server_url,
                        'server_url': url_retorno}
                       )
 
@@ -506,7 +599,7 @@ def editar_evaluacion(request):
         form = formularios[nombre_clase](instance=evaluacion)
 
     plantilla = 'form_editar_evaluacion_' + tipo + '_' + curso + '.html'
-    return render(request, plantilla, {'form': form, 'server_url': url_retorno})
+    return render(request, plantilla, {'form': form, 'index':server_url, 'server_url': url_retorno})
 
 
 
@@ -523,6 +616,13 @@ def listar_evaluaciones(request):
     alumno = Alumno.objects.get(pk=id_alumno)
     curso = alumno.curso
     print('>>> Mostrando lista para ' + tipo + ' ' + curso)
+
+    # TODO SOLO MOSTRAMOS LAS DEL PRESENTE AÑO ACADEMICO: VER COMO MEJORAR ESTO
+    # EN PRINCIPIO AÑADIENDO OPCIONES DE FILTRO, COMO EN EL CASO
+    # DE LOS ALUMNOS: PERO ENTONCES, PARA QUE TENEMOS UNA VARIABLE
+    # DE CURSO ACADEMICO EN EL EVALUADOR?
+
+    # curso_academico = alumno.grupo.curso_academico
 
     try:
 
@@ -569,6 +669,7 @@ def listar_evaluaciones(request):
                        'alumno': alumno,
                        'tipo': tipo,
                        'curso': curso,
+                       'index': server_url,
                        'server_url': server_url})
 
     except ObjectDoesNotExist:
@@ -593,7 +694,27 @@ def listar_alumnos_evaluador_en_grupo(request):
     id_grupo = request.GET['idGrupo']
     grupo = Grupo.objects.get(pk=id_grupo)
 
-    print('>>> Listando alumnos del grupo ' + grupo.nombre)
+    mostrar_todos = False
+
+    # comprobar si se ha filtrado por año academico
+    if request.GET.get('cursoAcademico', ''):
+
+        curso_academico = request.GET['cursoAcademico']
+
+        if curso_academico == 'todos':
+            mostrar_todos = True
+            print('>>> Mostrando todos los alumnos sin filtro')
+
+        else:
+            print('>>> Filtrando por ' + str(curso_academico))
+
+    else:
+        # no se ha filtrado, recuperamos el curso por defecto
+        curso_academico = grupo.curso_academico
+        print('>>> Filtro por defecto ' + str(curso_academico))
+
+
+    print('>>> Listando alumnos del grupo ' + grupo.nombre )
 
     try:
 
@@ -603,7 +724,15 @@ def listar_alumnos_evaluador_en_grupo(request):
         # TODO COMRPOBAR QUE ERES EL PROPIETARIO DEL GRUPO
         # AHORA ESTA EL PROBLEMA DE QUE EL EVALUADOR DEBE APARECER
         # EN LA LISTA 'EVALUADORES' DEL GRUPO !!!!
-        alumnos = Alumno.objects.filter(grupo=grupo)
+
+
+
+        # filtros
+        if mostrar_todos:
+            alumnos = Alumno.objects.filter(grupo=grupo)
+
+        else:
+            alumnos = Alumno.objects.filter(grupo=grupo, curso_academico=curso_academico)
 
 
         # recuperar todas las evaluaciones asociadas
@@ -616,7 +745,7 @@ def listar_alumnos_evaluador_en_grupo(request):
 
         for alumno in alumnos:
 
-            print('- recuperado ' + alumno.nombre)
+            print('- recuperado ' + alumno.codigo)
             # hacer las consultas
             modelo_IPAL = 'IPAL-' + alumno.curso
             modelo_IPAM = 'IPAM-' + alumno.curso
@@ -645,7 +774,7 @@ def listar_alumnos_evaluador_en_grupo(request):
                     Q(mes=Globales.MAYO)
                 )
                 for registro_evaluacion in consulta_evaluaciones_IPAE:
-                    print(registro_evaluacion.alumno.nombre + ' ' +
+                    print(registro_evaluacion.alumno.codigo + ' ' +
                           registro_evaluacion.mes_leible + ' ' +
                           registro_evaluacion.riesgo + ' ' +
                           registro_evaluacion.get_tipo_display())
@@ -656,7 +785,7 @@ def listar_alumnos_evaluador_en_grupo(request):
             # recorrer la queryset recuperando cada registro
             # de evaluacion
             for registro_evaluacion in consulta_evaluaciones_IPAL:
-                print(registro_evaluacion.alumno.nombre + ' ' +
+                print(registro_evaluacion.alumno.codigo + ' ' +
                       registro_evaluacion.mes_leible + ' ' +
                       registro_evaluacion.riesgo + ' ' +
                       registro_evaluacion.get_tipo_display())
@@ -665,7 +794,7 @@ def listar_alumnos_evaluador_en_grupo(request):
                 evas[key] = registro_evaluacion.riesgo
 
             for registro_evaluacion in consulta_evaluaciones_IPAM:
-                print(registro_evaluacion.alumno.nombre + ' ' +
+                print(registro_evaluacion.alumno.codigo + ' ' +
                       registro_evaluacion.mes_leible + ' ' +
                       registro_evaluacion.riesgo + ' ' +
                       registro_evaluacion.get_tipo_display())
@@ -679,7 +808,10 @@ def listar_alumnos_evaluador_en_grupo(request):
                         'alumnos': alumnos,
                         'evaluaciones': todas_evaluaciones,
                         'evas':evas,
+                        'curso_filtrado':curso_academico,
+                        'index': server_url,
                         'server_url': server_url})
+
     except ObjectDoesNotExist:
         return render(request, 'error.html', {'error': "No tiene alumnos"})
 
@@ -698,7 +830,10 @@ def lista_grupos_evaluador(request):
     try:
         # obtenemos los grupos del usuario
         grupos = Grupo.objects.filter(evaluadores__pk=request.user.pk).order_by('curso_academico').reverse()
-        return render(request, 'lista_grupos.html', {'grupos': grupos, 'server_url': server_url})
+        return render(request, 'lista_grupos.html',
+                      {'grupos': grupos,
+                       'index': server_url,
+                       'server_url': server_url})
 
     except ObjectDoesNotExist:
         return render(request,
@@ -726,7 +861,7 @@ def nuevo_grupo(request):
             return redirect(url_retorno)
     else:
         form = FormGrupo()
-    return render(request, 'nuevo_grupo.html', {'form': form, 'server_url': url_retorno})
+    return render(request, 'nuevo_grupo.html', {'form': form, 'index':server_url,'server_url': url_retorno})
 
 
 # editar el perfil del evaluador
@@ -744,7 +879,7 @@ def editar_evaluador(request):
             return redirect(url_retorno)
     else:
         form = FormEvaluador(instance=evaluador)
-    return render(request, 'form_editar_evaluador.html', {'form': form, 'server_url': url_retorno})
+    return render(request, 'form_editar_evaluador.html', {'form': form, 'index':server_url,'server_url': url_retorno})
 
 
 # editar un grupo
@@ -765,19 +900,13 @@ def editar_grupo(request):
             return redirect(url_retorno)
     else:
         form = FormGrupo(instance=grupo)
-    return render(request, 'form_editar_grupo.html', {'form': form, 'server_url': url_retorno})
+    return render(request, 'form_editar_grupo.html', {'form': form, 'index':server_url,'server_url': url_retorno})
 
 
 
 
 
 
-
-# ver un alumno
-def alumno(request):
-    id = request.GET['id']
-    alumno = get_object_or_404(Alumno, pk=id)
-    return render(request, 'vista_alumno.html', {'post': alumno})
 
 
 
@@ -802,7 +931,7 @@ def nuevo_alumno(request):
     else:
         form = FormAlumnoGrupoForzado()
     return render(request, 'form_nuevo_alumno.html',
-                  {'form': form, 'server_url': url_retorno})
+                  {'form': form, 'index':server_url,'server_url': url_retorno})
 
 
 
@@ -827,17 +956,17 @@ def nuevo_alumno_Grupo(request):
     else:
         form = FormAlumno(request.user)
     return render(request, 'form_nuevo_alumno.html',
-                  {'form': form, 'server_url': url_retorno})
+                  {'form': form, 'index':server_url,'server_url': url_retorno})
 
 
 
 # editar un alumno
 def editar_alumno(request):
-    print('>>> Editando alumno')
+
     id_alumno = request.GET['idAlumno']
     id_grupo = request.GET['idGrupo']
     alumno = get_object_or_404(Alumno, pk=id_alumno)
-    #grupo = get_object_or_404(Grupo, pk=id_grupo)
+    print('>>> Editando alumno ' + alumno.codigo)
     url_retorno = server_url + lista_alumnos_grupo_url + '/?idGrupo=' + id_grupo
     if request.method == "POST":
         form = FormAlumnoPOST(request.POST, instance=alumno)
@@ -847,7 +976,7 @@ def editar_alumno(request):
             return redirect(url_retorno)
     else:
         form = FormAlumno(request.user, instance=alumno)
-    return render(request, 'form_editar_alumno.html', {'form': form, 'server_url': url_retorno})
+    return render(request, 'form_editar_alumno.html', {'form': form, 'index':server_url,'server_url': url_retorno})
 
 
 
@@ -862,89 +991,4 @@ def listar_alumnos_evaluador(request):
     except ObjectDoesNotExist:
         return render(request, 'error.html', {'error': "No tiene alumnos"})
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# CODIGO EXPLORADORES
-
-
-import math
-from .models import Ubicacion, Explorador, Emblema
-def puntuaciones(request):
-    print('>>> Mostrando puntuaciones')
-
-# recibe la ubicacion desde el sistema de ubicacion
-# del navegador como parametro
-def comprobar_ubicacion(request):
-    print('>>> Comprobando ubicacion')
-    latitud = request.GET['latitud']
-    longitud = request.GET['longitud']
-
-    explorador = Explorador.objects.get(usuario =request.user)
-
-    # obtenemos todas las ubicaciones
-    ubicaciones = Ubicacion.objects.filter()
-
-    # para cada ubicacion medimos la distancia
-    for ubicacion in ubicaciones:
-        # aqui solo usamos un punto, pero en la practica, cada
-        # ubicacion deberia contar con varios puntos para
-        # cubrir la zona completa
-        print('>>> Procesando distancia hasta la ubicacion: ' + ubicacion.nombre)
-        d = distancia(float(latitud), float(longitud), ubicacion.latitud, ubicacion.longitud)
-        distancia_metros = d * 1000
-        print(str(distancia_metros) + ' metros')
-        umbral_metros =0.025 # a 25 metros
-        if d < umbral_metros:
-            print('>>> El usuario ha llegado a: ' + ubicacion.nombre)
-            # consultamos la bd y actualizamos:
-            # lo primero es recibir un emblema basico por llegar
-            # lo segundo es comprobar si existe un emblema
-            # de primer lugar en la bd, si no existe
-            # creamos uno para este usuario
-
-            # creamos el emblema
-            emblema_basico = Emblema(explorador=explorador, ubicacion=ubicacion)
-            emblema_basico.save()
-            print('>>> Emblema creado')
-
-
-def ubicaciones(request):
-    print('>>> Mostrando ubicaciones')
-
-def otorgar_emblema(request):
-    print('>>> Otorgando emblema')
-
-
-def distancia(lat1, lon1, lat2, lon2):
-    radlat1 = math.pi * lat1 / 180
-    radlat2 = math.pi * lat2 / 180
-    theta = lon1-lon2
-    radtheta = math.pi * theta / 180
-    dist = math.sin(radlat1) * math.sin(radlat2) + math.cos(radlat1) * math.cos(radlat2) * math.cos(radtheta)
-    if dist > 1:
-        dist = 1
-    dist = math.acos(dist)
-    dist = dist * 180 / math.pi
-    dist = dist * 60 * 1.1515
-    dist = dist * 1.609344
-    return dist
 

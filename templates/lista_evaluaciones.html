@@ -1,33 +1,21 @@
+{% extends 'base.html' %}
 {% load staticfiles %}
-
-<html>
-
-<head>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-	<link rel="stylesheet" href="{% static 'css/rti.css' %}">
-</head>
-
-<body>
+{% load app_filters %}
+{% block content %}
 
 
-<div class="form-style-1">
-	<h1>Evaluaciones {{ tipo_prueba }} {{ curso }}</h1>
-    <h2>{{ alumno.nombre }}</h2>
-    <br>
-</div>
+<h1>Evaluaciones {{ tipo }}-{{ curso }}</h1>
+<h2>{{ alumno.codigo }}</h2>
 
-<div class="form-style-1">
-	<form>
-	<button type="button" class="save btn btn-default"
-	onclick="window.location.href='{{ server_url }}'">🚀 Inicio</button>
+
+<div class="form-style-1" style="padding: 30px">
 
 	<button type="button" class="save btn btn-default"
 	onclick="window.location.href='{{ server_url }}lista-alumnos-grupo/?idGrupo={{ alumno.grupo.pk }}'">👈 Volver</button>
 
     <button type="button" class="save btn btn-default"
 	onclick="window.location.href='{{ server_url }}nueva-evaluacion/?idAlumno={{alumno.pk | safe}}&tipo={{ tipo }}'">📆 Nueva evaluación {{ tipo }}</button>
-	</form>
-    <hr>
+
 </div>
 
 	<table>
@@ -48,7 +36,7 @@
 		<tr>
 
 			<!-- Tipo de evaluacion 📆🔎-->
-			<td>
+			<td  >
 				{% if evaluacion.tipo == "PR" %}
 					📈 PROGRESO
 				{% else %}
@@ -103,7 +91,4 @@
 
 	</table>
 
-
-
-</body>
-</html>
+{% endblock %}

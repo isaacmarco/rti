@@ -1,22 +1,23 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-
-
+{% extends 'base.html' %}
+{% load app_filters %}
 {% block content %}
 
-    {% load app_filters %}
+
     <h1>Compartir el grupo con otro evaluador</h1>
     <h2>{{ grupo.nombre }} - {{ grupo.curso }}</h2>
-    <br>
-    <p>Introduza el número único de identificación del evaluador con el que quiere
-     compartir el grupo. <b>El otro evaluador puede consultar su número de identificación en
-        su perfil</b></p>
-    <br>
 
-    <form action="{{ server_url }}actualizar-grupo-compartido\" class="post-form">
+
+    <form action="{{ server_url }}actualizar-grupo-compartido/" class="post-form" style="padding: 30px">
+
+       Introduza el número único de identificación del evaluador con el que quiere
+     compartir el grupo. <b>El otro evaluador puede consultar su número de identificación en
+     su perfil</b><br><br>
 
         {% csrf_token %}
+        Número de identificación del otro evaluador<br>
         <input type="number" name="idEvaluador" value=0>
-        <input type="text" name="idGrupo" value="{{ grupo.pk }}">
+        <input type="hidden" name="idGrupo" value="{{ grupo.pk }}">
+
         <br><br><br>
         <button type="submit" class="save btn btn-default">Guardar</button>
         <button type="button" class="save btn btn-default" onclick="window.location.href='{{ server_url }}'"

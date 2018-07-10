@@ -1,0 +1,41 @@
+﻿{% extends 'base.html' %}
+{% load app_filters %}
+{% load staticfiles %}
+{% block content %}
+
+
+
+<h1>Accesso a evaluadores</h1>
+
+
+	<form method="post" action="{% url 'django.contrib.auth.views.login' %}"  class="post-form" style="padding: 30px">
+
+	{% csrf_token %}
+
+	 <table class="login"  border="0">
+		  	<tr class="login">
+   		 		<td>Usuario</td>
+    			<td> {{ form.username }}</td>
+  			</tr>
+		 	<tr class="login">
+   				 <td>Contraseña</td>
+    			 <td> {{ form.password }}</td>
+		  	</tr>
+	 </table>
+
+
+	{% if form.errors %}
+		<p style="font: bold 20px/30px;color: red;">Datos de acceso erroneos</p>
+	{% endif %}
+
+	<input type="submit" class="save btn btn-default" value="Acceder" />
+ 	<input type="hidden" class="save btn btn-default" name="next" value="{{ next }}" />
+
+
+
+	</form>
+
+
+
+{% endblock %}
+

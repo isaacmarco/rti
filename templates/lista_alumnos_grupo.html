@@ -1,57 +1,49 @@
+{% extends 'base.html' %}
 {% load staticfiles %}
 {% load app_filters %}
-<html>
+{% block content %}
 
-<head>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-	<link rel="stylesheet" href="{% static 'css/rti.css' %}">
-</head>
+<h1>Alumnos en {{ grupo.nombre }} ({{ grupo.curso}})</h1>
 
-<body>
+<div class="form-style-1" style="padding: 30px">
 
-
-<div class="form-style-1">
-	<h1>Lista de alumnos en el grupo</h1>
-	<h2>{{ grupo.nombre }}</h2>
-	<h2>{{ grupo.curso}}</h2>
-</div>
-
-<div class="form-style-1">
-	<br>
-	<form>
-	<button type="button" class="save btn btn-default"
-		onclick="window.location.href='{{ server_url }}'">🚀 Inicio</button>
+	<!--
 	<button type="button" class="save btn btn-default"
 		onclick="window.location.href='{{ server_url }}lista-grupos/?idGrupo={{ grupo.pk }}'">👪 Volver a mis grupos</button>
+	-->
 	<button type="button" class="save btn btn-default"
 		onclick="window.location.href='{{ server_url }}nuevo-alumno/?idGrupo={{ grupo.pk }}'">👤 Nuevo alumno</button>
-
-		<!--
-	<button type="button" class="save btn btn-default"
-		onclick="window.location.href='{{ server_url }}establecer-curso'">📅 Cambio de año académico</button>
-	-->
 
 	<button type="button" class="save btn btn-default"
 		onclick="window.location.href='{{ server_url }}compartir-grupo/?idGrupo={{ grupo.pk }}'">🙋 Compartir grupo</button>
 
-	<!-- filtrar alumnos por curso -->
-	<form action="{{ server_url }}" class="post-form">
-        {% csrf_token %}
-		<button type="submit" class="save btn btn-default">Filtrar</button>
-        <input type="number" name="curso_academico" value={{ grupo.curso_academico }}  style="width: 60px">
-    </form>
-
-	<br><br>
-
+	<!-- botones de infomes -->
 	<button type="button" class="save btn btn-default"
 		onclick="window.location.href='{{ server_url }}informe-grupo/?idGrupo={{ grupo.pk }}&prueba=IPAL'">📊 Informe de grupo IPAL</button>
+
 	<button type="button" class="save btn btn-default"
 		onclick="window.location.href='{{ server_url }}informe-grupo/?idGrupo={{ grupo.pk }}&prueba=IPAM'">📊 Informe de grupo IPAM</button>
+
 	<button type="button" class="save btn btn-default"
 		onclick="window.location.href='{{ server_url }}informe-grupo/?idGrupo={{ grupo.pk }}&prueba=IPAE'">📊 Informe de grupo IPAE</button>
 
-	</form>
-    <hr>
+
+
+</div>
+
+
+	<!-- filtrar alumnos por curso   -->
+	<form action="{{ server_url }}lista-alumnos-grupo/" class="post-form" style="padding: 0px 30px">
+ 		{% csrf_token %}
+
+		<input type="number" name="cursoAcademico" value={{ curso_filtrado }} style="width: 60px">
+		<button type="submit" class="save btn btn-default">Filtrar</button>
+		<input type="hidden" name="idGrupo" value="{{ grupo.pk }}">
+
+		<button type="button" class="save btn btn-default"
+		onclick="window.location.href='{{ server_url }}lista-alumnos-grupo/?idGrupo={{ grupo.pk }}&cursoAcademico=todos'">Mostrar todos</button>
+
+    </form>
 
 
 <script>
@@ -68,8 +60,6 @@ var riesgos = {
 
 </script>
 
-</div>
-
 
 	<table>
 
@@ -79,10 +69,10 @@ var riesgos = {
         </thead>
 	<tr>
         <th>Ficha</th>
-        <th>CIAL</th>
-		<th>Nombre</th>
+        <th>Código</th>
         <th>Género</th>
 		<th>Curso</th>
+		<th>Año académico</th>
         <th>IPAL</th>
         <th>IPAM</th>
         <th>IPAE</th>
@@ -99,19 +89,15 @@ var riesgos = {
 				&idGrupo={{alumno.grupo.pk | safe}}" style="font-size:23px" >📝</a>
 			</td>
 
-            <td>
-                {{ alumno.CIAL }}
-            </td>
+
 
 			<!-- controlamos el curso del alumno, si no coincide
 			con el curso asignado al grupo mostramos un indicador
 			de alerta al evaluador style="  text-align: left;"-->
 			<td >
-				{% if alumno.curso != grupo.curso %}
-					<b  style="color:red">{{ alumno.nombre }} ⚠</b>
-				{% else %}
-					{{ alumno.nombre }}
-				{% endif %}
+
+				{{ alumno.codigo }}
+
 			</td>
 
 
@@ -120,13 +106,21 @@ var riesgos = {
 
 			<td>
 				{% if alumno.curso != grupo.curso %}
-					<b  style="color:red">{{ alumno.curso }}</b>
+					<b  style="color:red">{{ alumno.curso }} ⚠</b>
 				{% else %}
 					{{ alumno.curso }}
 				{% endif %}
 
 			</td>
 
+			<td>
+				{% if alumno.curso_academico != grupo.curso_academico %}
+					<b  style="color:red">	{% get_curso alumno.curso_academico %} ⚠</b>
+				{% else %}
+						{% get_curso alumno.curso_academico %}
+				{% endif %}
+
+			</td>
             <td>
                 <!-- ver informe IPAL -->
 				<a href="#" style="font-size:23px">📊</a>
@@ -182,7 +176,7 @@ var riesgos = {
 				<a href="{{ server_url }}lista-evaluaciones/
 				?idAlumno={{alumno.pk | safe}}
 				&tipo=IPAE
-				&idGrupo={{alumno.grupo.pk | safe}}" style="font-size:23px">>📆</a>
+				&idGrupo={{alumno.grupo.pk | safe}}" style="font-size:23px">📆</a>
 
 
                 <!-- riesgo IPAE -->
@@ -203,6 +197,4 @@ var riesgos = {
 	</table>
 
 
-
-</body>
-</html>
+{% endblock %}

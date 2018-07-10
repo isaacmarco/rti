@@ -6,12 +6,6 @@ from .models import Evaluador, Grupo, Alumno,  \
     Evaluacion_IPAE_PRIMERO, Evaluacion_IPAE_SEGUNDO, Evaluacion_IPAE_TERCERO
 
 
-# TODO BORRA ESTO !
-from .models import Ubicacion, Emblema, Explorador
-
-admin.site.register(Ubicacion)
-admin.site.register(Emblema)
-admin.site.register(Explorador)
 
 
 admin.site.register(Evaluador)
