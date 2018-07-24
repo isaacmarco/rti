@@ -23,6 +23,7 @@ MAYO = 7
 CRIBADO = 'CR'
 PROGRESO = 'PR'
 # momento de evaluacion
+MOMENTO_DEFECTO = 'PROGRESO'
 INICIO = 'INICIO'
 MEDIO = 'MEDIO'
 FIN = 'FIN'
@@ -65,6 +66,7 @@ RIESGO_OPCIONES = (
 )
 # opciones de evaluaciones
 MOMENTOS_OPCIONES = (
+    (MOMENTO_DEFECTO, 'Progreso'),
     (INICIO, 'Inicio'),
     (MEDIO, 'Medio'),
     (FIN, 'FIn')

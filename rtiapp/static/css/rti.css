@@ -1,5 +1,10 @@
  
  
+	@media print {
+		.page-break { display: block; page-break-before: always; }
+	}
+ 
+ 
 	table {
 		border-collapse: collapse;
 		text-align: center;
@@ -56,5 +61,41 @@
 
 	tr.login{background-color: #ffffff}
 	
+	
+	
+	#contenedor {
+	 
+		width: 1040px;
+		margin: 0 auto;
+	}
+	#inicio {
+		float: left;
+		width: 320px;
+	}
+	#medio {
+		float: left;
+		width: 320px;
+	}
+	#fin {
+		float: left;
+		width: 320px;
+	}
+
+	#diciembre {
+		float: left;
+		width: 260px;
+	}
+	#enero {
+		float: left;
+		width: 260px;
+	}
+	#marzo {
+		float: left;
+		width: 260px;
+	}
+	#abril {
+		float: left;
+		width: 260px;
+	}
 	
 	 

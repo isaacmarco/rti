@@ -70,7 +70,7 @@ class Form_Evaluacion_IPAM_SEGUNDO(forms.ModelForm):
         fields = '__all__'
         exclude = ('curso_academico','mes','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
 
-'prueba',
+
 class Form_Evaluacion_IPAM_PRIMERO(forms.ModelForm):
     class Meta:
         model = Evaluacion_IPAM_PRIMERO
@@ -90,7 +90,9 @@ class Form_Evaluacion_IPAL_INFANTIL(forms.ModelForm):
     class Meta:
         model = Evaluacion_IPAL_INFANTIL
         fields = '__all__'
-        exclude = ('curso_academico','mes','prueba','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
+        progreso = False
+        exclude = ('curso_academico', 'mes', 'prueba', 'alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
+
 
 class Form_Evaluacion_IPAL_PRIMERO(forms.ModelForm):
     class Meta:

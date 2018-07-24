@@ -54,7 +54,9 @@
 
 var riesgos = {
 {% for evaluacion in evaluaciones %}
-    "{{ evaluacion.alumno.pk }}-RIESGO-{{ evaluacion.prueba }}-{{ evaluacion.momento}}" : "{{ evaluacion.color_riesgo }}",{% endfor %}
+    "{{ evaluacion.alumno.pk }}-RIESGO-{{ evaluacion.prueba }}-{{ evaluacion.momento}}" : "{{ evaluacion.color_riesgo }}",
+    "{{ evaluacion.alumno.pk }}-EVALUADO-{{ evaluacion.prueba }}-{{ evaluacion.momento}}" : "{{ evaluacion.evaluado }}",
+    {% endfor %}
 };
 
 
@@ -132,9 +134,9 @@ var riesgos = {
 
                 <!-- riesgo IPAL -->
                 <div style = "display: inline-block;">
-                <div style = "display: inline-block;background-color: {% color evas|get_item:alumno.key_IPAL_INICIO %};width:10px;height:10px;"></div>
-                <div style = "display: inline-block;background-color: {% color evas|get_item:alumno.key_IPAL_MEDIO %};width:10px;height:10px;"></div>
-                <div style = "display: inline-block;background-color: {% color evas|get_item:alumno.key_IPAL_FIN %};width:10px;height:10px;"></div>
+					 <div style = "display: inline-block;background-color: {% color evas|get_item:alumno.key_IPAL_INICIO %};width:10px;height:10px;"></div>
+					<div style = "display: inline-block;background-color: {% color evas|get_item:alumno.key_IPAL_MEDIO %};width:10px;height:10px;"></div>
+                	<div style = "display: inline-block;background-color: {% color evas|get_item:alumno.key_IPAL_FIN %};width:10px;height:10px;"></div>
                 </div>
 
             </td>

@@ -2,11 +2,131 @@
 {% load app_filters %}
 {% block content %}
 
+
+
+<script>
+
+/*
+	Calculo de colores de riesgo dependiendo
+	de las puntuaciones directas de cada tarea
+	en el inicio, medio y fin
+*/
+
+
+function get_riesgo_CFA_inicio(pd){
+	if(pd <= 17) return 0;
+	if(pd >= 18 && pd <= 38) return 1;
+	if(pd >= 39 && pd <= 46) return 2;
+	if(pd > 46) return 3;
+}
+function get_riesgo_ADIVINANZAS_inicio(pd){
+	if(pd <= 8) return 0;
+	if(pd == 9) return 1;
+	if(pd >  9) return 3;
+}
+function get_riesgo_CSL_inicio(pd){
+	if(pd <= 5) return 0;
+	if(pd >= 6 && pd <= 8) return 1;
+	if(pd >= 9 && pd <= 14) return 2;
+	if(pd > 14) return 3;
+}
+function get_riesgo_CNL_inicio(pd){
+	if(pd <= 6) return 0;
+	if(pd >= 7 && pd <=8) return 1;
+	if(pd > 8) return 3;
+}
+function get_riesgo_CLEIMAGEN_inicio(pd){
+	if(pd <= 28) return 0;
+	if(pd >= 29 && pd <= 31) return 1;
+	if(pd > 31) return 3;
+}
+function get_riesgo_CLETEXTO_inicio(pd){
+	if(pd <= 2) return 0;
+	if(pd == 3) return 1;
+	if(pd > 3) return 3;
+}
+
+// ---------
+
+function get_riesgo_ADIVINANZAS_medio(pd){
+	if(pd <= 9) return 0;
+	if(pd == 10) return 1;
+	if(pd == 11) return 2;
+	if(pd > 11) return 3;
+}
+function get_riesgo_CSL_medio(pd){
+	if(pd <= 10) return 0;
+	if(pd >= 11 && pd <= 16) return 1;
+	if(pd >= 17 && pd <= 29) return 2;
+	if(pd > 29) return 3;
+}
+function get_riesgo_CNL_medio(pd){
+	if(pd <= 12) return 0;
+	if(pd >= 13 && pd <= 14) return 1;
+	if(pd > 14) return 3;
+}
+function get_riesgo_CLEIMAGEN_medio(pd){
+	if(pd <= 29) return 0;
+	if(pd >= 30 && pd <= 31) return 1;
+	if(pd > 31) return 3;
+}
+function get_riesgo_CLETEXTO_medio(pd){
+	if(pd <= 3) return 0;
+	if(pd == 4) return 1;
+	if(pd > 4) return 3;
+}
+function get_riesgo_CFA_medio(pd){
+	if(pd <= 18) return 0;
+	if(pd >= 19 && pd <= 50) return 1;
+	if(pd >= 51 && pd <= 66) return 2;
+	if(pd > 66) return 3;
+}
+
+
+// ---------
+
+function get_riesgo_ADIVINANZAS_fin(pd){
+	if(pd <= 9) return 0;
+	if(pd ==10) return 1;
+	if(pd == 11) return 2;
+	if(pd > 11) return 3;
+}
+function get_riesgo_CSL_fin(pd){
+	if(pd <= 15) return 0;
+	if(pd >= 16 && pd <= 25) return 1;
+	if(pd >= 26 && pd <= 37) return 2;
+	if(pd > 37) return 3;
+}
+function get_riesgo_CNL_fin(pd){
+	if(pd <= 18) return 0;
+	if(pd >= 19 && pd <= 21) return 1;
+	if(pd == 22) return 2;
+	if(pd > 22) return 3;
+}
+function get_riesgo_CLEIMAGEN_fin(pd){
+	if(pd <= 30) return 0;
+	if(pd == 31) return 1;
+	if(pd > 31) return 3;
+}
+function get_riesgo_CLETEXTO_fin(pd){
+	if(pd <= 3) return 0;
+	if(pd == 4) return 1;
+	if(pd > 4) return 3;
+}
+function get_riesgo_CFA_fin(pd){
+	if(pd <= 22) return 0;
+	if(pd >= 23 && pd <= 70) return 1;
+	if(pd >= 71 && pd <= 75) return 2;
+	if(pd > 75) return 3;
+}
+</script>
+
 <script type="text/javascript" src="http://www.amcharts.com/lib/3/amcharts.js"></script>
 <script type="text/javascript" src="http://cdn.amcharts.com/lib/3/serial.js"></script>
 
-<h1>Informe individual {{ prueba }}-{{ curso }}</h1>
+<h1>Informe individual IPAL-{{ curso }}</h1>
 <h2>{{ grupo.nombre }}</h2>
+<h2>{{ alumno.codigo }}</h2>
 
     <form style="padding: 30px">
     <button type="button" class="save btn btn-default" onclick="window.location.href='{{ server_url }}'"
@@ -16,8 +136,8 @@
     </form>
 
 
-<!-- meno de tareas -->
-<table style="width:100%">
+<!-- menu de tareas -->
+<table style="width:80%">
   <tr>
     <td><a onclick="cambiar_subprueba(0)" href="#chartdiv">Adivinanzas (ADV)</a></td>
 	<td><a onclick="cambiar_subprueba(1)" href="#chartdiv">Conciencia Fonológica Aislar (CFA)</a></td>
@@ -28,48 +148,156 @@
 	<td><a onclick="cambiar_subprueba(4)"  href="#chartdiv">CLE texto</a></td>
 	<td><a onclick="cambiar_subprueba(5)" href="#chartdiv">CLE imágenes</a></td>
   </tr>
+
 </table>
+<br><br>
 
-<!-- grafico por tarea -->
-<div id="chartdiv" style="width: 100%;height: 600px;background-color: #FFFFFF"></div>
+<!-- grafico por tarea
+<div id="grafico-por-tareas" style=" margin: auto;width: 80%;height: 600px;background-color: #FFFFFF"></div>-->
+<div id="contenedor">
+	<h2>Evolución por tareas</h2>
+<div id="grafico-por-tareas" style=" margin: auto;width: 80%;height: 600px;background-color: #FFFFFF"></div>
+	<br><br>
+</div>
+
+<div class="page-break"></div>
+
+<!-- grafico por evaluaciones -->
+<div id="contenedor">
+<br><br>
+	<h2>Evaluaciones de cribado</h2>
+
+	<div id="inicio">
+		<div id="grafico-evaluaciones-inicio" style="width: 100%;height: 400px;background-color: #FFFFFF"></div>
+	</div>
+	<div id="medio">
+		<div id="grafico-evaluaciones-medio" style="width: 100%;height: 400px;background-color: #FFFFFF"></div>
+	</div>
+	<div id="fin">
+		<div id="grafico-evaluaciones-fin" style="width: 100%;height: 400px;background-color: #FFFFFF"></div>
+	</div>
+
+</div>
 
 
+<!-- grafico de progreso -->
+<div id="contenedor">
+
+	<h2>Evaluaciones de progreso</h2>
+
+	<div id="diciembre">
+		<div id="grafico-progreso-diciembre" style="width: 100%;height: 400px;background-color: #FFFFFF"></div>
+	</div>
+	<div id="enero">
+		<div id="grafico-progreso-enero" style="width: 100%;height: 400px;background-color: #FFFFFF"></div>
+	</div>
+	<div id="marzo">
+		<div id="grafico-progreso-marzo" style="width: 100%;height: 400px;background-color: #FFFFFF"></div>
+	</div>
+	<div id="abril">
+		<div id="grafico-progreso-abril" style="width: 100%;height: 400px;background-color: #FFFFFF"></div>
+	</div>
+
+</div>
+
+<script>
+
+	colores = ["#f00", "#ffa500", "#009fff","#1ae36e"]
+
+</script>
 
 
 <script>
 
-// diccionario de colores de riesgo:
-// NO EVALUDO, ALTO RIESGO, RIESGO, BAJO RIESGO,
-// NORMAL y OPTIMO
 
 // generar un diccionario con todas las evaluaciones
-// recibidas en el parametro %evaluaciones%
+// recibidas en el parametro %evaluaciones%.
 
-/*
 var evaluaciones = {
 {% for evaluacion in evaluaciones %}
-    "{{ evaluacion.alumno.pk }}-{{ evaluacion.momento}}" : "{{ evaluacion.omnibus }}",
-    "{{ evaluacion.alumno.pk }}-COLOR-RIESGO-{{ evaluacion.momento}}" : "{{ evaluacion.color_riesgo }}",
+// nivel de riesgo
+"{{ evaluacion.mes }}" : "{{ evaluacion.evaluado }}",
+// evaluacion valida
+"{{ evaluacion.mes }}-EVALUADO" : "{{ evaluacion.evaluado }}",
+// valores de las tareas
+"{{ evaluacion.mes }}-ADI" : "{{ evaluacion.ADIVINANZAS }}",
+"{{ evaluacion.mes }}-CSL" : "{{ evaluacion.CSL }}",
+"{{ evaluacion.mes }}-CNL" : "{{ evaluacion.CNL }}",
+"{{ evaluacion.mes }}-CLE_IMAGEN" : "{{ evaluacion.CLE_IMAGEN }}",
+"{{ evaluacion.mes }}-CLE_TEXTO" : "{{ evaluacion.CLE_TEXTO }}",
+"{{ evaluacion.mes }}-CFA" : "{{ evaluacion.CFA }}",
 {% endfor %}
+// valores del OMNIBUS para cada evaluacion
+"OMNIBUS-INICIO" : {{ evaluacion_inicio }},
+"OMNIBUS-MEDIO": {{ evaluacion_medio }},
+"OMNIBUS-FIN": {{ evaluacion_fin }}
 };
 
-// crear diccionario de datos del grafico
-var datos = [
-{% for alumno in alumnos %}
-    {
-        "codigo": "{{ alumno.codigo }}",
-	    "rendimiento-inicio": evaluaciones["{{ alumno.pk }}-INICIO"],
-	    "rendimiento-medio": evaluaciones["{{ alumno.pk }}-MEDIO"],
-	    "rendimiento-fin": evaluaciones["{{ alumno.pk }}-FIN"],
-		"color-inicio": evaluaciones["{{ alumno.pk }}-COLOR-RIESGO-INICIO"],
-        "color-medio": evaluaciones["{{ alumno.pk }}-COLOR-RIESGO-MEDIO"],
-        "color-fin": evaluaciones["{{ alumno.pk }}-COLOR-RIESGO-FIN"]
-    },{% endfor %}
-];
-*/
 
+// devuelve el valor correcto para cada prueba, dependiendo
+// del mes de evaluacion. Esta funcion tiene en cuenta que
+// si un mes el niño no es evaluado, se debe tomar el ultimo
+// mes del que se tiene
+function ultima_evaluacion(prueba, evaluacion_actual){
+
+
+	// recorremos desde la evaluacion actual al a primera.
+	for (i = evaluacion_actual; i >= 1; i--) {
+
+		// key de acceso a la puntuacion de la prueba
+		var key_tarea = i + "-" + prueba
+
+		// comprobamos si fue evaluado
+		if (evaluaciones[i] == "True"){
+
+			// devolvemos la puntuacion de la tarea porque
+			// es la mas reciente
+			return evaluaciones[key_tarea]
+
+		} else {
+
+			// pasamos a la evaluacion anterior
+
+		}
+
+	}
+
+
+	return 0
+}
+
+function puntuacion_directa(prueba, momento){
+	var key = momento + "-" + prueba
+	return evaluaciones[key]
+}
 
 </script>
+
+<script>
+
+// cambiar la subtarea mostrada en el grafico
+function cambiar_subprueba(d) {
+
+	var titulos_graficos = ["ADV", "CFA", "CSL", "CNL", "CLE-TEXTO", "CLE-IMAGENES"];
+	var subtitulos = ["Adivinanzas", "Conciencia Fonológica Aislar",
+	"Conocimiento Sonido Letra", "Conocimiento Nombre Letra",
+	"CLE Texto", "CLE Imágenes"
+	];
+
+	var propiedadTitulos = [
+		{"text": "",	"size": 25}	,
+		{"text": subtitulos[d],	"size": 20},
+		{"text": titulos_graficos[d], "size": 10}
+	];
+
+	grafico.titles = propiedadTitulos;
+	grafico.dataProvider = data_subtareas[d];
+	grafico.validateData();
+	grafico.validateNow();
+}
+
+</script>
+
 
 <script>
 
@@ -90,62 +318,560 @@ var datos = [
 	// evaluaciones, estos campos indican si el usuario esta evaluado,
 	// actualmente el campo es  evaluacion.riesgo => RIESGO_OPCIONES o SIN_EVALUAR
 	// TO-DO
-	var evaluaciones = ["[vacio]","[x5714]","[2vb2c4]","[b2cte4]","[bkicq4]","[1gkam4]","[77m134]","[83esd4]"];
+
 
 	// datasets para cada tarea
 	var dataset_ADIVINANZAS = [
 	{
 		"valor-maximo": 20,
 		"category": "Noviembre",
-		"estilo": evaluaciones[1] == "Evaluado" ? 0 : punteado,
-		"etiqueta": evaluaciones[1] == "Evaluado" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 8,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio": 0,
 		"rendimiento-optimo": max,
-		"rendimiento-alumno":ultima_evaluacion("ADIVINANZAS", 1)	// [ubrcu4]
+		"rendimiento-alumno":ultima_evaluacion("ADI", 1)
 	},
 	{
 		"valor-maximo": 20,
 		"category": "Febrero",
-		"estilo": evaluaciones[4] == "Evaluado" ? 0 : punteado,
-		"etiqueta": evaluaciones[4] == "Evaluado" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"estilo": evaluaciones[4] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 9,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio": 1,
 		"rendimiento-optimo": max,
-		"rendimiento-alumno":ultima_evaluacion("ADIVINANZAS", 4)// [5u7o54]
+		"rendimiento-alumno": ultima_evaluacion("ADI", 4)
 	},
 	{
 		"valor-maximo": 20,
 		"category": "Mayo",
-		"estilo": evaluaciones[7] == "Evaluado" ? 0 : punteado,
-		"etiqueta": evaluaciones[7] == "Evaluado" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"estilo": evaluaciones[7] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 9,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio": 1,
 		"rendimiento-optimo": max,
-		"rendimiento-alumno": ultima_evaluacion("ADIVINANZAS", 7)//[8fmr04]
+		"rendimiento-alumno": ultima_evaluacion("ADI", 7)
+	}
+	];
+
+	var dataset_CFA = [
+	{
+		"valor-maximo": 80,
+		"category": "Noviembre",
+		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[1]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo":  17,
+		"rendimiento-bajo": 21,
+		"rendimiento-medio": 8,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno": ultima_evaluacion("CFA", 1)
+	},
+	{
+		"valor-maximo": 80,
+		"category": "Diciembre",
+		"estilo": evaluaciones[2] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[2] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo":  17,
+		"rendimiento-bajo": 21,
+		"rendimiento-medio": 8,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":  ultima_evaluacion("CFA", 2)
+	},
+	{
+		"valor-maximo": 80,
+		"category": "Enero",
+		"estilo": evaluaciones[3]  == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[3]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo":  17,
+		"rendimiento-bajo": 21,
+		"rendimiento-medio": 8,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno": ultima_evaluacion("CFA", 3)
+	},
+	{
+		"valor-maximo": 80,
+		"category": "Febrero",
+		"estilo": evaluaciones[4]  == "True"? 0 : punteado,
+		"etiqueta": evaluaciones[4]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo": 18,
+		"rendimiento-bajo": 32,
+		"rendimiento-medio": 16,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno": ultima_evaluacion("CFA", 4)
+	},
+	{
+		"valor-maximo": 80,
+		"category": "Marzo",
+		"estilo": evaluaciones[5]  == "True"? 0 : punteado,
+		"etiqueta": evaluaciones[5]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo": 18,
+		"rendimiento-bajo": 32,
+		"rendimiento-medio": 16,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno": ultima_evaluacion("CFA", 5)
+	},
+	{
+		"valor-maximo": 80,
+		"category": "Abril",
+		"estilo": evaluaciones[6]  == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[6]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo": 18,
+		"rendimiento-bajo": 32,
+		"rendimiento-medio": 16,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":  ultima_evaluacion("CFA", 6)
+	},
+	{
+		"valor-maximo": 80,
+		"category": "Mayo",
+		"estilo": evaluaciones[7]  == "True"? 0 : punteado,
+		"etiqueta": evaluaciones[7]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo": 22,
+		"rendimiento-bajo": 48,
+		"rendimiento-medio": 5,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno": ultima_evaluacion("CFA", 7)
+	}
+	];
+
+	var dataset_CSL = [
+	{
+		"valor-maximo": 100,
+		"category": "Noviembre",
+		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo": 5,
+		"rendimiento-bajo": 3,
+		"rendimiento-medio": 6,
+		"rendimiento-optimo": 63,
+		"rendimiento-alumno": ultima_evaluacion("CSL", 1)
+	},
+	{
+		"valor-maximo": 100,
+		"category": "Diciembre",
+		"estilo": evaluaciones[2] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[2] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo": 5,
+		"rendimiento-bajo": 3,
+		"rendimiento-medio": 6,
+		"rendimiento-optimo": 63,
+		"rendimiento-alumno": ultima_evaluacion("CSL", 2)
+	},
+	{
+		"valor-maximo": 100,
+		"category": "Enero",
+		"estilo": evaluaciones[3] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[3] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo": 5,
+		"rendimiento-bajo": 3,
+		"rendimiento-medio": 6,
+		"rendimiento-optimo": 63,
+		"rendimiento-alumno": ultima_evaluacion("CSL", 3)
+	},
+	{
+		"valor-maximo": 100,
+		"category": "Febrero",
+		"estilo": evaluaciones[4] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo": 10,
+		"rendimiento-bajo": 6,
+		"rendimiento-medio": 13,
+		"rendimiento-optimo": 63,
+		"rendimiento-alumno": ultima_evaluacion("CSL", 4)
+	},
+	{
+		"valor-maximo": 100,
+		"category": "Marzo",
+		"estilo": evaluaciones[5] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[5] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo": 10,
+		"rendimiento-bajo": 6,
+		"rendimiento-medio": 13,
+		"rendimiento-optimo": 63,
+		"rendimiento-alumno": ultima_evaluacion("CSL", 5)
+	},
+	{
+		"valor-maximo": 100,
+		"category": "Abril",
+		"estilo": evaluaciones[6] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[6] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo": 10,
+		"rendimiento-bajo": 6,
+		"rendimiento-medio": 13,
+		"rendimiento-optimo": 63,
+		"rendimiento-alumno":ultima_evaluacion("CSL", 6)
+	},
+	{
+		"valor-maximo": 100,
+		"category": "Mayo",
+		"estilo": evaluaciones[7] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo": 15,
+		"rendimiento-bajo": 10,
+		"rendimiento-medio": 12,
+		"rendimiento-optimo": 63,
+		"rendimiento-alumno":ultima_evaluacion("CSL", 7)
 	}
 	];
 
 
+	var dataset_CNL = [
+	{
+		"valor-maximo": 100,
+		"category": "Noviembre",
+		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo": 6,
+		"rendimiento-bajo": 2,
+		"rendimiento-medio": 0,
+		"rendimiento-optimo": 78,
+		"rendimiento-alumno": ultima_evaluacion("CNL", 1)
+	},
+		{
+		"valor-maximo": 100,
+		"category": "Febrero",
+		"estilo": evaluaciones[4] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo": 12,
+		"rendimiento-bajo": 2,
+		"rendimiento-medio": 0,
+		"rendimiento-optimo": 78,
+		"rendimiento-alumno": ultima_evaluacion("CNL", 4)
+	},
+	{
+		"valor-maximo": 100,
+		"category": "Mayo",
+		"estilo": evaluaciones[7] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo": 18,
+		"rendimiento-bajo": 3,
+		"rendimiento-medio": 1,
+		"rendimiento-optimo": 78,
+		"rendimiento-alumno":ultima_evaluacion("CNL", 7)
+	}
+	];
+
+
+	var dataset_CLETEXTO = [
+	{
+		"valor-maximo": 6,
+		"category": "Noviembre",
+		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo":  2,
+		"rendimiento-bajo":  1,
+		"rendimiento-medio": 0,
+		"rendimiento-optimo": 3,
+		"rendimiento-alumno":ultima_evaluacion("CLE_TEXTO", 1)
+	},
+	{
+		"valor-maximo": 6,
+		"category": "Febrero",
+		"estilo": evaluaciones[4] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo":  3,
+		"rendimiento-bajo":  0,
+		"rendimiento-medio":  0,
+		"rendimiento-optimo": 3,
+		"rendimiento-alumno":ultima_evaluacion("CLE_TEXTO", 4)
+	},
+	{
+		"valor-maximo": 6,
+		"category": "Mayo",
+		"estilo": evaluaciones[7] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo": 3,
+		"rendimiento-bajo": 1,
+		"rendimiento-medio": 0,
+		"rendimiento-optimo": 3,
+		"rendimiento-alumno": ultima_evaluacion("CLE_TEXTO", 7)
+	}
+	];
+
+	var dataset_CLEIMAGENES = [
+	{
+		"valor-maximo": 35,
+		"category": "Noviembre",
+		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo":  28,
+		"rendimiento-bajo":  3,
+		"rendimiento-medio": 0,
+		"rendimiento-optimo": 4,
+		"rendimiento-alumno":ultima_evaluacion("CLE_IMAGEN", 1)
+	},
+	{
+		"valor-maximo": 35,
+		"category": "Febrero",
+		"estilo": evaluaciones[4] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo":  29,
+		"rendimiento-bajo":  2,
+		"rendimiento-medio":  0,
+		"rendimiento-optimo": 4,
+		"rendimiento-alumno":ultima_evaluacion("CLE_IMAGEN", 4)
+	},
+	{
+		"valor-maximo": 35,
+		"category": "Mayo",
+		"estilo": evaluaciones[7] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo": 30,
+		"rendimiento-bajo": 1,
+		"rendimiento-medio": 0,
+		"rendimiento-optimo": 4,
+		"rendimiento-alumno": ultima_evaluacion("CLE_IMAGEN", 7)
+	}
+	];
+
+
+// lista con los dataproviders de cada subtarea
+var data_subtareas = [
+	dataset_ADIVINANZAS, dataset_CFA, dataset_CSL,
+	dataset_CNL, dataset_CLETEXTO, dataset_CLEIMAGENES
+];
+
 </script>
 
 
-<script type="text/javascript">
+<script>
 
-	var linea_base = -5;
 
-			AmCharts.makeChart("grafico-inicio",
+
+var datos_por_evaluaciones = [
+	{
+	"info": "esta primera entrada de datos es solo para ajustar la escala",
+	"subtarea": "",
+	"rendimiento-inicio": 150,
+	"rendimiento-medio": 150,
+	"rendimiento-fin": 150,
+	"color-inicio":"#ffffff",
+	"color-medio":"#ffffff",
+	"color-fin":"#ffffff",
+	},
+	{
+	"subtarea": "CSL",
+	"rendimiento-inicio": puntuacion_directa("CSL", 1),
+	"rendimiento-medio": puntuacion_directa("CSL", 4),
+	"rendimiento-fin": puntuacion_directa("CSL", 7),
+	"color-inicio": colores[ get_riesgo_CSL_inicio( puntuacion_directa("CSL", 1) ) ],
+	"color-medio": colores[ get_riesgo_CSL_medio( puntuacion_directa("CSL", 4) )],
+	"color-fin": colores[ get_riesgo_CSL_fin( puntuacion_directa("CSL", 7) )]
+	},
+	{
+	"subtarea": "CNL",
+	"rendimiento-inicio": puntuacion_directa("CNL", 1),
+	"rendimiento-medio": puntuacion_directa("CNL", 4),
+	"rendimiento-fin": puntuacion_directa("CNL", 7),
+	"color-inicio": colores[ get_riesgo_CNL_inicio( puntuacion_directa("CNL", 1) ) ],
+	"color-medio": colores[ get_riesgo_CNL_medio( puntuacion_directa("CNL", 4) )],
+	"color-fin": colores[ get_riesgo_CNL_fin( puntuacion_directa("CNL", 7) )]
+	},
+	{
+	"subtarea": "CFA",
+	"rendimiento-inicio": puntuacion_directa("CFA", 1),
+	"rendimiento-medio": puntuacion_directa("CFA", 4),
+	"rendimiento-fin": puntuacion_directa("CFA", 7),
+	"color-inicio": colores[ get_riesgo_CFA_inicio( puntuacion_directa("CFA", 1) ) ],
+	"color-medio": colores[ get_riesgo_CFA_medio( puntuacion_directa("CFA", 4) )],
+	"color-fin": colores[ get_riesgo_CFA_fin( puntuacion_directa("CFA", 7) )]
+	},
+	{
+	"subtarea": "ADIVINANZAS",
+	"rendimiento-inicio": puntuacion_directa("ADI", 1),
+	"rendimiento-medio": puntuacion_directa("ADI", 4),
+	"rendimiento-fin": puntuacion_directa("ADI", 7),
+	"color-inicio": colores[ get_riesgo_ADIVINANZAS_inicio( puntuacion_directa("ADI", 1) ) ],
+	"color-medio": colores[ get_riesgo_ADIVINANZAS_medio( puntuacion_directa("ADI", 4) )],
+	"color-fin": colores[ get_riesgo_ADIVINANZAS_fin( puntuacion_directa("ADI", 7) )]
+	},
+	{
+	"subtarea": "CLE TEXTO",
+	"rendimiento-inicio": puntuacion_directa("CLE_TEXTO", 1),
+	"rendimiento-medio":  puntuacion_directa("CLE_TEXTO", 4),
+	"rendimiento-fin":  puntuacion_directa("CLE_TEXTO", 7),
+	"color-inicio": colores[ get_riesgo_CLETEXTO_inicio( puntuacion_directa("CLE_TEXTO", 1) ) ],
+	"color-medio": colores[ get_riesgo_CLETEXTO_medio( puntuacion_directa("CLE_TEXTO", 4) )],
+	"color-fin": colores[ get_riesgo_CLETEXTO_fin( puntuacion_directa("CLE_TEXTO", 7) )]
+	},
+	{
+	"subtarea": "CLE IMÁGENES",
+	"rendimiento-inicio":  puntuacion_directa("CLE_IMAGENES", 1),
+	"rendimiento-medio":  puntuacion_directa("CLE_IMAGENES", 4),
+	"rendimiento-fin": puntuacion_directa("CLE_IMAGENES", 7),
+	"color-inicio": colores[ get_riesgo_CLEIMAGEN_inicio( puntuacion_directa("CLE_IMAGENES", 1) ) ],
+	"color-medio": colores[ get_riesgo_CLEIMAGEN_medio( puntuacion_directa("CLE_IMAGENES", 4) )],
+	"color-fin": colores[ get_riesgo_CLEIMAGEN_fin( puntuacion_directa("CLE_IMAGENES", 7) )]
+	}
+];
+
+</script>
+
+
+<script>
+
+	/*
+	 datos para las tareas en las medidas
+	 de progreso
+	*/
+
+
+var datos_graficos_progreso = [
+	{
+	"info": "esta primera entrada de datos es solo para ajustar la escala",
+	"subtarea": "",
+	"rendimiento-diciembre": 150,
+	"rendimiento-enero": 150,
+	"rendimiento-marzo": 150,
+	"rendimiento-abril": 150,
+	"color-diciembre": "#ffffff",
+	"color-enero": "#ffffff",
+	"color-marzo": "#ffffff",
+	"color-abril": "#ffffff"
+	},
+	{
+	"subtarea": "CSL",
+	"rendimiento-diciembre": puntuacion_directa("CSL", 1),
+	"rendimiento-enero": puntuacion_directa("CSL", 1),
+	"rendimiento-marzo": puntuacion_directa("CSL", 4),
+	"rendimiento-abril": puntuacion_directa("CSL", 4),
+	"color-diciembre": colores[ get_riesgo_CSL_inicio( puntuacion_directa("CSL", 1) ) ],
+	"color-enero": colores[ get_riesgo_CSL_inicio( puntuacion_directa("CSL", 1) ) ],
+	"color-marzo": colores[ get_riesgo_CSL_medio( puntuacion_directa("CSL", 4) )],
+	"color-abril": colores[ get_riesgo_CSL_medio( puntuacion_directa("CSL", 4) )]
+	},
+
+	{
+	"subtarea": "CFA",
+	"rendimiento-diciembre":  puntuacion_directa("CFA", 1),
+	"rendimiento-enero":  puntuacion_directa("CFA", 1),
+	"rendimiento-marzo": puntuacion_directa("CFA", 4),
+	"rendimiento-abril": puntuacion_directa("CFA", 4),
+	"color-diciembre":  colores[ get_riesgo_CFA_inicio( puntuacion_directa("CFA", 1) ) ],
+	"color-enero":  colores[ get_riesgo_CFA_inicio( puntuacion_directa("CFA", 1) ) ],
+	"color-marzo":  colores[ get_riesgo_CFA_medio( puntuacion_directa("CFA", 4) )],
+	"color-abril": colores[ get_riesgo_CFA_medio( puntuacion_directa("CFA", 4) )]
+	}
+];
+
+</script>
+
+
+<script>
+
+	var grafico =  new AmCharts.makeChart("grafico-por-tareas",
 				{
 					"type": "serial",
-					"categoryField": "codigo",
-					"rotate": true,
+					"categoryField": "category",
 					"sequencedAnimation": false,
-					"gridAboveGraphs": true,
 					"accessible": false,
+					"tapToActivate": false,
+					"categoryAxis": {
+						"startOnAxis": true
+					},
+					"plotAreaFillAlphas": 1,
+					"plotAreaFillColors": "#78E935",
+					"trendLines": [],
+					"graphs": [
+						{
+							"fillAlphas": 1,
+							"fillColors": "#F21919",
+							"id": "area-riesgo",
+							"lineAlpha": 0,
+							"title": "Riesgo",
+							"valueField": "riesgo"
+						},
+						{
+							"fillAlphas": 1,
+							"id": "area-bajo-rendimiento",
+							"lineAlpha": 0,
+							"title": "Rendimiento bajo",
+							"valueField": "rendimiento-bajo"
+						},
+						{
+							"fillAlphas": 1,
+							"lineAlpha": 0,
+							"id": "area-media",
+							"fillColors": "#538DE0",
+							"title": "Rendimiento medio",
+							"valueField": "rendimiento-medio"
+						},
+
+						{
+							// marca el maximo de la tarea
+							"fillColors": "#000000",
+							"id": "maximo-tarea",
+							"lineColor": "#00C300",
+							"lineThickness": 10,
+							"stackable": false,
+							"title": "Rendimiento óptimo",
+							"valueField": "valor-maximo"
+						},
+
+						{
+							"fillColors": "#000000",
+							"id": "rendimiento",
+							"lineColor": "#000000",
+							"lineThickness": 3,
+							"stackable": false,
+							"title": "Rendimiento del alumno",
+							"valueField": "rendimiento-alumno",
+							"bullet": "round",
+							"dashLengthField":"estilo",
+							"labelText": "[[etiqueta]]",
+						}
+					],
+					"guides": [],
+					"valueAxes": [{
+					"id": "ValueAxis-1",
+					"stackType": "regular",
+					"title": "Rendimiento",
+					// valores maximos y minimos
+					"maximum": "valor-maximo",
+					"minimum": 0
+					}
+					],
+
+					"allLabels": [],
+					"balloon": {},
+					"legend": {
+						"enabled": true,
+						"switchable": false
+					},
+					"titles": [
+						{
+							"id": "titulo",
+							"size": 25,
+							"text": ""
+						},
+						{"text": "Adivinanzas",	"size": 20},
+						{"text": "ADV",	"size": 10}
+					],
+					"dataProvider": dataset_ADIVINANZAS
+				}
+			);
+</script>
+
+
+
+
+<script>
+
+
+	var linea_base = 0;
+
+			AmCharts.makeChart("grafico-evaluaciones-inicio",
+				{
+					"type": "serial",
+					"categoryField": "subtarea",
+					"rotate": true,
+					"gridAboveGraphs": true,
+					"sequencedAnimation": false,
 					"creditsPosition": "bottom-right",
+					"accessible": false,
 					"categoryAxis": {
 						"gridPosition": "start"
 					},
@@ -157,29 +883,21 @@ var datos = [
 							"id": "indicador-riesgo",
 							"title": "graph 1",
 							"type": "column",
-							"lineThickness": 0,
 							"showBalloon": false,
-							"valueField": "rendimiento-inicio"
-						}
-					],
-					"guides": [
-						{
-							"above": true,
-							"dashLength": 5,
-							"id": "linea-riesgo",
-							"inside": true,
-							"label": "Riesgo",
-							"labelRotation": 90,
-							"lineAlpha": 1,
-							"lineColor": "#ff0000",
-							"value": -0.55
+							"lineThickness": 0,
+							"valueField": "rendimiento-inicio",
+							"hidden": evaluaciones[1] != "NOEV" ? false : true
 						}
 					],
 					"valueAxes": [
 						{
 							"id": "ValueAxis-1",
                             "baseValue": linea_base,
-							"fontSize": 0
+							"fontSize": 9,
+							"includeGuidesInMinMax": true,
+							"maximum": 150,
+							"minimum": 0,
+							"strictMinMax": true
 						}
 					],
 					"allLabels": [],
@@ -191,22 +909,22 @@ var datos = [
 							"text": "Inicio"
 						}
 					],
-					"dataProvider": datos
+					"dataProvider": datos_por_evaluaciones
 				}
 			);
 
 
-			AmCharts.makeChart("grafico-medio",
+			AmCharts.makeChart("grafico-evaluaciones-medio",
 				{
 					"type": "serial",
-					"categoryField": "codigo",
+					"categoryField": "subtarea",
+					"gridAboveGraphs": true,
+					"creditsPosition": "bottom-right",
 					"rotate": true,
 					"sequencedAnimation": false,
-					"gridAboveGraphs": true,
 					"accessible": false,
-					"creditsPosition": "bottom-right",
 					"categoryAxis": {
-						"labelsEnabled": false
+
 					},
 					"trendLines": [],
 					"graphs": [
@@ -216,9 +934,10 @@ var datos = [
 							"id": "indicador-riesgo",
 							"title": "graph 1",
 							"type": "column",
-							"lineThickness": 0,
 							"showBalloon": false,
-							"valueField": "rendimiento-medio"
+							"lineThickness": 0,
+							"valueField": "rendimiento-medio",
+							"hidden": evaluaciones[4] != "NOEV" ? false : true
 						}
 					],
 					"guides": [
@@ -234,12 +953,15 @@ var datos = [
 							"value": -0.32
 						}
 					],
-
 					"valueAxes": [
 						{
 							"id": "ValueAxis-1",
 							"baseValue": linea_base,
-							"fontSize": 0
+							"fontSize": 9,
+							"includeGuidesInMinMax": true,
+							"maximum": 150,
+							"minimum": 0,
+							"strictMinMax": true
 						}
 					],
 					"allLabels": [],
@@ -251,22 +973,22 @@ var datos = [
 							"text": "Medio"
 						}
 					],
-					"dataProvider": datos
+					"dataProvider": datos_por_evaluaciones
 				}
 			);
 
 
-			AmCharts.makeChart("grafico-fin",
+			AmCharts.makeChart("grafico-evaluaciones-fin",
 				{
 					"type": "serial",
-					"categoryField": "codigo",
-					"rotate": true,
-					"sequencedAnimation": false,
-					"gridAboveGraphs": true,
-					"accessible": false,
+					"categoryField": "subtarea",
 					"creditsPosition": "bottom-right",
+					"rotate": true,
+					"gridAboveGraphs": true,
+					"sequencedAnimation": false,
+					"accessible": false,
 					"categoryAxis": {
-						"labelsEnabled": false
+
 					},
 					"trendLines": [],
 					"graphs": [
@@ -275,10 +997,11 @@ var datos = [
 							"fillColorsField": "color-fin",
 							"id": "indicador-riesgo",
 							"title": "graph 1",
-							"lineThickness": 0,
 							"type": "column",
 							"showBalloon": false,
-							"valueField": "rendimiento-fin"
+							"lineThickness": 0,
+							"valueField": "rendimiento-fin",
+							"hidden": evaluaciones[7] != "NOEV" ? false : true
 						}
 					],
 					"guides": [
@@ -298,7 +1021,11 @@ var datos = [
 						{
 							"id": "ValueAxis-1",
 							"baseValue": linea_base,
-							"fontSize": 0
+							"fontSize": 9,
+							"includeGuidesInMinMax": true,
+							"maximum": 150,
+							"minimum": 0,
+							"strictMinMax": true
 						}
 					],
 					"allLabels": [],
@@ -310,29 +1037,273 @@ var datos = [
 							"text": "Fin"
 						}
 					],
-					"dataProvider": datos
+					"dataProvider": datos_por_evaluaciones
 				}
 			);
-		</script>
 
-<style>
-	#contenedor {
-		width: 1040px;
-		margin: 0 auto;
-	}
-	#inicio {
-		float: left;
-		width: 400px;
-	}
-	#medio {
-		float: left;
-		width: 320px;
-	}
-	#fin {
-		float: left;
-		width: 320px;
-	}
-</style>
+
+</script>
+
+
+<script>
+
+	var linea_base = 0;
+	AmCharts.makeChart("grafico-progreso-diciembre",
+				{
+					"type": "serial",
+					"categoryField": "subtarea",
+					"rotate": true,
+					"gridAboveGraphs": true,
+					"sequencedAnimation": false,
+					"creditsPosition": "bottom-right",
+					"accessible": false,
+					"categoryAxis": {
+						"gridPosition": "start"
+					},
+					"trendLines": [],
+					"graphs": [
+						{
+							"fillAlphas": 1,
+							"fillColorsField": "color-diciembre",
+							"id": "indicador-riesgo",
+							"title": "graph 1",
+							"type": "column",
+							"showBalloon": false,
+							"lineThickness": 0,
+							"valueField": "rendimiento-diciembre",
+							//"hidden": evaluaciones[2] != "NOEV" ? false : true
+						}
+					],
+					"guides": [
+						{
+							"above": true,
+							"dashLength": 5,
+							"id": "linea-riesgo",
+							"inside": true,
+							"label": "Riesgo",
+							"labelRotation": 90,
+							"lineAlpha": 1,
+							"lineColor": "#ff0000",
+							"value": -0.55
+						}
+					],
+					"valueAxes": [
+						{
+							"id": "ValueAxis-1",
+                            "baseValue": linea_base,
+							"fontSize": 9,
+							"includeGuidesInMinMax": true,
+							"maximum": 150,
+							"minimum": 0,
+							"strictMinMax": true
+						}
+					],
+					"allLabels": [],
+					"balloon": {},
+					"titles": [
+						{
+							"id": "titulo",
+							"size": 15,
+							"text": "Diciembre"
+						}
+					],
+					"dataProvider": datos_graficos_progreso
+				}
+			);
+
+			AmCharts.makeChart("grafico-progreso-enero",
+				{
+					"type": "serial",
+					"categoryField": "subtarea",
+					"rotate": true,
+					"gridAboveGraphs": true,
+					"sequencedAnimation": false,
+					"creditsPosition": "bottom-right",
+					"accessible": false,
+					"categoryAxis": {
+						"gridPosition": "start"
+					},
+					"trendLines": [],
+					"graphs": [
+						{
+							"fillAlphas": 1,
+							"fillColorsField": "color-enero",
+							"id": "indicador-riesgo",
+							"title": "graph 1",
+							"type": "column",
+							"showBalloon": false,
+							"lineThickness": 0,
+							"valueField": "rendimiento-enero",
+							//"hidden": evaluaciones[3] != "NOEV" ? false : true
+						}
+					],
+					"guides": [
+						{
+							"above": true,
+							"dashLength": 5,
+							"id": "linea-riesgo",
+							"inside": true,
+							"label": "Riesgo",
+							"labelRotation": 90,
+							"lineAlpha": 1,
+							"lineColor": "#ff0000",
+							"value": -0.55
+						}
+					],
+					"valueAxes": [
+						{
+							"id": "ValueAxis-1",
+                            "baseValue": linea_base,
+							"fontSize": 9,
+							"includeGuidesInMinMax": true,
+							"maximum": 150,
+							"minimum": 0,
+							"strictMinMax": true
+						}
+					],
+					"allLabels": [],
+					"balloon": {},
+					"titles": [
+						{
+							"id": "titulo",
+							"size": 15,
+							"text": "Enero"
+						}
+					],
+					"dataProvider": datos_graficos_progreso
+				}
+			);
+
+
+
+				AmCharts.makeChart("grafico-progreso-marzo",
+				{
+					"type": "serial",
+					"categoryField": "subtarea",
+					"rotate": true,
+					"gridAboveGraphs": true,
+					"sequencedAnimation": false,
+					"creditsPosition": "bottom-right",
+					"accessible": false,
+					"categoryAxis": {
+						"gridPosition": "start"
+					},
+					"trendLines": [],
+					"graphs": [
+						{
+							"fillAlphas": 1,
+							"fillColorsField": "color-marzo",
+							"id": "indicador-riesgo",
+							"title": "graph 1",
+							"type": "column",
+							"showBalloon": false,
+							"lineThickness": 0,
+							"valueField": "rendimiento-marzo",
+							//"hidden": evaluaciones[5] != "NOEV" ? false : true
+						}
+					],
+					"guides": [
+						{
+							"above": true,
+							"dashLength": 5,
+							"id": "linea-riesgo",
+							"inside": true,
+							"label": "Riesgo",
+							"labelRotation": 90,
+							"lineAlpha": 1,
+							"lineColor": "#ff0000",
+							"value": -0.55
+						}
+					],
+					"valueAxes": [
+						{
+							"id": "ValueAxis-1",
+                            "baseValue": linea_base,
+							"fontSize": 9,
+							"includeGuidesInMinMax": true,
+							"maximum": 150,
+							"minimum": 0,
+							"strictMinMax": true
+						}
+					],
+					"allLabels": [],
+					"balloon": {},
+					"titles": [
+						{
+							"id": "titulo",
+							"size": 15,
+							"text": "Marzo"
+						}
+					],
+					"dataProvider": datos_graficos_progreso
+				}
+			);
+
+				AmCharts.makeChart("grafico-progreso-abril",
+				{
+					"type": "serial",
+					"categoryField": "subtarea",
+					"rotate": true,
+					"gridAboveGraphs": true,
+					"sequencedAnimation": false,
+					"creditsPosition": "bottom-right",
+					"accessible": false,
+					"categoryAxis": {
+						"gridPosition": "start"
+					},
+					"trendLines": [],
+					"graphs": [
+						{
+							"fillAlphas": 1,
+							"fillColorsField": "color-abril",
+							"id": "indicador-riesgo",
+							"title": "graph 1",
+							"type": "column",
+							"showBalloon": false,
+							"lineThickness": 0,
+							"valueField": "rendimiento-abril",
+							//"hidden": evaluaciones[6] != "NOEV" ? false : true
+						}
+					],
+					"guides": [
+						{
+							"above": true,
+							"dashLength": 5,
+							"id": "linea-riesgo",
+							"inside": true,
+							"label": "Riesgo",
+							"labelRotation": 90,
+							"lineAlpha": 1,
+							"lineColor": "#ff0000",
+							"value": -0.55
+						}
+					],
+					"valueAxes": [
+						{
+							"id": "ValueAxis-1",
+                            "baseValue": linea_base,
+							"fontSize": 9,
+							"includeGuidesInMinMax": true,
+							"maximum": 150,
+							"minimum": 0,
+							"strictMinMax": true
+						}
+					],
+					"allLabels": [],
+					"balloon": {},
+					"titles": [
+						{
+							"id": "titulo",
+							"size": 15,
+							"text": "Abril"
+						}
+					],
+					"dataProvider": datos_graficos_progreso
+				}
+			);
+
+
+</script>
 
 
 {% endblock %}
