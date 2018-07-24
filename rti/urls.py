@@ -10,7 +10,7 @@ from rtiapp.views import \
     listar_alumnos_evaluador_en_grupo,\
     listar_evaluaciones,nueva_evaluacion, editar_evaluacion, alta_evaluador,documentos,informe_grupo,\
     establecer_curso,actualizar_curso,compartir_grupo,actualizar_grupo_compartido,exportar,exportar_CSV, \
-    cerrar_sesion,informe_individual
+    cerrar_sesion,informe_individual, upload_csv
 
 
 urlpatterns = [
@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^documentos/', documentos),
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^cerrar-sesion/', cerrar_sesion),
+    url(r'^importar-evaluadores/', upload_csv),
 
     # exportar datos
     url(r'^exportar/', exportar),

@@ -1,7 +1,7 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-
-
+{% extends 'base.html' %}
+{% load app_filters %}
 {% block content %}
+
 
     <h1>Editar evaluación IPAM SEGUNDO</h1>
     <br>
@@ -16,6 +16,8 @@
         {{ hidden_field }}
     {% endfor %}
 
+    {% if evaluacion.tipo == 'CR' %}
+
     <table border="0">
         {% for field in form.visible_fields %}
         <tr>
@@ -28,6 +30,37 @@
         </tr>
         {% endfor %}
      </table>
+
+    {% else %}
+
+       <table border="0">
+               <tr>
+            <th>{{ form.evaluado.label_tag }}</th>
+            <td>
+            {{ form.evaluado.errors }}
+            {{ form.evaluado }}
+            {{ form.evaluado.help_text }}
+            </td>
+        </tr>
+        <tr>
+            <th>{{ form.SN.label_tag }}</th>
+            <td>
+            {{ form.SN.errors }}
+            {{ form.SN }}
+            {{ form.SN.help_text }}
+            </td>
+        </tr>
+        <tr>
+            <th>{{ form.OUD.label_tag }}</th>
+            <td>
+            {{ form.OUD.errors }}
+            {{ form.OUD }}
+            {{ form.OUD.help_text }}
+            </td>
+        </tr>
+        </table>
+
+    {% endif %}
 
 
     <br>

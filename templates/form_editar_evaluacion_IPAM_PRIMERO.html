@@ -1,7 +1,7 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-
-
+{% extends 'base.html' %}
+{% load app_filters %}
 {% block content %}
+
 
     <h1>Editar evaluación IPAM PRIMERO</h1>
     <br>
@@ -16,7 +16,9 @@
         {{ hidden_field }}
     {% endfor %}
 
-    <table border="0">
+    {% if evaluacion.tipo == 'CR' %}
+        <!-- es cribado, mostramos todas las tareas -->
+        <table border="0">
         {% for field in form.visible_fields %}
         <tr>
             <th>{{ field.label_tag }}</th>
@@ -27,7 +29,42 @@
             </td>
         </tr>
         {% endfor %}
-     </table>
+        </table>
+
+    {% else %}
+
+       <table border="0">
+    <tr>
+            <th>{{ form.evaluado.label_tag }}</th>
+            <td>
+            {{ form.evaluado.errors }}
+            {{ form.evaluado }}
+            {{ form.evaluado.help_text }}
+            </td>
+        </tr>
+        <tr>
+            <th>{{ form.SN.label_tag }}</th>
+            <td>
+            {{ form.SN.errors }}
+            {{ form.SN }}
+            {{ form.SN.help_text }}
+            </td>
+        </tr>
+        <tr>
+            <th>{{ form.CN.label_tag }}</th>
+            <td>
+            {{ form.CN.errors }}
+            {{ form.CN }}
+            {{ form.CN.help_text }}
+            </td>
+        </tr>
+
+
+
+        </table>
+
+    {% endif %}
+
 
 
     <br>

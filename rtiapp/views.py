@@ -68,7 +68,7 @@ colores_riesgo = {
   "RIES": "#f00",
   "BAJO": "#ffa500",
   "NORM": "#009fff",
-  "OPTI": "#1ae36e"#
+  "OPTI": "#1ae36e"
 }
 
 
@@ -142,7 +142,23 @@ def exportar_CSV(request):
     return response
 
 
+def elimina_grupo(request):
+    print('>>> Grupo eliminado')
+    id_grupo = request.GET['idGrupo']
+    grupo = Grupo.objects.get(pk=id_grupo)
+    grupo.delete()
+    return render(request, 'error.html', {
+        'index': server_url,
+        'server_url': server_url, 'grupo': grupo})
 
+
+def eliminar_grupo(request):
+    print('>>> Eliminar grupo?')
+    id_grupo = request.GET['idGrupo']
+    grupo = Grupo.objects.get(pk=id_grupo)
+    return render(request, 'eliminar_grupo.html', {
+        'index':server_url,
+        'server_url': server_url, 'grupo': grupo})
 
 def compartir_grupo(request):
     print('>>> Compartiendo grupo con otro evaluador')
@@ -212,6 +228,7 @@ def informe_individual(request):
         print('>>> Recuperando evaluaciones de ' + alumno.codigo)
         evaluaciones = []# lista de evaluaciones
 
+
         # obenemos todas las evaluaciones del alumno para el curso actual
         # TODO o para el curso del alumno?¿ Todo esto debe detallarse
         # correctamente en el manual o decidirlo con el grupo
@@ -225,17 +242,21 @@ def informe_individual(request):
                   registro_evaluacion.mes_leible + ' ' +
                   registro_evaluacion.riesgo + ' ' +
                   registro_evaluacion.get_tipo_display())
+
+            # def riesgo_TAREA_INFANTIL(tarea, momento, pd):
+
             evaluaciones.append(registro_evaluacion)
 
 
         # pasamos a la plantillas las evaluaciones inicio, medio, fin
         return render(request, 'informe_individual.html',
                       {'grupo': alumno.grupo,
+                       'alumno': alumno,
                        'curso': alumno.curso,
                        'evaluaciones': evaluaciones,
-                       'evaluacion-inicio': consulta_evaluaciones.filter(momento='INICIO'),
-                       'evaluacion-medio': consulta_evaluaciones.filter(momento='MEDIO'),
-                       'evaluacion-fin': consulta_evaluaciones.filter(momento='FIN'),
+                       'evaluacion_inicio': consulta_evaluaciones.get(mes=1).omnibus,
+                       'evaluacion_medio': consulta_evaluaciones.get(mes=4).omnibus,
+                       'evaluacion_fin': consulta_evaluaciones.get(mes=7).omnibus,
                        'colores_riesgo': colores_riesgo,
                        'index': server_url,
                        'server_url': url_retorno}
@@ -556,6 +577,8 @@ def procesar_evaluacion(evaluacion):
 
         # el riesgo en el objeto evaluacion siempre se actualiza
         evaluacion.riesgo = riesgo
+
+
         evaluacion.alumno.save()
 
         print('>>> Calculo RIESGO:')
@@ -566,6 +589,14 @@ def procesar_evaluacion(evaluacion):
         print('>>> Evaluacion de progreso de ' + evaluacion.get_mes_display())
         evaluacion.tipo = Globales.PROGRESO
 
+
+    # si no esta activada la opccion de evaluado,
+    # el riesgo se sobreescrbe como SIN_EVALUAR
+    if evaluacion.evaluado == False:
+        evaluacion.riesgo = Globales.SIN_EVALUAR
+
+    # actualizamos el campo. TODO: VER SI ESTE CAMPO ES NECESARIO
+    # PORQUE REALMENTE PODEMOS USAR SIEMPRE get_mes_display()
     evaluacion.mes_leible = evaluacion.get_mes_display()
     evaluacion.save()
 
@@ -599,7 +630,8 @@ def editar_evaluacion(request):
         form = formularios[nombre_clase](instance=evaluacion)
 
     plantilla = 'form_editar_evaluacion_' + tipo + '_' + curso + '.html'
-    return render(request, plantilla, {'form': form, 'index':server_url, 'server_url': url_retorno})
+    return render(request, plantilla, {
+        'form': form, 'evaluacion': evaluacion, 'index':server_url, 'server_url': url_retorno})
 
 
 
@@ -742,6 +774,7 @@ def listar_alumnos_evaluador_en_grupo(request):
         print('>>> Recuperando evaluaciones')
         todas_evaluaciones = []  # lista de evaluaciones
         evas = {}
+        #validas = {}
 
         for alumno in alumnos:
 
@@ -781,6 +814,7 @@ def listar_alumnos_evaluador_en_grupo(request):
                     todas_evaluaciones.append(registro_evaluacion)
                     key = str(alumno.pk) + registro_evaluacion.prueba + registro_evaluacion.momento
                     evas[key] = registro_evaluacion.riesgo
+                    #validas[key] = registro_evaluacion.evaluado
             
             # recorrer la queryset recuperando cada registro
             # de evaluacion
@@ -792,6 +826,7 @@ def listar_alumnos_evaluador_en_grupo(request):
                 todas_evaluaciones.append(registro_evaluacion)
                 key = str(alumno.pk) + registro_evaluacion.prueba + registro_evaluacion.momento
                 evas[key] = registro_evaluacion.riesgo
+                #validas[key] = registro_evaluacion.evaluado
 
             for registro_evaluacion in consulta_evaluaciones_IPAM:
                 print(registro_evaluacion.alumno.codigo + ' ' +
@@ -801,7 +836,7 @@ def listar_alumnos_evaluador_en_grupo(request):
                 todas_evaluaciones.append(registro_evaluacion)
                 key = str(alumno.pk) + registro_evaluacion.prueba + registro_evaluacion.momento
                 evas[key] = registro_evaluacion.riesgo
-
+                #validas[key] = registro_evaluacion.evaluado
 
         return render(request, 'lista_alumnos_grupo.html',
                       { 'grupo': grupo,
@@ -992,3 +1027,55 @@ def listar_alumnos_evaluador(request):
         return render(request, 'error.html', {'error': "No tiene alumnos"})
 
 
+
+
+
+# SUBIR CSV Y PROCESARLO, IMPORTANTE:
+# EL FICHERO DEBE SER UTF8 SIN BOM, EN CASO
+# CONTRARIO EL PRIMER CARACTER SERA UN CARACTER ESPECIAL (BOM)
+def upload_csv(request):
+    data = {}
+    if "GET" == request.method:
+        return render(request, "importar_evaluadores.html", data)
+
+    # if not GET, then proceed
+    try:
+        csv_file = request.FILES["csv_file"]
+
+        #if not csv_file.name.endswith('.csv'):
+        #    print('>>> No es un fichero CSV')
+        #    return render(request, "error.html")
+
+        #if file is too large, return
+        if csv_file.multiple_chunks():
+            print('>>> Fichero CSV demasiado grande')
+            #messages.error(request,"Uploaded file is too big (%.2f MB)." % (csv_file.size/(1000*1000),))
+            return render(request, "error.html")
+
+        file_data = csv_file.read().decode("utf-8")
+
+        lines = file_data.split("\n")
+        #loop over the lines and save them in db. If error , store as string and then display
+        for line in lines:
+            fields = line.split(",")
+            data_dict = {}
+            data_dict["nombre"] = fields[0]
+            data_dict["dni"] = fields[1]
+            print(fields[0] + ', ' + fields[1])
+            '''
+            try:
+                form = EventsForm(data_dict)
+                if form.is_valid():
+                    form.save()
+                else:
+                    logging.getLogger("error_logger").error(form.errors.as_json())
+            except Exception as e:
+                logging.getLogger("error_logger").error(repr(e))
+                pass
+            '''
+    except Exception as e:
+        print('>>> Error subiendo CSV: ' + repr(e))
+
+    return redirect(server_url)
+
+    #return HttpResponseRedirect(reverse("myapp:upload_csv"))

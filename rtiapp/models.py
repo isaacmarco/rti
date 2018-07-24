@@ -28,6 +28,7 @@ MAYO = 7
 CRIBADO = 'CR'
 PROGRESO = 'PR'
 # momento de evaluacion
+MOMENTO_DEFECTO = 'PROGRESO'
 INICIO = 'INICIO'
 MEDIO = 'MEDIO'
 FIN = 'FIN'
@@ -71,6 +72,7 @@ RIESGO_OPCIONES = (
 )
 # opciones de evaluaciones
 MOMENTOS_OPCIONES = (
+    (MOMENTO_DEFECTO, 'Progreso'),
     (INICIO, 'Inicio'),
     (MEDIO, 'Medio'),
     (FIN, 'FIn')
@@ -337,6 +339,9 @@ class Evaluacion(models.Model):
     fecha_alta = models.DateTimeField(auto_now_add=True)
     ultima_modificacion = models.DateTimeField(auto_now=True)
 
+    # indica que la evaluacion es valida
+    evaluado = models.BooleanField(default=False)
+
     prueba = models.CharField(
         max_length=4,
         choices=PRUEBA_OPCIONES,
@@ -352,7 +357,7 @@ class Evaluacion(models.Model):
     momento = models.CharField(
         max_length=10,
         choices=MOMENTOS_OPCIONES,
-        default=INICIO
+        default=MOMENTO_DEFECTO
     )
 
     mes = models.IntegerField(
@@ -368,6 +373,7 @@ class Evaluacion(models.Model):
 
     def key(self):
         return str(self.alumno.pk) + self.prueba + self.momento
+
     def color_riesgo(self):
         return colores_riesgo[self.riesgo]
 
@@ -379,7 +385,7 @@ class Evaluacion(models.Model):
 # IPAL
 
 class Evaluacion_IPAL_INFANTIL(Evaluacion):
-    # TODO introducir todos los VALIDATORS CUANDO NURIA PROPORCIONE LOS RANGOS
+
     ADIVINANZAS = models.IntegerField(default=0,  validators=[MaxValueValidator(20), MinValueValidator(0)])
     CSL = models.IntegerField(default=0,  validators=[MaxValueValidator(100), MinValueValidator(0)])
     CNL = models.IntegerField(default=0,  validators=[MaxValueValidator(100), MinValueValidator(0)])
@@ -398,6 +404,7 @@ class Evaluacion_IPAL_INFANTIL(Evaluacion):
 
 
 class Evaluacion_IPAL_PRIMERO(Evaluacion):
+
     TM = models.IntegerField(default=0,  validators=[MaxValueValidator(20), MinValueValidator(0)])
     LP = models.IntegerField(default=0,  validators=[MaxValueValidator(40), MinValueValidator(0)])
     CSL = models.IntegerField(default=0,  validators=[MaxValueValidator(100), MinValueValidator(0)])
@@ -419,6 +426,7 @@ class Evaluacion_IPAL_PRIMERO(Evaluacion):
 
 
 class Evaluacion_IPAL_SEGUNDO(Evaluacion):
+
     # subpruebas de evaluacion
     CNL = models.IntegerField(default=0, validators=[MaxValueValidator(100), MinValueValidator(0)])
     LP = models.IntegerField(default=0, validators=[MaxValueValidator(40), MinValueValidator(0)])
@@ -471,6 +479,7 @@ class Evaluacion_IPAL_SEGUNDO(Evaluacion):
 # IPAM
 
 class Evaluacion_IPAM_INFANTIL(Evaluacion):
+
     CN = models.IntegerField(default=0, validators=[MaxValueValidator(64), MinValueValidator(0)])
     EC = models.IntegerField(default=0, validators=[MaxValueValidator(36), MinValueValidator(0)])
     SN = models.IntegerField(default=0, validators=[MaxValueValidator(36), MinValueValidator(0)])
@@ -489,6 +498,7 @@ class Evaluacion_IPAM_INFANTIL(Evaluacion):
 
 
 class Evaluacion_IPAM_PRIMERO(Evaluacion):
+
     CN = models.IntegerField(default=0, validators=[MaxValueValidator(64), MinValueValidator(0)])
     ODD = models.IntegerField(default=0, validators=[MaxValueValidator(45), MinValueValidator(0)])
     SN = models.IntegerField(default=0, validators=[MaxValueValidator(45), MinValueValidator(0)])
@@ -505,6 +515,7 @@ class Evaluacion_IPAM_PRIMERO(Evaluacion):
 
 
 class Evaluacion_IPAM_SEGUNDO(Evaluacion):
+
     CN = models.IntegerField(default=0, validators=[MaxValueValidator(64), MinValueValidator(0)])
     ODD = models.IntegerField(default=0, validators=[MaxValueValidator(45), MinValueValidator(0)])
     SN = models.IntegerField(default=0, validators=[MaxValueValidator(45), MinValueValidator(0)])
@@ -521,6 +532,7 @@ class Evaluacion_IPAM_SEGUNDO(Evaluacion):
 '''
 
 class Evaluacion_IPAM_TERCERO(Evaluacion):
+
     CN = models.IntegerField(default=0, validators=[MaxValueValidator(64), MinValueValidator(0)])
     ODD = models.IntegerField(default=0, validators=[MaxValueValidator(45), MinValueValidator(0)])
     SN = models.IntegerField(default=0, validators=[MaxValueValidator(45), MinValueValidator(0)])
@@ -540,6 +552,7 @@ class Evaluacion_IPAM_TERCERO(Evaluacion):
 # IPAE
 
 class Evaluacion_IPAE_PRIMERO(Evaluacion):
+
     TLC_1 = models.IntegerField(default=0, validators=[MaxValueValidator(108), MinValueValidator(0)])
     DICTADO_ORTOGRAFIA_ARBITRARIA = models.IntegerField(default=0, validators=[MaxValueValidator(20), MinValueValidator(0)])
     DICTADO_ORTOGRAFIA_REGLADA = models.IntegerField(default=0, validators=[MaxValueValidator(20), MinValueValidator(0)])
@@ -555,6 +568,7 @@ Dictado de frases
 '''
 
 class Evaluacion_IPAE_SEGUNDO(Evaluacion):
+
     TLC_1 = models.IntegerField(default=0, validators=[MaxValueValidator(108), MinValueValidator(0)])
     DICTADO_ORTOGRAFIA_ARBITRARIA = models.IntegerField(default=0, validators=[MaxValueValidator(20), MinValueValidator(0)])
     DICTADO_ORTOGRAFIA_REGLADA = models.IntegerField(default=0, validators=[MaxValueValidator(20), MinValueValidator(0)])
@@ -571,6 +585,7 @@ Dictado de frases
 
 
 class Evaluacion_IPAE_TERCERO(Evaluacion):
+
     DICTADO_ORTOGRAFIA_ARBITRARIA = models.IntegerField(default=0, validators=[MaxValueValidator(20), MinValueValidator(0)])
     DICTADO_ORTOGRAFIA_REGLADA = models.IntegerField(default=0, validators=[MaxValueValidator(20), MinValueValidator(0)])
     DICTADO_FRASES = models.IntegerField(default=0, validators=[MaxValueValidator(21), MinValueValidator(0)])
