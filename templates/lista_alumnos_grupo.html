@@ -124,34 +124,41 @@ var riesgos = {
 
 			</td>
             <td>
-                <!-- ver informe IPAL -->
-				<a href="#" style="font-size:23px">📊</a>
 
+
+				{% if alumno.curso == "TERCERO" %}
+					-
+				{% else %}
+
+
+
+                <!-- ver informe IPAL -->
+				<a href="{{ server_url }}informe-individual/
+				?idAlumno={{alumno.pk}}&prueba=IPAL" style="font-size:23px">📊</a>
+				<!-- listar evalauciones -->
 				<a href="{{ server_url }}lista-evaluaciones/
 				?idAlumno={{alumno.pk | safe}}
 				&tipo=IPAL
 				&idGrupo={{alumno.grupo.pk | safe}}" style="font-size:23px">📆</a>
-
                 <!-- riesgo IPAL -->
                 <div style = "display: inline-block;">
 					 <div style = "display: inline-block;background-color: {% color evas|get_item:alumno.key_IPAL_INICIO %};width:10px;height:10px;"></div>
 					<div style = "display: inline-block;background-color: {% color evas|get_item:alumno.key_IPAL_MEDIO %};width:10px;height:10px;"></div>
                 	<div style = "display: inline-block;background-color: {% color evas|get_item:alumno.key_IPAL_FIN %};width:10px;height:10px;"></div>
                 </div>
-
+				{% endif %}
             </td>
 
             <td>
 				<!-- ver informe IPAM  📃-->
-				<a href="#" style="font-size:23px">📊</a>
-
+				<a href="{{ server_url }}informe-individual/
+				?idAlumno={{alumno.pk}}&prueba=IPAM" style="font-size:23px">📊</a>
+				<!-- listar evalauciones -->
 				<a href="{{ server_url }}lista-evaluaciones/
 				?idAlumno={{alumno.pk | safe}}
 				&tipo=IPAM
 				&idGrupo={{alumno.grupo.pk | safe}}" style="font-size:23px">📆</a>
-
-
-                  <!-- riesgo IPAM -->
+                <!-- riesgo IPAM -->
                 <div style = "display: inline-block;">
                 <div style = "display: inline-block;background-color: {% color evas|get_item:alumno.key_IPAM_INICIO %};width:10px;height:10px;"></div>
                 <div style = "display: inline-block;background-color: {% color evas|get_item:alumno.key_IPAM_MEDIO %};width:10px;height:10px;"></div>
@@ -173,14 +180,13 @@ var riesgos = {
 
 
                 <!-- ver informe IPAE -->
-				<a href="#" style="font-size:23px">📊</a>
-
+				<a href="{{ server_url }}informe-individual/
+				?idAlumno={{alumno.pk}}&prueba=IPAE" style="font-size:23px">📊</a>
+				<!-- listar evalauciones -->
 				<a href="{{ server_url }}lista-evaluaciones/
 				?idAlumno={{alumno.pk | safe}}
 				&tipo=IPAE
 				&idGrupo={{alumno.grupo.pk | safe}}" style="font-size:23px">📆</a>
-
-
                 <!-- riesgo IPAE -->
 
                 <div style = "display: inline-block;">

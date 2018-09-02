@@ -10,7 +10,7 @@ from rtiapp.views import \
     listar_alumnos_evaluador_en_grupo,\
     listar_evaluaciones,nueva_evaluacion, editar_evaluacion, alta_evaluador,documentos,informe_grupo,\
     establecer_curso,actualizar_curso,compartir_grupo,actualizar_grupo_compartido,exportar,exportar_CSV, \
-    cerrar_sesion,informe_individual, upload_csv
+    cerrar_sesion,informe_individual, upload_csv, eliminar_alumno
 
 
 urlpatterns = [
@@ -47,6 +47,7 @@ urlpatterns = [
     # alumnos
     url(r'^nuevo-alumno/', nuevo_alumno),
     url(r'^editar-alumno/', editar_alumno),
+    url(r'^eliminar-alumno/', eliminar_alumno),
     url(r'^lista-alumnos-grupo/', listar_alumnos_evaluador_en_grupo),
 
     # evaluaciones

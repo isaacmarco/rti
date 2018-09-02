@@ -70,7 +70,6 @@ class Form_Evaluacion_IPAM_SEGUNDO(forms.ModelForm):
         fields = '__all__'
         exclude = ('curso_academico','mes','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
 
-
 class Form_Evaluacion_IPAM_PRIMERO(forms.ModelForm):
     class Meta:
         model = Evaluacion_IPAM_PRIMERO
