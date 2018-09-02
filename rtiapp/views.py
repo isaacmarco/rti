@@ -142,6 +142,17 @@ def exportar_CSV(request):
     return response
 
 
+def eliminar_alumno(request):
+    print('>>> Eliminar alumno')
+    id_alumno = request.GET['idAlumno']
+    id_grupo = request.GET['idGrupo']
+    alumno = Alumno.objects.get(pk=id_alumno)
+    alumno.delete()
+    url_retorno = server_url + lista_alumnos_grupo_url + '/?idGrupo=' + id_grupo
+    return redirect(url_retorno)
+
+
+
 def elimina_grupo(request):
     print('>>> Grupo eliminado')
     id_grupo = request.GET['idGrupo']
@@ -213,19 +224,28 @@ def actualizar_curso(request):
 
 
 # generar datos y mostrar informe individual
-# test
 def informe_individual(request):
     print('>>> Informe individual')
     id_alumno = request.GET['idAlumno']
+
+    prueba = request.GET['prueba']
+
+
+
     alumno = Alumno.objects.get(pk=id_alumno)
+    curso = alumno.curso
+    # plabtilla html
+    plantilla = 'informe_individual_' + prueba + '_' + curso + '.html'
+
     url_retorno = server_url # + lista_alumnos_grupo_url + '/?idGrupo=' + id_grupo
+
     # para el informe individual se necesitan las evaluaciones
     # de la tarea
 
     # test IPAL-INFANTIL
     try:
 
-        print('>>> Recuperando evaluaciones de ' + alumno.codigo)
+        print('>>> Recuperando evaluaciones de ' + alumno.codigo + ' para prueba ' + prueba)
         evaluaciones = []# lista de evaluaciones
 
 
@@ -233,8 +253,17 @@ def informe_individual(request):
         # TODO o para el curso del alumno?¿ Todo esto debe detallarse
         # correctamente en el manual o decidirlo con el grupo
 
-        consulta_evaluaciones = Evaluacion_IPAL_INFANTIL.objects.filter(
+
+        # obtener la clase
+
+        nombre_modelo = prueba + '-' + curso
+        modelo = clases[nombre_modelo]
+
+        consulta_evaluaciones = modelo.objects.filter(
             alumno=alumno, curso_academico=alumno.curso_academico)
+
+        #consulta_evaluaciones = Evaluacion_IPAL_INFANTIL.objects.filter(
+         #   alumno=alumno, curso_academico=alumno.curso_academico)
 
         # introducimos en el diccionario de evaluaciones
         for registro_evaluacion in consulta_evaluaciones:
@@ -243,13 +272,11 @@ def informe_individual(request):
                   registro_evaluacion.riesgo + ' ' +
                   registro_evaluacion.get_tipo_display())
 
-            # def riesgo_TAREA_INFANTIL(tarea, momento, pd):
-
-            evaluaciones.append(registro_evaluacion)
+            evaluaciones.append(registro_evaluacion) # introducimos la evaluacion
 
 
         # pasamos a la plantillas las evaluaciones inicio, medio, fin
-        return render(request, 'informe_individual.html',
+        return render(request, plantilla,
                       {'grupo': alumno.grupo,
                        'alumno': alumno,
                        'curso': alumno.curso,
@@ -261,6 +288,9 @@ def informe_individual(request):
                        'index': server_url,
                        'server_url': url_retorno}
                       )
+
+
+
 
     except ObjectDoesNotExist:
         return render(request, 'error.html', {'error': ERROR_NO_HAY_EVALUACIONES})
@@ -656,6 +686,11 @@ def listar_evaluaciones(request):
 
     # curso_academico = alumno.grupo.curso_academico
 
+    if tipo == Globales.IPAL:
+        if curso == Globales.TERCERO:
+            print('>>> Error: no hay IPAL TERCERO')
+
+
     try:
 
         if tipo == Globales.IPAL:
@@ -680,7 +715,7 @@ def listar_evaluaciones(request):
                 evaluaciones = Evaluacion_IPAM_SEGUNDO.objects.filter \
                     (alumno=alumno).order_by('curso_academico', 'mes')#.reverse()
             if curso == Globales.TERCERO:
-                evaluaciones = Form_Evaluacion_IPAM_TERCERO.objects.filter \
+                evaluaciones = Evaluacion_IPAM_TERCERO.objects.filter \
                     (alumno=alumno).order_by('curso_academico', 'mes')#.reverse()
 
         if tipo == Globales.IPAE:
@@ -774,32 +809,37 @@ def listar_alumnos_evaluador_en_grupo(request):
         print('>>> Recuperando evaluaciones')
         todas_evaluaciones = []  # lista de evaluaciones
         evas = {}
-        #validas = {}
+
 
         for alumno in alumnos:
 
             print('- recuperado ' + alumno.codigo)
+
             # hacer las consultas
             modelo_IPAL = 'IPAL-' + alumno.curso
             modelo_IPAM = 'IPAM-' + alumno.curso
             modelo_IPAE = 'IPAE-' + alumno.curso
 
-            IPAL = clases[modelo_IPAL]
-            IPAM = clases[modelo_IPAM]
+
+            if alumno.curso != Globales.TERCERO: # no hay tercero en IPAL
+                IPAL = clases[modelo_IPAL]
+                consulta_evaluaciones_IPAL = IPAL.objects.filter(alumno=alumno).filter(
+                    Q(mes=Globales.NOVIEMBRE) |
+                    Q(mes=Globales.FEBRERO) |
+                    Q(mes=Globales.MAYO)
+                )
+                for registro_evaluacion in consulta_evaluaciones_IPAL:
+                    print(registro_evaluacion.alumno.codigo + ' ' +
+                          registro_evaluacion.mes_leible + ' ' +
+                          registro_evaluacion.riesgo + ' ' +
+                          registro_evaluacion.get_tipo_display())
+                    todas_evaluaciones.append(registro_evaluacion)
+                    key = str(alumno.pk) + registro_evaluacion.prueba + registro_evaluacion.momento
+                    evas[key] = registro_evaluacion.riesgo
 
 
-            consulta_evaluaciones_IPAL = IPAL.objects.filter(alumno=alumno).filter(
-                Q(mes=Globales.NOVIEMBRE) |
-                Q(mes=Globales.FEBRERO) |
-                Q(mes=Globales.MAYO)
-            )
-            consulta_evaluaciones_IPAM = IPAM.objects.filter(alumno=alumno).filter(
-                Q(mes=Globales.NOVIEMBRE) |
-                Q(mes=Globales.FEBRERO) |
-                Q(mes=Globales.MAYO)
-            )
 
-            if alumno.curso != Globales.INFANTIL:
+            if alumno.curso != Globales.INFANTIL: # no hay infantil en IPAE
                 IPAE = clases[modelo_IPAE]
                 consulta_evaluaciones_IPAE = IPAE.objects.filter(alumno=alumno).filter(
                     Q(mes=Globales.NOVIEMBRE) |
@@ -814,19 +854,16 @@ def listar_alumnos_evaluador_en_grupo(request):
                     todas_evaluaciones.append(registro_evaluacion)
                     key = str(alumno.pk) + registro_evaluacion.prueba + registro_evaluacion.momento
                     evas[key] = registro_evaluacion.riesgo
-                    #validas[key] = registro_evaluacion.evaluado
-            
-            # recorrer la queryset recuperando cada registro
-            # de evaluacion
-            for registro_evaluacion in consulta_evaluaciones_IPAL:
-                print(registro_evaluacion.alumno.codigo + ' ' +
-                      registro_evaluacion.mes_leible + ' ' +
-                      registro_evaluacion.riesgo + ' ' +
-                      registro_evaluacion.get_tipo_display())
-                todas_evaluaciones.append(registro_evaluacion)
-                key = str(alumno.pk) + registro_evaluacion.prueba + registro_evaluacion.momento
-                evas[key] = registro_evaluacion.riesgo
-                #validas[key] = registro_evaluacion.evaluado
+
+
+            IPAM = clases[modelo_IPAM]
+            consulta_evaluaciones_IPAM = IPAM.objects.filter(alumno=alumno).filter(
+                Q(mes=Globales.NOVIEMBRE) |
+                Q(mes=Globales.FEBRERO) |
+                Q(mes=Globales.MAYO)
+            )
+
+
 
             for registro_evaluacion in consulta_evaluaciones_IPAM:
                 print(registro_evaluacion.alumno.codigo + ' ' +
@@ -836,7 +873,7 @@ def listar_alumnos_evaluador_en_grupo(request):
                 todas_evaluaciones.append(registro_evaluacion)
                 key = str(alumno.pk) + registro_evaluacion.prueba + registro_evaluacion.momento
                 evas[key] = registro_evaluacion.riesgo
-                #validas[key] = registro_evaluacion.evaluado
+
 
         return render(request, 'lista_alumnos_grupo.html',
                       { 'grupo': grupo,
@@ -1011,7 +1048,9 @@ def editar_alumno(request):
             return redirect(url_retorno)
     else:
         form = FormAlumno(request.user, instance=alumno)
-    return render(request, 'form_editar_alumno.html', {'form': form, 'index':server_url,'server_url': url_retorno})
+    return render(request, 'form_editar_alumno.html',
+                  {'form': form, 'index':server_url,
+                   'server_url': url_retorno, 'alumno':alumno, 'grupo':id_grupo})
 
 
 

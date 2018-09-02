@@ -6,6 +6,12 @@
 
 
      <form method="POST" class="post-form" style="padding: 30px">
+
+          <button type="button" style="color:red;" class="save btn btn-default"
+     onclick="window.location.href='{{ index }}eliminar-alumno/?idGrupo={{grupo}}&idAlumno={{alumno.pk | safe}}'"
+     >⛔Eliminar</button>
+
+
     {% csrf_token %}
 
     {{ form.non_field_errors }}
@@ -30,9 +36,11 @@
 
 
     <br>
+
+
+
     <button type="submit" class="save btn btn-default">Guardar</button>
-    <button type="button" class="save btn btn-default" onclick="window.location.href='{{ server_url }}'"
-        >Cancelar</button>
+    <button type="button" class="save btn btn-default" onclick="window.location.href='{{ server_url }}'">Cancelar</button>
     </form>
 
 {% endblock %}
