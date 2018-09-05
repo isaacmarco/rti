@@ -214,7 +214,7 @@ class Grupo(models.Model):
     nombre = models.CharField(max_length=100, default="Nombre del grupo")#, help_text='Nombre del grupo')
     # el campo evaluador identifica al creador original del grupo, ya que
     # ahora varios evaluadores pueden compartir grupo mediante la relacion grupo-evaluador
-    evaluador = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
+    evaluador = models.ForeignKey(User,  default=0) # borrar un evaluador no elimina sus grupos (on_delete=models.CASCADE,)
     curso_academico = models.IntegerField(default=2018)#, help_text='Curso academico')
     centro = models.CharField(max_length=100, default="Centro")
     fecha_alta = models.DateTimeField(auto_now_add=True)
@@ -240,7 +240,7 @@ class Alumno(models.Model):
     codigo = models.CharField(max_length=100, default="código del alumno")
     fecha_nacimiento = models.DateField(default=datetime.date.today)
     centro = models.CharField(max_length=100, default="Centro")
-    evaluador = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
+    evaluador = models.ForeignKey(User,  default=0) # eliminar un evaluador no elimina sus alumnos (on_delete=models.CASCADE,
     grupo = models.ForeignKey(Grupo, on_delete=models.CASCADE, default=0)
     curso_academico = models.IntegerField(default=2018)
     # fechas de alta del alumno y actualizacion de su ficha
@@ -331,8 +331,8 @@ colores_riesgo = {
 
 class Evaluacion(models.Model):
 
-    evaluador = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
-    alumno = models.ForeignKey(Alumno, on_delete=models.CASCADE, default=0)
+    evaluador = models.ForeignKey(User, default=0) # eliminar el evaluador no elimina las evaluaciones
+    alumno = models.ForeignKey(Alumno, on_delete=models.CASCADE, default=0)  # eliminar el alumno SI elimina las evaluaciones
     omnibus = models.DecimalField(default=0, max_digits=12, decimal_places=10)
     curso_academico = models.IntegerField(default=2018)
     mes_leible = models.CharField(max_length=10, default='noviembre')

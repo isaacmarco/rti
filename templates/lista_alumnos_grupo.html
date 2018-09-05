@@ -7,28 +7,30 @@
 
 <div class="form-style-1" style="padding: 30px">
 
-	<!--
+
 	<button type="button" class="save btn btn-default"
 		onclick="window.location.href='{{ server_url }}lista-grupos/?idGrupo={{ grupo.pk }}'">👪 Volver a mis grupos</button>
-	-->
+
 	<button type="button" class="save btn btn-default"
 		onclick="window.location.href='{{ server_url }}nuevo-alumno/?idGrupo={{ grupo.pk }}'">👤 Nuevo alumno</button>
 
 	<button type="button" class="save btn btn-default"
 		onclick="window.location.href='{{ server_url }}compartir-grupo/?idGrupo={{ grupo.pk }}'">🙋 Compartir grupo</button>
 
-	<!-- botones de infomes -->
-	<button type="button" class="save btn btn-default"
-		onclick="window.location.href='{{ server_url }}informe-grupo/?idGrupo={{ grupo.pk }}&prueba=IPAL'">📊 Informe de grupo IPAL</button>
+	<!-- botones de infomes generales -->
+
+	{% if grupo.curso != "TERCERO" %}
+			<button type="button" class="save btn btn-default"
+			onclick="window.location.href='{{ server_url }}informe-grupo/?idGrupo={{ grupo.pk }}&prueba=IPAL'">📊 Informe de grupo IPAL</button>
+	{% endif %}
 
 	<button type="button" class="save btn btn-default"
 		onclick="window.location.href='{{ server_url }}informe-grupo/?idGrupo={{ grupo.pk }}&prueba=IPAM'">📊 Informe de grupo IPAM</button>
 
+	{% if grupo.curso != "INFANTIL" %}
 	<button type="button" class="save btn btn-default"
 		onclick="window.location.href='{{ server_url }}informe-grupo/?idGrupo={{ grupo.pk }}&prueba=IPAE'">📊 Informe de grupo IPAE</button>
-
-
-
+	{% endif %}
 </div>
 
 
