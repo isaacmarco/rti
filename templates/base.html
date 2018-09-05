@@ -60,7 +60,10 @@ div.contenido {
   		<a href="{{ index }}lista-grupos">👪 Mis grupos</a>
   		<a href="{{ index }}establecer-curso">📅 Establecer año académico</a>
 		<a href="{{ index }}documentos">💼 Documentos</a>
-		<a href="{{ index }}exportar">💾 Exportar datos</a>
+		<!-- menu solo para el rol de investigador -->
+		{% if user|es_investigador %}
+			<a href="{{ index }}exportar">💾 Exportar datos</a>
+		{% endif %}
 		<a href="{{ index }}cerrar-sesion">🔌 Cerrar sesión</a>
 
 	{% else %}

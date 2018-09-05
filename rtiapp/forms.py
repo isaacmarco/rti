@@ -65,10 +65,20 @@ class Form_Evaluacion_IPAM_TERCERO(forms.ModelForm):
         exclude = ('curso_academico','mes','prueba','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador','mes_leible')
 
 class Form_Evaluacion_IPAM_SEGUNDO(forms.ModelForm):
+    # TODO OJO CON ESTO ESTA TODO PROVISIONAL HAST Q SE CONFIRME
+
+    CN = forms.IntegerField(min_value=0, max_value=64, label='CN')
+    ODD = forms.IntegerField(min_value=0, max_value=45, label='ODD')
+    SN = forms.IntegerField(min_value=0, max_value=45, label='SN')
+    OUD = forms.IntegerField(min_value=0, max_value=45, label='OUD')
+    VP = forms.IntegerField(min_value=0, max_value=45, label='VP')
+
+
+
     class Meta:
         model = Evaluacion_IPAM_SEGUNDO
         fields = '__all__'
-        exclude = ('curso_academico','mes','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
+        exclude = ('prueba','curso_academico','mes','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
 
 class Form_Evaluacion_IPAM_PRIMERO(forms.ModelForm):
     class Meta:
@@ -141,7 +151,7 @@ class FormAlumnoGrupoForzado(forms.ModelForm):
 
     class Meta:
         model = Alumno
-        fields = ('codigo', 'sexo', 'fecha_nacimiento', 'pais', 'curso', 'centro')
+        fields = ('codigo', 'sexo', 'fecha_nacimiento', 'pais')
 
 
 

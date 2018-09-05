@@ -37,6 +37,7 @@ server_url = 'http://127.0.0.1:8000/'
 lista_grupos_url = 'lista-grupos'
 editar_grupo_url = 'editar-grupo'
 lista_alumnos_grupo_url = 'lista-alumnos-grupo'
+lista_evaluaciones = 'lista-evaluaciones'
 
 clases = {
     'IPAL-INFANTIL': Evaluacion_IPAL_INFANTIL,
@@ -78,9 +79,45 @@ ERROR_EVALUADOR_NO_EXISTE = 'El número de identificación del otro evaluador es
 ERROR_LISTADO_GRUPOS = 'No ha creado ningun grupo'
 ERROR_NO_HAY_EVALUACIONES = 'No existen evaluaciones para este alumno'
 ERROR_NO_HAY_ALUMNOS_EN_GRUPO = 'El grupo no contiene alumnos'
+ERROR_PROPIETARIO_GRUPO = 'No es el propietario de este grupo'
+ERROR_PROPIETARIO_ALUMNO = 'No es el propietario de este alumno'
+ERROR_PROPIETARIO_EVALUACION = 'No es el propietario de esta evaluacion'
+ERROR_ROL_INVESTIGADOR = 'No tiene el rol de investigador'
+ERROR_ELIMINAR_ALUMNO = 'No tiene permiso para eliminar un alumno'
 
 from django.contrib.auth import logout
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import Group
+
+
+
+def es_investigador(request):
+    print('>>> Comprobando si el rol es investigador')
+    return True if request.user.groups.filter(name='investigadores').exists() else False
+
+def es_participante(request):
+   return True if request.user.groups.filter(name='participantes').exists() else False
+
+def puede_eliminar_alumnos(request):
+    print('>>> Comprobando permisos para eliminar alumno')
+    # solo investigadores o usuarios normales de la plataforma pueden
+    # eliminar. No esta permitido para el profesorado participante
+    return True if es_investigador(request) or not es_participante(request) else False
+
+
+
+def es_propietario_grupo(request, grupo):
+    print('>>> Comprobando propietario del grupo')
+    return grupo.evaluador == request.user # el grupo es del usuario
+
+def es_propietario_alumno(request, alumno):
+    print('>>> Comprobando propietario del alumno')
+    return alumno.evaluador == request.user # el alumno es del usuario
+
+def es_propietario_evaluacion(request, evaluacion):
+    print('>>> Comprobando propietario de la evaluacion')
+    return evaluacion.evaluador == request.user # la evaluacion es del usuario
+
 
 def cerrar_sesion(request):
     print('>>> Cerrando sesion de usuario')
@@ -95,7 +132,10 @@ def documentos(request):
 
 def exportar(request):
     print('>>> Menu de exportar datos')
-    return render(request, 'exportar_datos.html', {'index': server_url})
+    if es_investigaror(request):
+        return render(request, 'exportar_datos.html', {'index': server_url})
+    else:
+        return render(request, 'error.html', {'error': ERROR_ROL_INVESTIGADOR})
 
 def exportar_CSV(request):
     print('>>> Exportando CSV')
@@ -147,6 +187,15 @@ def eliminar_alumno(request):
     id_alumno = request.GET['idAlumno']
     id_grupo = request.GET['idGrupo']
     alumno = Alumno.objects.get(pk=id_alumno)
+
+    # comprobar si el usuario tiene permisos por su rol
+    if not puede_eliminar_alumnos(request):
+        return render(request, 'error.html', {'error': ERROR_ELIMINAR_ALUMNO})
+
+    # comprobar los permisos en este ALUMNO
+    if not es_propietario_grupo(request, alumno):
+        return render(request, 'error.html', {'error': ERROR_PROPIETARIO_ALUMNO})
+
     alumno.delete()
     url_retorno = server_url + lista_alumnos_grupo_url + '/?idGrupo=' + id_grupo
     return redirect(url_retorno)
@@ -230,10 +279,15 @@ def informe_individual(request):
 
     prueba = request.GET['prueba']
 
-
-
     alumno = Alumno.objects.get(pk=id_alumno)
     curso = alumno.curso
+
+    # comprobar los permisos en este ALUMNO
+    if not es_propietario_grupo(request, alumno):
+        return render(request,'error.html', {'error': ERROR_PROPIETARIO_ALUMNO})
+
+
+
     # plabtilla html
     plantilla = 'informe_individual_' + prueba + '_' + curso + '.html'
 
@@ -311,6 +365,13 @@ def informe_grupo(request):
     prueba = request.GET['prueba']
     url_retorno = server_url + lista_alumnos_grupo_url + '/?idGrupo=' + id_grupo
     print('>>> Grupo ' + grupo.nombre + ' ' + grupo.curso + ' ' + prueba)
+
+
+    # comprobar los permisos en este grupo
+    if not es_propietario_grupo(request, grupo):
+        return render(request,'error.html', {'error': ERROR_PROPIETARIO_GRUPO})
+
+
 
     # no hay pruebas de IPAE INFANTIL
 
@@ -442,7 +503,11 @@ def nueva_evaluacion(request):
     evaluador = Evaluador.objects.get(usuario=request.user)
     curso = alumno.curso
     grupo = str(alumno.grupo.pk)
-    url_retorno = server_url + lista_alumnos_grupo_url + '/?idGrupo=' + grupo
+    # obsoleto: url_retorno = server_url + lista_alumnos_grupo_url + '/?idGrupo=' + grupo
+    url_retorno = server_url + lista_evaluaciones + \
+                  '/?idGrupo=' + grupo + '&idAlumno=' + id_alumno + \
+                  '&tipo=' + tipo
+
     print('>>> Nueva evaluacion ' + str(evaluador.curso_academico) + ' ' + tipo + ' ' + curso)
 
     # nombre del modelo a instanciar
@@ -639,7 +704,7 @@ def procesar_evaluacion(evaluacion):
 #
 
 def editar_evaluacion(request):
-    print('>>> Editando evaluacion generica')
+    print('>>> Editando evaluacion')
     id_evaluacion = request.GET['idEvaluacion']
     tipo = request.GET['tipo']
     curso = request.GET['curso']
@@ -647,6 +712,10 @@ def editar_evaluacion(request):
     evaluacion = get_object_or_404(clases[nombre_clase], pk=id_evaluacion)
     url_retorno = server_url + 'lista-evaluaciones/?idAlumno=' + str(evaluacion.alumno.pk) + '&tipo=' + tipo
     print('>>> Evaluacion de ' + evaluacion.prueba)
+
+    # comprobar los permisos en este alumno
+    if not es_propietario_evaluacion(request, evaluacion):
+        return render(request, 'error.html', {'error': ERROR_PROPIETARIO_EVALUACION})
 
     if request.method == "POST":
         print('post')
@@ -678,6 +747,10 @@ def listar_evaluaciones(request):
     alumno = Alumno.objects.get(pk=id_alumno)
     curso = alumno.curso
     print('>>> Mostrando lista para ' + tipo + ' ' + curso)
+
+    # comprobar los permisos en este alumno
+    if not es_propietario_alumno(request, alumno):
+        return render(request, 'error.html', {'error': ERROR_PROPIETARIO_ALUMNO})
 
     # TODO SOLO MOSTRAMOS LAS DEL PRESENTE AÑO ACADEMICO: VER COMO MEJORAR ESTO
     # EN PRINCIPIO AÑADIENDO OPCIONES DE FILTRO, COMO EN EL CASO
@@ -760,6 +833,13 @@ def listar_alumnos_evaluador_en_grupo(request):
     # grupo al que se agregara el alumno
     id_grupo = request.GET['idGrupo']
     grupo = Grupo.objects.get(pk=id_grupo)
+
+
+    # comprobar los permisos en este grupo
+    if not es_propietario_grupo(request, grupo):
+        return render(request,'error.html', {'error': ERROR_PROPIETARIO_GRUPO})
+
+
 
     mostrar_todos = False
 
@@ -960,6 +1040,11 @@ def editar_grupo(request):
     url_retorno = server_url + lista_grupos_url
     id = request.GET['id']
     grupo = get_object_or_404(Grupo, pk=id)
+
+    # comprobar los permisos en este grupo
+    if not es_propietario_alumno(request, grupo):
+        return render(request,'error.html', {'error': ERROR_PROPIETARIO_GRUPO})
+
     if request.method == "POST":
         form = FormGrupo(request.POST, instance=grupo)
         if form.is_valid():
@@ -967,7 +1052,6 @@ def editar_grupo(request):
             # El evaluador que cree el grupo estara siempre
             # en su campo evaluador. Este campo no se actualiza
             # nunca mas
-            # OBSOLETO: grupo.evaluador = request.user
             grupo.save()
             return redirect(url_retorno)
     else:
@@ -985,7 +1069,7 @@ def editar_grupo(request):
 # nuevo alumno sin que el evaluador pueda
 # seleccionar el grupo, se asigna automaticamente
 def nuevo_alumno(request):
-    print('>>> Nuevo alumno con grupo automatico')
+    print('>>> Nuevo alumno')
     id_grupo = request.GET['idGrupo']
     grupo = get_object_or_404(Grupo, pk=id_grupo)
     print('>>> Grupo al que pertenecera: ' + grupo.nombre + ' | ' + grupo.curso)
@@ -997,7 +1081,9 @@ def nuevo_alumno(request):
         if form.is_valid():
             alumno = form.save(commit=False)
             alumno.evaluador = request.user
-            alumno.grupo = grupo
+            alumno.grupo = grupo # asignamos el grupo actual
+            alumno.curso = grupo.curso # asignamos el curso del grupo
+            alumno.centro = grupo.centro # asignamos el centro del grupo
             alumno.save()
             return redirect(url_retorno)
     else:
@@ -1038,6 +1124,13 @@ def editar_alumno(request):
     id_alumno = request.GET['idAlumno']
     id_grupo = request.GET['idGrupo']
     alumno = get_object_or_404(Alumno, pk=id_alumno)
+
+
+    # comprobar los permisos en este alumno
+    if not es_propietario_alumno(request, alumno):
+        return render(request,'error.html', {'error': ERROR_PROPIETARIO_ALUMNO})
+
+
     print('>>> Editando alumno ' + alumno.codigo)
     url_retorno = server_url + lista_alumnos_grupo_url + '/?idGrupo=' + id_grupo
     if request.method == "POST":
@@ -1051,6 +1144,14 @@ def editar_alumno(request):
     return render(request, 'form_editar_alumno.html',
                   {'form': form, 'index':server_url,
                    'server_url': url_retorno, 'alumno':alumno, 'grupo':id_grupo})
+
+
+
+
+
+
+
+
 
 
 

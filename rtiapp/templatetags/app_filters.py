@@ -17,6 +17,23 @@ def get_curso(curso):
 
 
 
+# devuelve true si el usuario puede eliminar alumnos
+@register.filter
+def puede_eliminar_alumno(usuario):
+    # solo investigadores o usuarios normales de la plataforma pueden
+    # eliminar. No esta permitido para el profesorado participante
+    return True if es_investigador(usuario) or not es_participante(usuario) else False
+
+# devuelve true si el usuario tiene el rol de participante en el experimento
+@register.filter
+def es_participante(usuario):
+    return True if usuario.groups.filter(name='participantes').exists() else False
+
+# devuelve true si el usuario tiene el rol de investigador
+@register.filter
+def es_investigador(usuario):
+    return True if usuario.groups.filter(name='investigadores').exists() else False
+
 # devuelve el color segun la constante de riesgo
 @register.simple_tag
 def color(key):

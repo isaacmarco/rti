@@ -7,10 +7,12 @@
 
      <form method="POST" class="post-form" style="padding: 30px">
 
-          <button type="button" style="color:red;" class="save btn btn-default"
-     onclick="window.location.href='{{ index }}eliminar-alumno/?idGrupo={{grupo}}&idAlumno={{alumno.pk | safe}}'"
-     >⛔Eliminar</button>
-
+         <!-- comprobar que el usuario tiene permisos para eliminar -->
+     {% if user|puede_eliminar_alumno %}
+        <button type="button" style="color:red;" class="save btn btn-default"
+        onclick="window.location.href='{{ index }}eliminar-alumno/?idGrupo={{grupo}}&idAlumno={{alumno.pk | safe}}'"
+        >⛔Eliminar</button>
+    {% endif %}
 
     {% csrf_token %}
 
