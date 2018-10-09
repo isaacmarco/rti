@@ -106,6 +106,8 @@ def puede_eliminar_alumnos(request):
     # eliminar. No esta permitido para el profesorado participante
     return True if es_investigador(request) or not es_participante(request) else False
 
+
+
 def es_propietario_grupo(request, grupo):
     print('>>> Comprobando propietario del grupo')
     return grupo.evaluador == request.user # el grupo es del usuario
@@ -127,13 +129,14 @@ def cerrar_sesion(request):
 def index(request):
     return render(request,'principal.html')
 
-def documentos(request):
-    return render(request,'documentos.html', {'index':server_url})
+
+#def documentos(request):
+#    return render(request,'documentos.html', {'index':server_url})
 
 def exportar(request):
     print('>>> Menu de exportar datos')
     if es_investigador(request):
-        return render(request, 'exportar_datos.html', {'server_url': server_url, 'index': server_url})
+        return render(request, 'exportar_datos.html', {'index': server_url})
     else:
         return render(request, 'error.html', {'error': ERROR_ROL_INVESTIGADOR})
 
@@ -276,8 +279,9 @@ def actualizar_curso(request):
 def informe_individual(request):
     print('>>> Informe individual')
     id_alumno = request.GET['idAlumno']
-    id_grupo = request.GET['idGrupo']
+
     prueba = request.GET['prueba']
+
     alumno = Alumno.objects.get(pk=id_alumno)
     curso = alumno.curso
 
@@ -290,12 +294,12 @@ def informe_individual(request):
     # plabtilla html
     plantilla = 'informe_individual_' + prueba + '_' + curso + '.html'
 
-    url_retorno = server_url  + lista_alumnos_grupo_url + '/?idGrupo=' + id_grupo
+    url_retorno = server_url # + lista_alumnos_grupo_url + '/?idGrupo=' + id_grupo
 
     # para el informe individual se necesitan las evaluaciones
     # de la tarea
 
-
+    # test IPAL-INFANTIL
     try:
 
         print('>>> Recuperando evaluaciones de ' + alumno.codigo + ' para prueba ' + prueba)
@@ -594,10 +598,7 @@ def procesar_evaluacion(evaluacion):
         evaluacion.CLE_TEXTOS = OmnibusIPAL.subprueba_complementaria_CLE_TEXTOS(evaluacion)
         evaluacion.CFS = OmnibusIPAL.subprueba_complementaria_CFS(evaluacion)
         evaluacion.VOC = OmnibusIPAL.subprueba_complementaria_VOC(evaluacion)
-        print('- CSL: ' + str(evaluacion.CSL))
-        print('- CLE TEXTOS: ' + str(evaluacion.CLE_TEXTOS))
-        print('- CFS: ' + str(evaluacion.CFS))
-        print('- VOC: ' + str(evaluacion.VOC))
+
     # comprobar si es de cribado progreso
     if cribado:
 
@@ -1033,8 +1034,7 @@ def editar_evaluador(request):
             return redirect(url_retorno)
     else:
         form = FormEvaluador(instance=evaluador)
-    return render(request, 'form_editar_evaluador.html',
-                  {'form': form, 'id_evaluador':evaluador.pk,'index':server_url,'server_url': url_retorno})
+    return render(request, 'form_editar_evaluador.html', {'form': form, 'index':server_url,'server_url': url_retorno})
 
 
 # editar un grupo
@@ -1175,36 +1175,34 @@ def listar_alumnos_evaluador(request):
 # SUBIR CSV Y PROCESARLO, IMPORTANTE:
 # EL FICHERO DEBE SER UTF8 SIN BOM, EN CASO
 # CONTRARIO EL PRIMER CARACTER SERA UN CARACTER ESPECIAL (BOM)
-def importar_csv(request):
+def upload_csv(request):
     data = {}
     if "GET" == request.method:
-        return render(request, 'importar_evaluadores.html', {'index': server_url})
-        #return render(request, 'importar_evaluadores.html', data, {'index': server_url})
-
+        return render(request, "importar_evaluadores.html", data)
 
     # if not GET, then proceed
     try:
         csv_file = request.FILES["csv_file"]
 
+        #if not csv_file.name.endswith('.csv'):
+        #    print('>>> No es un fichero CSV')
+        #    return render(request, "error.html")
+
         #if file is too large, return
         if csv_file.multiple_chunks():
             print('>>> Fichero CSV demasiado grande')
+            #messages.error(request,"Uploaded file is too big (%.2f MB)." % (csv_file.size/(1000*1000),))
             return render(request, "error.html")
 
         file_data = csv_file.read().decode("utf-8")
 
         lines = file_data.split("\n")
-
+        #loop over the lines and save them in db. If error , store as string and then display
         for line in lines:
             fields = line.split(",")
             data_dict = {}
-            data_dict["usuario"] = fields[0]
-            data_dict["nombre"] = fields[1]
-            data_dict["password"] = fields[2]
-            data_dict["email"] = fields[3]
-            data_dict["centro_pilotaje"] = fields[4]
-            data_dict["pais"] = fields[5]
-            # el resto de campos se rellena por los docentes
+            data_dict["nombre"] = fields[0]
+            data_dict["dni"] = fields[1]
             print(fields[0] + ', ' + fields[1])
             '''
             try:
@@ -1221,5 +1219,5 @@ def importar_csv(request):
         print('>>> Error subiendo CSV: ' + repr(e))
 
     return redirect(server_url)
-    #return render(request, 'lista_alumnos.html',
-    #                  {'alumnos': alumnos,'index': server_url})
+
+    #return HttpResponseRedirect(reverse("myapp:upload_csv"))

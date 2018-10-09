@@ -4,7 +4,6 @@
 
     <h1>Su perfil de evaluador</h1>
 
-
     <form method="POST" class="post-form" style="padding: 30px">
     {% csrf_token %}
 
@@ -14,7 +13,6 @@
         {{ hidden_field.errors }}
         {{ hidden_field }}
     {% endfor %}
-
 
     <table class="formularios" border="0">
         {% for field in form.visible_fields %}
@@ -27,6 +25,8 @@
             </td>
         </tr>
         {% endfor %}
+
+        <td>👤 Identificador del evaluador <b>{{ id_evaluador }}</b></td>
      </table>
 
 

@@ -56,13 +56,14 @@ div.contenido {
 	el usuario esta logeado -->
     {% if user.is_authenticated %}
 
-  		<a href="{{ index }}editar-evaluador">👤 Mi perfil de evaluador</a>
+  		<a href="{{ index }}editar-evaluador">👤 Mi perfil</a>
   		<a href="{{ index }}lista-grupos">👪 Mis grupos</a>
+		<a href="{{ index }}lista-alumnos">📓 Mis alumnos</a>
   		<a href="{{ index }}establecer-curso">📅 Establecer año académico</a>
 		<a href="{{ index }}documentos">💼 Documentos</a>
 		<!-- menu solo para el rol de investigador -->
 		{% if user|es_investigador %}
-			<a href="{{ index }}exportar">💾 Exportar datos</a>
+			<a href="{{ index }}exportar">💾 Datos</a>
 		{% endif %}
 		<a href="{{ index }}cerrar-sesion">🔌 Cerrar sesión</a>
 

@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
-
 {% block content %}
+
 
     <h1>Nueva evaluación IPAL SEGUNDO</h1>
     <br>
@@ -16,11 +16,13 @@
         {{ hidden_field }}
     {% endfor %}
 
+
+
     <table border="0">
         {% for field in form.visible_fields %}
         <tr>
             <th>{{ field.label_tag }}</th>
-            <td>
+
             {{ field.errors }}
             {{ field }}
             {{ field.help_text }}

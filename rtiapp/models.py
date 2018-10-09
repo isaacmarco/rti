@@ -147,6 +147,8 @@ class Evaluador(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
     nombre = models.CharField(max_length=50, default="Nombre del evaluador")
     centro = models.CharField(max_length=50, default="Centro del evaluador")
+    # centro forzado para el grupo ULL (el usuario no puede cambiarlo)
+    centro_pilotaje = models.CharField(max_length=50, default="Centro pilotaje")
     email = models.EmailField(default='email@email.com')
 
     # fecha en la que se registro el evaluador
@@ -434,9 +436,6 @@ class Evaluacion_IPAL_SEGUNDO(Evaluacion):
     FLO = models.IntegerField(default=0, validators=[MaxValueValidator(133), MinValueValidator(0)])
     PRO = models.IntegerField(default=0, validators=[MinValueValidator(0)])
 
-    # TODO OJO AQUI, HAY VALORES MAXIMOS PARA LAS PUNTUACIONES
-    # TODO DIRECTAS DE LAS SUBPRUEBAS, PERO NO LAS METE EL EXAMINADOR,
-    # SE AUTOCALCULAN.... QUE HACEMOS?
 
     '''
     •	Conocimiento Nombre Letra (CNL) 

@@ -51,6 +51,17 @@ var evaluaciones = {
 
 // crear diccionario de datos del grafico
 var datos = [
+	{
+	"comentario": "esta entrada de datos es para ajustar la escala",
+	"codigo": "",
+ 	"rendimiento-inicio": 3,
+ 	"rendimiento-medio": 3,
+ 	"rendimiento-fin": 3,
+ 	"color-inicio": "#ffffff",
+    "color-medio": "#ffffff",
+   	"color-fin": "#ffffff"
+   	},
+
 {% for alumno in alumnos %}
     {
         "codigo": "{{ alumno.codigo }}",
@@ -61,6 +72,17 @@ var datos = [
         "color-medio": evaluaciones["{{ alumno.pk }}-COLOR-RIESGO-MEDIO"],
         "color-fin": evaluaciones["{{ alumno.pk }}-COLOR-RIESGO-FIN"]
     },{% endfor %}
+
+    {
+	"comentario": "esta entrada de datos es para ajustar la escala",
+	"codigo": "",
+ 	"rendimiento-inicio": -3,
+ 	"rendimiento-medio":-3,
+ 	"rendimiento-fin": -3,
+ 	"color-inicio": "#ffffff",
+    "color-medio": "#ffffff",
+   	"color-fin": "#ffffff"
+   	}
 ];
 </script>
 
@@ -92,7 +114,7 @@ var datos = [
 							"title": "graph 1",
 							"type": "column",
 							"lineThickness": 0,
-							"showBalloon": false,
+							"showBalloon": true,
 							"valueField": "rendimiento-inicio"
 						}
 					],
@@ -151,7 +173,7 @@ var datos = [
 							"title": "graph 1",
 							"type": "column",
 							"lineThickness": 0,
-							"showBalloon": false,
+							"showBalloon": true,
 							"valueField": "rendimiento-medio"
 						}
 					],
@@ -211,7 +233,7 @@ var datos = [
 							"title": "graph 1",
 							"lineThickness": 0,
 							"type": "column",
-							"showBalloon": false,
+							"showBalloon": true,
 							"valueField": "rendimiento-fin"
 						}
 					],
