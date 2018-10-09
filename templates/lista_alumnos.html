@@ -1,24 +1,10 @@
-<html>
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load app_filters %}
+{% block content %}
 
-<head>
-</head>
-
-<body>
-
-
-<div class="form-style-1">
-	<h1>ALUMNOS DEL EVALUADOR</h1>
-</div>
-
-<div class="form-style-1">
-
-	<h2>Lista de sus alumnos en el grupo {{ grupo.nombre }}</h2>
-	<a href="{{ server_url }}nuevo-grupo/">XXXX</a>
-</div>
-	
-	
-	
-	
+<h1>Mis alumnos</h1>
+<h2>Ordenados por grupo</h2>
 
 <style>
 	table {
@@ -40,37 +26,31 @@
 
 	<table>
 	<tr>
-		<th>Agregar</th>
-		<th>Nombre</th>
+		<th>X</th>
+		<th>Código</th>
+		<th>Grupo</th>
 		<th>Curso</th>
 		<th>Centro</th>
-		<th>Editar</th>
-
+		<th>X</th>
 	</tr>
 
 		{% for alumno in alumnos %}
 
 		<tr>
 			<td>
-				<!-- usar este grupo -->
-				<a href="{{ server_url }}listar_alumnos_evaluador/?id={{grupo.pk | safe}}">Usar</a>
+				<!-- usar este grupo
+				<a href="{{ server_url }}listar_alumnos_evaluador/?id={{grupo.pk | safe}}">Usar</a>-->
 			</td>
-			<td>{{ alumno.nombre }}</td>
+			<td>{{ alumno.codigo }}</td>
+			<td>{{ alumno.grupo }}</td>
             <td>{{ alumno.curso }}</td>
 			<td>{{ alumno.centro }}</td>
 			<td>
-				<!-- editar grupo -->
-				<a href="{{ server_url }}editar-grupo/?id={{grupo.pk | safe}}">Editar</a>
+				<!-- editar grupo
+				<a href="{{ server_url }}editar-grupo/?id={{grupo.pk | safe}}">Editar</a> -->
 			</td>
-
-
 		</tr>
-
 		{% endfor %}
-
 	</table>
 
-
-
-</body>
-</html>
+{% endblock %}

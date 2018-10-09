@@ -1,12 +1,11 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-
-
+{% extends 'base.html' %}
+{% load app_filters %}
 {% block content %}
 
     <h1>Editar evaluación IPAE PRIMERO</h1>
     <br>
 
-    <form method="POST" class="post-form">
+   <form method="POST" style="padding: 30px" class="post-form">
     {% csrf_token %}
 
     {{ form.non_field_errors }}
