@@ -16,6 +16,11 @@
         {{ hidden_field }}
     {% endfor %}
 
+
+
+    {% if evaluacion.tipo == 'CR' %}
+        <!-- es cribado, mostramos todas las tareas -->
+
     <table border="0">
         {% for field in form.visible_fields %}
         <tr>
@@ -23,12 +28,68 @@
             <td>
             {{ field.errors }}
             {{ field }}
+            {% if field.label == "CSL TIEMPO" %}
+            ⌚
+            {% endif %}
+            {% if field.label == "CSL ACIERTOS" %}
+            🎯
+            {% endif %}
             {{ field.help_text }}
             </td>
         </tr>
         {% endfor %}
      </table>
 
+    {% else %}
+         <!-- progreso -->
+
+
+       <table border="0">
+        <tr>
+            <th>{{ form.evaluado.label_tag }}</th>
+            <td>
+            {{ form.evaluado.errors }}
+            {{ form.evaluado }}
+            {{ form.evaluado.help_text }}
+            </td>
+        </tr>
+        <tr>
+            <th>{{ form.CFA.label_tag }}</th>
+            <td>
+            {{ form.CFA.errors }}
+            {{ form.CFA }}
+            {{ form.CFA.help_text }}
+            </td>
+        </tr>
+           <!--
+        <tr>
+            <th>{{ form.CSL.label_tag }}</th>
+            <td>
+            {{ form.CSL.errors }}
+            {{ form.CSL }}
+            {{ form.CSL.help_text }}
+            </td>
+        </tr>
+        -->
+            <tr>
+            <th>{{ form.CSL_ACIERTOS.label_tag }}</th>
+            <td>
+            {{ form.CSL_ACIERTOS.errors }}
+            {{ form.CSL_ACIERTOS }} 🎯
+            {{ form.CSL_ACIERTOS.help_text }}
+            </td>
+        </tr>
+        <tr>
+            <th>{{ form.CSL_TIEMPO.label_tag }}</th>
+            <td>
+            {{ form.CSL_TIEMPO.errors }}
+            {{ form.CSL_TIEMPO }} ⌚
+            {{ form.CSL_TIEMPO.help_text }}
+            </td>
+        </tr>
+    </table>
+
+    {% endif %}
 
     <br>
     <button type="submit" class="save btn btn-default">Guardar</button>

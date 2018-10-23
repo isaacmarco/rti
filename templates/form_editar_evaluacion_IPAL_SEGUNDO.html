@@ -16,16 +16,14 @@
         {{ hidden_field }}
     {% endfor %}
 
+    {% if evaluacion.tipo == 'CR' %}
+        <!-- es cribado, mostramos todas las tareas -->
+
     <table border="0">
         {% for field in form.visible_fields %}
         <tr>
-
-
             <th>{{ field.label_tag }}</th>
             <td>
-
-
-
 
             {{ field.errors }}
             {{ field }}
@@ -39,13 +37,68 @@
 
             {{ field.help_text }}
 
-
             </td>
 
         </tr>
         {% endfor %}
      </table>
 
+
+    {% else %}
+         <!-- progreso -->
+
+       <table border="0">
+        <tr>
+            <th>{{ form.evaluado.label_tag }}</th>
+            <td>
+            {{ form.evaluado.errors }}
+            {{ form.evaluado }}
+            {{ form.evaluado.help_text }}
+            </td>
+        </tr>
+        <tr>
+            <th>{{ form.LP.label_tag }}</th>
+            <td>
+            {{ form.LP.errors }}
+            {{ form.LP }}
+            {{ form.LP.help_text }}
+            </td>
+        </tr>
+             <tr>
+            <th>{{ form.CNL.label_tag }}</th>
+            <td>
+            {{ form.CNL.errors }}
+            {{ form.CNL }}
+            {{ form.CNL.help_text }}
+            </td>
+        </tr>
+               <tr>
+            <th>{{ form.FLO.label_tag }}</th>
+            <td>
+            {{ form.FLO.errors }}
+            {{ form.FLO }}
+            {{ form.FLO.help_text }}
+            </td>
+        </tr>
+           <tr>
+            <th>{{ form.CSL_ACIERTOS.label_tag }}</th>
+            <td>
+            {{ form.CSL_ACIERTOS.errors }}
+            {{ form.CSL_ACIERTOS }} 🎯
+            {{ form.CSL_ACIERTOS.help_text }}
+            </td>
+        </tr>
+        <tr>
+            <th>{{ form.CSL_TIEMPO.label_tag }}</th>
+            <td>
+            {{ form.CSL_TIEMPO.errors }}
+            {{ form.CSL_TIEMPO }} ⌚
+            {{ form.CSL_TIEMPO.help_text }}
+            </td>
+        </tr>
+    </table>
+
+    {% endif %}
 
     <br>
     <button type="submit" class="save btn btn-default">Guardar</button>

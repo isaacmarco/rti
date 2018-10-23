@@ -153,7 +153,7 @@ function get_riesgo_VP_fin(pd){
 <script type="text/javascript" src="http://www.amcharts.com/lib/3/amcharts.js"></script>
 <script type="text/javascript" src="http://cdn.amcharts.com/lib/3/serial.js"></script>
 
-<h1>Informe individual IPAM-PRIMERO</h1>
+<h1>Informe individual IPAM-INFANTIL</h1>
 <h2>{{ grupo.nombre }}</h2>
 <h2>{{ alumno.codigo }}</h2>
 
@@ -169,10 +169,11 @@ function get_riesgo_VP_fin(pd){
 <table style="width:80%">
   <tr>
   <td><a onclick="cambiar_subprueba(0)" href="#chartdiv">Comparación numérica (CN)</a></td>
-  <td><a onclick="cambiar_subprueba(1)" href="#chartdiv">Operaciones dos dígitos (ODD)</a></td>  
-	<td><a onclick="cambiar_subprueba(2)" href="#chartdiv">Secuencias numéricas (SN)</a></td>
- 	<td><a onclick="cambiar_subprueba(3)" href="#chartdiv">Operaciones un dígito (OUD)</a></td>
-	<td><a onclick="cambiar_subprueba(4)" href="#chartdiv">Valor posición (VP)</a></td>
+  <td><a onclick="cambiar_subprueba(1)" href="#chartdiv">Estimación de cantidad (EC)</a></td>
+  <td><a onclick="cambiar_subprueba(2)" href="#chartdiv">Secuencias numéricas (SN)</a></td>
+	  <td><a onclick="cambiar_subprueba(3)" href="#chartdiv">Identificación numérica (IN)</a></td>
+	<td><a onclick="cambiar_subprueba(4)" href="#chartdiv">Conteo voz alta (CVA)</a></td>
+	<td><a onclick="cambiar_subprueba(5)" href="#chartdiv">Comparación de magnitud (CM)</a></td>
 </table>
 <br><br>
 
@@ -186,7 +187,7 @@ function get_riesgo_VP_fin(pd){
 
 <div class="page-break"></div>
 
-<!-- grafico por evaluaciones -->
+<!-- grafico por evaluaciones
 <div id="contenedor">
 <br><br>
 	<h2>Evaluaciones de cribado</h2>
@@ -201,9 +202,9 @@ function get_riesgo_VP_fin(pd){
 		<div id="grafico-evaluaciones-fin" style="width: 100%;height: 400px;background-color: #FFFFFF"></div>
 	</div>
 </div>
+-->
 
-
-<!-- grafico de progreso -->
+<!-- grafico de progreso
 <div id="contenedor">
 
 	<h2>Evaluaciones de progreso</h2>
@@ -222,7 +223,7 @@ function get_riesgo_VP_fin(pd){
 	</div>
 
 </div>
-
+-->
 
 <script>
 
@@ -245,10 +246,11 @@ var evaluaciones = {
 "{{ evaluacion.mes }}-EVALUADO" : "{{ evaluacion.evaluado }}",
 // valores de las tareas
 "{{ evaluacion.mes }}-CN" : "{{ evaluacion.CN }}",
-"{{ evaluacion.mes }}-ODD" : "{{ evaluacion.ODD }}",
+"{{ evaluacion.mes }}-EC" : "{{ evaluacion.EC }}",
 "{{ evaluacion.mes }}-SN" : "{{ evaluacion.SN }}",
-"{{ evaluacion.mes }}-OUD" : "{{ evaluacion.OUD }}",
-"{{ evaluacion.mes }}-VP" : "{{ evaluacion.VP }}",
+"{{ evaluacion.mes }}-IN" : "{{ evaluacion.IN }}",
+"{{ evaluacion.mes }}-CVA" : "{{ evaluacion.CVA }}",
+"{{ evaluacion.mes }}-CM" : "{{ evaluacion.CM }}",
 {% endfor %}
 // valores del OMNIBUS para cada evaluacion
 "OMNIBUS-INICIO" : {{ evaluacion_inicio }},
@@ -298,12 +300,13 @@ function puntuacion_directa(prueba, momento){
 
 <script>
 
+
 // cambiar la subtarea mostrada en el grafico
 function cambiar_subprueba(d) {
 
-	var titulos_graficos = ["CN", "ODD", "SN", "OUD", "VP" ];
-	var subtitulos = ["Comparación numérica", "Operaciones dos dígitos", "Series numéricas", 
-	"Operaciones un dígito", "Valor posición"
+	var titulos_graficos = ["CN", "EC", "SN", "IN", "CVA", "CM" ];
+	var subtitulos = ["Comparación numérica", "Estimación de cantidad", "Series numéricas",
+	"Identificación numérica", "Conteo en voz alta", "Comparación de magnitud"
 	];
 
 	var propiedadTitulos = [
@@ -690,7 +693,7 @@ function cambiar_subprueba(d) {
 
 // lista con los dataproviders de cada subtarea
 var data_subtareas = [ 
-	dataset_CN, dataset_ODD, dataset_SN,  dataset_OUD, dataset_VP
+	dataset_CN, dataset_EC, dataset_SN,  dataset_IN, dataset_CVA, dataset_CM
 ];
 
 </script>

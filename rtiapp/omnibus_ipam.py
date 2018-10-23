@@ -10,38 +10,33 @@ import rtiapp.constantes as Globales
 
 def omnibus_INFANTIL(evaluacion, momento):
     e = evaluacion
-    # TODO FALTAN LOS DATOS PARA CALCULAR EL OMNIBUS INFANTIL!
-    # TODO LO QUE HAY DEBAJO NO ES FIABLE, FALTA UNA PRUEBA INCLUSO
-
-    print('>>> ######################### DATOS DE PRUEBA NO PROPORCIONADOS POR EL GRUPO ')
-
 
     if momento == Globales.INICIO:
         return (
-            (e.CN - 23.8869) / 9.75228 +
-            (e.EC - 2.4109) / 2.42259 +
-            (e.SN - 8.3473) / 4.31155 +
-            (e.CVA - 7.3273) / 3.65287 +
-            (e.CM - 2.7515) / 2.74841
-            ) / 5
+            (e.CN - 18.257) / 8.1132 +
+            (e.EC - 11.786) / 3.9993 +
+            (e.SN - 5.775) / 3.4122 +
+            (e.IN - 19.104) / 12.2411 +
+            (e.CVA - 26.990) / 14.3512
+        ) / 5
 
     if momento == Globales.MEDIO:
         return (
-                       (e.CN - 23.8869) / 9.75228 +
-                       (e.EC - 2.4109) / 2.42259 +
-                       (e.SN - 8.3473) / 4.31155 +
-                       (e.CVA - 7.3273) / 3.65287 +
-                       (e.CM - 2.7515) / 2.74841
-               ) / 5
+            (e.CN - 21.597) / 8.9222 +
+            (e.EC - 12.446) / 3.6615 +
+            (e.SN - 7.040) / 3.8771 +
+            (e.IN - 24.921) / 14.0033 +
+            (e.CVA - 33.310) / 16.8600
+        ) / 5
 
     if momento == Globales.FIN:
         return (
-                       (e.CN - 23.8869) / 9.75228 +
-                       (e.EC - 2.4109) / 2.42259 +
-                       (e.SN - 8.3473) / 4.31155 +
-                       (e.CVA - 7.3273) / 3.65287 +
-                       (e.CM - 2.7515) / 2.74841
-               ) / 5
+            (e.CN - 25.749) / 8.8139 +
+            (e.EC - 14.109) / 3.7819 +
+            (e.SN - 8.845) / 3.8117 +
+            (e.IN - 30.531) / 15.2430 +
+            (e.CVA - 41.409) / 19.6327
+         ) / 5
 
     print('>>> Error calculando OMNIBUS IPAM INFANTIL')
 
