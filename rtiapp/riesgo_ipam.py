@@ -7,43 +7,43 @@ import rtiapp.constantes as Globales
 
 def riesgo_INFANTIL(omnibus, momento):
 
-    print('>>> ######################### DATOS DE PRUEBA NO PROPORCIONADOS POR EL GRUPO ')
+
 
     if momento == Globales.INICIO:
 
-        if (omnibus <= -0.347999306):
+        if (omnibus <= -0.3351722):
             return Globales.RIESGO
-        if (omnibus > -0.347999305  and omnibus < -0.07087435):
+        if (omnibus > -0.3351721  and omnibus < -0.1328701):
             return Globales.BAJO
-        if (omnibus > -0.07087434 and omnibus < 0.098911218):
+        if (omnibus > -0.1328700 and omnibus < 0.4237160):
             return Globales.NORMAL
-        if (omnibus > 0.098911218):
+        if (omnibus > 0.4237160):
             return Globales.OPTIMO
         print('>>> Error calculando RIESGO IPAL INFANTIL')
         return 404
 
     if momento == Globales.MEDIO:
 
-        if (omnibus <= -0.384165007):
+        if (omnibus <= -0.2996457):
             return Globales.RIESGO
-        if (omnibus > -0.384165006 and omnibus < -0.043928001):
+        if (omnibus > -0.2996456 and omnibus < -0.1311223):
             return Globales.BAJO
-        if (omnibus > -0.043928000 and omnibus < 0.168002466):
+        if (omnibus > -0.1311222 and omnibus < 0.3529345):
             return Globales.NORMAL
-        if (omnibus > 0.168002466):
+        if (omnibus > 0.3529345):
             return Globales.OPTIMO
         print('>>> Error calculando RIESGO IPAL INFANTIL')
         return 404
 
     if momento == Globales.FIN:
 
-        if (omnibus <= -0.329980387):
+        if (omnibus <= -0.2292327):
             return Globales.RIESGO
-        if (omnibus > -0.329980387 and omnibus < -0.00458066):
+        if (omnibus > -0.2292326 and omnibus < -0.07182318):
             return Globales.BAJO
-        if (omnibus > 0.00458065 and omnibus < 0.131335391):
+        if (omnibus > -0.07182317 and omnibus < 0.2602976):
             return Globales.NORMAL
-        if (omnibus > 0.131335391):
+        if (omnibus > 0.2602976):
             return Globales.OPTIMO
         print('>>> Error calculando RIESGO IPAL INFANTIL')
         return 404

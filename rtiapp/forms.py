@@ -108,7 +108,8 @@ class Form_Evaluacion_IPAL_INFANTIL(forms.ModelForm):
     CLE_IMAGEN = forms.IntegerField(min_value=0, max_value=35, label='CLE_IMAGEN')
     CLE_TEXTO = forms.IntegerField(min_value=0, max_value=6, label='CLE_TEXTO')
     CFA = forms.IntegerField(min_value=0, max_value=80, label='CFA')
-
+    CSL_ACIERTOS = forms.IntegerField(min_value=0, max_value=100, label='CSL ACIERTOS')
+    CSL_TIEMPO = forms.IntegerField(min_value=0, max_value=300, label='CSL TIEMPO')
     class Meta:
         model = Evaluacion_IPAL_INFANTIL
         fields = '__all__'
@@ -124,7 +125,8 @@ class Form_Evaluacion_IPAL_PRIMERO(forms.ModelForm):
     FLO = forms.IntegerField(min_value=0, max_value=133, label='FLO')
     CLE_TEXTO = forms.IntegerField(min_value=0, max_value=6, label='CLE_TEXTO')
     CFS = forms.IntegerField(min_value=0, max_value=85, label='CFS')
-
+    CSL_ACIERTOS = forms.IntegerField(min_value=0, max_value=100, label='CSL ACIERTOS')
+    CSL_TIEMPO = forms.IntegerField(min_value=0, max_value=300, label='CSL TIEMPO')
     class Meta:
         model = Evaluacion_IPAL_PRIMERO
         fields = '__all__'
@@ -136,15 +138,16 @@ class Form_Evaluacion_IPAL_SEGUNDO(forms.ModelForm):
     LP = forms.IntegerField(min_value=0, max_value=40, label='LP')
     TM = forms.IntegerField(min_value=0, max_value=20, label='TM')
     PRO = forms.IntegerField(min_value=0, max_value=133, label='PRO')
+    FLO = forms.IntegerField(min_value=0, max_value=133, label='FLO')
     # tareas complementarias
     CSL_ACIERTOS =  forms.IntegerField(min_value=0, max_value=100, label='CSL ACIERTOS')
-    CSL_TIEMPO =  forms.IntegerField(min_value=0, max_value=100, label='CSL TIEMPO')
+    CSL_TIEMPO =  forms.IntegerField(min_value=0, max_value=300, label='CSL TIEMPO')
     CLE_TEXTO_ACIERTOS =  forms.IntegerField(min_value=0, max_value=100, label='CLE TEXTO ACIERTOS')
-    CLE_TEXTO_TIEMPO =  forms.IntegerField(min_value=0, max_value=100, label='CLE TEXTO TIEMPO')
+    CLE_TEXTO_TIEMPO =  forms.IntegerField(min_value=0, max_value=300, label='CLE TEXTO TIEMPO')
     CFS_ACIERTOS =  forms.IntegerField(min_value=0, max_value=100, label='CFS ACIERTOS')
-    CFS_TIEMPO =  forms.IntegerField(min_value=0, max_value=100, label='CFS TIEMPO')
+    CFS_TIEMPO =  forms.IntegerField(min_value=0, max_value=300, label='CFS TIEMPO')
     VOC_ACIERTOS =  forms.IntegerField(min_value=0, max_value=100, label='VOC ACIERTOS')
-    VOC_TIEMPO =  forms.IntegerField(min_value=0, max_value=100, label='VOC TIEMPO')
+    VOC_TIEMPO =  forms.IntegerField(min_value=0, max_value=300, label='VOC TIEMPO')
 
     class Meta:
         model = Evaluacion_IPAL_SEGUNDO
@@ -184,7 +187,7 @@ class FormAlumnoGrupoForzado(forms.ModelForm):
 
     class Meta:
         model = Alumno
-        fields = ('codigo', 'sexo', 'fecha_nacimiento', 'pais')
+        fields = ('codigo', 'sexo', 'fecha_nacimiento')
 
 
 
@@ -211,4 +214,4 @@ class FormEvaluador(forms.ModelForm):
     class Meta:
         model = Evaluador
         fields = '__all__'
-        exclude = ('usuario', 'informacion_adicional_completa', 'centro_pilotaje')
+        exclude = ('usuario', 'informacion_adicional_completa', 'centro_pilotaje', 'codigo')

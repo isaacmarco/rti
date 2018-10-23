@@ -137,51 +137,6 @@ def exportar(request):
     else:
         return render(request, 'error.html', {'error': ERROR_ROL_INVESTIGADOR})
 
-def exportar_CSV(request):
-    print('>>> Exportando CSV')
-    tipo_datos = request.GET['tipo']
-
-    # respuesta
-    response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="datos.csv"'
-    writer = csv.writer(response, delimiter=',')
-
-    if tipo_datos == 'alumnos':
-        print('>>> Exportando alumnos')
-        # obtenemos todos los alumnos
-        alumnos = Alumno.objects.all()
-        # cabecera y fichero
-        writer.writerow(['código', 'sexo', 'curso', 'fecha nacimiento',
-                         'pais', 'centro', 'grupo', 'id grupo', 'id evaluador', 'año académico' ])
-        for alumno in alumnos:
-            writer.writerow([alumno.codigo, alumno.sexo, alumno.curso,
-            alumno.fecha_nacimiento, alumno.pais, alumno.centro, alumno.grupo.nombre,
-            alumno.grupo.pk, alumno.evaluador.pk, alumno.curso_academico
-        ])
-
-
-
-
-    if tipo_datos == 'evaluadores':
-        print('>>> Exportando evaluadores')
-        # obtenemos todos los evaluadores
-        evaluadores = Evaluador.objects.all()
-        for evaluador in evaluadores:
-            writer.writerow([evaluador.usuario.pk, evaluador.nombre, evaluador.nivel_academico])
-
-    if tipo_datos == 'IAPL':
-        print('TODO')
-
-    if tipo_datos == 'IPAM':
-        print('TODO')
-
-    if tipo_datos == 'IPAE':
-        print('TODO')
-
-    # devolver el fichero para descargar
-    return response
-
-
 def eliminar_alumno(request):
     print('>>> Eliminar alumno')
     id_alumno = request.GET['idAlumno']
@@ -1072,7 +1027,7 @@ def editar_grupo(request):
 # nuevo alumno sin que el evaluador pueda
 # seleccionar el grupo, se asigna automaticamente
 def nuevo_alumno(request):
-    print('>>> Nuevo alumno')
+    print('>>> Nuevo alumno (asignado a grupo automaticamente)')
     id_grupo = request.GET['idGrupo']
     grupo = get_object_or_404(Grupo, pk=id_grupo)
     print('>>> Grupo al que pertenecera: ' + grupo.nombre + ' | ' + grupo.curso)
@@ -1083,10 +1038,18 @@ def nuevo_alumno(request):
 
         if form.is_valid():
             alumno = form.save(commit=False)
+            # obtener evaluador
             alumno.evaluador = request.user
+            evaluador =    Evaluador.objects.get(pk=alumno.evaluador.pk)
+
             alumno.grupo = grupo # asignamos el grupo actual
             alumno.curso = grupo.curso # asignamos el curso del grupo
             alumno.centro = grupo.centro # asignamos el centro del grupo
+
+            alumno.centro_pilotaje = evaluador.centro_pilotaje # asignameos el centro pilotje
+            alumno.pais = evaluador.pais  # fijar el pais del evaluador
+            alumno.codigo_evaluador = evaluador.codigo   # fijar el codigo del evaluacodr
+
             alumno.save()
             return redirect(url_retorno)
     else:
@@ -1198,14 +1161,22 @@ def importar_csv(request):
         for line in lines:
             fields = line.split(",")
             data_dict = {}
-            data_dict["usuario"] = fields[0]
+            data_dict["codigo"] = fields[0]
             data_dict["nombre"] = fields[1]
             data_dict["password"] = fields[2]
             data_dict["email"] = fields[3]
             data_dict["centro_pilotaje"] = fields[4]
             data_dict["pais"] = fields[5]
             # el resto de campos se rellena por los docentes
-            print(fields[0] + ', ' + fields[1])
+            print(fields[0] + ', ' + fields[1] + ', ' + fields[2] + ', ' + fields[3]
+                  + ', ' + fields[4] + ', ' + fields[5])
+
+            # TODO primer paso, crear el usuario en la plataforma
+
+            # TODO asignar el rol de evaluador en este punto
+
+            # TODO segundo paso, crear el registro evaluador
+
             '''
             try:
                 form = EventsForm(data_dict)
@@ -1223,3 +1194,77 @@ def importar_csv(request):
     return redirect(server_url)
     #return render(request, 'lista_alumnos.html',
     #                  {'alumnos': alumnos,'index': server_url})
+
+
+
+
+def exportar_CSV(request):
+    print('>>> Exportando CSV')
+    tipo_datos = request.GET['tipo']
+
+    # respuesta
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="datos.csv"'
+    writer = csv.writer(response, delimiter=',')
+
+    if tipo_datos == 'alumnos':
+        print('>>> Exportando alumnos')
+        # obtenemos todos los alumnos
+        alumnos = Alumno.objects.all()
+        # cabecera y fichero
+        writer.writerow(['codigo', 'genero', 'curso', 'fecha nacimiento',
+                         'pais', 'centro', 'grupo', 'id grupo', 'evaluador', 'curso academico' ])
+        for alumno in alumnos:
+            writer.writerow([alumno.codigo, alumno.sexo, alumno.curso,
+            alumno.fecha_nacimiento, alumno.pais, alumno.centro_pilotaje, alumno.grupo.nombre,
+            alumno.grupo.pk, alumno.codigo_evaluador, alumno.curso_academico
+        ])
+
+    if tipo_datos == 'evaluadores':
+        print('>>> Exportando evaluadores')
+        # obtenemos todos los evaluadores
+        evaluadores = Evaluador.objects.all()
+        writer.writerow(['codigo', 'nombre', 'centro', 'centro pilojate',
+                         'genero', 'nivel academico', 'pais', 'email', 'zona'])
+        for evaluador in evaluadores:
+            writer.writerow([evaluador.codigo, evaluador.nombre, evaluador.centro,
+                             evaluador.centro_pilotaje, evaluador.sexo, evaluador.nivel_academico,
+                             evaluador.pais, evaluador.email, evaluador.zona])
+
+    if tipo_datos == 'IPAL':
+        print('>>> Exportando IPAL INFANTIL')
+        # obtener todas las evaluaciones de IPAL
+        # TODO precisar opciones de filtro
+        evaluaciones = Evaluacion_IPAL_INFANTIL.objects.all()
+        writer.writerow(['alumno','evaluador','centro','curso','fecha',
+                         'prueba', 'mes', 'tipo','ADIVINANZAS',
+                         'CSL','CNL','CLE IMAGEN','CLE TEXTO', 'CFA',
+                         'EVALUADO'])
+        for evaluacion in evaluaciones:
+            writer.writerow([
+                evaluacion.alumno,
+                evaluacion.evaluador,
+                evaluacion.alumno.centro,
+                evaluacion.curso_academico,
+                evaluacion.ultima_modificacion,
+                evaluacion.prueba,
+                evaluacion.mes,
+                evaluacion.tipo,
+                evaluacion.ADIVINANZAS,
+                evaluacion.CSL,
+                evaluacion.CNL,
+                evaluacion.CLE_IMAGEN,
+                evaluacion.CLE_TEXTO,
+                evaluacion.CFA,
+                evaluacion.evaluado
+            ])
+
+    if tipo_datos == 'IPAM':
+        print('TODO')
+
+    if tipo_datos == 'IPAE':
+        print('TODO')
+
+    # devolver el fichero para descargar
+    return response
+

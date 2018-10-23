@@ -16,9 +16,6 @@
         {{ hidden_field }}
     {% endfor %}
 
-
-    {% if evaluacion.tipo == 'CR' %}
-
     <table border="0">
         {% for field in form.visible_fields %}
         <tr>
@@ -32,36 +29,6 @@
         {% endfor %}
      </table>
 
-    {% else %}
-
-       <table border="0">
-               <tr>
-            <th>{{ form.evaluado.label_tag }}</th>
-            <td>
-            {{ form.evaluado.errors }}
-            {{ form.evaluado }}
-            {{ form.evaluado.help_text }}
-            </td>
-        </tr>
-        <tr>
-            <th>{{ form.SN.label_tag }}</th>
-            <td>
-            {{ form.SN.errors }}
-            {{ form.SN }}
-            {{ form.SN.help_text }}
-            </td>
-        </tr>
-        <tr>
-            <th>{{ form.ODD.label_tag }}</th>
-            <td>
-            {{ form.ODD.errors }}
-            {{ form.ODD }}
-            {{ form.ODD.help_text }}
-            </td>
-        </tr>
-        </table>
-
-    {% endif %}
 
     <br>
     <button type="submit" class="save btn btn-default">Guardar</button>

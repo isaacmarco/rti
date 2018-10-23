@@ -149,6 +149,8 @@ class Evaluador(models.Model):
     centro = models.CharField(max_length=50, default="Centro del evaluador")
     # centro forzado para el grupo ULL (el usuario no puede cambiarlo)
     centro_pilotaje = models.CharField(max_length=50, default="Centro pilotaje")
+    # codigo forzado para el grupo ULL (el usuario no puede cambiarlo)
+    codigo = models.CharField(max_length=20, default="Codigo")
     email = models.EmailField(default='email@email.com')
 
     # fecha en la que se registro el evaluador
@@ -248,6 +250,9 @@ class Alumno(models.Model):
     # fechas de alta del alumno y actualizacion de su ficha
     fecha_alta = models.DateTimeField(auto_now_add=True)
     ultima_modificacion = models.DateTimeField(auto_now=True)
+
+    centro_pilotaje = models.CharField(max_length=50, default="Centro pilotaje")
+    codigo_evaluador = models.CharField(max_length=20, default="Codigo")
 
     curso = models.CharField(
         max_length=20,
@@ -395,6 +400,16 @@ class Evaluacion_IPAL_INFANTIL(Evaluacion):
     CLE_TEXTO = models.IntegerField(default=0,  validators=[MaxValueValidator(6), MinValueValidator(0)])
     CFA = models.IntegerField(default=0,  validators=[MaxValueValidator(80), MinValueValidator(0)])
 
+    # separacion de los campos en aciertos/tiempo
+    CSL_ACIERTOS = models.IntegerField(default=0)
+    CSL_TIEMPO = models.IntegerField(default=0)
+    CNL_ACIERTOS = models.IntegerField(default=0)
+    CNL_TIEMPO = models.IntegerField(default=0)
+    CLE_TEXTO_ACIERTOS = models.IntegerField(default=0)
+    CLE_TEXTO_TIEMPO = models.IntegerField(default=0)
+    CLE_IMAGEN_ACIERTOS = models.IntegerField(default=0)
+    CLE_IMAGEN_TIEMPO = models.IntegerField(default=0)
+
 '''
  Adivinanzas (ADI)  
  Conocimiento Sonido Letra (CSL)  
@@ -414,6 +429,22 @@ class Evaluacion_IPAL_PRIMERO(Evaluacion):
     FLO = models.IntegerField(default=0,  validators=[MaxValueValidator(133), MinValueValidator(0)])
     CLE_TEXTO = models.IntegerField(default=0,  validators=[MaxValueValidator(6), MinValueValidator(0)])
     CFS = models.IntegerField(default=0,  validators=[MaxValueValidator(85), MinValueValidator(0)])
+
+     # separacion de los campos en aciertos/tiempo
+    TM_ACIERTOS = models.IntegerField(default=0)
+    TM_TIEMPO = models.IntegerField(default=0)
+    LP_ACIERTOS = models.IntegerField(default=0)
+    LP_TIEMPO = models.IntegerField(default=0)
+    CSL_ACIERTOS = models.IntegerField(default=0)
+    CSL_TIEMPO = models.IntegerField(default=0)
+    CNL_ACIERTOS = models.IntegerField(default=0)
+    CNL_TIEMPO = models.IntegerField(default=0)
+    CLE_TEXTO_ACIERTOS = models.IntegerField(default=0)
+    CLE_TEXTO_TIEMPO = models.IntegerField(default=0)
+    FLO_ACIERTOS = models.IntegerField(default=0)
+    FLO_TIEMPO = models.IntegerField(default=0)
+    CFS_ACIERTOS = models.IntegerField(default=0)
+    CFS_TIEMPO = models.IntegerField(default=0)
 
 '''
 •	Textos Mutilados (TM) 
@@ -436,6 +467,18 @@ class Evaluacion_IPAL_SEGUNDO(Evaluacion):
     FLO = models.IntegerField(default=0, validators=[MaxValueValidator(133), MinValueValidator(0)])
     PRO = models.IntegerField(default=0, validators=[MinValueValidator(0)])
 
+    # separacion de los campos en aciertos/tiempo
+
+    CNL_ACIERTOS = models.IntegerField(default=0)
+    CNL_TIEMPO = models.IntegerField(default=0)
+    LP_ACIERTOS = models.IntegerField(default=0)
+    LP_TIEMPO = models.IntegerField(default=0)
+    TM_ACIERTOS = models.IntegerField(default=0)
+    TM_TIEMPO = models.IntegerField(default=0)
+    FLO_ACIERTOS = models.IntegerField(default=0)
+    FLO_TIEMPO = models.IntegerField(default=0)
+    PRO_ACIERTOS = models.IntegerField(default=0)
+    PRO_TIEMPO = models.IntegerField(default=0)
 
     '''
     •	Conocimiento Nombre Letra (CNL) 
