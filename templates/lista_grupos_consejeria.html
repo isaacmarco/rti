@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load app_filters %}
+{% block content %}
+
+<h1>Grupos/Aulas en mi centro de estudios</h1>
+
+<div class="form-style-1" style="padding: 30px">
+
+	<button type="button" class="save btn btn-default"
+		onclick="window.location.href='{{ server_url }}nuevo-grupo/'">👪 Nuevo grupo</button>
+
+
+</div>
+
+
+<table>
+	<tr>
+		<th>Acceso</th>
+		<th>Nombre</th>
+		<th>Curso</th>
+		<th>Año académico</th>
+		<th>Editar</th>
+
+	</tr>  		
+		{% for grupo in grupos %}
+		<tr>
+			<td>
+				<!-- usar este grupo 👉-->
+				<a href="{{ server_url }}lista-alumnos-grupo/?idGrupo={{grupo.pk | safe}}">🚪 Entrar</a>
+			</td>
+			<td>{{ grupo.nombre }}</td>
+			<td>{{ grupo.curso }}</td>
+			<td>{% get_curso grupo.curso_academico %}</td>
+			<td>
+				<!-- editar grupo -->
+				<a href="{{ server_url }}editar-grupo/?id={{grupo.pk | safe}}">👪 Editar</a>
+			</td>
+
+
+		</tr>
+		{% endfor %}
+</table>
+
+
+{% endblock %}

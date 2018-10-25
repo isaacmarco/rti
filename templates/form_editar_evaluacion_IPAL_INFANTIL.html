@@ -28,12 +28,15 @@
             <td>
             {{ field.errors }}
             {{ field }}
+                <!--
             {% if field.label == "CSL TIEMPO" %}
             ⌚
             {% endif %}
+
             {% if field.label == "CSL ACIERTOS" %}
             🎯
             {% endif %}
+                -->
             {{ field.help_text }}
             </td>
         </tr>
@@ -61,7 +64,7 @@
             {{ form.CFA.help_text }}
             </td>
         </tr>
-           <!--
+
         <tr>
             <th>{{ form.CSL.label_tag }}</th>
             <td>
@@ -70,7 +73,7 @@
             {{ form.CSL.help_text }}
             </td>
         </tr>
-        -->
+        <!--
             <tr>
             <th>{{ form.CSL_ACIERTOS.label_tag }}</th>
             <td>
@@ -87,6 +90,7 @@
             {{ form.CSL_TIEMPO.help_text }}
             </td>
         </tr>
+        -->
     </table>
 
     {% endif %}
