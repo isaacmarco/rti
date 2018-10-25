@@ -108,8 +108,8 @@ class Form_Evaluacion_IPAL_INFANTIL(forms.ModelForm):
     CLE_IMAGEN = forms.IntegerField(min_value=0, max_value=35, label='CLE_IMAGEN')
     CLE_TEXTO = forms.IntegerField(min_value=0, max_value=6, label='CLE_TEXTO')
     CFA = forms.IntegerField(min_value=0, max_value=80, label='CFA')
-    CSL_ACIERTOS = forms.IntegerField(min_value=0, max_value=100, label='CSL ACIERTOS')
-    CSL_TIEMPO = forms.IntegerField(min_value=0, max_value=300, label='CSL TIEMPO')
+    # CSL_ACIERTOS = forms.IntegerField(min_value=0, max_value=100, label='CSL ACIERTOS')
+    # CSL_TIEMPO = forms.IntegerField(min_value=0, max_value=300, label='CSL TIEMPO')
     class Meta:
         model = Evaluacion_IPAL_INFANTIL
         fields = '__all__'
@@ -125,8 +125,8 @@ class Form_Evaluacion_IPAL_PRIMERO(forms.ModelForm):
     FLO = forms.IntegerField(min_value=0, max_value=133, label='FLO')
     CLE_TEXTO = forms.IntegerField(min_value=0, max_value=6, label='CLE_TEXTO')
     CFS = forms.IntegerField(min_value=0, max_value=85, label='CFS')
-    CSL_ACIERTOS = forms.IntegerField(min_value=0, max_value=100, label='CSL ACIERTOS')
-    CSL_TIEMPO = forms.IntegerField(min_value=0, max_value=300, label='CSL TIEMPO')
+    # CSL_ACIERTOS = forms.IntegerField(min_value=0, max_value=100, label='CSL ACIERTOS')
+    # CSL_TIEMPO = forms.IntegerField(min_value=0, max_value=300, label='CSL TIEMPO')
     class Meta:
         model = Evaluacion_IPAL_PRIMERO
         fields = '__all__'

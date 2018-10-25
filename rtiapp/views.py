@@ -544,6 +544,8 @@ def procesar_evaluacion(evaluacion):
     # calcular los valores de las subpruebas
     # complementarias de IPAL segundo
     if prueba == Globales.IPAL and curso == Globales.SEGUNDO:
+
+        '''
         print('>>> Evaluacion IPAL de SEGUNDO, procesando SUBPRUEBAS COMPLEMENTARIAS')
         evaluacion.CSL = OmnibusIPAL.subprueba_complementaria_CSL(evaluacion)
         evaluacion.CLE_TEXTOS = OmnibusIPAL.subprueba_complementaria_CLE_TEXTOS(evaluacion)
@@ -553,6 +555,8 @@ def procesar_evaluacion(evaluacion):
         print('- CLE TEXTOS: ' + str(evaluacion.CLE_TEXTOS))
         print('- CFS: ' + str(evaluacion.CFS))
         print('- VOC: ' + str(evaluacion.VOC))
+        '''
+
     # comprobar si es de cribado progreso
     if cribado:
 
@@ -931,11 +935,31 @@ def listar_alumnos_evaluador_en_grupo(request):
 
 
 
+# listar grupos del evaluador (consejeria)
+@login_required
+def lista_grupos_evaluador_consejeria(request):
+    print('>>> Obteniendo listado de grupos de la consejeria')
+    try:
+        # obtenemos los grupos que pertenecen al centro del
+        # evaluador
+        evaluador = Evaluador.objects.filter(evaluador_pk=request.user.pk)
+        gruposCentro = Grupo.objects.filter(centro_pilotaje=evaluador.centro)
+
+        return render(request, 'lista_grupos_consejeria.html',
+                      {'grupos': gruposCentro,
+                       'index': server_url,
+                       'server_url': server_url})
+
+    except ObjectDoesNotExist:
+        return render(request,
+                      'error.html', {'error': ERROR_LISTADO_GRUPOS})
+
 
 
 # listar grupos del evaluador
 @login_required
 def lista_grupos_evaluador(request):
+    print('>>> Obteniendo lista de grupos del evaluador')
     try:
         # obtenemos los grupos del usuario
         grupos = Grupo.objects.filter(evaluadores__pk=request.user.pk).order_by('curso_academico').reverse()
