@@ -27,14 +27,14 @@
 
             {{ field.errors }}
             {{ field }}
-
+                <!--
             {% if field.label == "CSL TIEMPO" or field.label == "CLE TEXTO TIEMPO" or field.label == "CFS TIEMPO" or field.label == "VOC TIEMPO" %}
             ⌚
             {% endif %}
             {% if field.label == "CSL ACIERTOS" or field.label == "CLE TEXTO ACIERTOS" or field.label == "CFS ACIERTOS" or field.label == "VOC ACIERTOS" %}
             🎯
             {% endif %}
-
+            -->
             {{ field.help_text }}
 
             </td>
@@ -72,7 +72,7 @@
             {{ form.CNL.help_text }}
             </td>
         </tr>
-               <tr>
+        <tr>
             <th>{{ form.FLO.label_tag }}</th>
             <td>
             {{ form.FLO.errors }}
@@ -80,20 +80,12 @@
             {{ form.FLO.help_text }}
             </td>
         </tr>
-           <tr>
-            <th>{{ form.CSL_ACIERTOS.label_tag }}</th>
-            <td>
-            {{ form.CSL_ACIERTOS.errors }}
-            {{ form.CSL_ACIERTOS }} 🎯
-            {{ form.CSL_ACIERTOS.help_text }}
-            </td>
-        </tr>
         <tr>
-            <th>{{ form.CSL_TIEMPO.label_tag }}</th>
+            <th>{{ form.CSL.label_tag }}</th>
             <td>
-            {{ form.CSL_TIEMPO.errors }}
-            {{ form.CSL_TIEMPO }} ⌚
-            {{ form.CSL_TIEMPO.help_text }}
+            {{ form.CSL.errors }}
+            {{ form.CSL }}
+            {{ form.CSL.help_text }}
             </td>
         </tr>
     </table>
