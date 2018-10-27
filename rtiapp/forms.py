@@ -139,15 +139,12 @@ class Form_Evaluacion_IPAL_SEGUNDO(forms.ModelForm):
     TM = forms.IntegerField(min_value=0, max_value=20, label='TM')
     PRO = forms.IntegerField(min_value=0, max_value=133, label='PRO')
     FLO = forms.IntegerField(min_value=0, max_value=133, label='FLO')
-    # tareas complementarias
-    CSL_ACIERTOS =  forms.IntegerField(min_value=0, max_value=100, label='CSL ACIERTOS')
-    CSL_TIEMPO =  forms.IntegerField(min_value=0, max_value=300, label='CSL TIEMPO')
-    CLE_TEXTO_ACIERTOS =  forms.IntegerField(min_value=0, max_value=100, label='CLE TEXTO ACIERTOS')
-    CLE_TEXTO_TIEMPO =  forms.IntegerField(min_value=0, max_value=300, label='CLE TEXTO TIEMPO')
-    CFS_ACIERTOS =  forms.IntegerField(min_value=0, max_value=100, label='CFS ACIERTOS')
-    CFS_TIEMPO =  forms.IntegerField(min_value=0, max_value=300, label='CFS TIEMPO')
-    VOC_ACIERTOS =  forms.IntegerField(min_value=0, max_value=100, label='VOC ACIERTOS')
-    VOC_TIEMPO =  forms.IntegerField(min_value=0, max_value=300, label='VOC TIEMPO')
+
+    # tareas complementarias 'CSL', 'CLE_TEXTO', 'CFS', 'VOC',
+    CSL =  forms.IntegerField(min_value=0, max_value=100, label='CSL')
+    CLE_TEXTO =  forms.IntegerField(min_value=0, max_value=20, label='CLE TEXTO')
+    CFS =  forms.IntegerField(min_value=0, max_value=85, label='CFS')
+    VOC =  forms.IntegerField(min_value=0, max_value=30, label='VOC')
 
     class Meta:
         model = Evaluacion_IPAL_SEGUNDO
@@ -156,8 +153,8 @@ class Form_Evaluacion_IPAL_SEGUNDO(forms.ModelForm):
         # con puntuaciones directas que el programa debe calcular:
         # CSL, CLE_TEXTO, CFS, VOC
         exclude = ('curso_academico','mes','prueba','alumno', 'tipo', 'momento', 'riesgo', 'omnibus',
-                   'evaluador', 'observaciones', 'mes_leible',
-                   'CSL', 'CLE_TEXTO', 'CFS', 'VOC',)
+                   'evaluador', 'observaciones', 'mes_leible')
+                   #'CSL', 'CLE_TEXTO', 'CFS', 'VOC',)
 
 # formulario para grupos
 class FormGrupo(forms.ModelForm):

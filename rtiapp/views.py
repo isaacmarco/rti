@@ -240,38 +240,24 @@ def informe_individual(request):
     if not es_propietario_grupo(request, alumno):
         return render(request,'error.html', {'error': ERROR_PROPIETARIO_ALUMNO})
 
-
-
-    # plabtilla html
+    # plabtilla html y url de retorno
     plantilla = 'informe_individual_' + prueba + '_' + curso + '.html'
-
-    url_retorno = server_url  + lista_alumnos_grupo_url + '/?idGrupo=' + id_grupo
+    url_retorno = server_url + lista_alumnos_grupo_url + '/?idGrupo=' + id_grupo
 
     # para el informe individual se necesitan las evaluaciones
     # de la tarea
 
-
     try:
 
-        print('>>> Recuperando evaluaciones de ' + alumno.codigo + ' para prueba ' + prueba)
-        evaluaciones = []# lista de evaluaciones
-
-
-        # obenemos todas las evaluaciones del alumno para el curso actual
-        # TODO o para el curso del alumno?¿ Todo esto debe detallarse
-        # correctamente en el manual o decidirlo con el grupo
-
+        print('>>> Recuperando evaluaciones de ' + alumno.codigo + ' para prueba ' + prueba + ' ' + curso)
+        evaluaciones = [] # lista de evaluaciones
 
         # obtener la clase
-
         nombre_modelo = prueba + '-' + curso
         modelo = clases[nombre_modelo]
 
         consulta_evaluaciones = modelo.objects.filter(
             alumno=alumno, curso_academico=alumno.curso_academico)
-
-        #consulta_evaluaciones = Evaluacion_IPAL_INFANTIL.objects.filter(
-         #   alumno=alumno, curso_academico=alumno.curso_academico)
 
         # introducimos en el diccionario de evaluaciones
         for registro_evaluacion in consulta_evaluaciones:
@@ -281,7 +267,6 @@ def informe_individual(request):
                   registro_evaluacion.get_tipo_display())
 
             evaluaciones.append(registro_evaluacion) # introducimos la evaluacion
-
 
         # pasamos a la plantillas las evaluaciones inicio, medio, fin
         return render(request, plantilla,
@@ -296,9 +281,6 @@ def informe_individual(request):
                        'index': server_url,
                        'server_url': url_retorno}
                       )
-
-
-
 
     except ObjectDoesNotExist:
         return render(request, 'error.html', {'error': ERROR_NO_HAY_EVALUACIONES})
@@ -936,19 +918,20 @@ def listar_alumnos_evaluador_en_grupo(request):
 
 
 # listar grupos del evaluador (consejeria)
-@login_required
 def lista_grupos_evaluador_consejeria(request):
-    print('>>> Obteniendo listado de grupos de la consejeria')
+    print('>>> Obteniendo listado de grupos del centro del evaluador')
     try:
         # obtenemos los grupos que pertenecen al centro del
         # evaluador
-        evaluador = Evaluador.objects.filter(evaluador_pk=request.user.pk)
-        gruposCentro = Grupo.objects.filter(centro_pilotaje=evaluador.centro)
-
+        evaluador = Evaluador.objects.get(usuario=request.user)
+        print('>>> Centro del evaluador ' + evaluador.nombre  + ' es ' + evaluador.centro_pilotaje)
+        gruposCentro = Grupo.objects.filter(centro_pilotaje=evaluador.centro_pilotaje)
+        url_retorno = server_url + lista_grupos_url
         return render(request, 'lista_grupos_consejeria.html',
                       {'grupos': gruposCentro,
                        'index': server_url,
-                       'server_url': server_url})
+                       'server_url': url_retorno})
+
 
     except ObjectDoesNotExist:
         return render(request,

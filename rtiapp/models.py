@@ -504,10 +504,10 @@ class Evaluacion_IPAL_SEGUNDO(Evaluacion):
     # de omnibus ni riesgo, pero si se usaran para
     # ciertos informes de progreso del alumno
 
-    CSL = models.IntegerField(default=0, validators=[MaxValueValidator(20), MinValueValidator(0)])
+    CSL = models.IntegerField(default=0, validators=[MaxValueValidator(100), MinValueValidator(0)])
     CLE_TEXTO = models.IntegerField(default=0, validators=[MaxValueValidator(20), MinValueValidator(0)])
-    CFS = models.IntegerField(default=0, validators=[MaxValueValidator(20), MinValueValidator(0)])
-    VOC = models.IntegerField(default=0, validators=[MaxValueValidator(20), MinValueValidator(0)])
+    CFS = models.IntegerField(default=0, validators=[MaxValueValidator(85), MinValueValidator(0)])
+    VOC = models.IntegerField(default=0, validators=[MaxValueValidator(30), MinValueValidator(0)])
 
     # para calcular las anteriores puntuaciones directas
     # de las subpruebas complementarias se necesitan varios
