@@ -32,10 +32,14 @@
 	<button type="button" class="save btn btn-default"
 		onclick="window.location.href='{{ server_url }}informe-grupo/?idGrupo={{ grupo.pk }}&prueba=IPAE'">📊 Informe de grupo IPAE</button>
 	{% endif %}
+
+	<button type="button" class="save btn btn-default"
+		onclick="window.location.href='{{ server_url }}actualizar-curso-grupo/?idGrupo={{ grupo.pk }}'">📅 Actualizar año escolar</button>
+
 </div>
 
 
-	<!-- filtrar alumnos por curso   -->
+	<!-- filtrar alumnos por curso
 	<form action="{{ server_url }}lista-alumnos-grupo/" class="post-form" style="padding: 0px 30px">
  		{% csrf_token %}
 
@@ -47,8 +51,8 @@
 		onclick="window.location.href='{{ server_url }}lista-alumnos-grupo/?idGrupo={{ grupo.pk }}&cursoAcademico=todos'">Mostrar todos</button>
 
     </form>
-
-
+	-->
+	<!--<a href="{{ index }}establecer-curso">📅 Establecer año académico</a>-->
 <script>
 
 
@@ -91,7 +95,7 @@ var riesgos = {
              <td>
 				<!-- editar alumno -->
 				<a href="{{ server_url }}editar-alumno/?idAlumno={{alumno.pk | safe}}
-				&idGrupo={{alumno.grupo.pk | safe}}" style="font-size:23px" >📝</a>
+				&idGrupo={{alumno.grupo.pk | safe}}" style="font-size:23px" >📋</a>
 			</td>
 
 
@@ -142,7 +146,7 @@ var riesgos = {
 				<a href="{{ server_url }}lista-evaluaciones/
 				?idAlumno={{alumno.pk | safe}}
 				&tipo=IPAL
-				&idGrupo={{alumno.grupo.pk | safe}}" style="font-size:23px">📆</a>
+				&idGrupo={{alumno.grupo.pk | safe}}" style="font-size:23px">📝</a>
                 <!-- riesgo IPAL -->
                 <div style = "display: inline-block;">
 					 <div style = "display: inline-block;background-color: {% color evas|get_item:alumno.key_IPAL_INICIO %};width:10px;height:10px;"></div>
@@ -160,7 +164,7 @@ var riesgos = {
 				<a href="{{ server_url }}lista-evaluaciones/
 				?idAlumno={{alumno.pk | safe}}
 				&tipo=IPAM
-				&idGrupo={{alumno.grupo.pk | safe}}" style="font-size:23px">📆</a>
+				&idGrupo={{alumno.grupo.pk | safe}}" style="font-size:23px">📝</a>
                 <!-- riesgo IPAM -->
                 <div style = "display: inline-block;">
                 <div style = "display: inline-block;background-color: {% color evas|get_item:alumno.key_IPAM_INICIO %};width:10px;height:10px;"></div>
@@ -189,7 +193,7 @@ var riesgos = {
 				<a href="{{ server_url }}lista-evaluaciones/
 				?idAlumno={{alumno.pk | safe}}
 				&tipo=IPAE
-				&idGrupo={{alumno.grupo.pk | safe}}" style="font-size:23px">📆</a>
+				&idGrupo={{alumno.grupo.pk | safe}}" style="font-size:23px">📝</a>
                 <!-- riesgo IPAE -->
 
                 <div style = "display: inline-block;">

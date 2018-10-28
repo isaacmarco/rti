@@ -55,6 +55,7 @@ function get_riesgo_PRO_inicio(pd){
 
 function get_riesgo_CSL_inicio(pd){	
 	if(pd <= 24) return 0;
+	if(pd > 24) return 3;
 	// no hay otros niveles de rendimiento
 }	
 
@@ -73,7 +74,7 @@ function get_riesgo_CLETEXTO_inicio(pd){
 	if(pd > 5.32 ) return 3;
 }	
 
-function get_riesgo_VOCABULARIO_inicio(pd){	
+function get_riesgo_VOC_inicio(pd){	
 	if(pd <= 5.39) return 0;
 	if(pd >= 5.40 && pd <= 6.59) return 1;
 	if(pd >= 6.60 && pd <= 7.32) return 2;
@@ -124,6 +125,7 @@ function get_riesgo_PRO_medio(pd){
 
 function get_riesgo_CSL_medio(pd){	
 	if(pd <= 30) return 0;
+	if(pd > 30) return 3;
 	// no hay otros niveles de rendimiento
 }	
 
@@ -142,7 +144,7 @@ function get_riesgo_CLETEXTO_medio(pd){
 	if(pd > 5.38 ) return 3;
 }	
 
-function get_riesgo_VOCABULARIO_medio(pd){	
+function get_riesgo_VOC_medio(pd){	
 	if(pd <= 6.36) return 0;
 	if(pd >= 6.37 && pd <= 7.24) return 1;
 	if(pd >= 7.25 && pd <= 7.83) return 2;
@@ -214,7 +216,7 @@ function get_riesgo_CLETEXTO_fin(pd){
 	if(pd > 5.81 ) return 3;
 }	
 
-function get_riesgo_VOCABULARIO_fin(pd){	
+function get_riesgo_VOC_fin(pd){	
 	if(pd <= 6.67) return 0;
 	if(pd >= 6.68 && pd <= 8.06) return 1;
 	if(pd >= 8.07 && pd <= 8.57) return 2;
@@ -245,12 +247,21 @@ function get_riesgo_VOCABULARIO_fin(pd){
 
 <!-- menu de tareas -->
 <table style="width:80%">
-  <tr>
-  <td><a onclick="cambiar_subprueba(0)" href="#chartdiv">Conocimiento Nombre Letra (CNL)</a></td>
-  <td><a onclick="cambiar_subprueba(1)" href="#chartdiv">Lectura pseudopalabras (LP)</a></td>  
+	<tr>
+  	<td><a onclick="cambiar_subprueba(0)" href="#chartdiv">Conocimiento Nombre Letra (CNL)</a></td>
+  	<td><a onclick="cambiar_subprueba(1)" href="#chartdiv">Lectura pseudopalabras (LP)</a></td>
 	<td><a onclick="cambiar_subprueba(2)" href="#chartdiv">Textos mutilados (TM)</a></td>
- 	<td><a onclick="cambiar_subprueba(3)" href="#chartdiv">Fluidez lectural oral (FLO)</a></td>
+	<td><a onclick="cambiar_subprueba(3)" href="#chartdiv">Fluidez lectural oral (FLO)</a></td>
 	<td><a onclick="cambiar_subprueba(4)" href="#chartdiv">Prosodia (PRO)</a></td>
+	</tr>
+	<tr>
+	<td><a onclick="cambiar_subprueba(5)" href="#chartdiv">Conocimiento Sonido Letra (CSL)</a></td>
+	<td><a onclick="cambiar_subprueba(6)" href="#chartdiv">Conciencia Fonológica Segmentar (CFS)</a></td>
+	<td><a onclick="cambiar_subprueba(7)" href="#chartdiv">Vocabulario (VOC)</a></td>
+	<td><a onclick="cambiar_subprueba(8)" href="#chartdiv">CLE Texto (CLE TEXTO)</a></td>
+	</tr>
+
+
 </table>
 <br><br>
 
@@ -304,7 +315,9 @@ function get_riesgo_VOCABULARIO_fin(pd){
 
 <script>
 
+	//colores = ["#f00", "#ffa500", "#009fff","#1ae36e"]
 	colores = ["#f00", "#ffa500", "#009fff","#1ae36e"]
+
 
 </script>
 
@@ -327,6 +340,11 @@ var evaluaciones = {
 "{{ evaluacion.mes }}-CNL" : "{{ evaluacion.CNL }}",
 "{{ evaluacion.mes }}-FLO" : "{{ evaluacion.FLO }}",
 "{{ evaluacion.mes }}-PRO" : "{{ evaluacion.PRO }}",
+// tareas complementarias
+"{{ evaluacion.mes }}-CSL" : "{{ evaluacion.CSL }}",
+"{{ evaluacion.mes }}-CLETEXTO" : "{{ evaluacion.CLE_TEXTO }}",
+"{{ evaluacion.mes }}-CFS" : "{{ evaluacion.CFS }}",
+"{{ evaluacion.mes }}-VOC" : "{{ evaluacion.VOC }}",
 {% endfor %}
 // valores del OMNIBUS para cada evaluacion
 "OMNIBUS-INICIO" : {{ evaluacion_inicio }},
@@ -379,9 +397,10 @@ function puntuacion_directa(prueba, momento){
 // cambiar la subtarea mostrada en el grafico
 function cambiar_subprueba(d) {
 
-	var titulos_graficos = ["CNL", "LP", "TM", "FLO", "PRO" ];
+	var titulos_graficos = ["CNL", "LP", "TM", "FLO", "PRO", "CSL", "CFS", "VOC", "CLE TEXTO" ];
 	var subtitulos = ["Conocimiento Nombre Letras", "Lectura Pseudopalabras", "Textos mutilados", 
-	"FLuidez lectura Oral", "Prosodia"
+	"Fluidez lectura Oral", "Prosodia", "Conocimiento Sonido Letra", "Conciencia Fonológica Segmentar",
+	"Vocabulario", "CLE Texto"
 	];
 
 	var propiedadTitulos = [
@@ -415,12 +434,92 @@ function cambiar_subprueba(d) {
 	var etiquetaEvaluado = "";
 	var etiquetaNoEvaluado = "No evaluado";
 
-	// evaluaciones, estos campos indican si el usuario esta evaluado,
-	// actualmente el campo es  evaluacion.riesgo => RIESGO_OPCIONES o SIN_EVALUAR
-	// TO-DO
+
 
 
 	// datasets para cada tarea
+
+
+	var dataset_CSL = [
+	{
+		"valor-maximo": 100,
+		"category": "Noviembre",
+		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo":  24,
+		"rendimiento-bajo":  0,
+		"rendimiento-medio": 0,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("CSL", 1)
+	},
+	{
+		"valor-maximo": 100,
+		"category": "Diciembre",
+		"estilo": evaluaciones[2] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[2] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo":  24,
+		"rendimiento-bajo":  0,
+		"rendimiento-medio": 0,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("CSL", 2)
+	},
+	{
+		"valor-maximo": 100,
+		"category": "Enero",
+		"estilo": evaluaciones[3] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[3] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo":  24,
+		"rendimiento-bajo":  0,
+		"rendimiento-medio": 0,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("CSL", 3)
+	},
+	{
+		"valor-maximo": 100,
+		"category": "Febrero",
+		"estilo": evaluaciones[4] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo":  30,
+		"rendimiento-bajo":  0,
+		"rendimiento-medio":  0,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("CSL", 4)
+	},
+	{
+		"valor-maximo": 100,
+		"category": "Marzo",
+		"estilo": evaluaciones[5] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[5] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo":  30,
+		"rendimiento-bajo":  0,
+		"rendimiento-medio":  0,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("CSL", 5)
+	},
+	{
+		"valor-maximo": 100,
+		"category": "Abril",
+		"estilo": evaluaciones[6] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[6] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo":  30,
+		"rendimiento-bajo":  0,
+		"rendimiento-medio":  0,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("CSL", 6)
+	},
+	{
+		"valor-maximo": 100,
+		"category": "Mayo",
+		"estilo": evaluaciones[7] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo": 34,
+		"rendimiento-bajo": 3,
+		"rendimiento-medio": 3,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno": ultima_evaluacion("CSL", 7)
+	}
+	];
+
 	
 	var dataset_CNL = [
 	{
@@ -434,7 +533,29 @@ function cambiar_subprueba(d) {
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("CNL", 1)
 	},
-		{
+	{
+		"valor-maximo": 100,
+		"category": "Diciembre",
+		"estilo": evaluaciones[2] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[2] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo": 44,
+		"rendimiento-bajo": 4,
+		"rendimiento-medio": 3,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno": ultima_evaluacion("CNL", 2)
+	},
+	{
+		"valor-maximo": 100,
+		"category": "Enero",
+		"estilo": evaluaciones[3] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[3] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo": 44,
+		"rendimiento-bajo": 4,
+		"rendimiento-medio": 3,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno": ultima_evaluacion("CNL", 3)
+	},
+	{
 		"valor-maximo": 100,
 		"category": "Febrero",
 		"estilo": evaluaciones[4] == "True" ? 0 : punteado,
@@ -444,6 +565,28 @@ function cambiar_subprueba(d) {
 		"rendimiento-medio": 3,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("CNL", 4)
+	},
+	{
+		"valor-maximo": 100,
+		"category": "Marzo",
+		"estilo": evaluaciones[5] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[5] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo": 50,
+		"rendimiento-bajo": 6,
+		"rendimiento-medio": 3,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno": ultima_evaluacion("CNL", 5)
+	},
+	{
+		"valor-maximo": 100,
+		"category": "Abril",
+		"estilo": evaluaciones[6] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[6] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo": 50,
+		"rendimiento-bajo": 6,
+		"rendimiento-medio": 3,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno": ultima_evaluacion("CNL", 6)
 	},
 	{
 		"valor-maximo": 100,
@@ -457,7 +600,8 @@ function cambiar_subprueba(d) {
 		"rendimiento-alumno":ultima_evaluacion("CNL", 7)
 	}
 	];
-	
+
+
 	var dataset_LP = [
 	{
 		"valor-maximo": 40,
@@ -470,31 +614,28 @@ function cambiar_subprueba(d) {
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("LP", 1)
 	},
-	 
 	{
 		"valor-maximo": 40,
 		"category": "Diciembre",
 		"estilo": evaluaciones[2] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[2] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"etiqueta": evaluaciones[2]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo":  23,
 		"rendimiento-bajo": 3,
 		"rendimiento-medio": 3,
 		"rendimiento-optimo": max,
-		"rendimiento-alumno":  ultima_evaluacion("LP", 2)
-	}, 
+		"rendimiento-alumno": ultima_evaluacion("LP", 2)
+	},
 	{
 		"valor-maximo": 40,
 		"category": "Enero",
-		"estilo": evaluaciones[3]  == "True" ? 0 : punteado,
+		"estilo": evaluaciones[3] == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[3]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo":  23,
 		"rendimiento-bajo": 3,
 		"rendimiento-medio": 3,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("LP", 3)
-	}, 
-	
-	
+	},
 	{
 		"valor-maximo": 40,
 		"category": "Febrero",
@@ -505,7 +646,7 @@ function cambiar_subprueba(d) {
 		"rendimiento-medio": 3,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("LP", 4)
-	},  
+	},
 	{
 		"valor-maximo": 40,
 		"category": "Marzo",
@@ -520,14 +661,14 @@ function cambiar_subprueba(d) {
 	{
 		"valor-maximo": 40,
 		"category": "Abril",
-		"estilo": evaluaciones[6]  == "True" ? 0 : punteado,
+		"estilo": evaluaciones[6]  == "True"? 0 : punteado,
 		"etiqueta": evaluaciones[6]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 27,
 		"rendimiento-bajo": 4,
 		"rendimiento-medio": 3,
 		"rendimiento-optimo": max,
-		"rendimiento-alumno":  ultima_evaluacion("LP", 6)
-	},  
+		"rendimiento-alumno": ultima_evaluacion("LP", 6)
+	},
 	{
 		"valor-maximo": 40,
 		"category": "Mayo",
@@ -540,8 +681,6 @@ function cambiar_subprueba(d) {
 		"rendimiento-alumno": ultima_evaluacion("LP", 7)
 	}
 	];
-
-
 
 
 	var dataset_TM = [
@@ -580,6 +719,7 @@ function cambiar_subprueba(d) {
 	}
 	];
 
+
 	var dataset_FLO = [
 	{
 		"valor-maximo": 133,
@@ -594,6 +734,28 @@ function cambiar_subprueba(d) {
 	},
 	{
 		"valor-maximo": 133,
+		"category": "Diciembre",
+		"estilo": evaluaciones[2] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[2] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo":  51,
+		"rendimiento-bajo":  9,
+		"rendimiento-medio": 7,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("FLO", 2)
+	},
+	{
+		"valor-maximo": 133,
+		"category": "Enero",
+		"estilo": evaluaciones[3] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[3] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo":  51,
+		"rendimiento-bajo":  9,
+		"rendimiento-medio": 7,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("FLO", 3)
+	},
+	{
+		"valor-maximo": 133,
 		"category": "Febrero",
 		"estilo": evaluaciones[4] == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
@@ -602,6 +764,28 @@ function cambiar_subprueba(d) {
 		"rendimiento-medio":  8,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno":ultima_evaluacion("FLO", 4)
+	},
+	{
+		"valor-maximo": 133,
+		"category": "Marzo",
+		"estilo": evaluaciones[5] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[5] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo":  62,
+		"rendimiento-bajo":  7,
+		"rendimiento-medio":  8,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("FLO", 5)
+	},
+	{
+		"valor-maximo": 133,
+		"category": "Abril",
+		"estilo": evaluaciones[6] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[6] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo":  62,
+		"rendimiento-bajo":  7,
+		"rendimiento-medio":  8,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("FLO", 6)
 	},
 	{
 		"valor-maximo": 133,
@@ -652,11 +836,124 @@ function cambiar_subprueba(d) {
 		"rendimiento-alumno": ultima_evaluacion("PRO", 7)
 	}
 	];
- 
 
+
+	var dataset_CFS = [
+	{
+		"valor-maximo": 85,
+		"category": "Noviembre",
+		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo":  17,
+		"rendimiento-bajo":  1,
+		"rendimiento-medio": 3,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("CFS", 1)
+	},
+	{
+		"valor-maximo": 85,
+		"category": "Febrero",
+		"estilo": evaluaciones[4] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo":  21,
+		"rendimiento-bajo":  3,
+		"rendimiento-medio":  2,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("CFS", 4)
+	},
+	{
+		"valor-maximo": 85,
+		"category": "Mayo",
+		"estilo": evaluaciones[7] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo": 29,
+		"rendimiento-bajo": 3,
+		"rendimiento-medio": 3,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno": ultima_evaluacion("CFS", 7)
+	}
+	];
+
+
+	var dataset_VOC = [
+	{
+		"valor-maximo": 30,
+		"category": "Noviembre",
+		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo":  5.39,
+		"rendimiento-bajo":  1.2,
+		"rendimiento-medio": 0.73,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("VOC", 1)
+	},
+	{
+		"valor-maximo": 30,
+		"category": "Febrero",
+		"estilo": evaluaciones[4] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo":  6.36,
+		"rendimiento-bajo":  0.88,
+		"rendimiento-medio":  0.59,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("VOC", 4)
+	},
+	{
+		"valor-maximo": 30,
+		"category": "Mayo",
+		"estilo": evaluaciones[7] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo": 6.67,
+		"rendimiento-bajo": 1.39,
+		"rendimiento-medio": 0.51,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno": ultima_evaluacion("VOC", 7)
+	}
+	];
+	
+	
+	var dataset_CLETEXTO = [
+	{
+		"valor-maximo": 20,
+		"category": "Noviembre",
+		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo":  4.24,
+		"rendimiento-bajo":  0.43,
+		"rendimiento-medio": 0.65,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("CLETEXTO", 1)
+	},
+	{
+		"valor-maximo": 20,
+		"category": "Febrero",
+		"estilo": evaluaciones[4] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo":  4.33,
+		"rendimiento-bajo":  0.6,
+		"rendimiento-medio":  0.45,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("CLETEXTO", 4)
+	},
+	{
+		"valor-maximo": 20,
+		"category": "Mayo",
+		"estilo": evaluaciones[7] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"riesgo": 4.72,
+		"rendimiento-bajo": 0.65,
+		"rendimiento-medio": 0.44,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno": ultima_evaluacion("CLETEXTO", 7)
+	}
+	];
+
+
+	
 // lista con los dataproviders de cada subtarea
 var data_subtareas = [ 
-	dataset_CNL, dataset_LP, dataset_TM,  dataset_FLO, dataset_PRO
+	dataset_CNL, dataset_LP, dataset_TM,  dataset_FLO, dataset_PRO,
+	dataset_CSL, dataset_CFS, dataset_VOC, dataset_CLETEXTO
 ];
 
 </script>
@@ -721,7 +1018,48 @@ var datos_por_evaluaciones = [
 	"color-inicio": colores[ get_riesgo_PRO_inicio( puntuacion_directa("PRO", 1) ) ],
 	"color-medio": colores[ get_riesgo_PRO_medio( puntuacion_directa("PRO", 4) )],
 	"color-fin": colores[ get_riesgo_PRO_fin( puntuacion_directa("PRO", 7) )]
+	},
+	
+	// tareas complementarias 
+	{
+	"subtarea": "CFS",
+	"rendimiento-inicio": puntuacion_directa("CFS", 1),
+	"rendimiento-medio": puntuacion_directa("CFS", 4),
+	"rendimiento-fin": puntuacion_directa("CFS", 7),
+	"color-inicio": colores[ get_riesgo_CFS_inicio( puntuacion_directa("CFS", 1) ) ],
+	"color-medio": colores[ get_riesgo_CFS_medio( puntuacion_directa("CFS", 4) )],
+	"color-fin": colores[ get_riesgo_CFS_fin( puntuacion_directa("CFS", 7) )]
+	},
+	{
+	"subtarea": "CSL",
+	"rendimiento-inicio": puntuacion_directa("CSL", 1),
+	"rendimiento-medio": puntuacion_directa("CSL", 4),
+	"rendimiento-fin": puntuacion_directa("CSL", 7),
+	"color-inicio": colores[ get_riesgo_CSL_inicio( puntuacion_directa("CSL", 1) ) ],
+	"color-medio": colores[ get_riesgo_CSL_medio( puntuacion_directa("CSL", 4) )],
+	"color-fin": colores[ get_riesgo_CSL_fin( puntuacion_directa("CSL", 7) )]
+	},
+	{
+	"subtarea": "VOC",
+	"rendimiento-inicio": puntuacion_directa("VOC", 1),
+	"rendimiento-medio": puntuacion_directa("VOC", 4),
+	"rendimiento-fin": puntuacion_directa("VOC", 7),
+	"color-inicio": colores[ get_riesgo_VOC_inicio( puntuacion_directa("VOC", 1) ) ],
+	"color-medio": colores[ get_riesgo_VOC_medio( puntuacion_directa("VOC", 4) )],
+	"color-fin": colores[ get_riesgo_VOC_fin( puntuacion_directa("VOC", 7) )]
+	},
+	{
+	"subtarea": "CLETEXTO",
+	"rendimiento-inicio": puntuacion_directa("CLETEXTO", 1),
+	"rendimiento-medio": puntuacion_directa("CLETEXTO", 4),
+	"rendimiento-fin": puntuacion_directa("CLETEXTO", 7),
+	"color-inicio": colores[ get_riesgo_CLETEXTO_inicio( puntuacion_directa("CLETEXTO", 1) ) ],
+	"color-medio": colores[ get_riesgo_CLETEXTO_medio( puntuacion_directa("CLETEXTO", 4) )],
+	"color-fin": colores[ get_riesgo_CLETEXTO_fin( puntuacion_directa("CLETEXTO", 7) )]
 	}
+	
+	
+	
 ];
  
 </script>
@@ -734,7 +1072,6 @@ var datos_por_evaluaciones = [
 	 de progreso
 	*/
 
- 
  
 var datos_graficos_progreso = [
 	{
@@ -752,49 +1089,51 @@ var datos_graficos_progreso = [
 
 	{
 	"subtarea": "LP",
-	"rendimiento-diciembre": puntuacion_directa("LP", 1),
-	"rendimiento-enero": puntuacion_directa("LP", 1),
-	"rendimiento-marzo": puntuacion_directa("LP", 4),
-	"rendimiento-abril": puntuacion_directa("LP", 4),
-	"color-diciembre": colores[ get_riesgo_LP_inicio( puntuacion_directa("LP", 1) ) ],
-	"color-enero": colores[ get_riesgo_LP_inicio( puntuacion_directa("LP", 1) ) ],
-	"color-marzo": colores[ get_riesgo_LP_medio( puntuacion_directa("LP", 4) )],
-	"color-abril": colores[ get_riesgo_LP_medio( puntuacion_directa("LP", 4) )]
+	"rendimiento-diciembre": puntuacion_directa("LP", 2),
+	"rendimiento-enero": puntuacion_directa("LP", 3),
+	"rendimiento-marzo": puntuacion_directa("LP", 5),
+	"rendimiento-abril": puntuacion_directa("LP", 6),
+	"color-diciembre": colores[ get_riesgo_LP_inicio( puntuacion_directa("LP", 2) ) ],
+	"color-enero": colores[ get_riesgo_LP_inicio( puntuacion_directa("LP", 3) ) ],
+	"color-marzo": colores[ get_riesgo_LP_medio( puntuacion_directa("LP", 5) )],
+	"color-abril": colores[ get_riesgo_LP_medio( puntuacion_directa("LP", 6) )]
 	},
 
 	{
 	"subtarea": "CSL",
-	"rendimiento-diciembre": puntuacion_directa("CSL", 1),
-	"rendimiento-enero": puntuacion_directa("CSL", 1),
-	"rendimiento-marzo": puntuacion_directa("CSL", 4),
-	"rendimiento-abril": puntuacion_directa("CSL", 4),
-	"color-diciembre": colores[ get_riesgo_CSL_inicio( puntuacion_directa("CSL", 1) ) ],
-	"color-enero": colores[ get_riesgo_CSL_inicio( puntuacion_directa("CSL", 1) ) ],
-	"color-marzo": colores[ get_riesgo_CSL_medio( puntuacion_directa("CSL", 4) )],
-	"color-abril": colores[ get_riesgo_CSL_medio( puntuacion_directa("CSL", 4) )]
+	"rendimiento-diciembre": puntuacion_directa("CSL", 2),
+	"rendimiento-enero": puntuacion_directa("CSL", 3),
+	"rendimiento-marzo": puntuacion_directa("CSL", 5),
+	"rendimiento-abril": puntuacion_directa("CSL", 6),
+	"color-diciembre": colores[ get_riesgo_CSL_inicio( puntuacion_directa("CSL", 2) ) ],
+	"color-enero": colores[ get_riesgo_CSL_inicio( puntuacion_directa("CSL", 3) ) ],
+	"color-marzo": colores[ get_riesgo_CSL_medio( puntuacion_directa("CSL", 5) )],
+	"color-abril": colores[ get_riesgo_CSL_medio( puntuacion_directa("CSL", 6) )]
 	},
+
 	{
 	"subtarea": "CNL",
-	"rendimiento-diciembre": puntuacion_directa("CNL", 1),
-	"rendimiento-enero": puntuacion_directa("CNL", 1),
-	"rendimiento-marzo": puntuacion_directa("CNL", 4),
-	"rendimiento-abril": puntuacion_directa("CNL", 4),
-	"color-diciembre": colores[ get_riesgo_CNL_inicio( puntuacion_directa("CNL", 1) ) ],
-	"color-enero": colores[ get_riesgo_CNL_inicio( puntuacion_directa("CNL", 1) ) ],
-	"color-marzo": colores[ get_riesgo_CNL_medio( puntuacion_directa("CNL", 4) )],
-	"color-abril": colores[ get_riesgo_CNL_medio( puntuacion_directa("CNL", 4) )]
+	"rendimiento-diciembre": puntuacion_directa("CNL", 2),
+	"rendimiento-enero": puntuacion_directa("CNL", 3),
+	"rendimiento-marzo": puntuacion_directa("CNL", 5),
+	"rendimiento-abril": puntuacion_directa("CNL", 6),
+	"color-diciembre": colores[ get_riesgo_CNL_inicio( puntuacion_directa("CNL", 2) ) ],
+	"color-enero": colores[ get_riesgo_CNL_inicio( puntuacion_directa("CNL", 3) ) ],
+	"color-marzo": colores[ get_riesgo_CNL_medio( puntuacion_directa("CNL", 5) )],
+	"color-abril": colores[ get_riesgo_CNL_medio( puntuacion_directa("CNL", 6) )]
 	},
+
 	{
 	"subtarea": "FLO",
-	"rendimiento-diciembre": puntuacion_directa("FLO", 1),
-	"rendimiento-enero": puntuacion_directa("FLO", 1),
-	"rendimiento-marzo": puntuacion_directa("FLO", 4),
-	"rendimiento-abril": puntuacion_directa("FLO", 4),
-	"color-diciembre": colores[ get_riesgo_FLO_inicio( puntuacion_directa("FLO", 1) ) ],
-	"color-enero": colores[ get_riesgo_FLO_inicio( puntuacion_directa("FLO", 1) ) ],
-	"color-marzo": colores[ get_riesgo_FLO_medio( puntuacion_directa("FLO", 4) )],
-	"color-abril": colores[ get_riesgo_FLO_medio( puntuacion_directa("FLO", 4) )]
-	}
+	"rendimiento-diciembre": puntuacion_directa("FLO", 2),
+	"rendimiento-enero": puntuacion_directa("FLO", 3),
+	"rendimiento-marzo": puntuacion_directa("FLO", 5),
+	"rendimiento-abril": puntuacion_directa("FLO", 6),
+	"color-diciembre": colores[ get_riesgo_FLO_inicio( puntuacion_directa("FLO", 2) ) ],
+	"color-enero": colores[ get_riesgo_FLO_inicio( puntuacion_directa("FLO", 3) ) ],
+	"color-marzo": colores[ get_riesgo_FLO_medio( puntuacion_directa("FLO", 5) )],
+	"color-abril": colores[ get_riesgo_FLO_medio( puntuacion_directa("FLO", 6) )]
+	},
 
 
 ];
@@ -829,6 +1168,7 @@ var datos_graficos_progreso = [
 						{
 							"fillAlphas": 1,
 							"id": "area-bajo-rendimiento",
+							"fillColors": "#ffa500",
 							"lineAlpha": 0,
 							"title": "Rendimiento bajo",
 							"valueField": "rendimiento-bajo"

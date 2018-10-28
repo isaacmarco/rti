@@ -3,11 +3,25 @@
 {% load app_filters %}
 {% block content %}
 
-<h1>Importar evaluadores</h1>
-<h2>Formato del fichero CSV</h2>
-<h2>usuario, nombre, centro, email, pais</h2>
+<h1>Importar datos</h1>
 
 
+<h2>Formato del fichero CSV para <b>{{ tipo }}</b></h2>
+{% if tipo == "GRUPOS" %}
+    <h2><i>
+        código del centro, curso (INF, PRI, SEG, TER), nombre del grupo, nombre del centro, curso académico, isla,
+    </i></h2>
+{% endif %}
+{% if tipo == "ALUMNOS" %}
+    <h2><i>
+        código CIAL, fecha (d/m/a), grupo ID, curso (INF, PRI, SEG, TER), curso académico, código del centro, género
+    </i></h2>
+{% endif %}
+{% if tipo == "EVALUADORES" %}
+    <h2><i>
+        código/DNI, password, nombre, código del centro, nombre del centro, email
+    </i></h2>
+{% endif %}
 <div class="form-style-1" style="padding: 30px">
 
 <form method="POST" enctype="multipart/form-data" class="form-horizontal">

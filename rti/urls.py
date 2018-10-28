@@ -11,7 +11,7 @@ from rtiapp.views import \
     listar_evaluaciones,nueva_evaluacion, editar_evaluacion, alta_evaluador,informe_grupo,\
     establecer_curso,actualizar_curso,compartir_grupo,actualizar_grupo_compartido,exportar,exportar_CSV, \
     cerrar_sesion,informe_individual, importar_csv, eliminar_alumno,listar_alumnos_evaluador, documentos, \
-    lista_grupos_evaluador_consejeria
+    lista_grupos_evaluador_consejeria, compartir_grupo_centro, actualizar_curso_academico_grupo
 
 
 urlpatterns = [
@@ -19,11 +19,12 @@ urlpatterns = [
     # plataforma
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', index),
+    url(r'^index/', index),
     url(r'^alta/', alta_evaluador),
     url(r'^documentos/', documentos),
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^cerrar-sesion/', cerrar_sesion),
-    url(r'^importar-evaluadores/', importar_csv),
+    url(r'^importar/', importar_csv),
 
     # exportar datos
     url(r'^exportar/', exportar),
@@ -45,6 +46,8 @@ urlpatterns = [
     url(r'^compartir-grupo/', compartir_grupo),
     url(r'^actualizar-grupo-compartido/', actualizar_grupo_compartido),
     url(r'^lista-grupos-consejeria/', lista_grupos_evaluador_consejeria),
+    url(r'^compartir-grupo-centro/', compartir_grupo_centro),
+    url(r'^actualizar-curso-grupo/', actualizar_curso_academico_grupo),
 
     # alumnos
     url(r'^nuevo-alumno/', nuevo_alumno),

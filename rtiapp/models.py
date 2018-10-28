@@ -8,7 +8,15 @@ import rtiapp.constantes as Globales
 IPAL = 'IPAL'
 IPAM = 'IPAM'
 IPAE = 'IPAE'
-
+# islas
+NINGUNA = 'NINGUNA'
+TENERIFE = 'TENERIFE'
+PALMA = 'PALMA'
+GOMERA = 'GOMERA'
+HIERRO = 'HIERRO'
+GRANCANARIA = 'GRANCANARIA'
+FUERTEVENTURA = 'FUERTEVENTURA'
+LANZAROTE = 'LANZAROTE'
 # niveles de riesgo
 ALTO_RIESGO = 'ALTR'
 RIESGO = 'RIES'
@@ -94,6 +102,17 @@ CURSO_OPCIONES = (
     (SEGUNDO, 'Segundo'),
     (TERCERO, 'Tercero')
 )
+# opciones de isla
+ISLA_OPCIONES = (
+    (NINGUNA, 'Ninguna'),
+    (TENERIFE, 'Tenerife'),
+    (GOMERA, 'Gomera'),
+    (PALMA, 'Palma'),
+    (HIERRO, 'Hierro'),
+    (GRANCANARIA, 'GranCanaria'),
+    (FUERTEVENTURA, 'Fuerteventura'),
+    (LANZAROTE, 'Lanzarote')
+)
 # opciones de pais
 PAIS_OPCIONES = (
     (ESP, 'España'),
@@ -145,6 +164,7 @@ class Evaluador(models.Model):
 
     # identificador del usuario y datos personales
     usuario = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
+    clave = models.CharField(max_length=20, default="Clave del evaluador")
     nombre = models.CharField(max_length=50, default="Nombre del evaluador")
     centro = models.CharField(max_length=50, default="Centro del evaluador")
     # centro forzado para el grupo ULL (el usuario no puede cambiarlo)
@@ -224,6 +244,7 @@ class Grupo(models.Model):
     centro_pilotaje = models.CharField(max_length=50, default="Centro pilotaje") # centro de la consejeria
     fecha_alta = models.DateTimeField(auto_now_add=True)
     ultima_modificacion = models.DateTimeField(auto_now=True)
+    isla = models.CharField(max_length=15, choices=ISLA_OPCIONES, default=NINGUNA)
 
     # todos los evaluadores que tienen acceso al grupo
     evaluadores = models.ManyToManyField(
@@ -248,6 +269,7 @@ class Alumno(models.Model):
     evaluador = models.ForeignKey(User,  default=0) # eliminar un evaluador no elimina sus alumnos (on_delete=models.CASCADE,
     grupo = models.ForeignKey(Grupo, on_delete=models.CASCADE, default=0)
     curso_academico = models.IntegerField(default=2018)
+    isla = models.CharField(max_length=15, choices=ISLA_OPCIONES, default=NINGUNA)
     # fechas de alta del alumno y actualizacion de su ficha
     fecha_alta = models.DateTimeField(auto_now_add=True)
     ultima_modificacion = models.DateTimeField(auto_now=True)

@@ -11,11 +11,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../rti/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="83">
-              <caret line="46" column="34" selection-start-line="46" selection-start-column="11" selection-end-line="46" selection-end-column="34" />
+            <state relative-caret-position="164">
+              <caret line="21" column="27" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -26,8 +26,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="144" lean-forward="true" selection-start-line="144" selection-end-line="144" />
+            <state relative-caret-position="-162">
+              <caret line="249" column="40" selection-start-line="249" selection-start-column="18" selection-end-line="249" selection-end-column="40" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -38,8 +38,8 @@
       <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="461">
-              <caret line="146" column="55" selection-start-line="146" selection-start-column="55" selection-end-line="146" selection-end-column="55" />
+            <state relative-caret-position="3834">
+              <caret line="150" column="44" selection-start-line="150" selection-start-column="44" selection-end-line="150" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -47,8 +47,11 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="928" column="51" selection-start-line="928" selection-start-column="51" selection-end-line="928" selection-end-column="51" />
+            <state relative-caret-position="223">
+              <caret line="136" column="36" selection-start-line="136" selection-start-column="27" selection-end-line="136" selection-end-column="36" />
+              <folding>
+                <element signature="e#0#36#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -57,16 +60,31 @@
         <entry file="file://$PROJECT_DIR$/../templates/lista_grupos.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="351">
-              <caret line="16" column="6" lean-forward="true" selection-start-line="6" selection-end-line="16" selection-end-column="6" />
+              <caret line="16" column="6" lean-forward="true" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="lista_grupos_consejeria.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../templates/lista_grupos_consejeria.html">
+      <file leaf-file-name="lista_alumnos_grupo.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../templates/lista_alumnos_grupo.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="8" column="48" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
+            <state relative-caret-position="486">
+              <caret line="36" column="101" lean-forward="true" selection-start-line="36" selection-start-column="101" selection-end-line="36" selection-end-column="101" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#td#7;n#tr#1;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#td#7;n#tr#1;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#td#7;n#tr#1;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#div#0;n#td#7;n#tr#1;n#table#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="importar_evaluadores.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../templates/importar_evaluadores.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="21" column="30" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -83,48 +101,54 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>dataset_CFS</find>
-      <find>dataset_CLETEXOS</find>
-      <find>get_riesgo_TM_fin</find>
-      <find>get_riesgo_TM_medio</find>
-      <find>lista_g</find>
-      <find>es_propietario_grupo</find>
-      <find>informe_grupo</find>
-      <find>lista_alumnos_grupo_url</find>
-      <find />
-      <find>es_investigador</find>
-      <find>es_profesorado</find>
-      <find>documentos</find>
-      <find>linea_base</find>
-      <find>es_propietario_alumno</find>
-      <find>puede_eliminar_alumnos</find>
-      <find>omnibus_INFANTIL</find>
-      <find />
-      <find>OUD</find>
+      <find>EDITAR eva</find>
+      <find>.tip</find>
+      <find>self</find>
+      <find>editar eva</find>
+      <find>get_riesgo_LP_medio</find>
+      <find>PRO</find>
+      <find>CFS</find>
+      <find>CSL</find>
+      <find>VOC</find>
+      <find>punteado</find>
+      <find>COLORES</find>
       <find>CVA</find>
-      <find>grafico-evaluaciones-inicio</find>
-      <find>datos_por_evaluaciones</find>
       <find>ODD</find>
-      <find>VP</find>
-      <find>IN</find>
-      <find>datos_graficos_progreso</find>
-      <find />
-      <find>consej</find>
-      <find>filter</find>
-      <find>informe_grup</find>
-      <find>conse</find>
+      <find>listar_alumnos_evaluador_en_grupo</find>
+      <find>nueva_evaluacion</find>
+      <find>grupo</find>
+      <find>actualizar</find>
+      <find>redirect</find>
+      <find>alumno.curso_aca</find>
+      <find>conseje</find>
+      <find>grupo.evaluadores</find>
+      <find>codigo_evaluador</find>
+      <find>datetime</find>
+      <find>grupo.evaluadores</find>
+      <find>grupo.evaluadore</find>
+      <find>ISLA_OPCIONES</find>
+      <find>es_propietario_evaluacion</find>
+      <find>es_propietario_grupo</find>
+      <find>auth_views.login</find>
+      <find>def index</find>
     </findStrings>
     <replaceStrings>
       <replace>IN</replace>
-      <replace>CM</replace>
       <replace>EC</replace>
       <replace>CVA</replace>
+      <replace>LP</replace>
+      <replace>FLO</replace>
+      <replace>CFS</replace>
+      <replace>CSL</replace>
+      <replace>VOC</replace>
+      <replace>CM</replace>
+      <replace>CLETEXTO</replace>
+      <replace>VP</replace>
     </replaceStrings>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/../templates/error.html" />
         <option value="$PROJECT_DIR$/../templates/registration/login.html" />
         <option value="$PROJECT_DIR$/../templates/index.html" />
         <option value="$PROJECT_DIR$/../templates/principal.html" />
@@ -134,9 +158,7 @@
         <option value="$PROJECT_DIR$/constantes.py" />
         <option value="$PROJECT_DIR$/../templates/informe_individual.html" />
         <option value="$PROJECT_DIR$/../rti/settings.py" />
-        <option value="$PROJECT_DIR$/../templates/informe_individual_IPAL_INFANTIL.html" />
         <option value="$PROJECT_DIR$/riesgo_ipal.py" />
-        <option value="$PROJECT_DIR$/templatetags/app_filters.py" />
         <option value="$PROJECT_DIR$/../templates/form_editar_alumno.html" />
         <option value="$PROJECT_DIR$/../templates/lista_alumnos.html" />
         <option value="$PROJECT_DIR$/datos.py" />
@@ -144,7 +166,6 @@
         <option value="$PROJECT_DIR$/views/documentos.py" />
         <option value="$PROJECT_DIR$/views/__init__.py" />
         <option value="$PROJECT_DIR$/views/views.py" />
-        <option value="$PROJECT_DIR$/../templates/importar_evaluadores.html" />
         <option value="$PROJECT_DIR$/../templates/informe_grupo.html" />
         <option value="$PROJECT_DIR$/../templates/form_nueva_evaluacion_IPAL_SEGUNDO.html" />
         <option value="$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAE_TERCERO.html" />
@@ -152,35 +173,39 @@
         <option value="$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAE_PRIMERO.html" />
         <option value="$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAM_INFANTIL.html" />
         <option value="$PROJECT_DIR$/../templates/form_editar_evaluador.html" />
-        <option value="$PROJECT_DIR$/../templates/informe_individual_IPAL_PRIMERO.html" />
-        <option value="$PROJECT_DIR$/../templates/informe_individual_IPAL_SEGUNDO.html" />
-        <option value="$PROJECT_DIR$/../templates/informe_individual_IPAM_PRIMERO.html" />
-        <option value="$PROJECT_DIR$/../templates/informe_individual_IPAM_SEGUNDO.html" />
-        <option value="$PROJECT_DIR$/../templates/informe_individual_IPAM_TERCERO.html" />
-        <option value="$PROJECT_DIR$/../templates/exportar_datos.html" />
-        <option value="$PROJECT_DIR$/../templates/lista_alumnos_grupo.html" />
         <option value="$PROJECT_DIR$/riesgo_ipam.py" />
         <option value="$PROJECT_DIR$/omnibus_ipam.py" />
-        <option value="$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAM_PRIMERO.html" />
         <option value="$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAM_TERCERO.html" />
-        <option value="$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAM_SEGUNDO.html" />
         <option value="$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAL_INFANTIL.html" />
         <option value="$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAL_PRIMERO.html" />
-        <option value="$PROJECT_DIR$/../rti/urls.py" />
-        <option value="$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAL_SEGUNDO.html" />
-        <option value="$PROJECT_DIR$/../templates/informe_individual_IPAM_INFANTIL.html" />
-        <option value="$PROJECT_DIR$/forms.py" />
-        <option value="$PROJECT_DIR$/models.py" />
-        <option value="$PROJECT_DIR$/../templates/base.html" />
         <option value="$PROJECT_DIR$/../templates/lista_grupos.html" />
-        <option value="$PROJECT_DIR$/views.py" />
         <option value="$PROJECT_DIR$/../templates/lista_grupos_consejeria.html" />
+        <option value="$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAL_SEGUNDO.html" />
+        <option value="$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAM_PRIMERO.html" />
+        <option value="$PROJECT_DIR$/forms.py" />
+        <option value="$PROJECT_DIR$/../templates/base.html" />
+        <option value="$PROJECT_DIR$/templatetags/app_filters.py" />
+        <option value="$PROJECT_DIR$/../templates/informe_individual_IPAL_SEGUNDO.html" />
+        <option value="$PROJECT_DIR$/../templates/informe_individual_IPAL_PRIMERO.html" />
+        <option value="$PROJECT_DIR$/../templates/informe_individual_IPAL_INFANTIL.html" />
+        <option value="$PROJECT_DIR$/../templates/informe_individual_IPAM_INFANTIL.html" />
+        <option value="$PROJECT_DIR$/../templates/informe_individual_IPAM_PRIMERO.html" />
+        <option value="$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAM_SEGUNDO.html" />
+        <option value="$PROJECT_DIR$/../templates/informe_individual_IPAM_SEGUNDO.html" />
+        <option value="$PROJECT_DIR$/../templates/informe_individual_IPAM_TERCERO.html" />
+        <option value="$PROJECT_DIR$/../templates/informe_individual_IPAE_PRIMERO.html" />
+        <option value="$PROJECT_DIR$/../templates/lista_alumnos_grupo.html" />
+        <option value="$PROJECT_DIR$/../templates/exportar_datos.html" />
+        <option value="$PROJECT_DIR$/../templates/importar_evaluadores.html" />
+        <option value="$PROJECT_DIR$/models.py" />
+        <option value="$PROJECT_DIR$/views.py" />
+        <option value="$PROJECT_DIR$/../rti/urls.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="385" />
-    <option name="y" value="30" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="87" />
+    <option name="y" value="42" />
     <option name="width" value="1750" />
     <option name="height" value="970" />
   </component>
@@ -228,12 +253,12 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="70" y="34" width="1400" height="776" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.13131313" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32965517" />
       <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -252,48 +277,27 @@
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13151042" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Python Console" order="7" />
     </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25542">
-          <caret line="946" lean-forward="true" selection-start-line="946" selection-end-line="946" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/compartir_grupo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="9" column="104" selection-start-line="9" selection-start-column="64" selection-end-line="9" selection-end-column="104" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../templates/lista_evaluaciones.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1026">
@@ -330,13 +334,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templatetags/app_filters.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
-          <caret line="21" column="25" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/documentos.py" />
     <entry file="file://$PROJECT_DIR$/views/__init__.py" />
     <entry file="file://$PROJECT_DIR$/views/views.py" />
@@ -361,30 +358,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/importar_evaluadores.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="3" column="19" lean-forward="true" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/informe_individual_IPAE_PRIMERO.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-9315" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../templates/form_nueva_evaluacion_IPAL_SEGUNDO.html" />
     <entry file="file://$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAE_TERCERO.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="7" column="64" selection-start-line="7" selection-start-column="64" selection-end-line="7" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAE_SEGUNDO.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="3" />
         </state>
       </provider>
     </entry>
@@ -416,34 +394,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/informe_individual_IPAL_SEGUNDO.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="606" column="27" selection-start-line="606" selection-start-column="27" selection-end-line="606" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/informe_individual_IPAM_SEGUNDO.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="696" column="26" selection-start-line="696" selection-start-column="26" selection-end-line="696" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/informe_individual_IPAM_TERCERO.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="712" column="26" selection-start-line="712" selection-start-column="26" selection-end-line="712" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/exportar_datos.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1134">
-          <caret line="42" column="8" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../templates/informe_individual.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3672">
@@ -451,24 +401,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAM_SEGUNDO.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="596">
-          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAM_TERCERO.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="191">
           <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAM_PRIMERO.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="59" column="13" lean-forward="true" selection-start-line="59" selection-start-column="13" selection-end-line="59" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -486,6 +422,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../templates/informe_grupo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="12" column="22" lean-forward="true" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../templates/lista_grupos_consejeria.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1053">
+          <caret line="39" column="72" selection-start-line="39" selection-start-column="72" selection-end-line="39" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAL_SEGUNDO.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="36" column="26" selection-start-line="36" selection-start-column="26" selection-end-line="36" selection-end-column="26" />
+          <folding>
+            <element signature="n#style#0;n#form#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAE_SEGUNDO.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-538">
+          <caret selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAL_INFANTIL.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-864">
+          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAL_PRIMERO.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1215">
@@ -493,47 +467,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAL_INFANTIL.html">
+    <entry file="file://$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAM_PRIMERO.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-351">
-          <caret line="29" column="23" lean-forward="true" selection-start-line="29" selection-start-column="23" selection-end-line="29" selection-end-column="23" />
+        <state relative-caret-position="137">
+          <caret line="69" column="7" selection-start-line="69" selection-start-column="7" selection-end-line="69" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAL_SEGUNDO.html">
+    <entry file="file://$PROJECT_DIR$/../templates/informe_individual_IPAE_SEGUNDO.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="623">
-          <caret line="87" column="23" selection-start-line="87" selection-start-column="23" selection-end-line="87" selection-end-column="23" />
-          <folding>
-            <element signature="n#style#0;n#form#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
+        <state relative-caret-position="-21663" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/lista_alumnos_grupo.html">
+    <entry file="file://$PROJECT_DIR$/../templates/informe_individual_IPAL_SEGUNDO.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="194" column="30" lean-forward="true" selection-start-line="194" selection-start-column="30" selection-end-line="194" selection-end-column="30" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#td#7;n#tr#1;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#td#7;n#tr#1;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#td#7;n#tr#1;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#0;n#td#7;n#tr#1;n#table#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="-20713">
+          <caret line="318" column="54" lean-forward="true" selection-start-line="318" selection-start-column="4" selection-end-line="318" selection-end-column="54" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../templates/informe_individual_IPAL_INFANTIL.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="566" column="32" lean-forward="true" selection-start-line="566" selection-start-column="32" selection-end-line="566" selection-end-column="32" />
+        <state relative-caret-position="441">
+          <caret line="755" column="77" selection-start-line="755" selection-start-column="77" selection-end-line="755" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../templates/informe_individual_IPAL_PRIMERO.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13553">
+          <caret line="906" column="77" selection-start-line="906" selection-start-column="77" selection-end-line="906" selection-end-column="77" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../templates/informe_individual_IPAM_INFANTIL.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="825" column="27" selection-start-line="825" selection-start-column="27" selection-end-line="825" selection-end-column="27" />
+        <state relative-caret-position="839">
+          <caret line="958" column="51" selection-start-line="958" selection-start-column="51" selection-end-line="958" selection-end-column="51" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#1;n#div#2;n#!!top" expanded="true" />
@@ -546,79 +516,131 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/informe_individual_IPAL_PRIMERO.html">
+    <entry file="file://$PROJECT_DIR$/../templates/informe_individual_IPAM_PRIMERO.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="275" lean-forward="true" selection-start-line="275" selection-end-line="275" />
+        <state relative-caret-position="378">
+          <caret line="818" column="77" selection-start-line="818" selection-start-column="77" selection-end-line="818" selection-end-column="77" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/informe_individual_IPAM_PRIMERO.html">
+    <entry file="file://$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAM_SEGUNDO.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="430" column="5" lean-forward="true" selection-start-line="430" selection-start-column="5" selection-end-line="430" selection-end-column="5" />
+        <state relative-caret-position="270">
+          <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../templates/informe_individual_IPAM_SEGUNDO.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="857" column="75" selection-start-line="857" selection-start-column="75" selection-end-line="857" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../templates/informe_individual_IPAM_TERCERO.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1215">
+          <caret line="630" column="34" selection-start-line="630" selection-start-column="34" selection-end-line="630" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../templates/informe_individual_IPAE_PRIMERO.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4941">
+          <caret line="342" column="4" selection-start-line="342" selection-start-column="4" selection-end-line="342" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="164">
-          <caret line="60" column="67" selection-start-line="60" selection-start-column="67" selection-end-line="60" selection-end-column="67" />
+          <caret line="60" column="67" lean-forward="true" selection-start-line="60" selection-start-column="67" selection-end-line="60" selection-end-column="67" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../rti/urls.py">
+    <entry file="file://$PROJECT_DIR$/templatetags/app_filters.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
-          <caret line="46" column="34" selection-start-line="46" selection-start-column="11" selection-end-line="46" selection-end-column="34" />
+        <state relative-caret-position="351">
+          <caret line="43" column="24" selection-start-line="43" selection-start-column="17" selection-end-line="43" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../templates/exportar_datos.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="59" column="77" selection-start-line="59" selection-start-column="77" selection-end-line="59" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../templates/importar_evaluadores.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="21" column="30" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../templates/lista_alumnos_grupo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="36" column="101" lean-forward="true" selection-start-line="36" selection-start-column="101" selection-end-line="36" selection-end-column="101" />
           <folding>
-            <element signature="e#0#41#0" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#td#7;n#tr#1;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#td#7;n#tr#1;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#td#7;n#tr#1;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#0;n#td#7;n#tr#1;n#table#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="144" lean-forward="true" selection-start-line="144" selection-end-line="144" />
+        <state relative-caret-position="-162">
+          <caret line="249" column="40" selection-start-line="249" selection-start-column="18" selection-end-line="249" selection-end-column="40" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="146" column="55" selection-start-line="146" selection-start-column="55" selection-end-line="146" selection-end-column="55" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/../templates/signup.html">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/views.py">
+    <entry file="file://$PROJECT_DIR$/../templates/registration/login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="928" column="51" selection-start-line="928" selection-start-column="51" selection-end-line="928" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/informe_grupo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="12" column="22" lean-forward="true" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
-        </state>
+        <state relative-caret-position="-648" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../templates/lista_grupos.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="351">
-          <caret line="16" column="6" lean-forward="true" selection-start-line="6" selection-end-line="16" selection-end-column="6" />
+          <caret line="16" column="6" lean-forward="true" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/lista_grupos_consejeria.html">
+    <entry file="file://$PROJECT_DIR$/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="8" column="48" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
+        <state relative-caret-position="3834">
+          <caret line="150" column="44" selection-start-line="150" selection-start-column="44" selection-end-line="150" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="136" column="36" selection-start-line="136" selection-start-column="27" selection-end-line="136" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../rti/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="21" column="27" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
