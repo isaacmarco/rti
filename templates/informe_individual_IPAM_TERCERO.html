@@ -322,10 +322,6 @@ function cambiar_subprueba(d) {
 	var etiquetaEvaluado = "";
 	var etiquetaNoEvaluado = "No evaluado";
 
-	// evaluaciones, estos campos indican si el usuario esta evaluado,
-	// actualmente el campo es  evaluacion.riesgo => RIESGO_OPCIONES o SIN_EVALUAR
-	// TO-DO
-
 
 	// datasets para cada tarea
 	
@@ -335,7 +331,6 @@ function cambiar_subprueba(d) {
 		"category": "Noviembre",
 		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-	
 		"riesgo": 35,
 		"rendimiento-bajo": 2,
 		"rendimiento-medio": 3,
@@ -345,9 +340,8 @@ function cambiar_subprueba(d) {
 	{
 		"valor-maximo": 64,
 		"category": "Diciembre",
-		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-	
+		"estilo": evaluaciones[2] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[2] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 35,
 		"rendimiento-bajo": 2,
 		"rendimiento-medio": 3,
@@ -357,9 +351,8 @@ function cambiar_subprueba(d) {
 	{
 		"valor-maximo": 64,
 		"category": "Enero",
-		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-	
+		"estilo": evaluaciones[3] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[3] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 35,
 		"rendimiento-bajo": 2,
 		"rendimiento-medio": 3,
@@ -371,7 +364,6 @@ function cambiar_subprueba(d) {
 		"category": "Febrero",
 		"estilo": evaluaciones[4] == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-	
 		"riesgo":43,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio": 5,
@@ -381,10 +373,8 @@ function cambiar_subprueba(d) {
 		{
 		"valor-maximo": 64,
 		"category": "Marzo",
-		"estilo": evaluaciones[4] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-	
-	
+		"estilo": evaluaciones[5] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[5] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo":43,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio": 5,
@@ -394,10 +384,8 @@ function cambiar_subprueba(d) {
 		{
 		"valor-maximo": 64,
 		"category": "Abril",
-		"estilo": evaluaciones[4] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-	
-		
+		"estilo": evaluaciones[6] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[6] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo":43,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio": 5,
@@ -409,7 +397,6 @@ function cambiar_subprueba(d) {
 		"category": "Mayo",
 		"estilo": evaluaciones[7] == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		
 		"riesgo": 48,
 		"rendimiento-bajo": 2,
 		"rendimiento-medio": 7,
@@ -419,24 +406,22 @@ function cambiar_subprueba(d) {
 	];
 	
 	var dataset_ODD = [
-	{
+		{
 		"valor-maximo": 45,
 		"category": "Noviembre",
 		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[1]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		
 		"riesgo": 3,
 		"rendimiento-bajo": 2,
 		"rendimiento-medio": 1,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("ODD", 1)
-	}, 	
+		},
 		{
 		"valor-maximo": 45,
 		"category": "Diciembre",
-		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[1]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		
+		"estilo": evaluaciones[2] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[2]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 3,
 		"rendimiento-bajo": 2,
 		"rendimiento-medio": 1,
@@ -446,9 +431,8 @@ function cambiar_subprueba(d) {
 		{
 		"valor-maximo": 45,
 		"category": "Enero",
-		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[1]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		
+		"estilo": evaluaciones[3] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[3]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 3,
 		"rendimiento-bajo": 2,
 		"rendimiento-medio": 1,
@@ -460,7 +444,6 @@ function cambiar_subprueba(d) {
 		"category": "Febrero",
 		"estilo": evaluaciones[4]  == "True"? 0 : punteado,
 		"etiqueta": evaluaciones[4]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-	
 		"riesgo": 5,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio": 2,
@@ -470,9 +453,8 @@ function cambiar_subprueba(d) {
 	{
 		"valor-maximo": 45,
 		"category": "Marzo",
-		"estilo": evaluaciones[4]  == "True"? 0 : punteado,
-		"etiqueta": evaluaciones[4]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-	
+		"estilo": evaluaciones[5]  == "True"? 0 : punteado,
+		"etiqueta": evaluaciones[5]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 5,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio": 2,
@@ -482,10 +464,8 @@ function cambiar_subprueba(d) {
 	{
 		"valor-maximo": 45,
 		"category": "Abril",
-		"estilo": evaluaciones[4]  == "True"? 0 : punteado,
-		"etiqueta": evaluaciones[4]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-	
-	
+		"estilo": evaluaciones[6]  == "True"? 0 : punteado,
+		"etiqueta": evaluaciones[6]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 5,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio": 2,
@@ -497,7 +477,6 @@ function cambiar_subprueba(d) {
 		"category": "Mayo",
 		"estilo": evaluaciones[7]  == "True"? 0 : punteado,
 		"etiqueta": evaluaciones[7]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-	
 		"riesgo": 4,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio":2,
@@ -515,7 +494,6 @@ function cambiar_subprueba(d) {
 		"category": "Noviembre",
 		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		
 		"riesgo": 5,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio": 3,
@@ -525,9 +503,8 @@ function cambiar_subprueba(d) {
 	{
 		"valor-maximo": 45,
 		"category": "Diciembre",
-		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		
+		"estilo": evaluaciones[2] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[2] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 5,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio": 3,
@@ -537,9 +514,8 @@ function cambiar_subprueba(d) {
 	{
 		"valor-maximo": 45,
 		"category": "Enero",
-		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		
+		"estilo": evaluaciones[3] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[3] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 5,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio": 3,
@@ -551,7 +527,6 @@ function cambiar_subprueba(d) {
 		"category": "Febrero",
 		"estilo": evaluaciones[4] == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		
 		"riesgo": 6,
 		"rendimiento-bajo": 2,
 		"rendimiento-medio": 2,
@@ -561,8 +536,8 @@ function cambiar_subprueba(d) {
 	{
 		"valor-maximo": 45,
 		"category": "Marzo",
-		"estilo": evaluaciones[4] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
+		"estilo": evaluaciones[5] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[5] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 6,
 		"rendimiento-bajo": 2,
 		"rendimiento-medio": 2,
@@ -572,9 +547,8 @@ function cambiar_subprueba(d) {
 	{
 		"valor-maximo": 45,
 		"category": "Abil",
-		"estilo": evaluaciones[4] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		
+		"estilo": evaluaciones[6] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[6] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 6,
 		"rendimiento-bajo": 2,
 		"rendimiento-medio": 2,
@@ -586,7 +560,6 @@ function cambiar_subprueba(d) {
 		"category": "Mayo",
 		"estilo": evaluaciones[7] == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		
 		"riesgo": 7,
 		"rendimiento-bajo":3,
 		"rendimiento-medio": 3,
@@ -601,7 +574,6 @@ function cambiar_subprueba(d) {
 		"category": "Noviembre",
 		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		
 		"riesgo": 10,
 		"rendimiento-bajo":1 ,
 		"rendimiento-medio": 2,
@@ -611,9 +583,8 @@ function cambiar_subprueba(d) {
 	{
 		"valor-maximo": 45,
 		"category": "Diciembre",
-		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-	
+		"estilo": evaluaciones[2] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[2] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 10,
 		"rendimiento-bajo":1 ,
 		"rendimiento-medio": 2,
@@ -623,10 +594,8 @@ function cambiar_subprueba(d) {
 	{
 		"valor-maximo": 45,
 		"category": "Enero",
-		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-	
-		
+		"estilo": evaluaciones[3] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[3] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 10,
 		"rendimiento-bajo":1 ,
 		"rendimiento-medio": 2,
@@ -638,7 +607,6 @@ function cambiar_subprueba(d) {
 		"category": "Febrero",
 		"estilo": evaluaciones[4] == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		
 		"riesgo": 11,
 		"rendimiento-bajo": 3,
 		"rendimiento-medio": 2,
@@ -648,9 +616,8 @@ function cambiar_subprueba(d) {
 	{
 		"valor-maximo": 45,
 		"category": "Marzo",
-		"estilo": evaluaciones[4] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		
+		"estilo": evaluaciones[5] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[5] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 11,
 		"rendimiento-bajo": 3,
 		"rendimiento-medio": 2,
@@ -660,9 +627,8 @@ function cambiar_subprueba(d) {
 	{
 		"valor-maximo": 45,
 		"category": "Abril",
-		"estilo": evaluaciones[4] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-			
+		"estilo": evaluaciones[6] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[6] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 11,
 		"rendimiento-bajo": 3,
 		"rendimiento-medio": 2,
@@ -674,7 +640,6 @@ function cambiar_subprueba(d) {
 		"category": "Mayo",
 		"estilo": evaluaciones[7] == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		
 		"riesgo": 13,
 		"rendimiento-bajo": 5,
 		"rendimiento-medio": 3,
@@ -690,7 +655,6 @@ function cambiar_subprueba(d) {
 		"category": "Noviembre",
 		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		
 		"riesgo": 5,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio": 1,
@@ -702,7 +666,6 @@ function cambiar_subprueba(d) {
 		"category": "Febrero",
 		"estilo": evaluaciones[4] == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		
 		"riesgo": 5,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio": 1,
@@ -714,7 +677,6 @@ function cambiar_subprueba(d) {
 		"category": "Mayo",
 		"estilo": evaluaciones[7] == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-	
 		"riesgo": 7,
 		"rendimiento-bajo": 2,
 		"rendimiento-medio": 1,
@@ -822,48 +784,59 @@ var datos_graficos_progreso = [
 
 	{
 	"subtarea": "CN",
-	"rendimiento-diciembre": puntuacion_directa("CN", 1),
-	"rendimiento-enero": puntuacion_directa("CN", 1),
-	"rendimiento-marzo": puntuacion_directa("CN", 4),
-	"rendimiento-abril": puntuacion_directa("CN", 4),
-	"color-diciembre": colores[ get_riesgo_CN_inicio( puntuacion_directa("CN", 1) ) ],
-	"color-enero": colores[ get_riesgo_CN_inicio( puntuacion_directa("CN", 1) ) ],
-	"color-marzo": colores[ get_riesgo_CN_medio( puntuacion_directa("CN", 4) )],
-	"color-abril": colores[ get_riesgo_CN_medio( puntuacion_directa("CN", 4) )]
+	"rendimiento-diciembre": puntuacion_directa("CN", 2),
+	"rendimiento-enero": puntuacion_directa("CN", 3),
+	"rendimiento-marzo": puntuacion_directa("CN", 5),
+	"rendimiento-abril": puntuacion_directa("CN", 6),
+	"color-diciembre": colores[ get_riesgo_CN_inicio( puntuacion_directa("CN", 2) ) ],
+	"color-enero": colores[ get_riesgo_CN_inicio( puntuacion_directa("CN", 3) ) ],
+	"color-marzo": colores[ get_riesgo_CN_medio( puntuacion_directa("CN", 5) )],
+	"color-abril": colores[ get_riesgo_CN_medio( puntuacion_directa("CN", 6) )]
 	},
 
 	{
 	"subtarea": "SN",
-	"rendimiento-diciembre": puntuacion_directa("SN", 1),
-	"rendimiento-enero": puntuacion_directa("SN", 1),
-	"rendimiento-marzo": puntuacion_directa("SN", 4),
-	"rendimiento-abril": puntuacion_directa("SN", 4),
-	"color-diciembre": colores[ get_riesgo_SN_inicio( puntuacion_directa("SN", 1) ) ],
-	"color-enero": colores[ get_riesgo_SN_inicio( puntuacion_directa("SN", 1) ) ],
-	"color-marzo": colores[ get_riesgo_SN_medio( puntuacion_directa("SN", 4) )],
-	"color-abril": colores[ get_riesgo_SN_medio( puntuacion_directa("SN", 4) )]
+	"rendimiento-diciembre": puntuacion_directa("SN", 2),
+	"rendimiento-enero": puntuacion_directa("SN", 3),
+	"rendimiento-marzo": puntuacion_directa("SN", 5),
+	"rendimiento-abril": puntuacion_directa("SN", 6),
+	"color-diciembre": colores[ get_riesgo_SN_inicio( puntuacion_directa("SN", 2) ) ],
+	"color-enero": colores[ get_riesgo_SN_inicio( puntuacion_directa("SN", 3) ) ],
+	"color-marzo": colores[ get_riesgo_SN_medio( puntuacion_directa("SN", 5) )],
+	"color-abril": colores[ get_riesgo_SN_medio( puntuacion_directa("SN", 6) )]
 	},
 	{
 	"subtarea": "OUD",
-	"rendimiento-diciembre": puntuacion_directa("OUD", 1),
-	"rendimiento-enero": puntuacion_directa("OUD", 1),
-	"rendimiento-marzo": puntuacion_directa("OUD", 4),
-	"rendimiento-abril": puntuacion_directa("OUD", 4),
-	"color-diciembre": colores[ get_riesgo_OUD_inicio( puntuacion_directa("OUD", 1) ) ],
-	"color-enero": colores[ get_riesgo_OUD_inicio( puntuacion_directa("OUD", 1) ) ],
-	"color-marzo": colores[ get_riesgo_OUD_medio( puntuacion_directa("OUD", 4) )],
-	"color-abril": colores[ get_riesgo_OUD_medio( puntuacion_directa("OUD", 4) )]
+	"rendimiento-diciembre": puntuacion_directa("OUD", 2),
+	"rendimiento-enero": puntuacion_directa("OUD", 3),
+	"rendimiento-marzo": puntuacion_directa("OUD", 5),
+	"rendimiento-abril": puntuacion_directa("OUD", 6),
+	"color-diciembre": colores[ get_riesgo_OUD_inicio( puntuacion_directa("OUD", 2) ) ],
+	"color-enero": colores[ get_riesgo_OUD_inicio( puntuacion_directa("OUD", 3) ) ],
+	"color-marzo": colores[ get_riesgo_OUD_medio( puntuacion_directa("OUD", 5) )],
+	"color-abril": colores[ get_riesgo_OUD_medio( puntuacion_directa("OUD", 6) )]
 	},
 	{
 	"subtarea": "ODD",
-	"rendimiento-diciembre": puntuacion_directa("ODD", 1),
-	"rendimiento-enero": puntuacion_directa("ODD", 1),
-	"rendimiento-marzo": puntuacion_directa("ODD", 4),
-	"rendimiento-abril": puntuacion_directa("ODD", 4),
-	"color-diciembre": colores[ get_riesgo_ODD_inicio( puntuacion_directa("ODD", 1) ) ],
-	"color-enero": colores[ get_riesgo_ODD_inicio( puntuacion_directa("ODD", 1) ) ],
-	"color-marzo": colores[ get_riesgo_ODD_medio( puntuacion_directa("ODD", 4) )],
-	"color-abril": colores[ get_riesgo_ODD_medio( puntuacion_directa("ODD", 4) )]
+	"rendimiento-diciembre": puntuacion_directa("ODD", 2),
+	"rendimiento-enero": puntuacion_directa("ODD", 3),
+	"rendimiento-marzo": puntuacion_directa("ODD", 5),
+	"rendimiento-abril": puntuacion_directa("ODD", 6),
+	"color-diciembre": colores[ get_riesgo_ODD_inicio( puntuacion_directa("ODD", 2) ) ],
+	"color-enero": colores[ get_riesgo_ODD_inicio( puntuacion_directa("ODD", 3) ) ],
+	"color-marzo": colores[ get_riesgo_ODD_medio( puntuacion_directa("ODD", 5) )],
+	"color-abril": colores[ get_riesgo_ODD_medio( puntuacion_directa("ODD", 6) )]
+	},
+	{
+	"subtarea": "VP",
+	"rendimiento-diciembre": puntuacion_directa("VP", 2),
+	"rendimiento-enero": puntuacion_directa("VP", 3),
+	"rendimiento-marzo": puntuacion_directa("VP", 5),
+	"rendimiento-abril": puntuacion_directa("VP", 6),
+	"color-diciembre": colores[ get_riesgo_VP_inicio( puntuacion_directa("VP", 2) ) ],
+	"color-enero": colores[ get_riesgo_VP_inicio( puntuacion_directa("VP", 3) ) ],
+	"color-marzo": colores[ get_riesgo_VP_medio( puntuacion_directa("VP", 5) )],
+	"color-abril": colores[ get_riesgo_VP_medio( puntuacion_directa("VP", 6) )]
 	}
 
 

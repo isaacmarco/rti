@@ -10,6 +10,7 @@ from .models import Grupo, Alumno, Evaluacion, Evaluador
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
+from datetime import datetime
 
 from .forms import FormGrupo, FormAlumno, FormAlumnoPOST, FormEvaluador, FormAlumnoGrupoForzado,\
     Form_Evaluacion_IPAL_INFANTIL, Form_Evaluacion_IPAL_PRIMERO, Form_Evaluacion_IPAL_SEGUNDO, \
@@ -21,6 +22,7 @@ from .models import \
     Evaluacion_IPAL_INFANTIL, Evaluacion_IPAL_PRIMERO, Evaluacion_IPAL_SEGUNDO,\
     Evaluacion_IPAM_INFANTIL, Evaluacion_IPAM_PRIMERO, Evaluacion_IPAM_SEGUNDO, Evaluacion_IPAM_TERCERO, \
     Evaluacion_IPAE_PRIMERO, Evaluacion_IPAE_SEGUNDO, Evaluacion_IPAE_TERCERO
+
 
 
 
@@ -108,11 +110,18 @@ def puede_eliminar_alumnos(request):
 
 def es_propietario_grupo(request, grupo):
     print('>>> Comprobando propietario del grupo')
-    return grupo.evaluador == request.user # el grupo es del usuario
+    evaluadores = grupo.evaluadores.all()
+    return request.user in evaluadores
+    # return True
+    #
+    # return request.user in evaluadores
+    #return grupo.evaluador == request.user # el grupo es del usuario
 
 def es_propietario_alumno(request, alumno):
     print('>>> Comprobando propietario del alumno')
-    return alumno.evaluador == request.user # el alumno es del usuario
+    evaluadores = alumno.grupo.evaluadores.all()
+    return request.user in evaluadores
+    # return alumno.evaluador == request.user # el alumno es del usuario
 
 def es_propietario_evaluacion(request, evaluacion):
     print('>>> Comprobando propietario de la evaluacion')
@@ -148,7 +157,7 @@ def eliminar_alumno(request):
         return render(request, 'error.html', {'error': ERROR_ELIMINAR_ALUMNO})
 
     # comprobar los permisos en este ALUMNO
-    if not es_propietario_grupo(request, alumno):
+    if not es_propietario_grupo(request, alumno.grupo):
         return render(request, 'error.html', {'error': ERROR_PROPIETARIO_ALUMNO})
 
     alumno.delete()
@@ -182,6 +191,7 @@ def compartir_grupo(request):
     return render(request, 'compartir_grupo.html', {
         'index':server_url,
         'server_url': server_url, 'grupo': grupo})
+
 
 
 def actualizar_grupo_compartido(request):
@@ -237,7 +247,7 @@ def informe_individual(request):
     curso = alumno.curso
 
     # comprobar los permisos en este ALUMNO
-    if not es_propietario_grupo(request, alumno):
+    if not es_propietario_grupo(request, alumno.grupo):
         return render(request,'error.html', {'error': ERROR_PROPIETARIO_ALUMNO})
 
     # plabtilla html y url de retorno
@@ -437,11 +447,11 @@ def nueva_evaluacion(request):
     tipo = request.GET['tipo']
     alumno = Alumno.objects.get(pk=id_alumno)
     evaluador = Evaluador.objects.get(usuario=request.user)
+    grupo = alumno.grupo
     curso = alumno.curso
-    grupo = str(alumno.grupo.pk)
-    # obsoleto: url_retorno = server_url + lista_alumnos_grupo_url + '/?idGrupo=' + grupo
+    id_grupo = str(alumno.grupo.pk)
     url_retorno = server_url + lista_evaluaciones + \
-                  '/?idGrupo=' + grupo + '&idAlumno=' + id_alumno + \
+                  '/?idGrupo=' + id_grupo + '&idAlumno=' + id_alumno + \
                   '&tipo=' + tipo
 
     print('>>> Nueva evaluacion ' + str(evaluador.curso_academico) + ' ' + tipo + ' ' + curso)
@@ -487,7 +497,8 @@ def nueva_evaluacion(request):
             mes=mes,
             evaluador=request.user,
             alumno=alumno,
-            curso_academico=evaluador.curso_academico
+            curso_academico=grupo.curso_academico
+            # obsoleto: curso_academico=evaluador.curso_academico
         )
 
         # comprobar si es de tipo cribado o progreso
@@ -653,22 +664,26 @@ def editar_evaluacion(request):
     curso = request.GET['curso']
     nombre_clase = tipo + '-' + curso
     evaluacion = get_object_or_404(clases[nombre_clase], pk=id_evaluacion)
+
     url_retorno = server_url + 'lista-evaluaciones/?idAlumno=' + str(evaluacion.alumno.pk) + '&tipo=' + tipo
-    print('>>> Evaluacion de ' + evaluacion.prueba)
+    print('>>> Evaluacion de ' + nombre_clase)
 
     # comprobar los permisos en este alumno
     if not es_propietario_evaluacion(request, evaluacion):
         return render(request, 'error.html', {'error': ERROR_PROPIETARIO_EVALUACION})
 
     if request.method == "POST":
-        print('post')
+        print('>>> Enviando puntuaciones directas')
         form = formularios[nombre_clase](request.POST, instance=evaluacion)
         if form.is_valid():
             evaluacion = form.save(commit=False)
             procesar_evaluacion(evaluacion)
-        return redirect(url_retorno)
+            return redirect(url_retorno)
+        else:
+            print('>>> ERROR EN LOS DATOS DEL FORMULARIO')
+            return redirect(url_retorno)
     else:
-        print('no post')
+        print('>>> Mostrando formulario de puntuaciones directas para ' + nombre_clase)
         form = formularios[nombre_clase](instance=evaluacion)
 
     plantilla = 'form_editar_evaluacion_' + tipo + '_' + curso + '.html'
@@ -767,24 +782,38 @@ def listar_evaluaciones(request):
 
 
 
-
+# actualiza todos los cursos academicos de los
+# alumnos en eun determinado grupo
+def actualizar_curso_academico_grupo(request):
+    print('>>> Actualizar los alumnos al nuevo curso academico del grupo')
+    # grupo a actualizar
+    id_grupo = request.GET['idGrupo']
+    grupo = Grupo.objects.get(pk=id_grupo)
+    print('>>> Actualizando curso academico del grupo ' + grupo.nombre)
+    # comprobar los permisos en este grupo
+    if not es_propietario_grupo(request, grupo):
+        return render(request, 'error.html', {'error': ERROR_PROPIETARIO_GRUPO})
+    # obtener todos los alumnos del grupo
+    alumnos = Alumno.objects.filter(grupo=grupo)
+    # actualizar
+    for alumno in alumnos:
+        alumno.curso_academico = grupo.curso_academico
+        alumno.save()
+        print('>>> Actualizado curso de ' + alumno.codigo)
+    # volvemos al aula
+    url_retorno = server_url + lista_alumnos_grupo_url + '/?idGrupo=' + id_grupo
+    return redirect(url_retorno)
 
 
 # listar alumnos de un grupo
 def listar_alumnos_evaluador_en_grupo(request):
-
     # grupo al que se agregara el alumno
     id_grupo = request.GET['idGrupo']
     grupo = Grupo.objects.get(pk=id_grupo)
-
-
     # comprobar los permisos en este grupo
     if not es_propietario_grupo(request, grupo):
         return render(request,'error.html', {'error': ERROR_PROPIETARIO_GRUPO})
-
-
-
-    mostrar_todos = False
+    mostrar_todos = True
 
     # comprobar si se ha filtrado por año academico
     if request.GET.get('cursoAcademico', ''):
@@ -915,6 +944,19 @@ def listar_alumnos_evaluador_en_grupo(request):
 
 
 
+@login_required
+def compartir_grupo_centro(request):
+    print('>>> Compartiendo el aula del centro')
+    # obtennemos el grupo y el evaluador
+    id_grupo = request.GET['idGrupo']
+    grupo = Grupo.objects.get(pk=id_grupo)
+    evaluador = Evaluador.objects.get(usuario=request.user)
+    # agregar al grupo del centro el evaluador
+    grupo.evaluadores.add(evaluador.usuario)
+    grupo.save()
+    print('>>> Grupo ' + grupo.nombre + ' en el centro ' + grupo.centro_pilotaje + ' compartido con ' + evaluador.nombre)
+    return redirect(server_url + lista_grupos_url)
+
 
 
 # listar grupos del evaluador (consejeria)
@@ -924,13 +966,14 @@ def lista_grupos_evaluador_consejeria(request):
         # obtenemos los grupos que pertenecen al centro del
         # evaluador
         evaluador = Evaluador.objects.get(usuario=request.user)
-        print('>>> Centro del evaluador ' + evaluador.nombre  + ' es ' + evaluador.centro_pilotaje)
+        print('>>> Centro del evaluador ' + evaluador.nombre + ' es ' + evaluador.centro_pilotaje)
         gruposCentro = Grupo.objects.filter(centro_pilotaje=evaluador.centro_pilotaje)
         url_retorno = server_url + lista_grupos_url
         return render(request, 'lista_grupos_consejeria.html',
                       {'grupos': gruposCentro,
                        'index': server_url,
-                       'server_url': url_retorno})
+                       'url_retorno': url_retorno,
+                       'server_url': server_url})
 
 
     except ObjectDoesNotExist:
@@ -1047,7 +1090,7 @@ def nuevo_alumno(request):
             alumno = form.save(commit=False)
             # obtener evaluador
             alumno.evaluador = request.user
-            evaluador =    Evaluador.objects.get(pk=alumno.evaluador.pk)
+            evaluador = Evaluador.objects.get(usuario=request.user) # pk=alumno.evaluador.pk)
 
             alumno.grupo = grupo # asignamos el grupo actual
             alumno.curso = grupo.curso # asignamos el curso del grupo
@@ -1146,11 +1189,14 @@ def listar_alumnos_evaluador(request):
 # EL FICHERO DEBE SER UTF8 SIN BOM, EN CASO
 # CONTRARIO EL PRIMER CARACTER SERA UN CARACTER ESPECIAL (BOM)
 def importar_csv(request):
+
+    importar_tipo = request.GET['tipo'] # evaluadores, alumnos, grupos (tipo del fichero csv)
+    usuario = request.user
+    print('>>> Importando datos de tipo ' + importar_tipo )
+
     data = {}
     if "GET" == request.method:
-        return render(request, 'importar_evaluadores.html', {'index': server_url})
-        #return render(request, 'importar_evaluadores.html', data, {'index': server_url})
-
+        return render(request, 'importar_evaluadores.html', {'index': server_url, 'tipo':importar_tipo})
 
     # if not GET, then proceed
     try:
@@ -1166,42 +1212,69 @@ def importar_csv(request):
         lines = file_data.split("\n")
 
         for line in lines:
-            fields = line.split(",")
-            data_dict = {}
-            data_dict["codigo"] = fields[0]
-            data_dict["nombre"] = fields[1]
-            data_dict["password"] = fields[2]
-            data_dict["email"] = fields[3]
-            data_dict["centro_pilotaje"] = fields[4]
-            data_dict["pais"] = fields[5]
-            # el resto de campos se rellena por los docentes
-            print(fields[0] + ', ' + fields[1] + ', ' + fields[2] + ', ' + fields[3]
-                  + ', ' + fields[4] + ', ' + fields[5])
 
-            # TODO primer paso, crear el usuario en la plataforma
+            if importar_tipo == 'ALUMNOS':
+                fields = line.split(",")
+                alumno = Alumno(codigo=fields[0], curso=fields[3], curso_academico=fields[4],
+                                centro_pilotaje=fields[5],sexo=fields[6])
+                # fecha
+                fechaNacimiento = fields[1]
+                date = datetime.strptime(fechaNacimiento, "%d/%m/%Y")
+                alumno.fecha_nacimiento = date
+                # obtener el grupo desde su id
+                idGrupo = fields[2]
+                grupoAlumno = Grupo.objects.get(pk=idGrupo)
+                alumno.grupo = grupoAlumno
+                # forzar el evaluador
+                alumno.evaluador = request.user
+                alumno.save()
+                print('>>> Nuevo alumno subido:' + fields[0] + ', ' + fields[1] + ', ' +
+                      fields[2] + ', ' + fields[3] + ', ' + fields[4] + ', ' + fields[5])
 
-            # TODO asignar el rol de evaluador en este punto
+            if importar_tipo == 'GRUPOS':
+                fields = line.split(",")
+                grupo = Grupo(centro_pilotaje=fields[0], curso=fields[1],
+                              nombre=fields[2], centro=fields[3], curso_academico=fields[4],
+                              isla=fields[5])
+                grupo.evaluador = usuario
+                grupo.save()
+                grupo.evaluadores.add(usuario)
+                grupo.save()
+                print('>>> Nuevo grupo subido:' + fields[0] + ', ' + fields[1] + ', ' +
+                      fields[2] + ', ' + fields[3] + ', ' + fields[4] + ', ' + fields[5])
 
-            # TODO segundo paso, crear el registro evaluador
+            if importar_tipo == 'EVALUADORES':
+                fields = line.split(",")
+                codigo=fields[0]
+                clave=fields[1]
+                nombre=fields[2]
+                email=fields[5]
+                evaluador = Evaluador(codigo=codigo, clave=clave,
+                    nombre=nombre, centro_pilotaje=fields[3],
+                    centro=fields[4], email=fields[5])
 
-            '''
-            try:
-                form = EventsForm(data_dict)
-                if form.is_valid():
-                    form.save()
-                else:
-                    logging.getLogger("error_logger").error(form.errors.as_json())
-            except Exception as e:
-                logging.getLogger("error_logger").error(repr(e))
-                pass
-            '''
+                # el resto de campos se rellena por los docentes
+                print(fields[0] + ', ' + fields[1] + ', ' + fields[2] + ', ' + fields[3]
+                      + ', ' + fields[4] + fields[5])
+
+                # crear el usuario y asignarlo
+                # TODO comprobar si ya existe!
+                nuevoUsuario = User.objects.create_user(
+                    username=codigo,email=email,password=clave,first_name=nombre)
+
+                evaluador.usuario = nuevoUsuario
+
+                # asignar el grupo
+                grupoParticipantes = Group.objects.get(name='participantes')
+                grupoParticipantes.user_set.add(nuevoUsuario)
+
+                evaluador.save()
+
+
     except Exception as e:
         print('>>> Error subiendo CSV: ' + repr(e))
 
     return redirect(server_url)
-    #return render(request, 'lista_alumnos.html',
-    #                  {'alumnos': alumnos,'index': server_url})
-
 
 
 

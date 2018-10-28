@@ -8,7 +8,7 @@
 
 <div class="form-style-1" style="padding: 30px">
 
-    <button type="button" class="save btn btn-default" onclick="window.location.href='{{ server_url }}'"
+    <button type="button" class="save btn btn-default" onclick="window.location.href='{{ url_retorno }}'"
     >👈 Volver</button>
 
 </div>
@@ -17,25 +17,27 @@
 
 <table>
 	<tr>
-		<th>Acceso</th>
+		<!--<th>Acceso</th>-->
 		<th>Nombre</th>
 		<th>Curso</th>
 		<th>Año académico</th>
-		<th>Editar</th>
+		<th>Agregar</th>
 
 	</tr>  		
 		{% for grupo in grupos %}
 		<tr>
+				<!-- usar este grupo 👉-
 			<td>
-				<!-- usar este grupo 👉-->
+
 				<a href="{{ server_url }}lista-alumnos-grupo/?idGrupo={{grupo.pk | safe}}">🚪 Entrar</a>
-			</td>
+			</td>-->
 			<td>{{ grupo.nombre }}</td>
 			<td>{{ grupo.curso }}</td>
 			<td>{% get_curso grupo.curso_academico %}</td>
+			<!-- agregar el aula -->
 			<td>
-				<!-- editar grupo -->
-				<a href="{{ server_url }}editar-grupo/?id={{grupo.pk | safe}}">👪 Editar</a>
+
+				<a href="{{ server_url }}compartir-grupo-centro/?idGrupo={{grupo.pk | safe}}">🔌 Agregar</a>
 			</td>
 
 

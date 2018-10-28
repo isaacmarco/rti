@@ -35,7 +35,7 @@
 		<H3>✍ IPAE </H3>
 		<button type="button" class="save btn btn-default"
 		onclick="window.location.href='{{ server_url }}exportar-csv/?tipo=IPAE'">💾 Descargar datos IPAE-INFANTIL</button>
-	<button type="button" class="save btn btn-default"
+		<button type="button" class="save btn btn-default"
 		onclick="window.location.href='{{ server_url }}exportar-csv/?tipo=IPAE'">💾 Descargar datos IPAE-PRIMERO</button>
 		<button type="button" class="save btn btn-default"
 		onclick="window.location.href='{{ server_url }}exportar-csv/?tipo=IPAE'">💾 Descargar datos IPAE-SEGUNDO</button>
@@ -51,11 +51,14 @@
 <div class="form-style-1" style="padding: 30px">
 
 		<button type="button" class="save btn btn-default"
-		onclick="window.location.href='{{ server_url }}importar-evaluadores'">📃 Importar evaluadores</button>
-		<br><br>
+		onclick="window.location.href='{{ server_url }}importar/?tipo=EVALUADORES'">📃 Importar evaluadores</button>
+
 		<button type="button" class="save btn btn-default"
-		onclick="window.location.href='#'">👪 Importar alumnos</button>
-		<br><br>
+		onclick="window.location.href='{{ server_url }}importar/?tipo=ALUMNOS'">👪 Importar alumnos</button>
+
+		<button type="button" class="save btn btn-default"
+		onclick="window.location.href='{{ server_url }}importar/?tipo=GRUPOS'">🏡 Importar grupos</button>
+
 
 </div>
 
