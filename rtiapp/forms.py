@@ -171,6 +171,13 @@ class FormAlumnoPOST(forms.ModelForm):
         model = Alumno
         fields = ('codigo', 'sexo', 'fecha_nacimiento', 'curso_academico','pais', 'curso', 'centro', 'grupo')
 
+class FormAlumnoConsejeriaPOST(forms.ModelForm):
+    fecha_nacimiento = forms.DateField(widget=forms.DateInput(format='%d/%m/%Y'),
+                                       input_formats=('%d/%m/%Y',))
+    class Meta:
+        model = Alumno
+        fields = ('codigo', 'sexo', 'fecha_nacimiento', 'curso_academico','pais', 'curso', 'centro')
+
 
 
 # formulario para editar y crear nuevo alumno,
@@ -199,10 +206,27 @@ class FormAlumno(forms.ModelForm):
         self.fields['grupo'].queryset = Grupo.objects.filter(evaluador=user_evaluador)
 
 
+# formulario en el que no se puede cmbiar el grupo
+# del alumno (profesores consejeria)
+class FormAlumnoConsejeria(forms.ModelForm):
+    fecha_nacimiento = forms.DateField(widget=forms.DateInput(format='%d/%m/%Y'),
+                                       input_formats=('%d/%m/%Y',))
+
+    class Meta:
+        model = Alumno
+        fields = ('codigo', 'sexo', 'fecha_nacimiento', 'pais', 'curso', 'curso_academico', 'centro')
+
+
+    def __init__(self, user_evaluador, *args, **kwargs):
+        super(FormAlumnoConsejeria, self).__init__(*args, **kwargs)
+        # self.fields['grupo'].queryset = Grupo.objects.filter(evaluador=user_evaluador)
+
+
+
 
 # formulario para evaluadores
 class FormEvaluador(forms.ModelForm):
     class Meta:
         model = Evaluador
         fields = '__all__'
-        exclude = ('usuario', 'informacion_adicional_completa', 'centro_pilotaje', 'codigo')
+        exclude = ('clave','usuario', 'informacion_adicional_completa', 'centro_pilotaje', 'codigo')

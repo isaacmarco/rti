@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load app_filters %}
+{% block content %}
+
+
+ <TABLE>
+<div class="form-style-1" style="padding: 30px">
+
+    <tr>
+    <td style="text-align: left;">
+
+    <H2>Perfil de usuario</H2>
+    <br>
+
+    <p>En primer lugar complete su perfil mediante el botón <b>👤 Mi perfil</b>.
+    Puede actualizar los datos de su perfil en cualquier momento.</p>
+
+    <br>
+
+    <H2>Gestión de grupos/aulas</H2><br>
+    <p>Para acceder a sus grupos/aulas pulse el botón <b>👪 Mis grupos</b>.
+    La vista de grupos/aulas le permite trabajar con grupos de alumnos.
+    Los grupos pueden ser creados por usted o ser obtenidos desde su centro de estudios.
+    <br><br>
+        'Nuevo grupo' Le permite añadir un nuevo grupo de alumnos
+        <br><br>
+        'Grupos/Aulas de mi centro' Le permite incluir dentro de sus grupos
+        un aula existente en su centro (siempre que el centro de estudios haya importado
+        los datos previamente)
+
+
+    <br>
+
+    <H2>Trabajar con un grupo</H2>
+
+
+
+    </td>
+    </tr>
+
+
+</div>
+</TABLE>
+
+
+
+{% endblock %}
+
+
+

@@ -50,7 +50,7 @@ div.contenido {
 
 <div class="topnav">
 
-  	<a class="active" href="{{ server_url }}">🚀 Plataforma RTI</a>
+  	<a class="active" href="{{ server_url }}">🚀 Plataforma RtI</a>
 
 	<!-- solo se muestra el menu de navegacion si
 	el usuario esta logeado -->
@@ -60,12 +60,14 @@ div.contenido {
   		<a href="{{ index }}lista-grupos">👪 Mis grupos</a>
 		<!--<a href="{{ index }}lista-alumnos">📓 Mis alumnos</a>-->
   		<!--<a href="{{ index }}establecer-curso">📅 Establecer año académico</a>-->
-		<a href="{{ index }}documentos">💼 Documentos</a>
+		<!--<a href="{{ index }}documentos">💼 Documentos</a>-->
+		<!-- <a href="{{ index }}ayuda">❔ Ayuda</a>-->
 		<!-- menu solo para el rol de investigador -->
+
 		{% if user|es_investigador %}
 			<a href="{{ index }}exportar">💾 Datos</a>
 		{% endif %}
-		<a href="{{ index }}cerrar-sesion">🚪 Cerrar sesión</a>
+		<a href="{{ index }}cerrar-sesion">🔑 Cerrar sesión</a>
 
 	{% else %}
 
