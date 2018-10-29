@@ -9,6 +9,9 @@ def get_curso(curso):
     siguiente = curso + 1
     return str(curso) + '-' + str(siguiente)
 
+@register.simple_tag
+def get_server_url():
+    return 'http://193.145.96.31/'
 
 # devuelve el riesgo IPAL de cada
 # tarea segun su puntuacion directa
