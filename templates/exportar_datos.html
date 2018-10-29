@@ -5,44 +5,47 @@
 
 <h1>Exportar datos</h1>
 
+
 <div class="form-style-1" style="padding: 30px">
-
-		<button type="button" class="save btn btn-default"
-		onclick="window.location.href='{{ server_url }}exportar-csv/?tipo=alumnos'">👪 Descargar datos de alumnos</button>
-		<br><br>
-		<button type="button" class="save btn btn-default"
-		onclick="window.location.href='{{ server_url }}exportar-csv/?tipo=evaluadores'">🎓 Descargar datos de evaluadores</button>
-		<br><br><br>
-		<H3>📕 IPAL </H3>
-		<button type="button" class="save btn btn-default"
-		onclick="window.location.href='{{ server_url }}exportar-csv/?tipo=IPAL'">💾 Descargar datos IPAL-INFANTIL</button>
-		<button type="button" class="save btn btn-default"
-		onclick="window.location.href='{{ server_url }}exportar-csv/?tipo=IPAL'">💾 Descargar datos IPAL-PRIMERO</button>
-		<button type="button" class="save btn btn-default"
-		onclick="window.location.href='{{ server_url }}exportar-csv/?tipo=IPAL'">💾 Descargar datos IPAL-SEGUNDO</button>
-
-		<br><br><BR>
-		<H3>📏 IPAM </H3>
-		<button type="button" class="save btn btn-default"
-		onclick="window.location.href='{{ server_url }}exportar-csv/?tipo=IPAM'">💾 Descargar datos IPAM-INFANTIL</button>
 	<button type="button" class="save btn btn-default"
-		onclick="window.location.href='{{ server_url }}exportar-csv/?tipo=IPAM'">💾 Descargar datos IPAM-PRIMERO</button>
+	onclick="window.location.href='{{ server_url }}exportar-csv/?tipo=alumnos'">👪 Descargar datos de alumnos</button>
+	<br><br>
 	<button type="button" class="save btn btn-default"
-		onclick="window.location.href='{{ server_url }}exportar-csv/?tipo=IPAM'">💾 Descargar datos IPAM-SEGUNDO</button>
+	onclick="window.location.href='{{ server_url }}exportar-csv/?tipo=evaluadores'">🎓 Descargar datos de evaluadores</button>
+	<br><br>
 	<button type="button" class="save btn btn-default"
-		onclick="window.location.href='{{ server_url }}exportar-csv/?tipo=IPAM'">💾 Descargar datos IPAM-TERCERO</button>
-		<br><br><br>
-		<H3>✍ IPAE </H3>
-		<button type="button" class="save btn btn-default"
-		onclick="window.location.href='{{ server_url }}exportar-csv/?tipo=IPAE'">💾 Descargar datos IPAE-INFANTIL</button>
-		<button type="button" class="save btn btn-default"
-		onclick="window.location.href='{{ server_url }}exportar-csv/?tipo=IPAE'">💾 Descargar datos IPAE-PRIMERO</button>
-		<button type="button" class="save btn btn-default"
-		onclick="window.location.href='{{ server_url }}exportar-csv/?tipo=IPAE'">💾 Descargar datos IPAE-SEGUNDO</button>
+	onclick="window.location.href='{{ server_url }}exportar-csv/?tipo=grupos'">🏡 Descargar datos de grupos</button>
+</div>
 
-	<br>
+<div class="form-style-1" style="padding: 30px">
+	<H3>📕 IPAL </H3>
+	<button type="button" class="save btn btn-default"
+	onclick="window.location.href='{{ server_url }}exportar-csv/?tipo=IPAL&curso=INFANTIL'">💾 Descargar datos IPAL-INFANTIL</button>
+	<button type="button" class="save btn btn-default"
+	onclick="window.location.href='{{ server_url }}exportar-csv/?tipo=IPAL&curso=PRIMERO'">💾 Descargar datos IPAL-PRIMERO</button>
+	<button type="button" class="save btn btn-default"
+	onclick="window.location.href='{{ server_url }}exportar-csv/?tipo=IPAL&curso=SEGUNDO'">💾 Descargar datos IPAL-SEGUNDO</button>
+</div>
 
-
+<div class="form-style-1" style="padding: 30px">
+	<H3>📏 IPAM </H3>
+	<button type="button" class="save btn btn-default"
+	onclick="window.location.href='{{ server_url }}exportar-csv/?tipo=IPAM&curso=INFANTIL'">💾 Descargar datos IPAM-INFANTIL</button>
+	<button type="button" class="save btn btn-default"
+	onclick="window.location.href='{{ server_url }}exportar-csv/?tipo=IPAM&curso=PRIMERO'">💾 Descargar datos IPAM-PRIMERO</button>
+	<button type="button" class="save btn btn-default"
+	onclick="window.location.href='{{ server_url }}exportar-csv/?tipo=IPAM&curso=SEGUNDO'">💾 Descargar datos IPAM-SEGUNDO</button>
+	<button type="button" class="save btn btn-default"
+	onclick="window.location.href='{{ server_url }}exportar-csv/?tipo=IPAM&curso=TERCERO'">💾 Descargar datos IPAM-TERCERO</button>
+</div>
+<div class="form-style-1" style="padding: 30px">
+	<H3>✍ IPAE </H3>
+	<button type="button" class="save btn btn-default"
+	onclick="window.location.href='{{ server_url }}exportar-csv/?tipo=IPAE&curso=PRIMERO'">💾 Descargar datos IPAE-PRIMERO</button>
+	<button type="button" class="save btn btn-default"
+	onclick="window.location.href='{{ server_url }}exportar-csv/?tipo=IPAE&curso=SEGUNDO'">💾 Descargar datos IPAE-SEGUNDO</button>
+	<button type="button" class="save btn btn-default"
+	onclick="window.location.href='{{ server_url }}exportar-csv/?tipo=IPAE&curso=TERCERO'">💾 Descargar datos IPAE-TERCERO</button>
 </div>
 
 
@@ -50,15 +53,14 @@
 
 <div class="form-style-1" style="padding: 30px">
 
-		<button type="button" class="save btn btn-default"
-		onclick="window.location.href='{{ server_url }}importar/?tipo=EVALUADORES'">📃 Importar evaluadores</button>
+	<button type="button" class="save btn btn-default"
+	onclick="window.location.href='{{ server_url }}importar/?tipo=EVALUADORES'">📃 Importar evaluadores</button>
 
-		<button type="button" class="save btn btn-default"
-		onclick="window.location.href='{{ server_url }}importar/?tipo=ALUMNOS'">👪 Importar alumnos</button>
+	<button type="button" class="save btn btn-default"
+	onclick="window.location.href='{{ server_url }}importar/?tipo=ALUMNOS'">👪 Importar alumnos</button>
 
-		<button type="button" class="save btn btn-default"
-		onclick="window.location.href='{{ server_url }}importar/?tipo=GRUPOS'">🏡 Importar grupos</button>
-
+	<button type="button" class="save btn btn-default"
+	onclick="window.location.href='{{ server_url }}importar/?tipo=GRUPOS'">🏡 Importar grupos</button>
 
 </div>
 
