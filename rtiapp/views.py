@@ -37,8 +37,8 @@ from django.db.models import Q
 import itertools
 import csv
 
-#server_url = 'http://127.0.0.1:8000/'
-server_url = 'http://193.145.96.31/'
+server_url = 'http://127.0.0.1:8000/'
+#server_url = 'http://193.145.96.31/'
 
 lista_grupos_url = 'lista-grupos'
 editar_grupo_url = 'editar-grupo'
@@ -392,6 +392,12 @@ def alta_evaluador(request):
         if form.is_valid():
             # crear el nuevo usuario
             form.save()
+
+            # obtener el usuario
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            usuario = authenticate(username=username, password=raw_password)
+
             # crear el registro de Evaluador
             nombre = form.cleaned_data.get('nombre')
             email = form.cleaned_data.get('email')
@@ -411,16 +417,12 @@ def alta_evaluador(request):
                 nivel_academico=nivel_academico,
                 profesion=profesion,
                 zona=zona,
-                usuario=request.user
+                usuario=usuario
             )
 
             evaluador.save()
 
-            # hacer el login
-            #username = form.cleaned_data.get('username')
-            #raw_password = form.cleaned_data.get('password1')
-            #user = authenticate(username=username, password=raw_password)
-            #login(request, user)
+            login(request, usuario)
             return redirect(server_url)
     else:
         form = SignUpForm()
