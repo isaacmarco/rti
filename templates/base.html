@@ -50,14 +50,14 @@ div.contenido {
 
 <div class="topnav">
 
-  	<a class="active" href="{% get_server_url %}">🚀 Plataforma RtI</a>
+  	<a class="active" href="{% get_server_url %}?">🚀 Plataforma RtI</a>
 
 	<!-- solo se muestra el menu de navegacion si
 	el usuario esta logeado -->
     {% if user.is_authenticated %}
 
-  		<a href="{% get_server_url %}/editar-evaluador">👤 Mi perfil</a>
-  		<a href="{% get_server_url %}/lista-grupos">👪 Mis grupos</a>
+  		<a href="{% get_server_url %}editar-evaluador">👤 Mi perfil</a>
+  		<a href="{% get_server_url %}lista-grupos">👪 Mis grupos</a>
 		<!--<a href="{{ index }}lista-alumnos">📓 Mis alumnos</a>-->
   		<!--<a href="{{ index }}establecer-curso">📅 Establecer año académico</a>-->
 		<!--<a href="{{ index }}documentos">💼 Documentos</a>-->
@@ -65,9 +65,9 @@ div.contenido {
 		<!-- menu solo para el rol de investigador -->
 
 		{% if user|es_investigador %}
-			<a href="{% get_server_url %}/exportar">💾 Datos</a>
+			<a href="{% get_server_url %}exportar">💾 Datos</a>
 		{% endif %}
-		<a href="{% get_server_url %}/cerrar-sesion">🔑 Cerrar sesión</a>
+		<a href="{% get_server_url %}cerrar-sesion">🔑 Cerrar sesión</a>
 
 	{% else %}
 
@@ -75,7 +75,7 @@ div.contenido {
 
 			<!-- mostramos la interfaz para permitir
 			el login -->
-			<a href="{% get_server_url %}/login">🚪 Iniciar sesión</a>
+			<a href="{% get_server_url %}login">🚪 Iniciar sesión</a>
 
 		{% endif %}
 
