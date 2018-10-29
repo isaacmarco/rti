@@ -410,7 +410,8 @@ def alta_evaluador(request):
                 sexo=sexo,
                 nivel_academico=nivel_academico,
                 profesion=profesion,
-                zona=zona
+                zona=zona,
+                usuario=request.user
             )
 
             evaluador.save()
