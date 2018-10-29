@@ -38,7 +38,7 @@ import itertools
 import csv
 
 #server_url = 'http://127.0.0.1:8000/'
-server_url = 'http://193.145.96.31'
+server_url = 'http://193.145.96.31/'
 
 lista_grupos_url = 'lista-grupos'
 editar_grupo_url = 'editar-grupo'
