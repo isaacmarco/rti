@@ -1,6 +1,7 @@
 {% load staticfiles %}
 {% load app_filters %}
 
+
 <html>
 
 <head>
@@ -55,6 +56,13 @@ div.contenido {
 	<!-- solo se muestra el menu de navegacion si
 	el usuario esta logeado -->
     {% if user.is_authenticated %}
+
+
+	<a href="{{ server_url }}">{{ server_url }}</a>
+	<a href="{% get_server_url %}">{% get_server_url %}</a>
+
+
+
 
   		<a href="{% get_server_url %}editar-evaluador">👤 Mi perfil</a>
   		<a href="{% get_server_url %}lista-grupos">👪 Mis grupos</a>
