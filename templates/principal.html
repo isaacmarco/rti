@@ -3,7 +3,67 @@
 {% load app_filters %}
 {% block content %}
 
+
+<div class="form-style-1" style="padding: 30px; font-size: 20px; text-align: center;">
+
+<img src="https://images.vexels.com/media/users/3/141120/isolated/preview/a5ff757d7423e6c757795e7b60183180-rocket-round-icon-by-vexels.png" alt="rtilogo"
+style="margin:auto;width:25%;"
+
+</div>
 <h1>Plataforma RtI</h1>
+
+
+
+{% if user.is_authenticated %}
+
+ <TABLE>
+<div class="form-style-1" style="padding: 30px">
+
+        <tr>
+            <td style="text-align: left;">
+    <H2>Primeros pasos: Bienvenido a la página del aplicativo RtI</H2>
+    <br>
+    <p style="text-align: left;">
+    <p>En primer lugar complete su perfil mediante el botón <b>👤 Mi perfil</b>.
+    Puede actualizar los datos de su perfil en cualquier momento.</p>
+
+    <br>
+    <p>Para acceder a sus grupos/aulas pulse el botón <b>👪 Mis grupos</b>. La vista de grupos/aulas le permite trabajar con grupos de alumnos. Los grupos pueden ser creados por usted o ser obtenidos desde su centro de estudios.
+
+    <br>
+    <p>Una vez dentro del grupo verá el listado de alumnos. Puede modificar los
+    datos de cualquier alumno con el botón de <b>📋 Ficha</b>. También puede incluir
+        un nuevo alumno con <b>👤 Nuevo alumno</b>.
+
+        <br><br>
+        Puede agregar una evaluación IPAL/IPAM/IPAE a
+        un alumno pulsando 📝, o ver su informe individual pulsando 📊.
+        <br><br>
+        Para ver los informes de rendimento del grupo entero pulse los botones
+        <b>📊 Informe de grupo</b>. Finalmente, <B>📅 Actualizar año escolar</B> le permite
+        ajustar el año escolar de cada uno de los alumnos en el grupo al año escolar configurado
+        en el grupo.
+    </p>
+
+
+
+
+    <br>
+    <p>Cuando termine de usar la aplicación puede cerrar la sesión pulsando el botón <b>🔑 Cerrar sesión</b>.
+    Si está usando la aplicación desde su domicilio no es necesario que cierra la sesión.</p>
+
+    <br>
+    ❓ <b>Recuerde que debe estudiar el manual de la plataforma para su correcta utilización</b>
+
+    </td>
+    </tr>
+
+
+</div>
+</TABLE>
+
+{% else %}
+{% endif %}
 
 <div class="form-style-1" style="padding: 30px; font-size: 20px; text-align: center;">
 
@@ -11,7 +71,6 @@
     {% if user.is_authenticated %}
 
     <!-- texto que se muestra cuando estas logeado -->
-
 
 
     {% else %}

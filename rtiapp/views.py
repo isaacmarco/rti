@@ -16,7 +16,7 @@ from .forms import FormGrupo, FormAlumno, FormAlumnoPOST, FormEvaluador, FormAlu
     Form_Evaluacion_IPAL_INFANTIL, Form_Evaluacion_IPAL_PRIMERO, Form_Evaluacion_IPAL_SEGUNDO, \
     Form_Evaluacion_IPAM_INFANTIL, Form_Evaluacion_IPAM_PRIMERO, Form_Evaluacion_IPAM_SEGUNDO, \
     Form_Evaluacion_IPAM_TERCERO, Form_Evaluacion_IPAE_PRIMERO, Form_Evaluacion_IPAE_SEGUNDO, \
-    Form_Evaluacion_IPAE_TERCERO,SignUpForm
+    Form_Evaluacion_IPAE_TERCERO,SignUpForm,FormAlumnoConsejeria, FormAlumnoConsejeriaPOST
 
 from .models import \
     Evaluacion_IPAL_INFANTIL, Evaluacion_IPAL_PRIMERO, Evaluacion_IPAL_SEGUNDO,\
@@ -108,6 +108,10 @@ def puede_eliminar_alumnos(request):
     # eliminar. No esta permitido para el profesorado participante
     return True if es_investigador(request) or not es_participante(request) else False
 
+def es_creador_grupo(request, grupo):
+    print('>>> Comprobando si es el creador del grupo')
+    return grupo.evaluador == request.user # el grupo es del usuario
+
 def es_propietario_grupo(request, grupo):
     print('>>> Comprobando propietario del grupo')
     evaluadores = grupo.evaluadores.all()
@@ -135,6 +139,9 @@ def cerrar_sesion(request):
 
 def index(request):
     return render(request,'principal.html')
+
+def ayuda(request):
+    return render(request, 'ayuda.html', {'index': server_url})
 
 def documentos(request):
     return render(request,'documentos.html', {'index':server_url})
@@ -1050,7 +1057,8 @@ def editar_grupo(request):
     grupo = get_object_or_404(Grupo, pk=id)
 
     # comprobar los permisos en este grupo
-    if not es_propietario_alumno(request, grupo):
+    if not es_creador_grupo(request, grupo):
+    #if not es_propietario_alumno(request, grupo):
         return render(request,'error.html', {'error': ERROR_PROPIETARIO_GRUPO})
 
     if request.method == "POST":
@@ -1150,13 +1158,21 @@ def editar_alumno(request):
     print('>>> Editando alumno ' + alumno.codigo)
     url_retorno = server_url + lista_alumnos_grupo_url + '/?idGrupo=' + id_grupo
     if request.method == "POST":
-        form = FormAlumnoPOST(request.POST, instance=alumno)
+        print('salvando')
+        if es_participante(request):
+            form = FormAlumnoConsejeriaPOST(request.POST, instance=alumno)
+        else :
+            form = FormAlumnoPOST(request.POST, instance=alumno)
         if form.is_valid():
             alumno = form.save(commit=False)
             alumno.save()
             return redirect(url_retorno)
     else:
-        form = FormAlumno(request.user, instance=alumno)
+        print('editando')
+        if es_participante(request):
+            form = FormAlumnoConsejeria(request.user, instance=alumno)
+        else:
+            form = FormAlumno(request.user, instance=alumno)
     return render(request, 'form_editar_alumno.html',
                   {'form': form, 'index':server_url,
                    'server_url': url_retorno, 'alumno':alumno, 'grupo':id_grupo})
