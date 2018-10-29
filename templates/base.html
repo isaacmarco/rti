@@ -56,8 +56,8 @@ div.contenido {
 	el usuario esta logeado -->
     {% if user.is_authenticated %}
 
-  		<a href="{{ index }}editar-evaluador">👤 Mi perfil</a>
-  		<a href="{{ index }}lista-grupos">👪 Mis grupos</a>
+  		<a href="/editar-evaluador">👤 Mi perfil</a>
+  		<a href="/lista-grupos">👪 Mis grupos</a>
 		<!--<a href="{{ index }}lista-alumnos">📓 Mis alumnos</a>-->
   		<!--<a href="{{ index }}establecer-curso">📅 Establecer año académico</a>-->
 		<!--<a href="{{ index }}documentos">💼 Documentos</a>-->
@@ -65,9 +65,9 @@ div.contenido {
 		<!-- menu solo para el rol de investigador -->
 
 		{% if user|es_investigador %}
-			<a href="{{ index }}exportar">💾 Datos</a>
+			<a href="/exportar">💾 Datos</a>
 		{% endif %}
-		<a href="{{ index }}cerrar-sesion">🔑 Cerrar sesión</a>
+		<a href="/cerrar-sesion">🔑 Cerrar sesión</a>
 
 	{% else %}
 
@@ -75,7 +75,7 @@ div.contenido {
 
 			<!-- mostramos la interfaz para permitir
 			el login -->
-			<a href="{{ index }}login">🚪 Iniciar sesión</a>
+			<a href="/login">🚪 Iniciar sesión</a>
 
 		{% endif %}
 
