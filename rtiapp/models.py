@@ -605,7 +605,7 @@ class Evaluacion_IPAE_TERCERO(Evaluacion):
     DICTADO_FRASES = models.IntegerField(default=0, validators=[MaxValueValidator(21), MinValueValidator(0)])
     SEC_5 = models.IntegerField(default=0, validators=[MaxValueValidator(80), MinValueValidator(0)])
     SEC_SEI_5 = models.IntegerField(default=0, validators=[MaxValueValidator(80), MinValueValidator(0)])
-    PDC_5 = models.IntegerField(default=0, validators=[MaxValueValidator(77), MinValueValidator(0)])
+    PDC_5 = models.IntegerField(default=0, validators=[MaxValueValidator(80), MinValueValidator(0)])
 
 '''
 Dictado de palabras con ortografía arbitraria 
