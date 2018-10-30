@@ -11,8 +11,8 @@ def get_curso(curso):
 
 @register.simple_tag
 def get_server_url():
-    # return 'http://127.0.0.1:8000/'
-    return 'http://193.145.96.31/'
+     return 'http://127.0.0.1:8000/'
+    #return 'http://193.145.96.31/'
 
 # devuelve el riesgo IPAL de cada
 # tarea segun su puntuacion directa
@@ -45,9 +45,9 @@ def color(key):
         "NOEV": "#808080",
         "ALTR": "#850202",
         "RIES": "#f00",
-        "BAJO": "#ffa500",
-        "NORM": "#1ae36e",
-        "OPTI": "#009fff"
+        "BAJO": "#fff200",
+        "NORM": "#009fff",
+        "OPTI": "#1ae36e"
     }
     try:
         color = colores_riesgo[key]
