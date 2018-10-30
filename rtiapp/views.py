@@ -338,7 +338,10 @@ def informe_grupo(request):
     try:
 
         # obtener alumnos solo de ese grupo y curso
-        alumnos = Alumno.objects.filter(evaluador=request.user, grupo=grupo, curso=grupo.curso)
+        # alumnos = Alumno.objects.filter(evaluador=request.user, grupo=grupo, curso=grupo.curso)
+        # nota: he desconectado evaluador=request.user para que funcione el sistema de
+        # aulas compartidas.
+        alumnos = Alumno.objects.filter(grupo=grupo, curso=grupo.curso)
 
         # obtener las evaluaciones inicio-medio-fin de todos los
         # alumnos recuperados
@@ -1278,7 +1281,7 @@ def importar_csv(request):
 
                 # el resto de campos se rellena por los docentes
                 print(fields[0] + ', ' + fields[1] + ', ' + fields[2] + ', ' + fields[3]
-                      + ', ' + fields[4] + fields[5])
+                      + ', ' + fields[4] + ', ' + fields[5])
 
                 # crear el usuario y asignarlo
                 # TODO comprobar si ya existe!
