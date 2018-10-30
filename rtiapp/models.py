@@ -230,9 +230,6 @@ class Evaluador(models.Model):
 
 
 
-
-
-
 class Grupo(models.Model):
 
     nombre = models.CharField(max_length=100, default="Nombre del grupo")#, help_text='Nombre del grupo')
@@ -242,6 +239,7 @@ class Grupo(models.Model):
     curso_academico = models.IntegerField(default=2018)#, help_text='Curso academico')
     centro = models.CharField(max_length=100, default="Centro")
     centro_pilotaje = models.CharField(max_length=50, default="Centro pilotaje") # centro de la consejeria
+    codigo = models.CharField(max_length=50, default="Codigo del grupo")  # centro de la consejeria
     fecha_alta = models.DateTimeField(auto_now_add=True)
     ultima_modificacion = models.DateTimeField(auto_now=True)
     isla = models.CharField(max_length=15, choices=ISLA_OPCIONES, default=NINGUNA)

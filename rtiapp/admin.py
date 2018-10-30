@@ -17,8 +17,8 @@ class EvaluadorAdmin(admin.ModelAdmin):
     list_filter = ('centro_pilotaje',)
 
 class GrupoAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'curso', 'evaluador', 'centro_pilotaje')
-    search_fields = ('nombre', 'curso', 'evaluador', 'centro_pilotaje')
+    list_display = ('codigo', 'nombre', 'curso', 'evaluador', 'centro_pilotaje')
+    search_fields = ('codigo', 'nombre', 'curso', 'evaluador', 'centro_pilotaje')
     list_filter = ('centro_pilotaje',)
 
 
