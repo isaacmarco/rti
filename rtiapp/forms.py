@@ -27,20 +27,36 @@ class SignUpForm(UserCreationForm):
 
 
 # forms IPAE
-# todo faltan los valores maximos y minimos
+
 class Form_Evaluacion_IPAE_PRIMERO(forms.ModelForm):
+    TLC_1 = forms.IntegerField(required=False,min_value=0, max_value=108, label='TLC')
+    DICTADO_ORTOGRAFIA_ARBITRARIA = forms.IntegerField(required=False,min_value=0, max_value=20, label='DOA')
+    DICTADO_ORTOGRAFIA_REGLADA = forms.IntegerField(required=False,min_value=0, max_value=20, label='DOR')
+    DICTADO_PSEUDOPALABRAS = forms.IntegerField(required=False,min_value=0, max_value=20, label='DP')
+    DICTADO_FRASES = forms.IntegerField(required=False,min_value=0, max_value=21, label='DF')
     class Meta:
         model = Evaluacion_IPAE_PRIMERO
         fields = '__all__'
         exclude = ('curso_academico','mes','prueba','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
 
 class Form_Evaluacion_IPAE_SEGUNDO(forms.ModelForm):
+    TLC_1 = forms.IntegerField(required=False, min_value=0, max_value=108, label='TLC')
+    DICTADO_ORTOGRAFIA_ARBITRARIA = forms.IntegerField(required=False, min_value=0, max_value=20, label='DOA')
+    DICTADO_ORTOGRAFIA_REGLADA = forms.IntegerField(required=False, min_value=0, max_value=20, label='DOR')
+    DICTADO_PSEUDOPALABRAS = forms.IntegerField(required=False, min_value=0, max_value=20, label='DP')
+    DICTADO_FRASES = forms.IntegerField(required=False, min_value=0, max_value=21, label='DF')
     class Meta:
         model = Evaluacion_IPAE_SEGUNDO
         fields = '__all__'
         exclude = ('curso_academico','mes','prueba','alumno', 'tipo', 'momento', 'riesgo', 'omnibus', 'evaluador', 'mes_leible')
 
 class Form_Evaluacion_IPAE_TERCERO(forms.ModelForm):
+    DICTADO_ORTOGRAFIA_ARBITRARIA = forms.IntegerField(required=False, min_value=0, max_value=20, label='DOA')
+    DICTADO_ORTOGRAFIA_REGLADA = forms.IntegerField(required=False, min_value=0, max_value=20, label='DOR')
+    DICTADO_FRASES = forms.IntegerField(required=False, min_value=0, max_value=21, label='DF')
+    SEC_5 = forms.IntegerField(required=False, min_value=0, max_value=80, label='SEC5')
+    SEC_SEI_5 = forms.IntegerField(required=False, min_value=0, max_value=80, label='SEC_SEI5')
+    PDC_5 = forms.IntegerField(required=False, min_value=0, max_value=80, label='PDC5')
     class Meta:
         model = Evaluacion_IPAE_TERCERO
         fields = '__all__'
