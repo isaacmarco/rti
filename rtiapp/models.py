@@ -354,7 +354,7 @@ colores_riesgo = {
   "RIES": "#f00",
   "BAJO": "#ffa500",
   "NORM": "#009fff",
-  "OPTI": "#1ae36e"#
+  "OPTI": "#1ae36e"
 }
 
 class Evaluacion(models.Model):
@@ -421,17 +421,6 @@ class Evaluacion_IPAL_INFANTIL(Evaluacion):
     CLE_TEXTO = models.IntegerField(default=0,  validators=[MaxValueValidator(6), MinValueValidator(0)])
     CFA = models.IntegerField(default=0,  validators=[MaxValueValidator(80), MinValueValidator(0)])
 
-    # separacion de los campos en aciertos/tiempo
-    '''
-    CSL_ACIERTOS = models.IntegerField(default=0)
-    CSL_TIEMPO = models.IntegerField(default=0)
-    CNL_ACIERTOS = models.IntegerField(default=0)
-    CNL_TIEMPO = models.IntegerField(default=0)
-    CLE_TEXTO_ACIERTOS = models.IntegerField(default=0)
-    CLE_TEXTO_TIEMPO = models.IntegerField(default=0)
-    CLE_IMAGEN_ACIERTOS = models.IntegerField(default=0)
-    CLE_IMAGEN_TIEMPO = models.IntegerField(default=0)
-    '''
 
 '''
  Adivinanzas (ADI)  
@@ -453,23 +442,6 @@ class Evaluacion_IPAL_PRIMERO(Evaluacion):
     CLE_TEXTO = models.IntegerField(default=0,  validators=[MaxValueValidator(6), MinValueValidator(0)])
     CFS = models.IntegerField(default=0,  validators=[MaxValueValidator(85), MinValueValidator(0)])
 
-     # separacion de los campos en aciertos/tiempo
-    '''
-    TM_ACIERTOS = models.IntegerField(default=0)
-    TM_TIEMPO = models.IntegerField(default=0)
-    LP_ACIERTOS = models.IntegerField(default=0)
-    LP_TIEMPO = models.IntegerField(default=0)
-    CSL_ACIERTOS = models.IntegerField(default=0)
-    CSL_TIEMPO = models.IntegerField(default=0)
-    CNL_ACIERTOS = models.IntegerField(default=0)
-    CNL_TIEMPO = models.IntegerField(default=0)
-    CLE_TEXTO_ACIERTOS = models.IntegerField(default=0)
-    CLE_TEXTO_TIEMPO = models.IntegerField(default=0)
-    FLO_ACIERTOS = models.IntegerField(default=0)
-    FLO_TIEMPO = models.IntegerField(default=0)
-    CFS_ACIERTOS = models.IntegerField(default=0)
-    CFS_TIEMPO = models.IntegerField(default=0)
-    '''
 
 '''
 •	Textos Mutilados (TM) 
@@ -492,19 +464,6 @@ class Evaluacion_IPAL_SEGUNDO(Evaluacion):
     FLO = models.IntegerField(default=0, validators=[MaxValueValidator(133), MinValueValidator(0)])
     PRO = models.IntegerField(default=0, validators=[MinValueValidator(0)])
 
-    # separacion de los campos en aciertos/tiempo
-    '''
-    CNL_ACIERTOS = models.IntegerField(default=0)
-    CNL_TIEMPO = models.IntegerField(default=0)
-    LP_ACIERTOS = models.IntegerField(default=0)
-    LP_TIEMPO = models.IntegerField(default=0)
-    TM_ACIERTOS = models.IntegerField(default=0)
-    TM_TIEMPO = models.IntegerField(default=0)
-    FLO_ACIERTOS = models.IntegerField(default=0)
-    FLO_TIEMPO = models.IntegerField(default=0)
-    PRO_ACIERTOS = models.IntegerField(default=0)
-    PRO_TIEMPO = models.IntegerField(default=0)
-    '''
 
     '''
     •	Conocimiento Nombre Letra (CNL) 
@@ -529,20 +488,6 @@ class Evaluacion_IPAL_SEGUNDO(Evaluacion):
     CFS = models.IntegerField(default=0, validators=[MaxValueValidator(85), MinValueValidator(0)])
     VOC = models.IntegerField(default=0, validators=[MaxValueValidator(30), MinValueValidator(0)])
 
-    # para calcular las anteriores puntuaciones directas
-    # de las subpruebas complementarias se necesitan varios
-    # campos adicionales:
-
-    '''
-    CSL_ACIERTOS = models.IntegerField(default=0)
-    CSL_TIEMPO = models.IntegerField(default=0)
-    CLE_TEXTO_ACIERTOS = models.IntegerField(default=0)
-    CLE_TEXTO_TIEMPO = models.IntegerField(default=0)
-    CFS_ACIERTOS = models.IntegerField(default=0)
-    CFS_TIEMPO = models.IntegerField(default=0)
-    VOC_ACIERTOS = models.IntegerField(default=0)
-    VOC_TIEMPO = models.IntegerField(default=0)
-    '''
 
 
 # IPAM

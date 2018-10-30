@@ -229,7 +229,8 @@ function get_riesgo_DF_fin(pd){
 
 <script>
 
-	colores = ["#850202","#f00", "#ffa500", "#009fff","#1ae36e"]
+	//colores = ["#850202","#f00", "#ffa500", "#009fff","#1ae36e"]
+	colores = ["#850202","#f00", "#fff200", "#009fff","#1ae36e"]
 
 </script>
 
@@ -304,7 +305,7 @@ function puntuacion_directa(prueba, momento){
 // cambiar la subtarea mostrada en el grafico
 function cambiar_subprueba(d) {
 
-	var titulos_graficos = ["TLC-1", "DOA", "DOR", "DP", "DF" ];
+	var titulos_graficos = ["TLC", "DOA", "DOR", "DP", "DF" ];
 	var subtitulos = ["Paso mayúsculas-minúsculas", "Dictado de palabras con ortografía arbitraria", "Dictado de palabras con ortografía reglada", 
 	"Dictado de pseudopalabras", "Dictado de frases"
 	];
@@ -345,31 +346,31 @@ function cambiar_subprueba(d) {
 	
 	var dataset_TLC = [
 	{
-		"valor-maximo": 100,
+		"valor-maximo": 40,
 		"category": "Noviembre",
 		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		"alto-riesgo": 1, 
-		"riesgo": 1,
+		"alto-riesgo": 0,
+		"riesgo": 0,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio": 0,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("TLC", 1)
 	},
 	{
-		"valor-maximo": 100,
+		"valor-maximo": 40,
 		"category": "Febrero",
 		"estilo": evaluaciones[4] == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		"alto-riesgo": 30, 
-		"riesgo": 2,
+		"alto-riesgo": 1,
+		"riesgo": 1,
 		"rendimiento-bajo": 1,
-		"rendimiento-medio": 2,
+		"rendimiento-medio": 0,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("TLC", 4)
 	},
 	{
-		"valor-maximo": 100,
+		"valor-maximo": 40,
 		"category": "Mayo",
 		"estilo": evaluaciones[7] == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
@@ -715,6 +716,7 @@ var datos_graficos_progreso = [
 						{
 							"fillAlphas": 1,
 							"id": "area-bajo-rendimiento",
+							"fillColors": "#fff200",
 							"lineAlpha": 0,
 							"title": "Rendimiento bajo",
 							"valueField": "rendimiento-bajo"
