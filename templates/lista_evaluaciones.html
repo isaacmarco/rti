@@ -53,6 +53,15 @@
 				{% endif %}
 			</td>
 
+			<!-- en IPAE el primer mes no es noviembre, es octubre,
+			esto no afecta a la plataforma, es solo para no confundir a los
+			maesteros
+			{% if tipo == 'IPAE' and evaluacion.mes_leible == 'Noviembre' %}
+					<td>Octubre</td>
+			{% else %}
+			{% endif %}
+			-->
+			
 			<td>{{ evaluacion.mes_leible }}</td>
 
 			<td>{{ evaluacion.omnibus }}</td>
