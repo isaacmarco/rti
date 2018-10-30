@@ -19,7 +19,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # constantes para el login
-LOGIN_REDIRECT_URL = '/?' #"/index"
+LOGIN_REDIRECT_URL = '/?'
 LOGIN_URL = '/'
 LOGOUT_URL = 'mysite_logout'
 

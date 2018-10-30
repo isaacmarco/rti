@@ -1243,10 +1243,12 @@ def importar_csv(request):
                 fechaNacimiento = fields[1]
                 date = datetime.strptime(fechaNacimiento, "%d/%m/%Y")
                 alumno.fecha_nacimiento = date
-                # obtener el grupo desde su id
-                idGrupo = fields[2]
-                grupoAlumno = Grupo.objects.get(pk=idGrupo)
+
+                # obtener el grupo desde su codigo
+                codigoGrupo = fields[2]
+                grupoAlumno = Grupo.objects.get(codigo=codigoGrupo)
                 alumno.grupo = grupoAlumno
+
                 # forzar el evaluador
                 alumno.evaluador = request.user
                 alumno.save()
@@ -1255,9 +1257,8 @@ def importar_csv(request):
 
             if importar_tipo == 'GRUPOS':
                 fields = line.split(",")
-                grupo = Grupo(centro_pilotaje=fields[0], curso=fields[1],
-                              nombre=fields[2], centro=fields[3], curso_academico=fields[4],
-                              isla=fields[5])
+                grupo = Grupo(codigo=fields[0],centro_pilotaje=fields[1], curso=fields[2],
+                              nombre=fields[3], centro=fields[4], curso_academico=fields[5])
                 grupo.evaluador = usuario
                 grupo.save()
                 grupo.evaluadores.add(usuario)
@@ -1312,9 +1313,9 @@ def exportar_CSV(request):
     if tipo_datos == 'grupos':
         print('>>> Exportando grupos')
         grupos = Grupo.objects.all()
-        writer.writerow(['nombre','centro_pilotaje','curso','curso_academico'])
+        writer.writerow(['nombre','centro_pilotaje','codigo,''curso','curso_academico'])
         for grupo in grupos:
-            writer.writerow([grupo.nombre, grupo.centro_pilotaje, grupo.curso, grupo.curso_academico])
+            writer.writerow([grupo.nombre, grupo.centro_pilotaje, grupo.codigo,grupo.curso, grupo.curso_academico])
 
     if tipo_datos == 'alumnos':
         print('>>> Exportando alumnos')
