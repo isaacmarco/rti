@@ -28,7 +28,7 @@ LOGOUT_URL = 'mysite_logout'
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'i9!f@1(39!v-g-s)3u6c)&m32*1^=h%9+*qv%b@^85ph4t0=y^7'
+SECRET_KEY = '9!f@1(39!v-g-s)3u6c)&m32*1^=h%9+*qv%b@^85ph4t0=y^7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
