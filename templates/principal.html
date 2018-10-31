@@ -3,19 +3,14 @@
 {% load app_filters %}
 {% block content %}
 
-
 <div class="form-style-1" style="padding: 30px; font-size: 20px; text-align: center;">
 
-<img src="https://images.vexels.com/media/users/3/141120/isolated/preview/a5ff757d7423e6c757795e7b60183180-rocket-round-icon-by-vexels.png" alt="rtilogo"
-style="margin:auto;width:25%;"
+
+<img src="{% static "imagenes/logotipo.png" %}" alt="something"  style="text-align: center;">
+ <!--style="margin:auto;width:25%;">-->
+
 
 </div>
-<h1>Plataforma RtI</h1>
-
-    <!--
-	<a href="{{ server_url }}">VIEWS {{ server_url }}</a><br>
-	<a href="{% get_server_url %}">FILTER {% get_server_url %}</a>
-    -->
 
 {% if user.is_authenticated %}
 
@@ -31,9 +26,12 @@ style="margin:auto;width:25%;"
     Puede actualizar los datos de su perfil en cualquier momento.</p>
 
     <br>
-    <p>Para acceder a sus grupos/aulas pulse el botón <b>👪 Mis grupos</b>. La vista de grupos/aulas le permite trabajar con grupos de alumnos. Los grupos pueden ser creados por usted o ser obtenidos desde su centro de estudios.
+    <p>Para acceder a sus grupos/aulas pulse el botón <b>👪 Mis grupos</b>.
+    La vista de grupos/aulas le permite trabajar con grupos de alumnos.
+    Los grupos pueden ser creados por usted o ser obtenidos desde su centro de estudios usando el botón
+    <b>🏡 Grupos/Aulas de mi centro</b>.
 
-    <br>
+    <br> <br>
     <p>Una vez dentro del grupo verá el listado de alumnos. Puede modificar los
     datos de cualquier alumno con el botón de <b>📋 Ficha</b>. También puede incluir
         un nuevo alumno con <b>👤 Nuevo alumno</b>.

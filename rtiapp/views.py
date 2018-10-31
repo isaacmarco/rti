@@ -38,8 +38,8 @@ from django.db.models import Q
 import itertools
 import csv
 
-server_url = 'http://127.0.0.1:8000/'
-#server_url = 'http://193.145.96.31/'
+#server_url = 'http://127.0.0.1:8000/'
+server_url = 'http://193.145.96.31/'
 
 lista_grupos_url = 'lista-grupos'
 editar_grupo_url = 'editar-grupo'
@@ -1239,7 +1239,7 @@ def importar_csv(request):
         for line in lines:
 
             if importar_tipo == 'ALUMNOS':
-                fields = line.split(",")
+                fields = line.split(";")
                 alumno = Alumno(codigo=fields[0], curso=fields[3], curso_academico=fields[4],
                                 centro_pilotaje=fields[5],sexo=fields[6])
                 # fecha
@@ -1259,7 +1259,7 @@ def importar_csv(request):
                       fields[2] + ', ' + fields[3] + ', ' + fields[4] + ', ' + fields[5])
 
             if importar_tipo == 'GRUPOS':
-                fields = line.split(",")
+                fields = line.split(";")
                 grupo = Grupo(codigo=fields[0],centro_pilotaje=fields[1], curso=fields[2],
                               nombre=fields[3], centro=fields[4], curso_academico=fields[5])
                 grupo.evaluador = usuario
@@ -1270,7 +1270,7 @@ def importar_csv(request):
                       fields[2] + ', ' + fields[3] + ', ' + fields[4] + ', ' + fields[5])
 
             if importar_tipo == 'EVALUADORES':
-                fields = line.split(",")
+                fields = line.split(";")
                 codigo=fields[0]
                 clave=fields[1]
                 nombre=fields[2]
