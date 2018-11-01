@@ -23,14 +23,14 @@ function get_riesgo_CN_inicio(pd){
 
 function get_riesgo_EC_inicio(pd){
 	if(pd <= 10) return 0;
-	if(pd == 11 && pd <= 18) return 1;
+	if(pd == 11) return 1;
 	if(pd == 12) return 2;
 	if(pd > 12) return 3;
 }
 
 function get_riesgo_SN_inicio(pd){
 	if(pd <= 5) return 0;
-	if(pd == 6 && pd <= 18) return 1;
+	if(pd == 6 )return 1;
 	// no
 	if(pd > 6) return 3;
 }
@@ -231,7 +231,7 @@ function get_riesgo_CM_fin(pd){
 <script>
 
 	//colores = ["#850202","#f00", "#ffa500", "#009fff","#1ae36e"]
-	colores = ["#f00", "#ffa500", "#009fff","#1ae36e"]
+	colores = ["#f00", "#fff200", "#009fff","#1ae36e"]
 </script>
 
 
@@ -1049,6 +1049,7 @@ var datos_graficos_progreso = [
 						{
 							"fillAlphas": 1,
 							"id": "area-bajo-rendimiento",
+							"fillColors": "#fff200",
 							"lineAlpha": 0,
 							"title": "Rendimiento bajo",
 							"valueField": "rendimiento-bajo"

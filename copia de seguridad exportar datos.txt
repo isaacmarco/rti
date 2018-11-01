@@ -1,0 +1,126 @@
+
+
+def exportar_CSV(request):
+ 
+
+    #print('>>> Exportando CSV')
+    tipo_datos = request.GET['tipo']
+
+    # respuesta
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="datos.csv"'
+    writer = csv.writer(response, delimiter=',')
+
+    if tipo_datos == 'grupos':
+        print('>>> Exportando grupos')
+        grupos = Grupo.objects.all()
+        writer.writerow(['nombre','centro_pilotaje','codigo,''curso','curso_academico'])
+        for grupo in grupos:
+            writer.writerow([grupo.nombre, grupo.centro_pilotaje, grupo.codigo,grupo.curso, grupo.curso_academico])
+
+    if tipo_datos == 'alumnos':
+        print('>>> Exportando alumnos')
+        # obtenemos todos los alumnos
+        alumnos = Alumno.objects.all()
+        # cabecera y fichero
+        writer.writerow(['codigo', 'genero', 'curso', 'fecha nacimiento',
+                         'pais', 'centro', 'grupo', 'id grupo', 'evaluador', 'curso academico' ])
+        for alumno in alumnos:
+            writer.writerow([alumno.codigo, alumno.sexo, alumno.curso,
+            alumno.fecha_nacimiento, alumno.pais, alumno.centro_pilotaje, alumno.grupo.nombre,
+            alumno.grupo.pk, alumno.codigo_evaluador, alumno.curso_academico
+        ])
+
+    if tipo_datos == 'evaluadores':
+        print('>>> Exportando evaluadores')
+        # obtenemos todos los evaluadores
+        evaluadores = Evaluador.objects.all()
+        writer.writerow(['codigo', 'nombre', 'centro', 'centro pilojate',
+                         'genero', 'nivel academico', 'pais', 'email', 'zona'])
+        for evaluador in evaluadores:
+            writer.writerow([evaluador.codigo, evaluador.nombre, evaluador.centro,
+                             evaluador.centro_pilotaje, evaluador.sexo, evaluador.nivel_academico,
+                             evaluador.pais, evaluador.email, evaluador.zona])
+
+    if tipo_datos == 'IPAL':
+        curso = request.GET['curso']
+        print('>>> Exportando IPAL-' + curso)
+        # obtener el modelo
+        nombre_modelo = 'IPAL-' + curso
+        modelo = clases[nombre_modelo]
+        evaluaciones = modelo.objects.all()
+
+        if curso == 'INFANTIL':
+            writer.writerow(Encabezados.encabezado_IPAL_INFANTIL)
+            for e in evaluaciones:
+                writer.writerow([
+                e.alumno,e.evaluador,e.alumno.centro,e.curso_academico,e.ultima_modificacion,e.prueba,e.mes, e.tipo,
+                e.ADIVINANZAS,e.CSL,e.CNL,e.CLE_IMAGEN,e.CLE_TEXTO,e.CFA,e.evaluado
+                ])
+
+        if curso == 'PRIMERO':
+            writer.writerow(Encabezados.encabezado_IPAL_PRIMERO)
+            for e in evaluaciones:
+                writer.writerow([
+                    e.alumno,e.evaluador,e.alumno.centro,e.curso_academico,e.ultima_modificacion,e.prueba,e.mes,e.tipo,
+                    e.TM,e.LP,e.CSL,e.CNL,e.FLO,e.CLE_TEXTO,e.CFS,e.evaluado
+                ])
+
+        if curso == 'SEGUNDO':
+            writer.writerow(Encabezados.encabezado_IPAL_SEGUNDO)
+            for e in evaluaciones:
+                writer.writerow([
+                e.alumno, e.evaluador,e.alumno.centro,  e.curso_academico,e.ultima_modificacion, e.prueba,e.mes, e.tipo,
+                e.TM,e.LP,e.CSL,e.CNL,e.FLO,e.CLE_TEXTO,e.CFS,e.PRO,e.VOC,e.evaluado
+                ])
+
+    if tipo_datos == 'IPAM':
+        curso = request.GET['curso']
+        print('>>> Exportando IPAM-' + curso)
+        # obtener el modelo
+        nombre_modelo = 'IPAM-' + curso
+        modelo = clases[nombre_modelo]
+        evaluaciones = modelo.objects.all()
+        if curso == 'INFANTIL':
+            writer.writerow(Encabezados.encabezado_IPAM_INFANTIL)
+            for e in evaluaciones:
+                writer.writerow([
+                e.alumno,e.evaluador,e.alumno.centro,e.curso_academico,e.ultima_modificacion,e.prueba,e.mes, e.tipo,
+                e.CN,e.EC,e.SN,e.IN,e.CVA,e.CM,e.evaluado
+                ])
+        if curso == 'PRIMERO' or curso == 'SEGUNDO' or curso == 'TERCERO':
+            writer.writerow(Encabezados.encabezado_IPAM_PRIMERO)
+            for e in evaluaciones:
+                writer.writerow([
+                e.alumno,e.evaluador,e.alumno.centro,e.curso_academico,e.ultima_modificacion,e.prueba,e.mes, e.tipo,
+                e.CN,e.ODD,e.SN,e.OUD,e.VP,e.evaluado
+                ])
+
+    if tipo_datos == 'IPAE':
+        curso = request.GET['curso']
+        print('>>> Exportando IPAE-' + curso)
+        # obtener el modelo
+        nombre_modelo = 'IPAE-' + curso
+        modelo = clases[nombre_modelo]
+        evaluaciones = modelo.objects.all()
+        if curso == 'PRIMERO' or curso == 'SEGUNDO':
+            writer.writerow(Encabezados.encabezado_IPAE_PRIMERO)
+            for e in evaluaciones:
+                writer.writerow([
+                e.alumno,e.evaluador,e.alumno.centro,e.curso_academico,e.ultima_modificacion,e.prueba,e.mes, e.tipo,
+                e.TLC_1,e.DICTADO_ORTOGRAFIA_ARBITRARIA,e.DICTADO_ORTOGRAFIA_REGLADA,e.DICTADO_PSEUDOPALABRAS,
+                e.DICTADO_FRASES,e.evaluado
+                ])
+        if curso == 'TERCERO':
+            writer.writerow(Encabezados.encabezado_IPAE_TERCERO)
+            for e in evaluaciones:
+                writer.writerow([
+                e.alumno,e.evaluador,e.alumno.centro,e.curso_academico,e.ultima_modificacion,e.prueba,e.mes, e.tipo,
+                e.DICTADO_ORTOGRAFIA_ARBITRARIA,e.DICTADO_ORTOGRAFIA_REGLADA,e.DICTADO_FRASES,
+                e.SEC_5, e.SEC_SEI_5,e.PDC_5,e.evaluado
+                ])
+
+    
+    # devolver el fichero para descargar
+    return response
+     

@@ -35,7 +35,7 @@
 
 		<tr>
 
-			<!-- Tipo de evaluacion 📆🔎-->
+			<!-- Tipo de evaluacion -->
 			<td  >
 				{% if evaluacion.tipo == "PR" %}
 					📈 PROGRESO
@@ -64,7 +64,25 @@
 
 			<td>{{ evaluacion.mes_leible }}</td>
 
-			<td>{{ evaluacion.omnibus }}</td>
+			<!-- como no hay omnibus calculado en el progreso,
+			cambiamos la etiqueta, ademas inlcuimos en este punto informacion
+			sobre si se ha evaluado en este momento -->
+
+			{% if evaluacion.evaluado == True %}
+
+
+			{% if evaluacion.tipo == "CR" %}
+				<td>{{ evaluacion.omnibus }}</td>
+			{% else %}
+				<td>Evaluado</td>
+			{% endif %}
+
+			{% else %}
+				<td>Sin evaluar</td>
+			{% endif %}
+
+
+
 
 			<!-- Nivel de riesgo: si la evaluacion es de progreso
 			 no tiene el riesgo calculado, hay que usar la de la ultima
@@ -82,10 +100,6 @@
 
 			<!-- editar evaluacion -->
 			<td>
-				<!--
-				<a href="{{ server_url }}editar-evaluacion-ipal-infantil/
-				?idEvaluacion={{evaluacion.pk | safe}}" style="font-size:20px" >📋</a>
-				-->
 				<a href="{{ server_url }}editar-evaluacion/
 				?idEvaluacion={{evaluacion.pk | safe}}
 				&tipo={{ tipo }}

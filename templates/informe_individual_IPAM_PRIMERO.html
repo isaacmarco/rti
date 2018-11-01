@@ -124,7 +124,7 @@ function get_riesgo_SN_fin(pd){
 	if(pd <= 12) return 0;
 	if(pd == 13) return 1;
 	if(pd == 14) return 2;	
-	if(pd == 15) return 2;	
+	if(pd == 15) return 3;
 	if(pd > 15) return 4;
 }	
 
@@ -226,7 +226,7 @@ function get_riesgo_VP_fin(pd){
 
 <script>
 
-	colores = ["#850202","#f00", "#ffa500", "#009fff","#1ae36e"]
+	colores = ["#850202","#f00", "#fff200", "#009fff","#1ae36e"]
 
 </script>
 
@@ -861,6 +861,7 @@ var datos_graficos_progreso = [
 							"fillAlphas": 1,
 							"id": "area-bajo-rendimiento",
 							"lineAlpha": 0,
+							"fillColors": "#fff200",
 							"title": "Rendimiento bajo",
 							"valueField": "rendimiento-bajo"
 						},

@@ -42,6 +42,14 @@
             {{ form.evaluado.help_text }}
             </td>
         </tr>
+           <tr>
+            <th>{{ form.CN.label_tag }}</th>
+            <td>
+            {{ form.CN.errors }}
+            {{ form.CN }}
+            {{ form.CN.help_text }}
+            </td>
+        </tr>
         <tr>
             <th>{{ form.SN.label_tag }}</th>
             <td>
@@ -50,14 +58,7 @@
             {{ form.SN.help_text }}
             </td>
         </tr>
-        <tr>
-            <th>{{ form.CN.label_tag }}</th>
-            <td>
-            {{ form.CN.errors }}
-            {{ form.CN }}
-            {{ form.CN.help_text }}
-            </td>
-        </tr>
+
          <tr>
             <th>{{ form.OUD.label_tag }}</th>
             <td>

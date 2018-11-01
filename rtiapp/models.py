@@ -352,7 +352,7 @@ colores_riesgo = {
   "NOEV": "#ffffff",
   "ALTR": "#850202",
   "RIES": "#f00",
-  "BAJO": "#ffa500",
+  "BAJO": "#fff200",
   "NORM": "#009fff",
   "OPTI": "#1ae36e"
 }

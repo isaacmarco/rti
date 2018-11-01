@@ -2,21 +2,14 @@
 {% load app_filters %}
 {% block content %}
 
-
-
 <script>
-
 /*
 	Calculo de colores de riesgo dependiendo
 	de las puntuaciones directas de cada tarea
 	en el inicio, medio y fin
 */
 
-
 // INICIO
-
-
-
 
 function get_riesgo_CN_inicio(pd){	
 	if(pd <= 27) return 0;
@@ -37,7 +30,7 @@ function get_riesgo_SN_inicio(pd){
 	if(pd == 0) return 0;
 	if(pd == 1) return 1;
 	if(pd == 2) return 2;	
-	if(pd > 2) return 2;		 
+	if(pd > 2) return 3;
 }	
 
 function get_riesgo_OUD_inicio(pd){	
@@ -58,26 +51,25 @@ function get_riesgo_VP_inicio(pd){
 
 // MEDIO
 
-function get_riesgo_CN_medio(pd){	
-	// REVISAR TABLA HAY ERRORES
+function get_riesgo_CN_medio(pd){
 	if(pd <= 37) return 0;
 	if(pd == 38) return 1;
 	if(pd >= 39 && pd <= 42) return 2;
-	if(pd >= 3) return 3; 
+	if(pd >= 43) return 3;
 }	
 
 function get_riesgo_ODD_medio(pd){	
 	if(pd <= 6) return 0;
 	if(pd >= 7 && pd <= 8) return 1;
-	if(pd >= 9 && pd <= 10) return 1;
+	if(pd >= 9 && pd <= 10) return 2;
 	if(pd > 10) return 3;	 
 }	
 
 function get_riesgo_SN_medio(pd){		 
 	if(pd <= 3) return 0;
 	if(pd == 4) return 1;
-	if(pd >= 5 && pd <= 6) return 1;
-	if(pd > 6) return 2;		 
+	if(pd >= 5 && pd <= 6) return 2;
+	if(pd > 6) return 3;
 }	
 
 function get_riesgo_OUD_medio(pd){	
@@ -211,7 +203,7 @@ function get_riesgo_VP_fin(pd){
 
 <script>
 
-	colores = [ "#f00", "#ffa500", "#009fff","#1ae36e"]
+	colores = [ "#f00", "#fff200", "#009fff","#1ae36e"]
 
 </script>
 
@@ -893,6 +885,7 @@ var datos_graficos_progreso = [
 							"fillAlphas": 1,
 							"id": "area-bajo-rendimiento",
 							"lineAlpha": 0,
+							"fillColors": "#fff200",
 							"title": "Rendimiento bajo",
 							"valueField": "rendimiento-bajo"
 						},
