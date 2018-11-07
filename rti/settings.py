@@ -57,7 +57,7 @@ SECRET_KEY = find_or_create_secret_key()
 DEBUG = True
 
 # direccion base
-PRODUCCION = False
+PRODUCCION = True
 def direccion_server():
 	if PRODUCCION == True:
 		return 'webrti.ull.es'

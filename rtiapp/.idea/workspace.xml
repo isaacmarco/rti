@@ -14,10 +14,11 @@
       <file leaf-file-name="app_filters.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templatetags/app_filters.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="13" column="30" lean-forward="true" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
+            <state relative-caret-position="432">
+              <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
               <folding>
                 <element signature="e#0#27#0" expanded="true" />
+                <marker date="1541604235866" expanded="true" signature="289:294" ph="..." />
               </folding>
             </state>
           </provider>
@@ -38,8 +39,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="47" column="14" selection-start-line="47" selection-start-column="14" selection-end-line="47" selection-end-column="14" />
+            <state relative-caret-position="324">
+              <caret line="45" column="1" selection-start-line="45" selection-start-column="1" selection-end-line="45" selection-end-column="1" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
               </folding>
@@ -171,8 +172,8 @@
         <option value="$PROJECT_DIR$/riesgo_ipae.py" />
         <option value="$PROJECT_DIR$/riesgo_ipam.py" />
         <option value="$PROJECT_DIR$/riesgo_ipal.py" />
-        <option value="$PROJECT_DIR$/templatetags/app_filters.py" />
         <option value="$PROJECT_DIR$/views.py" />
+        <option value="$PROJECT_DIR$/templatetags/app_filters.py" />
       </list>
     </option>
   </component>
@@ -627,8 +628,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="47" column="14" selection-start-line="47" selection-start-column="14" selection-end-line="47" selection-end-column="14" />
+        <state relative-caret-position="324">
+          <caret line="45" column="1" selection-start-line="45" selection-start-column="1" selection-end-line="45" selection-end-column="1" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
           </folding>
@@ -637,10 +638,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templatetags/app_filters.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="13" column="30" lean-forward="true" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
+        <state relative-caret-position="432">
+          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
           <folding>
             <element signature="e#0#27#0" expanded="true" />
+            <marker date="1541604235866" expanded="true" signature="289:294" ph="..." />
           </folding>
         </state>
       </provider>
