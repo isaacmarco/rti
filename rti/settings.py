@@ -58,9 +58,10 @@ DEBUG = True
 
 # direccion base
 PRODUCCION = True
+
 def direccion_server():
 	if PRODUCCION == True:
-		return 'webrti.ull.es/'
+		return 'http://webrti.ull.es/'
 	else:
 		return 'http://127.0.0.1:8000/'
 DIRECCION = direccion_server()
