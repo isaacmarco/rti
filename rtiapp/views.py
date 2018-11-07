@@ -45,7 +45,7 @@ import csv
 
 #server_url = settings.DIRECCION # 'http://127.0.0.1:8000/'
 #server_url = 'http://193.145.96.31/'
-server_url = 'webrti.ull.es/'
+server_url = 'http://webrti.ull.es/'
 
 lista_grupos_url = 'lista-grupos'
 editar_grupo_url = 'editar-grupo'
