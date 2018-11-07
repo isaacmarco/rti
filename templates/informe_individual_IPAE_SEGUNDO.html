@@ -16,7 +16,7 @@
 // INICIO
 
 
-
+// REVISADO POR JUANE
 
 function get_riesgo_TLC_inicio(pd){		 
 	if(pd == 0) return 0;
@@ -61,7 +61,7 @@ function get_riesgo_DF_inicio(pd){
 
 
 function get_riesgo_TLC_medio(pd){		 
-	if(pd < 1) return 0;
+	if(pd <= 1) return 0;
 	if(pd >= 2 && pd <= 3) return 1;	 
 	// no hay
 	if(pd > 3) return 3;	
@@ -103,7 +103,7 @@ function get_riesgo_DF_medio(pd){
 
 
 function get_riesgo_TLC_fin(pd){		 
-	if(pd < 3) return 0;
+	if(pd <= 3) return 0;
 	if(pd == 4) return 1;	 
 	if(pd == 5) return 2;	 
 	if(pd > 5) return 3;	
@@ -128,7 +128,7 @@ function get_riesgo_DP_fin(pd){
 	if(pd <= 16) return 0;
 	if(pd == 17) return 1;	 
 	// no hay
-	if(pd > 18) return 3;
+	if(pd > 17) return 3;
 }	
 
 function get_riesgo_DF_fin(pd){		 
@@ -464,8 +464,8 @@ function cambiar_subprueba(d) {
 		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		 
-		"riesgo": 2,
-		"rendimiento-bajo": 2,
+		"riesgo": 14,
+		"rendimiento-bajo": 1,
 		"rendimiento-medio": 1,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno":ultima_evaluacion("DP", 1)

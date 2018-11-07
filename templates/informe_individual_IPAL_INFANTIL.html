@@ -12,6 +12,41 @@
 	en el inicio, medio y fin
 */
 
+// REVISADO CON JUANE
+
+
+function get_riesgo_ADIVINANZAS_inicio(pd){
+	if(pd <= 8) return 0;
+	if(pd == 9) return 1;
+	//x 
+	if(pd >  9) return 3;
+}
+
+function get_riesgo_CSL_inicio(pd){
+	if(pd <= 5) return 0;
+	if(pd >= 6 && pd <= 8) return 1;
+	if(pd >= 9 && pd <= 14) return 2;
+	if(pd > 14) return 3;
+}
+
+function get_riesgo_CNL_inicio(pd){
+	if(pd <= 6) return 0;
+	if(pd >= 7 && pd <=8) return 1;
+	//x 
+	if(pd > 8) return 3;
+}
+function get_riesgo_CLEIMAGEN_inicio(pd){
+	if(pd <= 28) return 0;
+	if(pd >= 29 && pd <= 31) return 1;
+	//x 
+	if(pd > 31) return 3;
+}
+function get_riesgo_CLETEXTO_inicio(pd){
+	if(pd <= 2) return 0;
+	if(pd == 3) return 1;
+	//x 
+	if(pd > 3) return 3;
+}
 
 function get_riesgo_CFA_inicio(pd){
 	if(pd <= 17) return 0;
@@ -19,33 +54,6 @@ function get_riesgo_CFA_inicio(pd){
 	if(pd >= 39 && pd <= 46) return 2;
 	if(pd > 46) return 3;
 }
-function get_riesgo_ADIVINANZAS_inicio(pd){
-	if(pd <= 8) return 0;
-	if(pd == 9) return 1;
-	if(pd >  9) return 3;
-}
-function get_riesgo_CSL_inicio(pd){
-	if(pd <= 5) return 0;
-	if(pd >= 6 && pd <= 8) return 1;
-	if(pd >= 9 && pd <= 14) return 2;
-	if(pd > 14) return 3;
-}
-function get_riesgo_CNL_inicio(pd){
-	if(pd <= 6) return 0;
-	if(pd >= 7 && pd <=8) return 1;
-	if(pd > 8) return 3;
-}
-function get_riesgo_CLEIMAGEN_inicio(pd){
-	if(pd <= 28) return 0;
-	if(pd >= 29 && pd <= 31) return 1;
-	if(pd > 31) return 3;
-}
-function get_riesgo_CLETEXTO_inicio(pd){
-	if(pd <= 2) return 0;
-	if(pd == 3) return 1;
-	if(pd > 3) return 3;
-}
-
 // ---------
 
 function get_riesgo_ADIVINANZAS_medio(pd){
@@ -63,21 +71,24 @@ function get_riesgo_CSL_medio(pd){
 function get_riesgo_CNL_medio(pd){
 	if(pd <= 12) return 0;
 	if(pd >= 13 && pd <= 14) return 1;
+	//x 
 	if(pd > 14) return 3;
 }
 function get_riesgo_CLEIMAGEN_medio(pd){
 	if(pd <= 29) return 0;
 	if(pd >= 30 && pd <= 31) return 1;
+	//x 
 	if(pd > 31) return 3;
 }
 function get_riesgo_CLETEXTO_medio(pd){
 	if(pd <= 3) return 0;
-	if(pd == 4) return 1;
+	// x
+	if(pd == 4) return 2;
 	if(pd > 4) return 3;
 }
 function get_riesgo_CFA_medio(pd){
-	if(pd <= 18) return 0;
-	if(pd >= 19 && pd <= 50) return 1;
+	if(pd <= 34) return 0;
+	if(pd >= 35 && pd <= 50) return 1;
 	if(pd >= 51 && pd <= 66) return 2;
 	if(pd > 66) return 3;
 }
@@ -87,7 +98,7 @@ function get_riesgo_CFA_medio(pd){
 
 function get_riesgo_ADIVINANZAS_fin(pd){
 	if(pd <= 9) return 0;
-	if(pd ==10) return 1;
+	if(pd == 10) return 1;
 	if(pd == 11) return 2;
 	if(pd > 11) return 3;
 }
@@ -106,16 +117,18 @@ function get_riesgo_CNL_fin(pd){
 function get_riesgo_CLEIMAGEN_fin(pd){
 	if(pd <= 30) return 0;
 	if(pd == 31) return 1;
+	//x 
 	if(pd > 31) return 3;
 }
 function get_riesgo_CLETEXTO_fin(pd){
 	if(pd <= 3) return 0;
 	if(pd == 4) return 1;
+	//x 
 	if(pd > 4) return 3;
 }
 function get_riesgo_CFA_fin(pd){
-	if(pd <= 22) return 0;
-	if(pd >= 23 && pd <= 70) return 1;
+	if(pd <= 38) return 0;
+	if(pd >= 39 && pd <= 70) return 1;
 	if(pd >= 71 && pd <= 75) return 2;
 	if(pd > 75) return 3;
 }
@@ -396,8 +409,8 @@ function cambiar_subprueba(d) {
 		"category": "Febrero",
 		"estilo": evaluaciones[4]  == "True"? 0 : punteado,
 		"etiqueta": evaluaciones[4]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		"riesgo": 18,
-		"rendimiento-bajo": 32,
+		"riesgo": 34,
+		"rendimiento-bajo": 16,
 		"rendimiento-medio": 16,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("CFA", 4)
@@ -407,8 +420,8 @@ function cambiar_subprueba(d) {
 		"category": "Marzo",
 		"estilo": evaluaciones[5]  == "True"? 0 : punteado,
 		"etiqueta": evaluaciones[5]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		"riesgo": 18,
-		"rendimiento-bajo": 32,
+		"riesgo": 34,
+		"rendimiento-bajo": 16,
 		"rendimiento-medio": 16,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("CFA", 5)
@@ -418,8 +431,8 @@ function cambiar_subprueba(d) {
 		"category": "Abril",
 		"estilo": evaluaciones[6]  == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[6]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		"riesgo": 18,
-		"rendimiento-bajo": 32,
+		"riesgo": 34,
+		"rendimiento-bajo": 16,
 		"rendimiento-medio": 16,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno":  ultima_evaluacion("CFA", 6)
@@ -429,8 +442,8 @@ function cambiar_subprueba(d) {
 		"category": "Mayo",
 		"estilo": evaluaciones[7]  == "True"? 0 : punteado,
 		"etiqueta": evaluaciones[7]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		"riesgo": 22,
-		"rendimiento-bajo": 48,
+		"riesgo": 38,
+		"rendimiento-bajo": 32,
 		"rendimiento-medio": 5,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("CFA", 7)
@@ -574,7 +587,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo":  3,
 		"rendimiento-bajo":  0,
-		"rendimiento-medio":  0,
+		"rendimiento-medio":  1,
 		"rendimiento-optimo": 3,
 		"rendimiento-alumno":ultima_evaluacion("CLE_TEXTO", 4)
 	},

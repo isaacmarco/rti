@@ -12,7 +12,7 @@
 	en el inicio, medio y fin
 */
 
-
+// REVISADO POR JUANE
 // INICIO
 
 
@@ -61,7 +61,7 @@ function get_riesgo_CN_medio(pd){
 	if(pd <= 43) return 0;
 	if(pd == 44) return 1;
 	if(pd >= 45 && pd <= 49) return 2;
-	if(pd >= 49) return 3;
+	if(pd > 49) return 3;
 }	
 
 function get_riesgo_ODD_medio(pd){	
@@ -103,9 +103,9 @@ function get_riesgo_CN_fin(pd){
 }	
 
 function get_riesgo_ODD_fin(pd){	
-	if(pd <= 4) return 0;
-	if(pd == 5) return 1;
-	if(pd >= 6 && pd <= 7) return 2;
+	if(pd <= 5) return 0;
+	if(pd == 6) return 1;
+	if(pd == 7) return 2;
 	if(pd > 7) return 3;
 }	
 
@@ -475,9 +475,9 @@ function cambiar_subprueba(d) {
 		"category": "Mayo",
 		"estilo": evaluaciones[7]  == "True"? 0 : punteado,
 		"etiqueta": evaluaciones[7]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		"riesgo": 4,
+		"riesgo": 5,
 		"rendimiento-bajo": 1,
-		"rendimiento-medio":2,
+		"rendimiento-medio":1,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("ODD", 7)
 	}

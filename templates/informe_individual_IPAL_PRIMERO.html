@@ -12,6 +12,8 @@
 	en el inicio, medio y fin
 */
 
+// REVISADO CON JUANE
+
 // Inicio
  
 function get_riesgo_TM_inicio(pd){	
@@ -58,14 +60,14 @@ function get_riesgo_FLO_inicio(pd){
 function get_riesgo_CLETEXTO_inicio(pd){	
 	if(pd <= 4) return 0;
 	if(pd == 5 ) return 1;
-	// no hay estado normal
+	// x
 	if(pd == 6 ) return 3;
 }	
 
 
 function get_riesgo_CFS_inicio(pd){	
-	if(pd <= 9) return 0;
-	if(pd >= 10 && pd <= 17) return 1;
+	if(pd <= 13) return 0;
+	if(pd >= 14 && pd <= 17) return 1;
 	if(pd == 18) return 2;
 	if(pd > 18) return 3;
 }	
@@ -121,7 +123,7 @@ function get_riesgo_FLO_medio(pd){
 function get_riesgo_CLETEXTO_medio(pd){
 	if(pd <= 4) return 0;
 	if(pd == 5 ) return 1;
-	// no hay estado normal
+	//x 
 	if(pd == 6 ) return 3;
 }
 
@@ -182,7 +184,7 @@ function get_riesgo_FLO_fin(pd){
 function get_riesgo_CLETEXTO_fin(pd){
 	if(pd <= 4) return 0;
 	if(pd == 5 ) return 1;
-	// no hay estado normal
+	//x 
 	if(pd == 6 ) return 3;
 }
 
@@ -402,7 +404,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 4,
 		"rendimiento-bajo": 7,
-		"rendimiento-medio": 5,
+		"rendimiento-medio": 1,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno":ultima_evaluacion("TM", 1)
 	},
@@ -713,8 +715,8 @@ function cambiar_subprueba(d) {
 		"category": "Noviembre",
 		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		"riesgo":  9,
-		"rendimiento-bajo":  8,
+		"riesgo":  13,
+		"rendimiento-bajo":  4,
 		"rendimiento-medio": 1,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno":ultima_evaluacion("CFS", 1)

@@ -2,11 +2,7 @@ import rtiapp.constantes as Globales
 
 
 
-#
-# REVISADO POR MI DURANTE EL DESARROLLO
-#
-
-
+# REVISADO CON JUANE
 
 def omnibus_INFANTIL(evaluacion, momento):
     e = evaluacion

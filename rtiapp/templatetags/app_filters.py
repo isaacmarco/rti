@@ -1,5 +1,5 @@
 from django import template
-
+from django.conf import settings
 
 register = template.Library()
 
@@ -11,7 +11,8 @@ def get_curso(curso):
 
 @register.simple_tag
 def get_server_url():
-    return 'http://127.0.0.1:8000/'
+    return settings.DIRECCION
+    #return 'http://127.0.0.1:8000/'
     #return 'http://193.145.96.31/'
 
 # devuelve el riesgo IPAL de cada

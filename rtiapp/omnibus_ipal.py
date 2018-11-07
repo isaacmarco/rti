@@ -3,7 +3,7 @@ import rtiapp.constantes as Globales
 
 
 #
-# REVISADO POR MI DURANTE EL DESARROLLO
+# REVISADO POR JUANE
 #
 
 def subprueba_complementaria_CSL(evaluacion):
@@ -114,29 +114,29 @@ def omnibus_SEGUNDO(evaluacion, momento):
 
     if momento == Globales.INICIO:
         return (
-            (e.CNL - 49.45) / 16.25 +
-            (e.LP - 26.27) / 8.67  +
-            (e.TM - 5.42) / 2.62 +
-            (e.FLO - 64.39) / 26.58 +
-            (e.PRO - 68.32) /26.95
-            )  / 5
+            (e.CNL - 49.451) / 16.255 +
+            (e.LP - 26.270) / 8.6727 +
+            (e.TM - 5.4184) / 2.6175 +
+            (e.FLO - 64.389) / 26.578 +
+            (e.PRO - 68.32) / 26.95
+            ) / 5
 
     if momento == Globales.MEDIO:
         return (
-            (e.CNL - 56.14) / 15.28 +
-            (e.LP - 30.08) / 8.13  +
-            (e.TM - 4.37) / 2.35 +
-            (e.FLO - 71.42) / 26.02 +
-            (e.PRO - 73.38) / 23.93
+            (e.CNL - 56.142) / 15.286 +
+            (e.LP - 30.080) / 8.1333 +
+            (e.TM - 4.3780) / 2.3480 +
+            (e.FLO - 71.423) / 26.024 +
+            (e.PRO - 73.3833) / 23.930
              ) / 5
 
     if momento == Globales.FIN:
         return (
-            (e.CNL - 59.03) / 16.96 +
-            (e.LP - 29.83) / 8.46 +
-            (e.TM - 7.11) / 3.22 +
-            (e.FLO - 78.02) / 28.21 +
-            (e.PRO - 72.74) / 26.30
+            (e.CNL - 59.030) / 16.956 +
+            (e.LP - 29.828) / 8.4566 +
+            (e.TM - 7.084) / 3.163 +
+            (e.FLO - 78.054) / 28.212 +
+            (e.PRO - 72.741) / 26.305
             ) / 5
 
 

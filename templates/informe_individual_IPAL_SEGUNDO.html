@@ -14,56 +14,59 @@
 
 // INICIO
 
+// REVISADO CON JUANE
 
 
 function get_riesgo_CNL_inicio(pd){	
 	if(pd <= 44) return 0;
 	if(pd >= 45 && pd <= 48) return 1;
-	if(pd >= 49 && pd <= 51) return 2;
-	if(pd > 51) return 3;
+	if(pd >= 49 && pd <= 50) return 2;
+	if(pd > 50) return 3;
 }	
 
 function get_riesgo_LP_inicio(pd){	
 	if(pd <= 23) return 0;
 	if(pd >= 24 && pd <= 26) return 1;
-	if(pd >= 27 && pd <= 29) return 2;
-	if(pd > 29) return 3;
+	if(pd >= 27 && pd <= 28) return 2;
+	if(pd > 28) return 3;
 }	
 
 function get_riesgo_TM_inicio(pd){	
 	if(pd <= 3) return 0;
-	if(pd == 4) return 1;
-	if(pd == 5) return 2;
-	if(pd > 5) return 3;
+	// x
+	if(pd == 4) return 2;	
+	if(pd > 4) return 3;
 }	
 
 function get_riesgo_FLO_inicio(pd){	
 	if(pd <= 51) return 0;
 	if(pd >= 52 && pd <= 60) return 1;
-	if(pd >= 61 && pd <= 67) return 2;
-	if(pd > 67) return 3;
+	if(pd >= 61 && pd <= 66) return 2;
+	if(pd > 66) return 3;
 }	
 
 function get_riesgo_PRO_inicio(pd){	
 	if(pd <= 54.45) return 0;
 	if(pd >= 54.46 && pd <= 65.29) return 1;
-	if(pd >= 65.30 && pd <= 72.06) return 2;
-	if(pd > 72.06) return 3;
+	if(pd >= 65.30 && pd <= 72.61) return 2;
+	if(pd > 72.61) return 3;
 }	
 
 // TAREAS COMPLEMENTARIAS
 
 function get_riesgo_CSL_inicio(pd){	
 	if(pd <= 24) return 0;
-	if(pd > 24) return 3;
+	// x
+	// x
+	if(pd > 25) return 3;
 	// no hay otros niveles de rendimiento
 }	
 
 function get_riesgo_CFS_inicio(pd){	
 	if(pd <= 17) return 0;
 	if(pd == 18 ) return 1;
-	if(pd >= 19 && pd <= 21) return 2;
-	if(pd > 21) return 3;
+	if(pd >= 19 && pd <= 20) return 2;
+	if(pd > 20) return 3;
 }	
 
 
@@ -89,8 +92,8 @@ function get_riesgo_VOC_inicio(pd){
 function get_riesgo_CNL_medio(pd){	
 	if(pd <= 50) return 0;
 	if(pd >= 51 && pd <= 56) return 1;
-	if(pd >= 57 && pd <= 59) return 2;
-	if(pd > 59) return 3;
+	if(pd >= 57 && pd <= 58) return 2;
+	if(pd > 58) return 3;
 }	
 
 function get_riesgo_LP_medio(pd){	
@@ -103,52 +106,53 @@ function get_riesgo_LP_medio(pd){
 function get_riesgo_TM_medio(pd){	
 	if(pd <= 3) return 0;
 	if(pd == 4) return 1;
-	if(pd == 5) return 2;
-	if(pd > 5) return 3;
+	// x
+	if(pd > 4) return 3;
 }	
 
 function get_riesgo_FLO_medio(pd){	
 	if(pd <= 62) return 0;
 	if(pd >= 63 && pd <= 69) return 1;
-	if(pd >= 70 && pd <= 77) return 2;
-	if(pd > 77) return 3;
+	if(pd >= 70 && pd <= 75) return 2;
+	if(pd > 75) return 3;
 }	
 
 function get_riesgo_PRO_medio(pd){	
 	if(pd <= 59.80) return 0;
 	if(pd >= 59.81 && pd <= 69.42) return 1;
-	if(pd >= 69.43 && pd <= 80.91) return 2;
-	if(pd > 80.91) return 3;
+	if(pd >= 69.43 && pd <= 70.85) return 2;
+	if(pd > 70.85) return 3;
 }	
 
 // TAREAS COMPLEMENTARIAS
 
 function get_riesgo_CSL_medio(pd){	
 	if(pd <= 30) return 0;
+	// X
+	// x
 	if(pd > 30) return 3;
-	// no hay otros niveles de rendimiento
 }	
 
 function get_riesgo_CFS_medio(pd){	
 	if(pd <= 21) return 0;
 	if(pd >= 22 && pd <= 24) return 1;
-	if(pd >= 25 && pd <= 26) return 2;
-	if(pd > 26) return 3;
+	if(pd == 25) return 2;
+	if(pd > 25) return 3;
 }	
 
 
 function get_riesgo_CLETEXTO_medio(pd){	
 	if(pd <= 4.33) return 0;
 	if(pd >= 4.34 && pd <= 4.93) return 1;
-	if(pd >= 4.94 && pd <= 5.38) return 2;	
-	if(pd > 5.38 ) return 3;
+	if(pd >= 4.94 && pd <= 5.45) return 2;	
+	if(pd > 5.45 ) return 3;
 }	
 
 function get_riesgo_VOC_medio(pd){	
 	if(pd <= 6.36) return 0;
 	if(pd >= 6.37 && pd <= 7.24) return 1;
-	if(pd >= 7.25 && pd <= 7.83) return 2;
-	if(pd > 7.83) return 3;
+	if(pd >= 7.25 && pd <= 7.74) return 2;
+	if(pd > 7.74) return 3;
 }	
 
 
@@ -160,22 +164,22 @@ function get_riesgo_VOC_medio(pd){
 function get_riesgo_CNL_fin(pd){	
 	if(pd <= 54) return 0;
 	if(pd >= 55 && pd <= 58) return 1;
-	if(pd >= 59 && pd <= 60) return 2;
-	if(pd > 60) return 3;
+	if(pd >= 59 && pd <= 62) return 2;
+	if(pd > 62) return 3;
 }	
 
 function get_riesgo_LP_fin(pd){	
 	if(pd <= 28) return 0;
 	if(pd >= 29 && pd <= 31) return 1;
-	if(pd >= 32 && pd <= 33) return 2;
-	if(pd > 33) return 3;
+	if(pd >= 32 && pd <= 34) return 2;
+	if(pd > 34) return 3;
 }	
 
 function get_riesgo_TM_fin(pd){	
 	if(pd <= 5) return 0;
 	if(pd == 6) return 1;
-	if(pd == 7) return 2;
-	if(pd > 7) return 3;
+	//x
+	if(pd > 6) return 3;
 }	
 
 function get_riesgo_FLO_fin(pd){	
@@ -188,8 +192,8 @@ function get_riesgo_FLO_fin(pd){
 function get_riesgo_PRO_fin(pd){	
 	if(pd <= 60.01) return 0;
 	if(pd >= 60.02 && pd <= 71.21) return 1;
-	if(pd >= 71.22 && pd <= 78.06) return 2;
-	if(pd > 78.06) return 3;
+	if(pd >= 71.22 && pd <= 78.85) return 2;
+	if(pd > 78.85) return 3;
 }	
 
 // TAREAS COMPLEMENTARIAS
@@ -197,30 +201,30 @@ function get_riesgo_PRO_fin(pd){
 function get_riesgo_CSL_fin(pd){	
 	if(pd <= 34) return 0;
 	if(pd >= 35 && pd <= 37) return 1;
-	if(pd >= 38 && pd <= 40) return 2;
-	if(pd > 40) return 3;
+	if(pd >= 38 && pd <= 39) return 2;
+	if(pd > 39) return 3;
 }	
 
 function get_riesgo_CFS_fin(pd){	
 	if(pd <= 29) return 0;
 	if(pd >= 30 && pd <= 32) return 1;
-	if(pd >= 33 && pd <= 35) return 2;
-	if(pd > 35) return 3;
+	if(pd >= 33 && pd <= 34) return 2;
+	if(pd > 34) return 3;
 }	
 
 
 function get_riesgo_CLETEXTO_fin(pd){	
 	if(pd <= 4.72) return 0;
 	if(pd >= 4.73 && pd <= 5.37) return 1;
-	if(pd >= 5.38 && pd <= 5.81) return 2;	
-	if(pd > 5.81 ) return 3;
+	if(pd >= 5.38 && pd <= 6) return 2;	
+	if(pd > 6) return 3;
 }	
 
 function get_riesgo_VOC_fin(pd){	
 	if(pd <= 6.67) return 0;
 	if(pd >= 6.68 && pd <= 8.06) return 1;
-	if(pd >= 8.07 && pd <= 8.57) return 2;
-	if(pd > 8.57) return 3;
+	if(pd >= 8.07 && pd <= 8.40) return 2;
+	if(pd > 8.40) return 3;
 }	
 
 
@@ -514,7 +518,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 34,
 		"rendimiento-bajo": 3,
-		"rendimiento-medio": 3,
+		"rendimiento-medio": 2,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("CSL", 7)
 	}
@@ -528,8 +532,8 @@ function cambiar_subprueba(d) {
 		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 44,
-		"rendimiento-bajo": 4,
-		"rendimiento-medio": 3,
+		"rendimiento-bajo": 8,
+		"rendimiento-medio": 2,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("CNL", 1)
 	},
@@ -538,9 +542,9 @@ function cambiar_subprueba(d) {
 		"category": "Diciembre",
 		"estilo": evaluaciones[2] == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[2] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		"riesgo": 44,
-		"rendimiento-bajo": 4,
-		"rendimiento-medio": 3,
+			"riesgo": 44,
+		"rendimiento-bajo": 8,
+		"rendimiento-medio": 2,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("CNL", 2)
 	},
@@ -549,9 +553,9 @@ function cambiar_subprueba(d) {
 		"category": "Enero",
 		"estilo": evaluaciones[3] == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[3] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		"riesgo": 44,
-		"rendimiento-bajo": 4,
-		"rendimiento-medio": 3,
+			"riesgo": 44,
+		"rendimiento-bajo": 8,
+		"rendimiento-medio": 2,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("CNL", 3)
 	},
@@ -562,7 +566,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 50,
 		"rendimiento-bajo": 6,
-		"rendimiento-medio": 3,
+		"rendimiento-medio": 2,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("CNL", 4)
 	},
@@ -573,7 +577,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[5] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 50,
 		"rendimiento-bajo": 6,
-		"rendimiento-medio": 3,
+		"rendimiento-medio": 2,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("CNL", 5)
 	},
@@ -584,7 +588,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[6] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 50,
 		"rendimiento-bajo": 6,
-		"rendimiento-medio": 3,
+		"rendimiento-medio": 2,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("CNL", 6)
 	},
@@ -595,7 +599,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 54,
 		"rendimiento-bajo": 4,
-		"rendimiento-medio": 2,
+		"rendimiento-medio": 4,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno":ultima_evaluacion("CNL", 7)
 	}
@@ -610,7 +614,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[1]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo":  23,
 		"rendimiento-bajo": 3,
-		"rendimiento-medio": 3,
+		"rendimiento-medio": 2,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("LP", 1)
 	},
@@ -621,7 +625,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[2]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo":  23,
 		"rendimiento-bajo": 3,
-		"rendimiento-medio": 3,
+		"rendimiento-medio": 2,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("LP", 2)
 	},
@@ -632,7 +636,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[3]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo":  23,
 		"rendimiento-bajo": 3,
-		"rendimiento-medio": 3,
+		"rendimiento-medio": 2,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("LP", 3)
 	},
@@ -676,7 +680,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[7]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 28,
 		"rendimiento-bajo": 3,
-		"rendimiento-medio": 2,
+		"rendimiento-medio": 3,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("LP", 7)
 	}
@@ -690,7 +694,7 @@ function cambiar_subprueba(d) {
 		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 3,
-		"rendimiento-bajo": 1,
+		"rendimiento-bajo": 0,
 		"rendimiento-medio": 1,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno":ultima_evaluacion("TM", 1)
@@ -702,7 +706,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 3,
 		"rendimiento-bajo": 1,
-		"rendimiento-medio": 1,
+		"rendimiento-medio": 0,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("TM", 4)
 	},
@@ -713,7 +717,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 5,
 		"rendimiento-bajo": 1,
-		"rendimiento-medio": 1,
+		"rendimiento-medio": 0,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("TM", 7)
 	}
@@ -728,7 +732,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo":  51,
 		"rendimiento-bajo":  9,
-		"rendimiento-medio": 7,
+		"rendimiento-medio": 6,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno":ultima_evaluacion("FLO", 1)
 	},
@@ -739,7 +743,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[2] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo":  51,
 		"rendimiento-bajo":  9,
-		"rendimiento-medio": 7,
+		"rendimiento-medio": 6,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno":ultima_evaluacion("FLO", 2)
 	},
@@ -750,7 +754,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[3] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo":  51,
 		"rendimiento-bajo":  9,
-		"rendimiento-medio": 7,
+		"rendimiento-medio": 6,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno":ultima_evaluacion("FLO", 3)
 	},
@@ -761,7 +765,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo":  62,
 		"rendimiento-bajo":  7,
-		"rendimiento-medio":  8,
+		"rendimiento-medio":  6,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno":ultima_evaluacion("FLO", 4)
 	},
@@ -772,7 +776,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[5] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo":  62,
 		"rendimiento-bajo":  7,
-		"rendimiento-medio":  8,
+		"rendimiento-medio":  6,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno":ultima_evaluacion("FLO", 5)
 	},
@@ -783,7 +787,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[6] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo":  62,
 		"rendimiento-bajo":  7,
-		"rendimiento-medio":  8,
+		"rendimiento-medio":  6,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno":ultima_evaluacion("FLO", 6)
 	},
@@ -809,7 +813,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo":  54.45,
 		"rendimiento-bajo":  10.84,
-		"rendimiento-medio": 6.77,
+		"rendimiento-medio": 7.32,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno":ultima_evaluacion("PRO", 1)
 	},
@@ -820,7 +824,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo":  59.8,
 		"rendimiento-bajo":  9.62,
-		"rendimiento-medio":  11.49,
+		"rendimiento-medio":  1.43,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno":ultima_evaluacion("PRO", 4)
 	},
@@ -831,7 +835,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 60.01,
 		"rendimiento-bajo": 11.2,
-		"rendimiento-medio": 6.85,
+		"rendimiento-medio": 7.64,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("PRO", 7)
 	}
@@ -846,7 +850,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo":  17,
 		"rendimiento-bajo":  1,
-		"rendimiento-medio": 3,
+		"rendimiento-medio": 2,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno":ultima_evaluacion("CFS", 1)
 	},
@@ -868,7 +872,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 29,
 		"rendimiento-bajo": 3,
-		"rendimiento-medio": 3,
+		"rendimiento-medio": 2,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("CFS", 7)
 	}
@@ -894,7 +898,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo":  6.36,
 		"rendimiento-bajo":  0.88,
-		"rendimiento-medio":  0.59,
+		"rendimiento-medio":  0.5,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno":ultima_evaluacion("VOC", 4)
 	},
@@ -905,7 +909,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 6.67,
 		"rendimiento-bajo": 1.39,
-		"rendimiento-medio": 0.51,
+		"rendimiento-medio": 0.34,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("VOC", 7)
 	}
@@ -931,7 +935,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo":  4.33,
 		"rendimiento-bajo":  0.6,
-		"rendimiento-medio":  0.45,
+		"rendimiento-medio":  0.52,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno":ultima_evaluacion("CLETEXTO", 4)
 	},
@@ -942,7 +946,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo": 4.72,
 		"rendimiento-bajo": 0.65,
-		"rendimiento-medio": 0.44,
+		"rendimiento-medio": 0.63,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("CLETEXTO", 7)
 	}

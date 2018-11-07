@@ -9,6 +9,8 @@
 	en el inicio, medio y fin
 */
 
+// REVISADO POR JUANE
+
 // INICIO
 
 function get_riesgo_CN_inicio(pd){	
@@ -54,8 +56,8 @@ function get_riesgo_VP_inicio(pd){
 function get_riesgo_CN_medio(pd){
 	if(pd <= 37) return 0;
 	if(pd == 38) return 1;
-	if(pd >= 39 && pd <= 42) return 2;
-	if(pd >= 43) return 3;
+	if(pd >= 39 && pd <= 43) return 2;
+	if(pd > 43) return 3;
 }	
 
 function get_riesgo_ODD_medio(pd){	
@@ -104,8 +106,8 @@ function get_riesgo_ODD_fin(pd){
 }	
 
 function get_riesgo_SN_fin(pd){			 
-	if(pd <= 2) return 0;
-	if(pd >= 3 && pd <= 7) return 1;
+	if(pd <= 3) return 0;
+	if(pd >= 4 && pd <= 7) return 1;
 	if(pd >= 8 && pd <= 9) return 2;
 	if(pd > 9) return 3;		 
 }	
@@ -362,7 +364,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo":37,
 		"rendimiento-bajo": 1,
-		"rendimiento-medio": 4,
+		"rendimiento-medio": 5,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("CN", 4)
 	},
@@ -373,7 +375,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[5] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo":37,
 		"rendimiento-bajo": 1,
-		"rendimiento-medio": 4,
+		"rendimiento-medio": 5,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("CN", 5)
 	},
@@ -384,7 +386,7 @@ function cambiar_subprueba(d) {
 		"etiqueta": evaluaciones[6] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"riesgo":37,
 		"rendimiento-bajo": 1,
-		"rendimiento-medio": 4,
+		"rendimiento-medio": 5,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("CN", 6)
 	},
@@ -560,8 +562,8 @@ function cambiar_subprueba(d) {
 		"category": "Mayo",
 		"estilo": evaluaciones[7] == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		"riesgo": 2,
-		"rendimiento-bajo": 5,
+		"riesgo": 3,
+		"rendimiento-bajo": 4,
 		"rendimiento-medio": 2,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("SN", 7)

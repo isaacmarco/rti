@@ -12,6 +12,8 @@
 	en el inicio, medio y fin
 */
 
+// REVISADO CON JUANE
+
 // INICIO
 
 function get_riesgo_CN_inicio(pd){
@@ -129,8 +131,8 @@ function get_riesgo_SN_fin(pd){
 }
 
 function get_riesgo_IN_fin(pd){
-	if(pd < 28) return 0;
-	if(pd == 28) return 1;
+	if(pd <= 28) return 0;
+	// x 
 	if(pd >= 29 && pd <= 30) return 2;
 	if(pd > 30) return 3;
 }
@@ -665,8 +667,8 @@ function cambiar_subprueba(d) {
 		"category": "Mayo",
 		"estilo": evaluaciones[7] == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		"riesgo": 27,
-		"rendimiento-bajo": 1,
+		"riesgo": 28,
+		"rendimiento-bajo": 0,
 		"rendimiento-medio": 2,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("IN", 7)

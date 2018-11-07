@@ -36,13 +36,14 @@ import rtiapp.constantes as Globales
 import rtiapp.encabezados as Encabezados
 import rtiapp.informes as Informes
 import rtiapp.datos as Datos
+from django.conf import settings
 
 from django.db.models import Q
 import itertools
 import csv
 
 
-server_url = 'http://127.0.0.1:8000/'
+server_url = settings.DIRECCION # 'http://127.0.0.1:8000/'
 #server_url = 'http://193.145.96.31/'
 
 lista_grupos_url = 'lista-grupos'

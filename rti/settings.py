@@ -56,6 +56,15 @@ SECRET_KEY = find_or_create_secret_key()
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# direccion base
+PRODUCCION = False
+def direccion_server():
+	if PRODUCCION == True:
+		return 'webrti.ull.es'
+	else:
+		return 'http://127.0.0.1:8000/'
+DIRECCION = direccion_server()
+		
 ALLOWED_HOSTS = []
 
 

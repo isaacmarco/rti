@@ -2,7 +2,7 @@ import rtiapp.constantes as Globales
 
 
 #
-# REVISADO POR MI DURANTE EL DESARROLLO
+#   REVISADO POR JUANE
 #
 
 
@@ -39,7 +39,7 @@ def omnibus_PRIMERO(evaluacion, momento):
             ) / 5
 
 
-    print ('>>> Error calculando OMNIBUS IPAM PRIMERO')
+    print ('>>> Error calculando OMNIBUS IPE PRIMERO')
     return 404
 
 
@@ -55,7 +55,7 @@ def omnibus_SEGUNDO(evaluacion, momento):
             (e.TLC_1 - 1.451) / 1.8309 +
             (e.DICTADO_ORTOGRAFIA_ARBITRARIA - 10.694) / 3.3552  +
             (e.DICTADO_ORTOGRAFIA_REGLADA - 13.279) / 5.3998 +
-            (e.DICTADO_PSEUDOPALABRAS - 13.789) / 4.2499  +
+            (e.DICTADO_PSEUDOPALABRAS - 13.783) / 4.2499  +
             (e.DICTADO_FRASES - 13.389) / 5.0228
         ) / 5
 
@@ -77,7 +77,7 @@ def omnibus_SEGUNDO(evaluacion, momento):
             (e.DICTADO_FRASES - 16.938) / 3.0914
             ) / 5
 
-    print('>>> Error calculando OMNIBUS IPAM SEGUNDO')
+    print('>>> Error calculando OMNIBUS IPE SEGUNDO')
     return 404
 
 
@@ -89,33 +89,33 @@ def omnibus_TERCERO(evaluacion, momento):
 
     if momento == Globales.INICIO:
         return (
-            (e.DICTADO_ORTOGRAFIA_ARBITRARIA - 1.451) / 1.8309 +
-            (e.DICTADO_ORTOGRAFIA_REGLADA - 10.694) / 3.3552  +
-            (e.DICTADO_FRASES - 13.279) / 5.3998 +
-            (e.SEC_5 - 13.789) / 4.2499  +
-            (e.SEC_SEI_5 - 13.789) / 4.2499 +
-            (e.PDC_5 - 13.389) / 5.0228
+            (e.DICTADO_ORTOGRAFIA_ARBITRARIA - 14.316) / 2.8776 +
+            (e.DICTADO_ORTOGRAFIA_REGLADA - 15.458) / 3.1245  +
+            (e.DICTADO_FRASES - 15.524) / 3.8263 +
+            (e.SEC_5 - 26.466) / 12.1264  +
+            (e.SEC_SEI_5 - 25.817) / 11.7282 +
+            (e.PDC_5 - 27.7784) / 12.07706
         ) / 6
 
     if momento == Globales.MEDIO:
         return (
-            (e.DICTADO_ORTOGRAFIA_ARBITRARIA - 2.995) / 2.9214 +
-            (e.DICTADO_ORTOGRAFIA_REGLADA - 13.296) / 3.0081 +
-            (e.DICTADO_FRASES - 16.128) / 4.2638  +
-            (e.SEC_5 - 16.648) / 2.9593 +
-            (e.SEC_SEI_5 - 13.789) / 4.2499 +
-            (e.PDC_5 - 16.507) / 2.8375
+            (e.DICTADO_ORTOGRAFIA_ARBITRARIA - 14.787) / 2.8690 +
+            (e.DICTADO_ORTOGRAFIA_REGLADA - 15.314) / 2.5691 +
+            (e.DICTADO_FRASES - 17.766) / 2.4069  +
+            (e.SEC_5 - 35.036) / 12.4947 +
+            (e.SEC_SEI_5 - 34.421) / 12.5947 +
+            (e.PDC_5 - 36.3145) / 12.59790
              ) / 6
 
     if momento == Globales.FIN:
         return (
-            (e.DICTADO_ORTOGRAFIA_ARBITRARIA - 4.861) / 3.8717 +
-            (e.DICTADO_ORTOGRAFIA_REGLADA - 13.986) / 3.0447  +
-            (e.DICTADO_FRASES - 17.163) / 3.6159  +
-            (e.SEC_5 - 15.757) / 3.1296 +
-            (e.SEC_SEI_5 - 13.789) / 4.2499 +
-            (e.PDC_5 - 16.938) / 3.0914
+            (e.DICTADO_ORTOGRAFIA_ARBITRARIA - 14.374) / 3.2913 +
+            (e.DICTADO_ORTOGRAFIA_REGLADA - 16.381) / 2.5971  +
+            (e.DICTADO_FRASES - 17.376) / 2.5422  +
+            (e.SEC_5 - 35.454) / 14.7490 +
+            (e.SEC_SEI_5 - 34.840) / 14.5321 +
+            (e.PDC_5 - 36.9828) / 14.73706
             ) / 6
 
-    print('>>> Error calculando OMNIBUS IPAE TERCERO')
+    print('>>> Error calculando OMNIBUS IPE TERCERO')
     return 404
