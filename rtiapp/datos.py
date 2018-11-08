@@ -115,6 +115,7 @@ def importar_csv(request, server_url):
 
     except Exception as e:
         print('>>> Error subiendo CSV: ' + repr(e))
+        return render(request, 'error.html', {'error': repr(e)})
 
     return redirect(server_url)
 

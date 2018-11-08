@@ -11,13 +11,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="app_filters.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app_filters.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templatetags/app_filters.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+            <state relative-caret-position="540">
+              <caret line="20" column="21" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
               <folding>
                 <element signature="e#0#27#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="informe_grupo.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../templates/informe_grupo.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="378">
+              <caret line="29" column="62" selection-start-line="29" selection-start-column="62" selection-end-line="29" selection-end-column="62" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -26,7 +39,7 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="27">
+            <state relative-caret-position="13095">
               <caret line="489" selection-start-line="489" selection-end-line="489" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
@@ -38,8 +51,20 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="45" selection-start-line="45" selection-end-line="45" />
+            <state relative-caret-position="189">
+              <caret line="171" column="43" lean-forward="true" selection-start-line="171" selection-start-column="43" selection-end-line="171" selection-end-column="43" />
+              <folding>
+                <element signature="e#0#36#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="datos.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/datos.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="432">
+              <caret line="118" lean-forward="true" selection-start-line="118" selection-end-line="118" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
               </folding>
@@ -59,7 +84,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>codigo_evaluador</find>
       <find>datetime</find>
       <find>grupo.evaluadore</find>
       <find>ISLA_OPCIONES</find>
@@ -89,6 +113,7 @@
       <find>def info</find>
       <find>&quot;fillColors&quot;: &quot;#538DE0&quot;,</find>
       <find>fff200</find>
+      <find>ERROR_ELIMINAR_ALUMNO</find>
     </findStrings>
     <replaceStrings>
       <replace>IN</replace>
@@ -115,7 +140,6 @@
       <list>
         <option value="$PROJECT_DIR$/views/__init__.py" />
         <option value="$PROJECT_DIR$/views/views.py" />
-        <option value="$PROJECT_DIR$/../templates/informe_grupo.html" />
         <option value="$PROJECT_DIR$/../templates/form_nueva_evaluacion_IPAL_SEGUNDO.html" />
         <option value="$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAE_TERCERO.html" />
         <option value="$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAE_SEGUNDO.html" />
@@ -139,7 +163,6 @@
         <option value="$PROJECT_DIR$/admin.py" />
         <option value="$PROJECT_DIR$/../templates/informe_individual_IPAE_PRIMERO.html" />
         <option value="$PROJECT_DIR$/../templates/principal.html" />
-        <option value="$PROJECT_DIR$/datos.py" />
         <option value="$PROJECT_DIR$/models.py" />
         <option value="$PROJECT_DIR$/../templates/informe_individual_IPAL_INFANTIL.html" />
         <option value="$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAM_PRIMERO.html" />
@@ -164,6 +187,8 @@
         <option value="$PROJECT_DIR$/riesgo_ipal.py" />
         <option value="$PROJECT_DIR$/views.py" />
         <option value="$PROJECT_DIR$/templatetags/app_filters.py" />
+        <option value="$PROJECT_DIR$/../templates/informe_grupo.html" />
+        <option value="$PROJECT_DIR$/datos.py" />
       </list>
     </option>
   </component>
@@ -424,13 +449,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/datos.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="7" column="43" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../templates/lista_grupos.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="27">
@@ -449,13 +467,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="393">
           <caret line="76" column="28" selection-start-line="76" selection-start-column="28" selection-end-line="76" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/informe_grupo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5373">
-          <caret line="277" column="5" lean-forward="true" selection-start-line="277" selection-start-column="5" selection-end-line="277" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -601,7 +612,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
+        <state relative-caret-position="13095">
           <caret line="489" selection-start-line="489" selection-end-line="489" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
@@ -616,22 +627,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templatetags/app_filters.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="20" column="21" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../templates/informe_grupo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="29" column="62" selection-start-line="29" selection-start-column="62" selection-end-line="29" selection-end-column="62" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="45" selection-start-line="45" selection-end-line="45" />
+        <state relative-caret-position="189">
+          <caret line="171" column="43" lean-forward="true" selection-start-line="171" selection-start-column="43" selection-end-line="171" selection-end-column="43" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templatetags/app_filters.py">
+    <entry file="file://$PROJECT_DIR$/datos.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
-          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+          <caret line="118" lean-forward="true" selection-start-line="118" selection-end-line="118" />
           <folding>
-            <element signature="e#0#27#0" expanded="true" />
+            <element signature="e#0#36#0" expanded="true" />
           </folding>
         </state>
       </provider>
