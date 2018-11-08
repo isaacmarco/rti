@@ -93,9 +93,16 @@ var riesgos = {
 		<tr>
 
              <td>
-				<!-- editar alumno -->
-				<a href="{{ server_url }}editar-alumno/?idAlumno={{alumno.pk | safe}}
+				<!-- editar alumno, no valido para participantes consejria -->
+				 {% if participante == True %}
+					🔑
+				 {% else %}
+
+				 <a href="{{ server_url }}editar-alumno/?idAlumno={{alumno.pk | safe}}
 				&idGrupo={{alumno.grupo.pk | safe}}" style="font-size:23px" >📋</a>
+
+				 {% endif %}
+
 			</td>
 
 

@@ -85,7 +85,7 @@ colores_riesgo = {
   "OPTI": "#1ae36e"
 }
 
-
+ERROR_CONSEJERIA_EDITAR_ALUMNO = 'No tiene permisos para editar la ficha'
 ERROR_ALUMNO_YA_TIENE_EVALUACION_ANUAL = 'Este alumno ya tiene registros de evaluación para el curso'
 ERROR_INFORME_IPAE_INFANTIL = 'La prueba IPAE no tiene una versión para Infantil'
 ERROR_EVALUADOR_NO_EXISTE = 'El número de identificación del otro evaluador es incorrecto'
@@ -842,6 +842,9 @@ def listar_alumnos_evaluador_en_grupo(request):
         return render(request,'error.html', {'error': ERROR_PROPIETARIO_GRUPO})
     mostrar_todos = True
 
+    # comprobar si es participante
+    participante = es_participante(request)
+
     # comprobar si se ha filtrado por año academico
     if request.GET.get('cursoAcademico', ''):
 
@@ -961,7 +964,8 @@ def listar_alumnos_evaluador_en_grupo(request):
                         'evas':evas,
                         'curso_filtrado':curso_academico,
                         'index': server_url,
-                        'server_url': server_url})
+                        'server_url': server_url,
+                        'participante': participante})
 
     except ObjectDoesNotExist:
         return render(request, 'error.html', {'error': "No tiene alumnos"})
@@ -1169,6 +1173,11 @@ def editar_alumno(request):
     id_grupo = request.GET['idGrupo']
     alumno = get_object_or_404(Alumno, pk=id_alumno)
 
+    # si es un profesor de la consejeria no se permite editar
+    participante = es_participante(request)
+    if participante:
+        return render(request, 'error.html', {'error': ERROR_CONSEJERIA_EDITAR_ALUMNO})
+
 
     # comprobar los permisos en este alumno
     if not es_propietario_alumno(request, alumno):
@@ -1188,14 +1197,17 @@ def editar_alumno(request):
             alumno.save()
             return redirect(url_retorno)
     else:
-        print('editando')
+
         if es_participante(request):
+            print('>>> Editando alumno de la consjeria')
             form = FormAlumnoConsejeria(request.user, instance=alumno)
         else:
+            print('>>> Editando alumno externo')
             form = FormAlumno(request.user, instance=alumno)
     return render(request, 'form_editar_alumno.html',
                   {'form': form, 'index':server_url,
-                   'server_url': url_retorno, 'alumno':alumno, 'grupo':id_grupo})
+                   'server_url': url_retorno,
+                   'alumno':alumno, 'grupo':id_grupo})
 
 
 

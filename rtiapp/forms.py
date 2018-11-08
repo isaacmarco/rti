@@ -292,6 +292,11 @@ class FormAlumnoConsejeria(forms.ModelForm):
 
     def __init__(self, user_evaluador, *args, **kwargs):
         super(FormAlumnoConsejeria, self).__init__(*args, **kwargs)
+        self.fields['codigo'].widget.attrs['readonly'] = True
+        self.fields['curso'].widget.attrs['readonly'] = True
+        self.fields['pais'].widget.attrs['readonly'] = True
+        self.fields['centro'].widget.attrs['readonly'] = True
+
         # self.fields['grupo'].queryset = Grupo.objects.filter(evaluador=user_evaluador)
 
 
