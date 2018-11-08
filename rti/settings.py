@@ -66,7 +66,7 @@ def direccion_server():
 		return 'http://127.0.0.1:8000/'
 DIRECCION = direccion_server()
 		
-ALLOWED_HOSTS = ['http://webrti.ull.es']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
