@@ -72,7 +72,7 @@ def importar_csv(request, server_url):
                 alumno.evaluador = request.user
                 alumno.save()
                 print('>>> Nuevo alumno subido:' + fields[0] + ', ' + fields[1] + ', ' +
-                      fields[2] + ', ' + fields[3] + ', ' + fields[4] + ', ' + fields[5])
+                      fields[2] + ', ' + fields[3] + ', ' + fields[4] + ', ' + fields[5] + ', ' + fields[6])
 
             if importar_tipo == 'GRUPOS':
                 fields = line.split(";")
@@ -143,13 +143,15 @@ def exportar_CSV(request):
         # obtenemos todos los alumnos
         alumnos = Alumno.objects.all()
         # cabecera y fichero
+
         writer.writerow(['codigo', 'genero', 'curso', 'fecha nacimiento',
-                         'pais', 'centro', 'grupo', 'id grupo', 'evaluador', 'curso academico'])
+                         'pais', 'centro', 'grupo', 'id grupo', 'curso academico'])
         for alumno in alumnos:
             writer.writerow([alumno.codigo, alumno.sexo, alumno.curso,
                              alumno.fecha_nacimiento, alumno.pais, alumno.centro_pilotaje, alumno.grupo.nombre,
-                             alumno.grupo.pk, alumno.codigo_evaluador, alumno.curso_academico
+                             alumno.grupo.pk,  alumno.curso_academico
                              ])
+
 
     if tipo_datos == 'evaluadores':
         print('>>> Exportando evaluadores')

@@ -7,7 +7,7 @@ from .models import Evaluador, Grupo, Alumno,  \
 
 
 class AlumnoAdmin(admin.ModelAdmin):
-    list_display = ('codigo','centro_pilotaje','grupo','evaluador')
+    list_display = ('codigo','sexo','centro_pilotaje','grupo','evaluador')
     search_fields = ('codigo', 'centro_pilotaje', 'grupo','evaluador')
     list_filter = ('centro_pilotaje','grupo')
 
@@ -15,6 +15,7 @@ class EvaluadorAdmin(admin.ModelAdmin):
     list_display = ('codigo', 'nombre', 'centro_pilotaje', 'email')
     search_fields = ('codigo', 'nombre', 'centro_pilotaje', 'email')
     list_filter = ('centro_pilotaje',)
+
 
 class GrupoAdmin(admin.ModelAdmin):
     list_display = ('codigo', 'nombre', 'curso', 'evaluador', 'centro_pilotaje')
