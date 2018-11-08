@@ -15,9 +15,8 @@ import os
 import sys 
 
 STATIC_URL = '/static/'
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # constantes para el login
 LOGIN_REDIRECT_URL = '/?'
@@ -90,6 +89,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+	'whitenoise.middleware.WhiteNoiseMiddleware',
 )
 
 ROOT_URLCONF = 'rti.urls'
