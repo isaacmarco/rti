@@ -66,8 +66,8 @@ class Form_Evaluacion_IPAE_TERCERO(forms.ModelForm):
     tarea1 = 'Dictado de palabras con ortografía arbitraria'
     tarea2 = 'Dictado de palabras con ortografía reglada'
     tarea3 = 'Dictado de frases'
-    tarea4 = 'Escritura de una historia (SEC-5)'
-    tarea5 = 'Escritura de una historia (SEC-SEI-5)'
+    tarea4 = 'Escritura de una historia (SPC-5)'
+    tarea5 = 'Escritura de una historia (SPC-SPI-5)'
     tarea6 = 'Escritura de una historia (PDC-5)'
     DICTADO_ORTOGRAFIA_ARBITRARIA = forms.IntegerField(required=False, min_value=0, max_value=20, label=tarea1)
     DICTADO_ORTOGRAFIA_REGLADA = forms.IntegerField(required=False, min_value=0, max_value=20, label=tarea2)

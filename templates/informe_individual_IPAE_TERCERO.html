@@ -389,8 +389,7 @@ function cambiar_subprueba(d) {
 		"valor-maximo": 80,
 		"category": "Noviembre",
 		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[1]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		 
+		"etiqueta": evaluaciones[1]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
 		"riesgo": 13,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio": 0,
@@ -399,10 +398,32 @@ function cambiar_subprueba(d) {
 	}, 	
 	{
 		"valor-maximo": 80,
+		"category": "Diciembre",
+		"estilo": evaluaciones[2] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[2]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
+		"riesgo": 13,
+		"rendimiento-bajo": 1,
+		"rendimiento-medio": 0,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno": ultima_evaluacion("DOA", 2)
+	}, 	
+	{
+		"valor-maximo": 80,
+		"category": "Enero",
+		"estilo": evaluaciones[3] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[3]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
+		"riesgo": 13,
+		"rendimiento-bajo": 1,
+		"rendimiento-medio": 0,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno": ultima_evaluacion("DOA", 3)
+	}, 	
+	
+	{
+		"valor-maximo": 80,
 		"category": "Febrero",
 		"estilo": evaluaciones[4]  == "True"? 0 : punteado,
-		"etiqueta": evaluaciones[4]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		 
+		"etiqueta": evaluaciones[4]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
 		"riesgo": 13,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio": 0,
@@ -411,10 +432,32 @@ function cambiar_subprueba(d) {
 	},
 	{
 		"valor-maximo": 80,
+		"category": "Marzo",
+		"estilo": evaluaciones[5]  == "True"? 0 : punteado,
+		"etiqueta": evaluaciones[5]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
+		"riesgo": 13,
+		"rendimiento-bajo": 1,
+		"rendimiento-medio": 0,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno": ultima_evaluacion("DOA", 5)
+	},
+	{
+		"valor-maximo": 80,
+		"category": "Abril",
+		"estilo": evaluaciones[6]  == "True"? 0 : punteado,
+		"etiqueta": evaluaciones[6]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
+		"riesgo": 13,
+		"rendimiento-bajo": 1,
+		"rendimiento-medio": 0,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno": ultima_evaluacion("DOA", 6)
+	},
+	
+	{
+		"valor-maximo": 80,
 		"category": "Mayo",
 		"estilo": evaluaciones[7]  == "True"? 0 : punteado,
-		"etiqueta": evaluaciones[7]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		 
+		"etiqueta": evaluaciones[7]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
 		"riesgo": 13,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio":1,
@@ -431,8 +474,7 @@ function cambiar_subprueba(d) {
 		"valor-maximo": 20,
 		"category": "Noviembre",
 		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		 
+		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
 		"riesgo": 14,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio":0,
@@ -441,10 +483,32 @@ function cambiar_subprueba(d) {
 	},
 	{
 		"valor-maximo": 20,
+		"category": "Diciembre",
+		"estilo": evaluaciones[2] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[2] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
+		"riesgo": 14,
+		"rendimiento-bajo": 1,
+		"rendimiento-medio":0,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("DOR", 2)
+	},
+	{
+		"valor-maximo": 20,
+		"category": "Enero",
+		"estilo": evaluaciones[3] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[3] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
+		"riesgo": 14,
+		"rendimiento-bajo": 1,
+		"rendimiento-medio":0,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("DOR", 3)
+	},
+	
+	{
+		"valor-maximo": 20,
 		"category": "Febrero",
 		"estilo": evaluaciones[4] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		 
+		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
 		"riesgo": 15,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio": 0,
@@ -453,10 +517,32 @@ function cambiar_subprueba(d) {
 	},
 	{
 		"valor-maximo": 20,
+		"category": "Marzo",
+		"estilo": evaluaciones[5] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[5] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
+		"riesgo": 15,
+		"rendimiento-bajo": 1,
+		"rendimiento-medio": 0,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno": ultima_evaluacion("DOR", 5)
+	},
+	{
+		"valor-maximo": 20,
+		"category": "Abril",
+		"estilo": evaluaciones[6] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[6] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
+		"riesgo": 15,
+		"rendimiento-bajo": 1,
+		"rendimiento-medio": 0,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno": ultima_evaluacion("DOR", 6)
+	},
+	
+	{
+		"valor-maximo": 20,
 		"category": "Mayo",
 		"estilo": evaluaciones[7] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		 
+		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
 		"riesgo": 15,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio": 0,
@@ -472,8 +558,7 @@ function cambiar_subprueba(d) {
 		"valor-maximo": 35,
 		"category": "Noviembre",
 		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		 
+		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
 		"riesgo": 13,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio": 0,
@@ -482,10 +567,31 @@ function cambiar_subprueba(d) {
 	},
 	{
 		"valor-maximo": 35,
+		"category": "Diciembre",
+		"estilo": evaluaciones[2] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[2] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
+		"riesgo": 13,
+		"rendimiento-bajo": 1,
+		"rendimiento-medio": 0,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("DF", 2)
+	},
+	{
+		"valor-maximo": 35,
+		"category": "Enero",
+		"estilo": evaluaciones[3] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[3] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
+		"riesgo": 13,
+		"rendimiento-bajo": 1,
+		"rendimiento-medio": 0,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("DF", 3)
+	},	
+	{
+		"valor-maximo": 35,
 		"category": "Febrero",
 		"estilo": evaluaciones[4] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		 
+		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
 		"riesgo": 16,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio": 1,
@@ -494,10 +600,31 @@ function cambiar_subprueba(d) {
 	},
 	{
 		"valor-maximo": 35,
+		"category": "Marzo",
+		"estilo": evaluaciones[5] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[5] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
+		"riesgo": 16,
+		"rendimiento-bajo": 1,
+		"rendimiento-medio": 1,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("DF", 5)
+	},
+	{
+		"valor-maximo": 35,
+		"category": "Abril",
+		"estilo": evaluaciones[6] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[6] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
+		"riesgo": 16,
+		"rendimiento-bajo": 1,
+		"rendimiento-medio": 1,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("DF", 6)
+	},	
+	{
+		"valor-maximo": 35,
 		"category": "Mayo",
 		"estilo": evaluaciones[7] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		 
+		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
 		"riesgo": 16,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio": 0,
@@ -508,11 +635,10 @@ function cambiar_subprueba(d) {
  
  var dataset_SEC = [
 	{
-		"valor-maximo": 6,
+		"valor-maximo": 80,
 		"category": "Noviembre",
 		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		 
+		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
 		"riesgo": 22,
 		"rendimiento-bajo": 4,
 		"rendimiento-medio": 3,
@@ -520,11 +646,33 @@ function cambiar_subprueba(d) {
 		"rendimiento-alumno":ultima_evaluacion("SEC", 1)
 	},
 	{
-		"valor-maximo": 6,
+		"valor-maximo": 80,
+		"category": "Diciembre",
+		"estilo": evaluaciones[2] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[2] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
+		"riesgo": 22,
+		"rendimiento-bajo": 4,
+		"rendimiento-medio": 3,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("SEC", 2)
+	},
+	{
+		"valor-maximo": 80,
+		"category": "Enero",
+		"estilo": evaluaciones[3] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[3] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
+		"riesgo": 22,
+		"rendimiento-bajo": 4,
+		"rendimiento-medio": 3,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("SEC", 3)
+	},
+	
+	{
+		"valor-maximo": 80,
 		"category": "Febrero",
 		"estilo": evaluaciones[4] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		 
+		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
 		"riesgo":32,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio": 0,
@@ -532,11 +680,34 @@ function cambiar_subprueba(d) {
 		"rendimiento-alumno":ultima_evaluacion("SEC", 4)
 	},
 	{
-		"valor-maximo": 6,
+		"valor-maximo": 80,
+		"category": "Marzo",
+		"estilo": evaluaciones[5] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[5] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
+		"riesgo":32,
+		"rendimiento-bajo": 1,
+		"rendimiento-medio": 0,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("SEC", 5)
+	},
+	{
+		"valor-maximo": 80,
+		"category": "Abril",
+		"estilo": evaluaciones[6] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[6] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
+		"riesgo":32,
+		"rendimiento-bajo": 1,
+		"rendimiento-medio": 0,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("SEC", 6)
+	},
+	
+	
+	{
+		"valor-maximo": 80,
 		"category": "Mayo",
 		"estilo": evaluaciones[7] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		 
+		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
 		"riesgo": 37,
 		"rendimiento-bajo": 4,
 		"rendimiento-medio": 1,
@@ -547,11 +718,10 @@ function cambiar_subprueba(d) {
   
   var dataset_SEI = [
 	{
-		"valor-maximo": 6,
+		"valor-maximo": 80,
 		"category": "Noviembre",
 		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		 
+		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
 		"riesgo": 22,
 		"rendimiento-bajo": 6,
 		"rendimiento-medio": 0,
@@ -559,11 +729,33 @@ function cambiar_subprueba(d) {
 		"rendimiento-alumno":ultima_evaluacion("SEI", 1)
 	},
 	{
-		"valor-maximo": 6,
+		"valor-maximo": 80,
+		"category": "Diciembre",
+		"estilo": evaluaciones[2] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[2] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
+		"riesgo": 22,
+		"rendimiento-bajo": 6,
+		"rendimiento-medio": 0,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("SEI", 2)
+	},
+	{
+		"valor-maximo": 80,
+		"category": "Enero",
+		"estilo": evaluaciones[3] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[3] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
+		"riesgo": 22,
+		"rendimiento-bajo": 6,
+		"rendimiento-medio": 0,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("SEI", 3)
+	},
+	
+	{
+		"valor-maximo": 80,
 		"category": "Febrero",
 		"estilo": evaluaciones[4] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		 
+		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
 		"riesgo":30,
 		"rendimiento-bajo": 2,
 		"rendimiento-medio": 0,
@@ -571,11 +763,34 @@ function cambiar_subprueba(d) {
 		"rendimiento-alumno":ultima_evaluacion("SEI", 4)
 	},
 	{
-		"valor-maximo": 6,
+		"valor-maximo": 80,
+		"category": "Marzo",
+		"estilo": evaluaciones[5] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[5] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
+		"riesgo":30,
+		"rendimiento-bajo": 2,
+		"rendimiento-medio": 0,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("SEI", 5)
+	},
+	{
+		"valor-maximo": 80,
+		"category": "Abril",
+		"estilo": evaluaciones[6] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[6] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
+		"riesgo":30,
+		"rendimiento-bajo": 2,
+		"rendimiento-medio": 0,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("SEI", 6)
+	},
+	
+	
+	{
+		"valor-maximo": 80,
 		"category": "Mayo",
 		"estilo": evaluaciones[7] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		 
+		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
 		"riesgo": 37,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio": 1,
@@ -598,6 +813,31 @@ function cambiar_subprueba(d) {
 	},
 	{
 		"valor-maximo": 80,
+		"category": "Diciembre",
+		"estilo": evaluaciones[2] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[2] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
+		"riesgo": 24,
+		"rendimiento-bajo": 5,
+		"rendimiento-medio": 2,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("PDC", 2)
+	},
+	{
+		"valor-maximo": 80,
+		"category": "Enero",
+		"estilo": evaluaciones[3] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[3] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
+		"riesgo": 24,
+		"rendimiento-bajo": 5,
+		"rendimiento-medio": 2,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("PDC", 3)
+	},
+	
+	
+	
+	{
+		"valor-maximo": 80,
 		"category": "Febrero",
 		"estilo": evaluaciones[4] == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
@@ -607,6 +847,30 @@ function cambiar_subprueba(d) {
 		"rendimiento-optimo": max,
 		"rendimiento-alumno":ultima_evaluacion("PDC", 4)
 	},
+	{
+		"valor-maximo": 80,
+		"category": "Marzo",
+		"estilo": evaluaciones[5] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[5] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
+		"riesgo":32,
+		"rendimiento-bajo": 1,
+		"rendimiento-medio": 2,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("PDC", 5)
+	},
+	{
+		"valor-maximo": 80,
+		"category": "Abril",
+		"estilo": evaluaciones[6] == "True" ? 0 : punteado,
+		"etiqueta": evaluaciones[6] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
+		"riesgo":32,
+		"rendimiento-bajo": 1,
+		"rendimiento-medio": 2,
+		"rendimiento-optimo": max,
+		"rendimiento-alumno":ultima_evaluacion("PDC", 6)
+	},
+	
+	
 	{
 		"valor-maximo": 80,
 		"category": "Mayo",
