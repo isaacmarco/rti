@@ -2,7 +2,7 @@ import rtiapp.constantes as Globales
 
 
 #
-# REVISADO CON JUANE
+# REVISADO CON JUANE (SEGUNDA REVISION)
 #
 
 
@@ -10,47 +10,48 @@ def riesgo_PRIMERO(omnibus, momento):
 
     if momento == Globales.INICIO:
 
-        if (omnibus <= -0.740080287):
+        if (omnibus <= -0.70730561160):
             return Globales.ALTO_RIESGO
-        # no hay nivel riesgo
-        if (omnibus > -0.740080287  and omnibus <= 0.862731281):
+        if (omnibus > -0.70730561160 and omnibus <= -0.37984452327):
+            return Globales.RIESGO
+        if (omnibus > -0.37984452327  and omnibus <= 0.06867414335):
             return Globales.BAJO
-        if (omnibus > 0.862731281  and omnibus <= 1.74861109):
+        if (omnibus > 0.06867414335  and omnibus <= 0.21691417064):
             return Globales.NORMAL
-        if (omnibus > 1.74861109):
+        if (omnibus > 0.21691417064):
             return Globales.OPTIMO
         print('>>> Error calculando RIESGO IPAE PRIMERO')
         return 404
 
     if momento == Globales.MEDIO:
 
-        if (omnibus <= -0.228144238):
+        if (omnibus <= -0.3818744902):
             return Globales.ALTO_RIESGO
-        if (omnibus > -0.228144238   and omnibus <= -0.22656331):
+        if (omnibus > -0.3818744902   and omnibus <= -0.15640893632):
             return Globales.RIESGO
-        if (omnibus > -0.22656331  and omnibus <= 1.262659227):
+        if (omnibus > -0.15640893632  and omnibus <= 0.1956489893):
             return Globales.BAJO
-        if (omnibus > 1.262659227 and omnibus <= 1.770315515):
+        if (omnibus > 0.1956489893 and omnibus <= 0.4063569056):
             return Globales.NORMAL
-        if (omnibus > 1.770315515):
+        if (omnibus > 0.4063569056):
             return Globales.OPTIMO
         print('>>> Error calculando RIESGO IPAE PRIMERO')
         return 404
 
     if momento == Globales.FIN:
 
-        if (omnibus <= -0.314248128):
+        if (omnibus <= -0.225898215):
             return Globales.ALTO_RIESGO
-        if (omnibus > -0.314248128 and omnibus <= 0.210416406):
+        if (omnibus > -0.225898215 and omnibus <= -0.053461496):
             return Globales.RIESGO
-        if (omnibus > 0.210416406 and omnibus <= 2.120545545):
+        if (omnibus > -0.053461496 and omnibus <= 0.207542352):
             return Globales.BAJO
-        # NO HAY RENDIMIENTO 'NORMAL'
-        if (omnibus > 2.120545545):
+        if (omnibus > 0.207542352 and omnibus <= 0.525522662):
+            return Globales.NORMAL
+        if (omnibus > 0.525522662):
             return Globales.OPTIMO
         print('>>> Error calculando RIESGO IPAE PRIMERO')
         return 404
-
 
 
 
@@ -58,39 +59,39 @@ def riesgo_SEGUNDO(omnibus, momento):
 
     if momento == Globales.INICIO:
 
-        if (omnibus <= -1.532965198):
+        if (omnibus <= -0.302854366):
             return Globales.RIESGO
-        if (omnibus > -1.532965198  and omnibus <= -0.6034989):
+        if (omnibus > -0.302854366  and omnibus <= -0.111144333):
             return Globales.BAJO
-        if (omnibus > -0.6034989 and omnibus <= 0.978968326):
+        if (omnibus > -0.111144333 and omnibus <= -0.007799196):
             return Globales.NORMAL
-        if (omnibus > 0.978968326):
+        if (omnibus > -0.007799196):
             return Globales.OPTIMO
         print('>>> Error calculando RIESGO IPAE PRIMERO')
         return 404
 
     if momento == Globales.MEDIO:
 
-        if (omnibus <= -1.899277272):
+        if (omnibus <= -0.329250256):
             return Globales.RIESGO
-        if (omnibus > -1.899277272 and omnibus <= -1.059334541):
+        if (omnibus > -0.329250256 and omnibus <= -0.122463016):
             return Globales.BAJO
-        if (omnibus > -1.059334541  and omnibus <= 0.294693554):
+        if (omnibus > -0.122463016  and omnibus <= 0.055621763):
             return Globales.NORMAL
-        if (omnibus > 0.294693554):
+        if (omnibus > 0.055621763):
             return Globales.OPTIMO
         print('>>> Error calculando RIESGO IPAL PRIMERO')
         return 404
 
     if momento == Globales.FIN:
 
-        if (omnibus <= -1.974925464):
+        if (omnibus <= -0.266751501):
             return Globales.RIESGO
-        if (omnibus > -1.974925464 and omnibus <= -0.150502921):
+        if (omnibus > -0.266751501 and omnibus <= -0.023180658):
             return Globales.BAJO
-        if (omnibus > -0.150502921  and omnibus <= 1.114174218):
+        if (omnibus > -0.023180658  and omnibus <= 0.167508746):
             return Globales.NORMAL
-        if (omnibus > 1.114174218):
+        if (omnibus > 0.167508746):
             return Globales.OPTIMO
         print('>>> Error calculando RIESGO IPAE SEGUNDO')
         return 404

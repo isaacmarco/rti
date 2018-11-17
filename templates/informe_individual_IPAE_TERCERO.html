@@ -200,10 +200,10 @@ function get_riesgo_PDC_fin(pd){
   <td><a onclick="cambiar_subprueba(0)" href="#chartdiv">Dictado palabras ortografía arbitraria (DOA)</a></td>  
 	<td><a onclick="cambiar_subprueba(1)" href="#chartdiv">Dictado palabras ortografía reglada (DOR)</a></td> 
 	<td><a onclick="cambiar_subprueba(2)" href="#chartdiv">Dictado frases (DF)</a></td>	
-	<td><a onclick="cambiar_subprueba(3)" href="#chartdiv">Escritura de una historia (SEC-5)</a></td>
-	<td><a onclick="cambiar_subprueba(4)" href="#chartdiv">Escritura de una historia (SEC-SEI-5)</a></td>
+	<td><a onclick="cambiar_subprueba(3)" href="#chartdiv">Escritura de una historia (SPC-5)</a></td>
+	<td><a onclick="cambiar_subprueba(4)" href="#chartdiv">Escritura de una historia (SPC-SPI-5)</a></td>
 	<td><a onclick="cambiar_subprueba(5)" href="#chartdiv">Escritura de una historia (PDC-5)</a></td>
-	
+	 
 </table>
 <br><br>
 
@@ -335,7 +335,7 @@ function puntuacion_directa(prueba, momento){
 // cambiar la subtarea mostrada en el grafico
 function cambiar_subprueba(d) {
 
-	var titulos_graficos = ["DOA", "DOR", "DF", "SEC-5", "SEC-SEI-5", "PDC-5" ];
+	var titulos_graficos = ["DOA", "DOR", "DF", "SPC-5", "SPC-SPI-5", "PDC-5" ];
 	var subtitulos = [
 	"Dictado de palabras con ortografía arbitraria",
 	"Dictado de palabras con ortografía reglada", 
@@ -586,11 +586,10 @@ function cambiar_subprueba(d) {
   
   var dataset_PDC = [
 	{
-		"valor-maximo": 6,
+		"valor-maximo": 80,
 		"category": "Noviembre",
 		"estilo": evaluaciones[1] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		 
+		"etiqueta": evaluaciones[1] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
 		"riesgo": 24,
 		"rendimiento-bajo": 5,
 		"rendimiento-medio": 2,
@@ -598,11 +597,10 @@ function cambiar_subprueba(d) {
 		"rendimiento-alumno":ultima_evaluacion("PDC", 1)
 	},
 	{
-		"valor-maximo": 6,
+		"valor-maximo": 80,
 		"category": "Febrero",
 		"estilo": evaluaciones[4] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		 
+		"etiqueta": evaluaciones[4] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
 		"riesgo":32,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio": 2,
@@ -610,11 +608,10 @@ function cambiar_subprueba(d) {
 		"rendimiento-alumno":ultima_evaluacion("PDC", 4)
 	},
 	{
-		"valor-maximo": 6,
+		"valor-maximo": 80,
 		"category": "Mayo",
 		"estilo": evaluaciones[7] == "True" ? 0 : punteado,
-		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		 
+		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,		 
 		"riesgo": 38,
 		"rendimiento-bajo": 1,
 		"rendimiento-medio": 1,

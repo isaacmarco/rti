@@ -100,43 +100,39 @@ def riesgo_SEGUNDO(omnibus, momento):
 
     if momento == Globales.INICIO:
 
-        if (omnibus <= -0.5108):
+        if (omnibus <= -0.510825):
             return Globales.RIESGO
-        if (omnibus > -0.5108 and omnibus <= 0.0946):
+        if (omnibus > -0.510825 and omnibus <= 0.079801):
             return Globales.BAJO
-        if (omnibus > 0.0946 and omnibus <= 0.1172):
+        if (omnibus > 0.079801 and omnibus <= 0.117268):
             return Globales.NORMAL
-        if (omnibus >0.1172):
+        if (omnibus >0.117268):
             return Globales.OPTIMO
         print('>>> Error calculando RIESGO IPAL SEGUNDO')
         return 404
 
     if momento == Globales.MEDIO:
 
-        if (omnibus <=  -0.2862):
+        if (omnibus <=  -0.2862476):
             return Globales.RIESGO
-        if (omnibus > -0.2862 and omnibus <= 0.0287):
+        if (omnibus > -0.2862476 and omnibus <= 0.028678):
             return Globales.BAJO
-        if (omnibus > 0.0287 and omnibus <= 0.1795):
+        if (omnibus > 0.028678 and omnibus <= 0.1795739):
             return Globales.NORMAL
-        if (omnibus > 0.1795):
+        if (omnibus > 0.1795739):
             return Globales.OPTIMO
         print('>>> Error calculando RIESGO IPAL SEGUNDO')
         return 404
 
     if momento == Globales.FIN:
 
-        if (omnibus <= -0.5143):
+        if (omnibus <= -0.5143255):
             return Globales.RIESGO
-        if (omnibus > -0.5143 and omnibus <= 0.0360):
+        if (omnibus > -0.5143255 and omnibus <= -0.081679):
             return Globales.BAJO
-        if (omnibus > 0.0360 and omnibus <= 0.1232):
+        if (omnibus > -0.081679 and omnibus <= 0.1232562):
             return Globales.NORMAL
-        if (omnibus > 0.1232):
+        if (omnibus > 0.1232562):
             return Globales.OPTIMO
         print('>>> Error calculando RIESGO IPAL SEGUNDO')
         return 404
-
-
-
-
