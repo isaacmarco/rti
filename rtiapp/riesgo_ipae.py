@@ -87,9 +87,9 @@ def riesgo_SEGUNDO(omnibus, momento):
 
         if (omnibus <= -0.266751501):
             return Globales.RIESGO
-        if (omnibus > -0.266751501 and omnibus <= -0.023180658):
+        if (omnibus > -0.266751501 and omnibus <= 0.028182139):
             return Globales.BAJO
-        if (omnibus > -0.023180658  and omnibus <= 0.258451001):
+        if (omnibus > 0.028182139  and omnibus <= 0.258451001):
             return Globales.NORMAL
         if (omnibus > 0.258451001):
             return Globales.OPTIMO
