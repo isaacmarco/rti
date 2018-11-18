@@ -56,7 +56,7 @@ SECRET_KEY = find_or_create_secret_key()
 DEBUG = False
 
 # direccion base
-PRODUCCION = False
+PRODUCCION = True
 
 def direccion_server():
 	if PRODUCCION == True:

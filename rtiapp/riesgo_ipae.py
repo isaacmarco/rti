@@ -89,9 +89,9 @@ def riesgo_SEGUNDO(omnibus, momento):
             return Globales.RIESGO
         if (omnibus > -0.266751501 and omnibus <= -0.023180658):
             return Globales.BAJO
-        if (omnibus > -0.023180658  and omnibus <= 0.167508746):
+        if (omnibus > -0.023180658  and omnibus <= 0.258451001):
             return Globales.NORMAL
-        if (omnibus > 0.167508746):
+        if (omnibus > 0.258451001):
             return Globales.OPTIMO
         print('>>> Error calculando RIESGO IPAE SEGUNDO')
         return 404
