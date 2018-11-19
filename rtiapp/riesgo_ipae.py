@@ -87,9 +87,9 @@ def riesgo_SEGUNDO(omnibus, momento):
 
         if (omnibus <= -0.266751501):
             return Globales.RIESGO
-        if (omnibus > -0.266751501 and omnibus <= 0.028182139):
+        if (omnibus > -0.266751501 and omnibus <= 0.036251262):
             return Globales.BAJO
-        if (omnibus > 0.028182139  and omnibus <= 0.258451001):
+        if (omnibus > 0.036251262  and omnibus <= 0.258451001):
             return Globales.NORMAL
         if (omnibus > 0.258451001):
             return Globales.OPTIMO
@@ -128,13 +128,13 @@ def riesgo_TERCERO(omnibus, momento):
 
     if momento == Globales.FIN:
 
-        if (omnibus <= -0.190393154):
+        if (omnibus <= -0.164233297):
             return Globales.RIESGO
-        if (omnibus > -0.190393154 and omnibus <= -0.012598242):
+        if (omnibus > -0.164233297 and omnibus <= 0.028560792):
             return Globales.BAJO
-        if (omnibus > -0.012598242 and omnibus <= 0.116164957):
+        if (omnibus > 0.028560792 and omnibus <= 0.128285922):
             return Globales.NORMAL
-        if (omnibus > 0.116164957):
+        if (omnibus > 0.128285922):
             return Globales.OPTIMO
         print('>>> Error calculando RIESGO IPAE TERCERO')
         return 404
