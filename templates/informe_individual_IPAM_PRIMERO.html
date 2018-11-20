@@ -139,8 +139,8 @@ function get_riesgo_OUD_fin(pd){
 
 function get_riesgo_VP_fin(pd){	 
 	if(pd <= 4) return 0;
-	if(pd >= 5 && pd <= 7) return 1;
-	if(pd == 8) return 2;
+	if(pd >= 5 && pd <= 6) return 1;
+	if(pd >= 7 && pd <= 8) return 2;
 	if(pd == 9) return 3;
 	if(pd > 9) return 4;
 }	
@@ -680,8 +680,8 @@ function cambiar_subprueba(d) {
 		"estilo": evaluaciones[7] == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[7] == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
 		"alto-riesgo": 4, 
-		"riesgo": 3,
-		"rendimiento-bajo": 1,
+		"riesgo": 2,
+		"rendimiento-bajo": 2,
 		"rendimiento-medio": 1,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("VP", 7)
