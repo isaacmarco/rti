@@ -65,7 +65,7 @@
       <file leaf-file-name="riesgo_ipal.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/riesgo_ipal.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="358">
+            <state relative-caret-position="318">
               <caret line="133" column="33" lean-forward="true" selection-start-line="133" selection-start-column="33" selection-end-line="133" selection-end-column="33" />
             </state>
           </provider>
@@ -201,7 +201,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="482" />
     <option name="y" value="47" />
     <option name="width" value="1750" />
@@ -251,7 +251,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="386" y="38" width="1400" height="776" extended-state="0" />
+    <frame x="386" y="38" width="1400" height="776" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.118489586" />
@@ -644,7 +644,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/riesgo_ipal.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
+        <state relative-caret-position="318">
           <caret line="133" column="33" lean-forward="true" selection-start-line="133" selection-start-column="33" selection-end-line="133" selection-end-column="33" />
         </state>
       </provider>
