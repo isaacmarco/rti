@@ -3,6 +3,12 @@ from django.conf import settings
 
 register = template.Library()
 
+# redondea el omnibus
+@register.simple_tag
+def omnibus_redondeado(omnibus):
+    return round(omnibus, 6)
+
+
 # devuelve el formato de año academico
 @register.simple_tag
 def get_curso(curso):
