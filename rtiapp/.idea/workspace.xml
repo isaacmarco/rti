@@ -35,7 +35,7 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="412">
+            <state relative-caret-position="20466">
               <caret line="800" column="45" selection-start-line="800" selection-start-column="45" selection-end-line="800" selection-end-column="45" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
@@ -44,20 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="lista_evaluaciones.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="lista_evaluaciones.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../templates/lista_evaluaciones.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="75" column="59" selection-start-line="75" selection-start-column="59" selection-end-line="75" selection-end-column="59" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app_filters.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templatetags/app_filters.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="7" column="22" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="22" />
+            <state relative-caret-position="258">
+              <caret line="74" column="49" selection-start-line="74" selection-start-column="49" selection-end-line="74" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -65,8 +56,8 @@
       <file leaf-file-name="riesgo_ipam.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/riesgo_ipam.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1566">
-              <caret line="58" column="33" lean-forward="true" selection-start-line="58" selection-start-column="33" selection-end-line="58" selection-end-column="33" />
+            <state relative-caret-position="4590">
+              <caret line="170" column="34" selection-start-line="170" selection-start-column="34" selection-end-line="170" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -74,17 +65,17 @@
       <file leaf-file-name="riesgo_ipal.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/riesgo_ipal.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="291">
-              <caret line="140" column="67" selection-start-line="140" selection-start-column="67" selection-end-line="140" selection-end-column="67" />
+            <state relative-caret-position="3537">
+              <caret line="131" column="35" selection-start-line="131" selection-start-column="35" selection-end-line="131" selection-end-column="35" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="riesgo_ipae.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="riesgo_ipae.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/riesgo_ipae.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="24" column="72" selection-start-line="24" selection-start-column="72" selection-end-line="24" selection-end-column="72" />
+            <state relative-caret-position="-621">
+              <caret line="85" column="5" selection-start-line="85" selection-start-column="5" selection-end-line="85" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -101,28 +92,27 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>auth_views.login</find>
-      <find />
-      <find />
+      <find>def index</find>
+      <find>def es_propietario_alumno</find>
       <find>FormAlumno</find>
       <find>es_participante</find>
-      <find />
+      <find>server_url =</find>
       <find>127.0.0.1:8000</find>
       <find>server_url</find>
       <find>base</find>
-      <find />
+      <find>alta ev</find>
       <find>SignUpForm</find>
       <find>IPAE</find>
       <find>IPAL</find>
       <find>clases</find>
       <find>evaluacion</find>
-      <find />
+      <find>recuperando ev</find>
       <find>riesgo_PRIMERO</find>
       <find>omnibus_PRIMERO</find>
       <find>Group</find>
       <find>colores_riesgo</find>
-      <find />
-      <find />
+      <find>def info</find>
+      <find>&quot;fillColors&quot;: &quot;#538DE0&quot;,</find>
       <find>fff200</find>
       <find>ERROR_ELIMINAR_ALUMNO</find>
       <find>SEXO_OPCIONES</find>
@@ -131,6 +121,7 @@
       <find>nuevo_alu</find>
       <find>lista_ev</find>
       <find>get_server_url</find>
+      <find>))</find>
     </findStrings>
     <replaceStrings>
       <replace>IN</replace>
@@ -147,6 +138,7 @@
       <replace>IPAL</replace>
       <replace>IPAM</replace>
       <replace>e</replace>
+      <replace>)</replace>
     </replaceStrings>
   </component>
   <component name="HighlightingSettingsPerFile">
@@ -201,17 +193,17 @@
         <option value="$PROJECT_DIR$/admin.py" />
         <option value="$PROJECT_DIR$/../templates/principal.html" />
         <option value="$PROJECT_DIR$/forms.py" />
+        <option value="$PROJECT_DIR$/templatetags/app_filters.py" />
+        <option value="$PROJECT_DIR$/../templates/lista_evaluaciones.html" />
         <option value="$PROJECT_DIR$/riesgo_ipam.py" />
         <option value="$PROJECT_DIR$/riesgo_ipal.py" />
         <option value="$PROJECT_DIR$/riesgo_ipae.py" />
-        <option value="$PROJECT_DIR$/templatetags/app_filters.py" />
-        <option value="$PROJECT_DIR$/../templates/lista_evaluaciones.html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="587" />
-    <option name="y" value="40" />
+    <option name="x" value="56" />
+    <option name="y" value="35" />
     <option name="width" value="1750" />
     <option name="height" value="970" />
   </component>
@@ -259,7 +251,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="124" y="61" width="1400" height="776" extended-state="0" />
+    <frame x="45" y="28" width="1400" height="776" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.118489586" />
@@ -283,21 +275,21 @@
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13151042" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Python Console" order="7" />
     </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -612,30 +604,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/riesgo_ipam.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1566">
-          <caret line="58" column="33" lean-forward="true" selection-start-line="58" selection-start-column="33" selection-end-line="58" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/riesgo_ipal.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="140" column="67" selection-start-line="140" selection-start-column="67" selection-end-line="140" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/riesgo_ipae.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="24" column="72" selection-start-line="24" selection-start-column="72" selection-end-line="24" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
+        <state relative-caret-position="20466">
           <caret line="800" column="45" selection-start-line="800" selection-start-column="45" selection-end-line="800" selection-end-column="45" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
@@ -652,8 +623,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../templates/lista_evaluaciones.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="75" column="59" selection-start-line="75" selection-start-column="59" selection-end-line="75" selection-end-column="59" />
+        <state relative-caret-position="258">
+          <caret line="74" column="49" selection-start-line="74" selection-start-column="49" selection-end-line="74" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/riesgo_ipam.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4590">
+          <caret line="170" column="34" selection-start-line="170" selection-start-column="34" selection-end-line="170" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/riesgo_ipal.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3537">
+          <caret line="131" column="35" selection-start-line="131" selection-start-column="35" selection-end-line="131" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/riesgo_ipae.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-621">
+          <caret line="85" column="5" selection-start-line="85" selection-start-column="5" selection-end-line="85" selection-end-column="5" />
         </state>
       </provider>
     </entry>
