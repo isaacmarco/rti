@@ -87,8 +87,8 @@ function get_riesgo_CLETEXTO_medio(pd){
 	if(pd > 4) return 3;
 }
 function get_riesgo_CFA_medio(pd){
-	if(pd <= 34) return 0;
-	if(pd >= 35 && pd <= 50) return 1;
+	if(pd <= 18) return 0;
+	if(pd >= 19 && pd <= 50) return 1;
 	if(pd >= 51 && pd <= 66) return 2;
 	if(pd > 66) return 3;
 }
@@ -409,8 +409,8 @@ function cambiar_subprueba(d) {
 		"category": "Febrero",
 		"estilo": evaluaciones[4]  == "True"? 0 : punteado,
 		"etiqueta": evaluaciones[4]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		"riesgo": 34,
-		"rendimiento-bajo": 16,
+		"riesgo": 18,
+		"rendimiento-bajo": 32,
 		"rendimiento-medio": 16,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("CFA", 4)
@@ -420,8 +420,8 @@ function cambiar_subprueba(d) {
 		"category": "Marzo",
 		"estilo": evaluaciones[5]  == "True"? 0 : punteado,
 		"etiqueta": evaluaciones[5]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		"riesgo": 34,
-		"rendimiento-bajo": 16,
+		"riesgo": 18,
+		"rendimiento-bajo": 32,
 		"rendimiento-medio": 16,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno": ultima_evaluacion("CFA", 5)
@@ -431,8 +431,8 @@ function cambiar_subprueba(d) {
 		"category": "Abril",
 		"estilo": evaluaciones[6]  == "True" ? 0 : punteado,
 		"etiqueta": evaluaciones[6]  == "True" ? etiquetaEvaluado : etiquetaNoEvaluado,
-		"riesgo": 34,
-		"rendimiento-bajo": 16,
+		"riesgo": 18,
+		"rendimiento-bajo": 32,
 		"rendimiento-medio": 16,
 		"rendimiento-optimo": max,
 		"rendimiento-alumno":  ultima_evaluacion("CFA", 6)
