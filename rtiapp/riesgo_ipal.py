@@ -40,9 +40,9 @@ def riesgo_INFANTIL(omnibus, momento):
             return Globales.RIESGO
         if (omnibus > -0.329980387 and omnibus <= -0.00458066):
             return Globales.BAJO
-        if (omnibus > -0.00458066 and omnibus <= 0.1734771618):
+        if (omnibus > -0.00458066 and omnibus <= 0.17347716184131115): # 0.1734771618
             return Globales.NORMAL
-        if (omnibus > 0.1734771618):
+        if (omnibus > 0.17347716184131115):
             return Globales.OPTIMO
         print('>>> Error calculando RIESGO IPAL INFANTIL')
         return 404
@@ -125,9 +125,9 @@ def riesgo_SEGUNDO(omnibus, momento):
 
     if momento == Globales.FIN:
 
-        if (omnibus <= -0.4237496660):
+        if (omnibus <= -0.42374966595644514): # -0.4237496660
             return Globales.RIESGO
-        if (omnibus > -0.4237496660 and omnibus <= -0.0807718261):
+        if (omnibus > -0.42374966595644514 and omnibus <= -0.0807718261):
             return Globales.BAJO
         if (omnibus > -0.0807718261 and omnibus <= 0.1232562):
             return Globales.NORMAL

@@ -56,25 +56,25 @@
       <file leaf-file-name="riesgo_ipam.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/riesgo_ipam.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4590">
-              <caret line="170" column="34" selection-start-line="170" selection-start-column="34" selection-end-line="170" selection-end-column="34" />
+            <state relative-caret-position="-1782">
+              <caret line="46" column="29" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="riesgo_ipal.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="riesgo_ipal.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/riesgo_ipal.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3537">
-              <caret line="131" column="35" selection-start-line="131" selection-start-column="35" selection-end-line="131" selection-end-column="35" />
+            <state relative-caret-position="358">
+              <caret line="133" column="33" lean-forward="true" selection-start-line="133" selection-start-column="33" selection-end-line="133" selection-end-column="33" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="riesgo_ipae.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="riesgo_ipae.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/riesgo_ipae.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-621">
+            <state relative-caret-position="-1086">
               <caret line="85" column="5" selection-start-line="85" selection-start-column="5" selection-end-line="85" selection-end-column="5" />
             </state>
           </provider>
@@ -92,7 +92,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>def index</find>
       <find>def es_propietario_alumno</find>
       <find>FormAlumno</find>
       <find>es_participante</find>
@@ -122,6 +121,7 @@
       <find>lista_ev</find>
       <find>get_server_url</find>
       <find>))</find>
+      <find>0.173477</find>
     </findStrings>
     <replaceStrings>
       <replace>IN</replace>
@@ -195,15 +195,15 @@
         <option value="$PROJECT_DIR$/forms.py" />
         <option value="$PROJECT_DIR$/templatetags/app_filters.py" />
         <option value="$PROJECT_DIR$/../templates/lista_evaluaciones.html" />
+        <option value="$PROJECT_DIR$/riesgo_ipae.py" />
         <option value="$PROJECT_DIR$/riesgo_ipam.py" />
         <option value="$PROJECT_DIR$/riesgo_ipal.py" />
-        <option value="$PROJECT_DIR$/riesgo_ipae.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="56" />
-    <option name="y" value="35" />
+    <option name="x" value="482" />
+    <option name="y" value="47" />
     <option name="width" value="1750" />
     <option name="height" value="970" />
   </component>
@@ -251,7 +251,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="45" y="28" width="1400" height="776" extended-state="0" />
+    <frame x="386" y="38" width="1400" height="776" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.118489586" />
@@ -630,22 +630,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/riesgo_ipam.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4590">
-          <caret line="170" column="34" selection-start-line="170" selection-start-column="34" selection-end-line="170" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/riesgo_ipal.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3537">
-          <caret line="131" column="35" selection-start-line="131" selection-start-column="35" selection-end-line="131" selection-end-column="35" />
+        <state relative-caret-position="-1782">
+          <caret line="46" column="29" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/riesgo_ipae.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-621">
+        <state relative-caret-position="-1086">
           <caret line="85" column="5" selection-start-line="85" selection-start-column="5" selection-end-line="85" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/riesgo_ipal.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="133" column="33" lean-forward="true" selection-start-line="133" selection-start-column="33" selection-end-line="133" selection-end-column="33" />
         </state>
       </provider>
     </entry>
