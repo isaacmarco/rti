@@ -481,7 +481,8 @@ def nueva_evaluacion(request):
                   '/?idGrupo=' + id_grupo + '&idAlumno=' + id_alumno + \
                   '&tipo=' + tipo
 
-    print('>>> Nueva evaluacion ' + str(evaluador.curso_academico) + ' ' + tipo + ' ' + curso)
+    print('>>> Nueva evaluacion ' + str(evaluador.curso_academico) + \
+          ' ' + tipo + ' ' + curso + ' ' + str(evaluador))
 
     # nombre del modelo a instanciar
     nombre_modelo = tipo + '-' + curso
