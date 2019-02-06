@@ -176,7 +176,7 @@ def exportar_CSV(request):
             writer.writerow(Encabezados.encabezado_IPAL_INFANTIL)
             for e in evaluaciones:
                 writer.writerow([
-                    e.alumno, e.evaluador, e.alumno.centro, e.curso_academico, e.ultima_modificacion, e.prueba, e.mes,
+                    e.alumno, e.evaluador, e.alumno.centro_pilotaje, e.curso_academico, e.ultima_modificacion, e.prueba, e.mes,
                     e.tipo,
                     e.ADIVINANZAS, e.CSL, e.CNL, e.CLE_IMAGEN, e.CLE_TEXTO, e.CFA, e.evaluado
                 ])
@@ -185,7 +185,7 @@ def exportar_CSV(request):
             writer.writerow(Encabezados.encabezado_IPAL_PRIMERO)
             for e in evaluaciones:
                 writer.writerow([
-                    e.alumno, e.evaluador, e.alumno.centro, e.curso_academico, e.ultima_modificacion, e.prueba, e.mes,
+                    e.alumno, e.evaluador, e.alumno.centro_pilotaje, e.curso_academico, e.ultima_modificacion, e.prueba, e.mes,
                     e.tipo,
                     e.TM, e.LP, e.CSL, e.CNL, e.FLO, e.CLE_TEXTO, e.CFS, e.evaluado
                 ])
@@ -194,7 +194,7 @@ def exportar_CSV(request):
             writer.writerow(Encabezados.encabezado_IPAL_SEGUNDO)
             for e in evaluaciones:
                 writer.writerow([
-                    e.alumno, e.evaluador, e.alumno.centro, e.curso_academico, e.ultima_modificacion, e.prueba, e.mes,
+                    e.alumno, e.evaluador, e.alumno.centro_pilotaje, e.curso_academico, e.ultima_modificacion, e.prueba, e.mes,
                     e.tipo,
                     e.TM, e.LP, e.CSL, e.CNL, e.FLO, e.CLE_TEXTO, e.CFS, e.PRO, e.VOC, e.evaluado
                 ])
@@ -210,7 +210,7 @@ def exportar_CSV(request):
             writer.writerow(Encabezados.encabezado_IPAM_INFANTIL)
             for e in evaluaciones:
                 writer.writerow([
-                    e.alumno, e.evaluador, e.alumno.centro, e.curso_academico, e.ultima_modificacion, e.prueba, e.mes,
+                    e.alumno, e.evaluador, e.alumno.centro_pilotaje, e.curso_academico, e.ultima_modificacion, e.prueba, e.mes,
                     e.tipo,
                     e.CN, e.EC, e.SN, e.IN, e.CVA, e.CM, e.evaluado
                 ])
@@ -218,7 +218,7 @@ def exportar_CSV(request):
             writer.writerow(Encabezados.encabezado_IPAM_PRIMERO)
             for e in evaluaciones:
                 writer.writerow([
-                    e.alumno, e.evaluador, e.alumno.centro, e.curso_academico, e.ultima_modificacion, e.prueba, e.mes,
+                    e.alumno, e.evaluador, e.alumno.centro_pilotaje, e.curso_academico, e.ultima_modificacion, e.prueba, e.mes,
                     e.tipo,
                     e.CN, e.ODD, e.SN, e.OUD, e.VP, e.evaluado
                 ])
@@ -234,7 +234,7 @@ def exportar_CSV(request):
             writer.writerow(Encabezados.encabezado_IPAE_PRIMERO)
             for e in evaluaciones:
                 writer.writerow([
-                    e.alumno, e.evaluador, e.alumno.centro, e.curso_academico, e.ultima_modificacion, e.prueba, e.mes,
+                    e.alumno, e.evaluador, e.alumno.centro_pilotaje, e.curso_academico, e.ultima_modificacion, e.prueba, e.mes,
                     e.tipo,
                     e.TLC_1, e.DICTADO_ORTOGRAFIA_ARBITRARIA, e.DICTADO_ORTOGRAFIA_REGLADA, e.DICTADO_PSEUDOPALABRAS,
                     e.DICTADO_FRASES, e.evaluado
@@ -243,7 +243,7 @@ def exportar_CSV(request):
             writer.writerow(Encabezados.encabezado_IPAE_TERCERO)
             for e in evaluaciones:
                 writer.writerow([
-                    e.alumno, e.evaluador, e.alumno.centro, e.curso_academico, e.ultima_modificacion, e.prueba, e.mes,
+                    e.alumno, e.evaluador, e.alumno.centro_pilotaje, e.curso_academico, e.ultima_modificacion, e.prueba, e.mes,
                     e.tipo,
                     e.DICTADO_ORTOGRAFIA_ARBITRARIA, e.DICTADO_ORTOGRAFIA_REGLADA, e.DICTADO_FRASES,
                     e.SEC_5, e.SEC_SEI_5, e.PDC_5, e.evaluado
