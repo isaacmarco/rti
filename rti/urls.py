@@ -14,6 +14,7 @@ from rtiapp.views import \
     lista_grupos_evaluador_consejeria, compartir_grupo_centro, actualizar_curso_academico_grupo, ayuda
 
 
+
 urlpatterns = [
 
     # plataforma
@@ -29,6 +30,9 @@ urlpatterns = [
     # exportar datos
     url(r'^exportar/', exportar),
     url(r'^exportar-csv/', exportar_CSV),
+
+
+
 
     # informes
     url(r'^informe-grupo/', informe_grupo),
