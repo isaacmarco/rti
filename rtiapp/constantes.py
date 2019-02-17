@@ -47,6 +47,7 @@ PSICOLOGO = 'PS'
 PEDAGOGO = 'PG'
 PSICOPEDAGOGO = 'SG'
 MAESTRO = 'MS'
+LOGOPEDA = 'LP'
 # zona de trabajo
 PERIFERIA = 'PR'
 URBANA = 'UB'
@@ -125,7 +126,8 @@ PROFESION_OPCIONES = (
     (PSICOLOGO, 'Psicologo'),
     (PEDAGOGO, 'Pedagogo'),
     (PSICOPEDAGOGO, 'Psicopedagogo'),
-    (MAESTRO, 'Maestro')
+    (MAESTRO, 'Maestro'),
+    (LOGOPEDA, 'Logopeda')
 )
 # opciones de tipo de prueba
 PRUEBA_OPCIONES = (
