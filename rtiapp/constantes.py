@@ -32,6 +32,7 @@ ESP = 'ESP'
 ECU = 'ECU'
 GTM = 'GTM'
 CAN = 'CAN'
+PAN = 'PAN'
 # constantes personales
 HOMBRE = 'HM'
 MUJER = 'MJ'
@@ -94,7 +95,8 @@ PAIS_OPCIONES = (
     (ESP, 'España'),
     (GTM, 'Guatemala'),
     (ECU, 'Ecuador'),
-    (CAN, 'Canarias')
+    (CAN, 'Canarias'),
+    (PAN, 'Panama')
 )
 # opciones de evaluacion
 EVALUACION_OPCIONES = (
