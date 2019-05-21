@@ -24,47 +24,57 @@ class GrupoAdmin(admin.ModelAdmin):
 
 
 class IPAE_PRIMERO_Admin(admin.ModelAdmin):
-    list_display = ('alumno', 'evaluador', 'mes', 'tipo')
+    list_display = ('alumno', 'evaluador', 'mes', 'tipo', 'evaluado')
+    list_filter = ('evaluador',)
     search_fields = ('alumno', 'evaluador', 'mes', 'tipo')
 
 class IPAE_SEGUNDO_Admin(admin.ModelAdmin):
-    list_display = ('alumno', 'evaluador', 'mes', 'tipo')
+    list_display = ('alumno', 'evaluador', 'mes', 'tipo', 'evaluado')
+    list_filter = ('evaluador',)
     search_fields = ('alumno', 'evaluador', 'mes', 'tipo')
 
 class IPAE_TERCERO_Admin(admin.ModelAdmin):
-    list_display = ('alumno', 'evaluador', 'mes', 'tipo')
+    list_display = ('alumno', 'evaluador', 'mes', 'tipo', 'evaluado')
+    list_filter = ('evaluador',)
     search_fields = ('alumno', 'evaluador', 'mes', 'tipo')
 
 
 
 class IPAL_PRIMERO_Admin(admin.ModelAdmin):
-    list_display = ('alumno', 'evaluador', 'mes', 'tipo')
+    list_display = ('alumno', 'evaluador', 'mes', 'tipo', 'evaluado')
+    list_filter = ('evaluador',)
     search_fields = ('alumno', 'evaluador', 'mes', 'tipo')
 
 class IPAL_SEGUNDO_Admin(admin.ModelAdmin):
-    list_display = ('alumno', 'evaluador', 'mes', 'tipo')
+    list_display = ('alumno', 'evaluador', 'mes', 'tipo', 'evaluado')
+    list_filter = ('evaluador',)
     search_fields = ('alumno', 'evaluador', 'mes', 'tipo')
 
 class IPAL_INFANTIL_Admin(admin.ModelAdmin):
-    list_display = ('alumno', 'evaluador', 'mes', 'tipo')
+    list_display = ('alumno', 'evaluador', 'mes', 'tipo', 'evaluado')
+    list_filter = ('evaluador',)
     search_fields = ('alumno', 'evaluador', 'mes', 'tipo')
 
 
 
 class IPAM_PRIMERO_Admin(admin.ModelAdmin):
-    list_display = ('alumno', 'evaluador', 'mes', 'tipo')
+    list_display = ('alumno', 'evaluador', 'mes', 'tipo', 'evaluado')
+    list_filter = ('evaluador',)
     search_fields = ('alumno', 'evaluador', 'mes', 'tipo')
 
 class IPAM_SEGUNDO_Admin(admin.ModelAdmin):
-    list_display = ('alumno', 'evaluador', 'mes', 'tipo')
+    list_display = ('alumno', 'evaluador', 'mes', 'tipo', 'evaluado')
+    list_filter = ('evaluador',)
     search_fields = ('alumno', 'evaluador', 'mes', 'tipo')
 
 class IPAM_TERCERO_Admin(admin.ModelAdmin):
-    list_display = ('alumno', 'evaluador', 'mes', 'tipo')
+    list_display = ('alumno', 'evaluador', 'mes', 'tipo', 'evaluado')
+    list_filter = ('evaluador',)
     search_fields = ('alumno', 'evaluador', 'mes', 'tipo')
 
 class IPAM_INFANTIL_Admin(admin.ModelAdmin):
-    list_display = ('alumno', 'evaluador', 'mes', 'tipo')
+    list_display = ('alumno', 'evaluador', 'mes', 'tipo', 'evaluado')
+    list_filter = ('evaluador',)
     search_fields = ('alumno', 'evaluador', 'mes', 'tipo')
     
 
