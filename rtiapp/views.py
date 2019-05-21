@@ -86,7 +86,7 @@ colores_riesgo = {
 }
 
 ERROR_CONSEJERIA_EDITAR_ALUMNO = 'No tiene permisos para editar la ficha'
-ERROR_ALUMNO_YA_TIENE_EVALUACION_ANUAL = 'Este alumno ya tiene registros de evaluación para el curso'
+ERROR_ALUMNO_YA_TIENE_EVALUACION_ANUAL = 'Este alumno ya tiene registros de evaluación para el curso '
 ERROR_INFORME_IPAE_INFANTIL = 'La prueba IPAE no tiene una versión para Infantil'
 ERROR_EVALUADOR_NO_EXISTE = 'El número de identificación del otro evaluador es incorrecto'
 ERROR_LISTADO_GRUPOS = 'No ha creado ningun grupo'
@@ -487,12 +487,21 @@ def nueva_evaluacion(request):
     # nombre del modelo a instanciar
     nombre_modelo = tipo + '-' + curso
 
+    # el siguiente codigo ES ERRONEO:
     # buscamos un registro que contenga una evaluacion
     # de este alumno que coincida con la fecha del curso
     # configurada en el perfil del evaluador, si existe
     # no se permite crear mas
+    #reg_evaluacion = clases[nombre_modelo].objects.filter(
+    #alumno=alumno, curso_academico=evaluador.curso_academico)
+
+    # ACTUALIZACION:
+    # TENEMOS QUE REESCRBIR ESTO, PARA BUSCAR UN REGISTRO
+    # DE EVALUACION DEL ALUMNO QUE COINCIDA CON LA FECHA
+    # DE SU CURSO, Y NO DEL EVALUADOR
     reg_evaluacion = clases[nombre_modelo].objects.filter(
-        alumno=alumno, curso_academico=evaluador.curso_academico)
+        alumno=alumno, curso_academico=alumno.curso_academico
+    )
 
     if not reg_evaluacion:
         print('>>> Comenzando a crear el registro anual para esta prueba')
@@ -500,7 +509,7 @@ def nueva_evaluacion(request):
         print(' >>> Ya existe un registro anual de esta prueba para este alumno: ABORTANDO')
         return render(request, 'error.html',
             {'error': ERROR_ALUMNO_YA_TIENE_EVALUACION_ANUAL +
-                      str(evaluador.curso_academico),'server_url': url_retorno})
+                      str(alumno.curso_academico),'server_url': url_retorno})
 
 
     # al crear una evaluacion anual para el alumno
@@ -525,7 +534,7 @@ def nueva_evaluacion(request):
             mes=mes,
             evaluador=request.user,
             alumno=alumno,
-            curso_academico=grupo.curso_academico
+            curso_academico=alumno.curso_academico # grupo.curso_academico
             # obsoleto: curso_academico=evaluador.curso_academico
         )
 
