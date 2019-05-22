@@ -732,9 +732,6 @@ def editar_evaluacion(request):
 
 
 
-
-
-
 def listar_evaluaciones(request):
     print('>>> Lista generica de evaluaciones')
     id_alumno = request.GET['idAlumno']
@@ -814,8 +811,27 @@ def listar_evaluaciones(request):
 
 
 
-
-
+'''
+def listar_evaluaciones_grupo(request):
+    print('>>> Lista las evaluaciones de un grupo')
+    tipo = request.GET['tipo']
+    id_grupo = request.GET['idGrupo']
+    grupo = Grupo.objects.get(pk=id_grupo)
+    # obtener todos los alumnos del grupo
+    alumnos = Alumno.objects.filter(grupo=grupo)
+    # para cada alumno
+    for alumno in alumnos:
+        # obtener las evaluaciones del tipo
+        if curso == Globales.PRIMERO:
+            evaluaciones = Evaluacion_IPAE_PRIMERO.objects.filter \
+                (alumno=alumno).order_by('curso_academico', 'mes')
+        if curso == Globales.SEGUNDO:
+            evaluaciones = Evaluacion_IPAE_SEGUNDO.objects.filter \
+                (alumno=alumno).order_by('curso_academico', 'mes')
+        if curso == Globales.TERCERO:
+            evaluaciones = Evaluacion_IPAE_TERCERO.objects.filter \
+                (alumno=alumno).order_by('curso_academico', 'mes')
+'''
 
 
 
