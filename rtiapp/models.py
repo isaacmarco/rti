@@ -185,7 +185,7 @@ class Evaluador(models.Model):
     # informacion necesaria para usar la plataforma
     informacion_adicional_completa = models.BooleanField(default=False)
 
-    # curso academico en el que esta trabajando
+    # curso academico en el que esta trabajoro
     # actualmente en la plataforma
     curso_academico = models.IntegerField(default=2018)
 
@@ -297,7 +297,7 @@ class Alumno(models.Model):
         default=ESP
     )
 
-    # recordar cuando es la ultima evaluacion
+    # recordar cuoro es la ultima evaluacion
     ultima_evaluacion_curso = models.IntegerField(default=0)
     ultima_evaluacion_mes = models.IntegerField(choices=FECHA_OPCIONES,default=NOVIEMBRE)
 
@@ -409,6 +409,9 @@ class Evaluacion(models.Model):
     def color_riesgo(self):
         return colores_riesgo[self.riesgo]
 
+    def get_evaluador(self):
+        return Evaluador.objects.filter(evaluador=self.evaluador).name
+
     class Meta:
         abstract = True
 
@@ -418,12 +421,20 @@ class Evaluacion(models.Model):
 
 class Evaluacion_IPAL_INFANTIL(Evaluacion):
 
-    ADIVINANZAS = models.IntegerField(default=0,  validators=[MaxValueValidator(20), MinValueValidator(0)])
-    CSL = models.IntegerField(default=0,  validators=[MaxValueValidator(100), MinValueValidator(0)])
-    CNL = models.IntegerField(default=0,  validators=[MaxValueValidator(100), MinValueValidator(0)])
-    CLE_IMAGEN = models.IntegerField(default=0,  validators=[MaxValueValidator(35), MinValueValidator(0)])
-    CLE_TEXTO = models.IntegerField(default=0,  validators=[MaxValueValidator(6), MinValueValidator(0)])
-    CFA = models.IntegerField(default=0,  validators=[MaxValueValidator(80), MinValueValidator(0)])
+    ADIVINANZAS = models.IntegerField(default=-1,  validators=[MaxValueValidator(20), MinValueValidator(-1)])
+    CSL = models.IntegerField(default=-1,  validators=[MaxValueValidator(100), MinValueValidator(-1)])
+    CNL = models.IntegerField(default=-1,  validators=[MaxValueValidator(100), MinValueValidator(-1)])
+    CLE_IMAGEN = models.IntegerField(default=-1,  validators=[MaxValueValidator(35), MinValueValidator(-1)])
+    CLE_TEXTO = models.IntegerField(default=-1,  validators=[MaxValueValidator(6), MinValueValidator(-1)])
+    CFA = models.IntegerField(default=-1,  validators=[MaxValueValidator(80), MinValueValidator(-1)])
+
+    def tareas(self):
+        return [self.CFA, self.CSL]
+
+    def tareas_progreso(self):
+        return [self.ADIVINANZAS, self.CSL, self.CNL, self.CLE_IMAGEN, self.CLE_TEXTO, self.CFA]
+
+
 
 
 '''
@@ -438,14 +449,28 @@ class Evaluacion_IPAL_INFANTIL(Evaluacion):
 
 class Evaluacion_IPAL_PRIMERO(Evaluacion):
 
-    TM = models.IntegerField(default=0,  validators=[MaxValueValidator(20), MinValueValidator(0)])
-    LP = models.IntegerField(default=0,  validators=[MaxValueValidator(40), MinValueValidator(0)])
-    CSL = models.IntegerField(default=0,  validators=[MaxValueValidator(100), MinValueValidator(0)])
-    CNL = models.IntegerField(default=0,  validators=[MaxValueValidator(100), MinValueValidator(0)])
-    FLO = models.IntegerField(default=0,  validators=[MaxValueValidator(133), MinValueValidator(0)])
-    CLE_TEXTO = models.IntegerField(default=0,  validators=[MaxValueValidator(6), MinValueValidator(0)])
-    CFS = models.IntegerField(default=0,  validators=[MaxValueValidator(85), MinValueValidator(0)])
+    TM = models.IntegerField(default=-1,  validators=[MaxValueValidator(20), MinValueValidator(-1)])
+    LP = models.IntegerField(default=-1,  validators=[MaxValueValidator(40), MinValueValidator(-1)])
+    CSL = models.IntegerField(default=-1,  validators=[MaxValueValidator(100), MinValueValidator(-1)])
+    CNL = models.IntegerField(default=-1,  validators=[MaxValueValidator(100), MinValueValidator(-1)])
+    FLO = models.IntegerField(default=-1,  validators=[MaxValueValidator(133), MinValueValidator(-1)])
+    CLE_TEXTO = models.IntegerField(default=-1,  validators=[MaxValueValidator(6), MinValueValidator(-1)])
+    CFS = models.IntegerField(default=-1,  validators=[MaxValueValidator(85), MinValueValidator(-1)])
 
+    def tareas(self):
+        return [self.TM, self.LP, self.CSL, self.CNL, self.FLO, self.CLE_TEXTO, self.CFS]
+
+    def tareas_progreso(self):
+        return [self.LP, self.CNL, self.FLO, self.CSL]
+
+    def reiniciar(self):
+        self.TM = -1
+        self.LP = -1
+        self.CSL = -1
+        self.CNL = -1
+        self.FLO = -1
+        self.CLE_TEXTO = -1
+        self.CFS = -1
 
 '''
 •	Textos Mutilados (TM) 
@@ -462,12 +487,11 @@ class Evaluacion_IPAL_PRIMERO(Evaluacion):
 class Evaluacion_IPAL_SEGUNDO(Evaluacion):
 
     # subpruebas de evaluacion
-    CNL = models.IntegerField(default=0, validators=[MaxValueValidator(100), MinValueValidator(0)])
-    LP = models.IntegerField(default=0, validators=[MaxValueValidator(40), MinValueValidator(0)])
-    TM = models.IntegerField(default=0, validators=[MaxValueValidator(20), MinValueValidator(0)])
-    FLO = models.IntegerField(default=0, validators=[MaxValueValidator(133), MinValueValidator(0)])
-    PRO = models.IntegerField(default=0, validators=[MinValueValidator(0)])
-
+    CNL = models.IntegerField(default=-1, validators=[MaxValueValidator(100), MinValueValidator(-1)])
+    LP = models.IntegerField(default=-1, validators=[MaxValueValidator(40), MinValueValidator(-1)])
+    TM = models.IntegerField(default=-1, validators=[MaxValueValidator(20), MinValueValidator(-1)])
+    FLO = models.IntegerField(default=-1, validators=[MaxValueValidator(133), MinValueValidator(-1)])
+    PRO = models.IntegerField(default=-1, validators=[MinValueValidator(-1)])
 
     '''
     •	Conocimiento Nombre Letra (CNL) 
@@ -487,23 +511,35 @@ class Evaluacion_IPAL_SEGUNDO(Evaluacion):
     # de omnibus ni riesgo, pero si se usaran para
     # ciertos informes de progreso del alumno
 
-    CSL = models.IntegerField(default=0, validators=[MaxValueValidator(100), MinValueValidator(0)])
-    CLE_TEXTO = models.IntegerField(default=0, validators=[MaxValueValidator(20), MinValueValidator(0)])
-    CFS = models.IntegerField(default=0, validators=[MaxValueValidator(85), MinValueValidator(0)])
-    VOC = models.IntegerField(default=0, validators=[MaxValueValidator(30), MinValueValidator(0)])
+    CSL = models.IntegerField(default=-1, validators=[MaxValueValidator(100), MinValueValidator(-1)])
+    CLE_TEXTO = models.IntegerField(default=-1, validators=[MaxValueValidator(20), MinValueValidator(-1)])
+    CFS = models.IntegerField(default=-1, validators=[MaxValueValidator(85), MinValueValidator(-1)])
+    VOC = models.IntegerField(default=-1, validators=[MaxValueValidator(30), MinValueValidator(-1)])
 
+
+    def tareas(self):
+        return [self.CNL, self.LP, self.TM, self.FLO, self.PRO, self.CSL, self.CLE_TEXTO, self.CFS, self.VOC]
+
+    def tareas_progreso(self):
+        return [self.LP, self.CNL, self.FLO, self.CSL]
 
 
 # IPAM
 
 class Evaluacion_IPAM_INFANTIL(Evaluacion):
 
-    CN = models.IntegerField(default=0, validators=[MaxValueValidator(64), MinValueValidator(0)])
-    EC = models.IntegerField(default=0, validators=[MaxValueValidator(36), MinValueValidator(0)])
-    SN = models.IntegerField(default=0, validators=[MaxValueValidator(36), MinValueValidator(0)])
-    IN = models.IntegerField(default=0, validators=[MaxValueValidator(63), MinValueValidator(0)])
-    CVA = models.IntegerField(default=0, validators=[MaxValueValidator(100), MinValueValidator(0)])
-    CM = models.IntegerField(default=0, validators=[MaxValueValidator(40), MinValueValidator(0)])
+    CN = models.IntegerField(default=-1, validators=[MaxValueValidator(64), MinValueValidator(-1)])
+    EC = models.IntegerField(default=-1, validators=[MaxValueValidator(36), MinValueValidator(-1)])
+    SN = models.IntegerField(default=-1, validators=[MaxValueValidator(36), MinValueValidator(-1)])
+    IN = models.IntegerField(default=-1, validators=[MaxValueValidator(63), MinValueValidator(-1)])
+    CVA = models.IntegerField(default=-1, validators=[MaxValueValidator(100), MinValueValidator(-1)])
+    CM = models.IntegerField(default=-1, validators=[MaxValueValidator(40), MinValueValidator(-1)])
+
+    def tareas(self):
+        return [self.CN, self.EC, self.SN, self.IN, self.CVA, self.CM]
+
+    def tareas_progreso(self):
+        return [self.CN, self.EC, self.SN, self.IN, self.CVA, self.CM]
 
 '''
 •	Comparación Numérica (CN) 
@@ -517,11 +553,24 @@ class Evaluacion_IPAM_INFANTIL(Evaluacion):
 
 class Evaluacion_IPAM_PRIMERO(Evaluacion):
 
-    CN = models.IntegerField(default=0, validators=[MaxValueValidator(64), MinValueValidator(0)])
-    ODD = models.IntegerField(default=0, validators=[MaxValueValidator(45), MinValueValidator(0)])
-    SN = models.IntegerField(default=0, validators=[MaxValueValidator(45), MinValueValidator(0)])
-    OUD = models.IntegerField(default=0, validators=[MaxValueValidator(45), MinValueValidator(0)])
-    VP = models.IntegerField(default=0, validators=[MaxValueValidator(45), MinValueValidator(0)])
+    CN = models.IntegerField(default=-1, validators=[MaxValueValidator(64), MinValueValidator(-1)])
+    ODD = models.IntegerField(default=-1, validators=[MaxValueValidator(45), MinValueValidator(-1)])
+    SN = models.IntegerField(default=-1, validators=[MaxValueValidator(45), MinValueValidator(-1)])
+    OUD = models.IntegerField(default=-1, validators=[MaxValueValidator(45), MinValueValidator(-1)])
+    VP = models.IntegerField(default=-1, validators=[MaxValueValidator(45), MinValueValidator(-1)])
+
+    def tareas(self):
+        return [self.CN, self.ODD, self.SN, self.OUD, self.VP]
+
+    def tareas_progreso(self):
+        return [self.CN, self.SN, self.OUD]
+
+    def reiniciar(self):
+        self.CN = -1
+        self.ODD = -1
+        self.SN = -1
+        self.OUD = -1
+        self.VP = -1
 
 '''
 •	Comparación Numérica (CN)  
@@ -534,12 +583,17 @@ class Evaluacion_IPAM_PRIMERO(Evaluacion):
 
 class Evaluacion_IPAM_SEGUNDO(Evaluacion):
 
-    CN = models.IntegerField(default=0, validators=[MaxValueValidator(64), MinValueValidator(0)])
-    ODD = models.IntegerField(default=0, validators=[MaxValueValidator(45), MinValueValidator(0)])
-    SN = models.IntegerField(default=0, validators=[MaxValueValidator(45), MinValueValidator(0)])
-    OUD = models.IntegerField(default=0, validators=[MaxValueValidator(45), MinValueValidator(0)])
-    VP = models.IntegerField(default=0, validators=[MaxValueValidator(45), MinValueValidator(0)])
+    CN = models.IntegerField(default=-1, validators=[MaxValueValidator(64), MinValueValidator(-1)])
+    ODD = models.IntegerField(default=-1, validators=[MaxValueValidator(45), MinValueValidator(-1)])
+    SN = models.IntegerField(default=-1, validators=[MaxValueValidator(45), MinValueValidator(-1)])
+    OUD = models.IntegerField(default=-1, validators=[MaxValueValidator(45), MinValueValidator(-1)])
+    VP = models.IntegerField(default=-1, validators=[MaxValueValidator(45), MinValueValidator(-1)])
 
+    def tareas(self):
+        return [self.CN, self.ODD, self.SN, self.OUD, self.VP]
+
+    def tareas_progreso(self):
+        return [self.CN, self.ODD, self.SN, self.OUD, self.VP]
 '''
 •	Comparación Numérica (CN) 
 •	Operaciones de dos dígitos (ODD)  
@@ -551,11 +605,18 @@ class Evaluacion_IPAM_SEGUNDO(Evaluacion):
 
 class Evaluacion_IPAM_TERCERO(Evaluacion):
 
-    CN = models.IntegerField(default=0, validators=[MaxValueValidator(64), MinValueValidator(0)])
-    ODD = models.IntegerField(default=0, validators=[MaxValueValidator(45), MinValueValidator(0)])
-    SN = models.IntegerField(default=0, validators=[MaxValueValidator(45), MinValueValidator(0)])
-    OUD = models.IntegerField(default=0, validators=[MaxValueValidator(45), MinValueValidator(0)])
-    VP = models.IntegerField(default=0, validators=[MaxValueValidator(45), MinValueValidator(0)])
+    CN = models.IntegerField(default=-1, validators=[MaxValueValidator(64), MinValueValidator(-1)])
+    ODD = models.IntegerField(default=-1, validators=[MaxValueValidator(45), MinValueValidator(-1)])
+    SN = models.IntegerField(default=-1, validators=[MaxValueValidator(45), MinValueValidator(-1)])
+    OUD = models.IntegerField(default=-1, validators=[MaxValueValidator(45), MinValueValidator(-1)])
+    VP = models.IntegerField(default=-1, validators=[MaxValueValidator(45), MinValueValidator(-1)])
+
+    def tareas(self):
+        return [self.CN, self.ODD, self.SN, self.OUD, self.VP]
+
+    def tareas_progreso(self):
+        return [self.CN, self.ODD, self.SN, self.OUD, self.VP]
+
 
 '''
 •	Comparación Numérica (CN)  
@@ -571,11 +632,27 @@ class Evaluacion_IPAM_TERCERO(Evaluacion):
 
 class Evaluacion_IPAE_PRIMERO(Evaluacion):
 
-    TLC_1 = models.IntegerField(default=0, validators=[MaxValueValidator(108), MinValueValidator(0)])
-    DICTADO_ORTOGRAFIA_ARBITRARIA = models.IntegerField(default=0, validators=[MaxValueValidator(20), MinValueValidator(0)])
-    DICTADO_ORTOGRAFIA_REGLADA = models.IntegerField(default=0, validators=[MaxValueValidator(20), MinValueValidator(0)])
-    DICTADO_PSEUDOPALABRAS = models.IntegerField(default=0, validators=[MaxValueValidator(20), MinValueValidator(0)])
-    DICTADO_FRASES = models.IntegerField(default=0, validators=[MaxValueValidator(21), MinValueValidator(0)])
+    TLC_1 = models.IntegerField(default=-1, validators=[MaxValueValidator(108), MinValueValidator(-1)])
+    DICTADO_ORTOGRAFIA_ARBITRARIA = models.IntegerField(default=-1, validators=[MaxValueValidator(20), MinValueValidator(-1)])
+    DICTADO_ORTOGRAFIA_REGLADA = models.IntegerField(default=-1, validators=[MaxValueValidator(20), MinValueValidator(-1)])
+    DICTADO_PSEUDOPALABRAS = models.IntegerField(default=-1, validators=[MaxValueValidator(20), MinValueValidator(-1)])
+    DICTADO_FRASES = models.IntegerField(default=-1, validators=[MaxValueValidator(21), MinValueValidator(-1)])
+
+    def tareas_progreso(self):
+        return [self.TLC_1, self.DICTADO_ORTOGRAFIA_ARBITRARIA, self.DICTADO_ORTOGRAFIA_REGLADA, \
+                self.DICTADO_PSEUDOPALABRAS, self.DICTADO_FRASES]
+
+
+    def tareas(self):
+        return [self.TLC_1, self.DICTADO_ORTOGRAFIA_ARBITRARIA, self.DICTADO_ORTOGRAFIA_REGLADA, \
+                self.DICTADO_PSEUDOPALABRAS, self.DICTADO_FRASES]
+
+    def reiniciar(self):
+        self.TLC_1 = -1
+        self.DICTADO_ORTOGRAFIA_ARBITRARIA = -1
+        self.DICTADO_ORTOGRAFIA_REGLADA = -1
+        self.DICTADO_PSEUDOPALABRAS = -1
+        self.DICTADO_FRASES = -1
 
 '''
 Pasar de mayúscula a minúscula (TLC-1)	 
@@ -587,11 +664,21 @@ Dictado de frases
 
 class Evaluacion_IPAE_SEGUNDO(Evaluacion):
 
-    TLC_1 = models.IntegerField(default=0, validators=[MaxValueValidator(108), MinValueValidator(0)])
-    DICTADO_ORTOGRAFIA_ARBITRARIA = models.IntegerField(default=0, validators=[MaxValueValidator(20), MinValueValidator(0)])
-    DICTADO_ORTOGRAFIA_REGLADA = models.IntegerField(default=0, validators=[MaxValueValidator(20), MinValueValidator(0)])
-    DICTADO_PSEUDOPALABRAS = models.IntegerField(default=0, validators=[MaxValueValidator(20), MinValueValidator(0)])
-    DICTADO_FRASES = models.IntegerField(default=0, validators=[MaxValueValidator(21), MinValueValidator(0)])
+    TLC_1 = models.IntegerField(default=-1, validators=[MaxValueValidator(108), MinValueValidator(-1)])
+    DICTADO_ORTOGRAFIA_ARBITRARIA = models.IntegerField(default=-1, validators=[MaxValueValidator(20), MinValueValidator(-1)])
+    DICTADO_ORTOGRAFIA_REGLADA = models.IntegerField(default=-1, validators=[MaxValueValidator(20), MinValueValidator(-1)])
+    DICTADO_PSEUDOPALABRAS = models.IntegerField(default=-1, validators=[MaxValueValidator(20), MinValueValidator(-1)])
+    DICTADO_FRASES = models.IntegerField(default=-1, validators=[MaxValueValidator(21), MinValueValidator(-1)])
+
+
+    def tareas(self):
+        return [self.TLC_1, self.DICTADO_ORTOGRAFIA_ARBITRARIA, self.DICTADO_ORTOGRAFIA_REGLADA, \
+                self.DICTADO_PSEUDOPALABRAS, self.DICTADO_FRASES]
+
+    def tareas_progreso(self):
+        return [self.TLC_1, self.DICTADO_ORTOGRAFIA_ARBITRARIA, self.DICTADO_ORTOGRAFIA_REGLADA, \
+                self.DICTADO_PSEUDOPALABRAS, self.DICTADO_FRASES]
+
 
 '''
 Pasar de mayúscula a minúscula (TLC-1)
@@ -604,12 +691,22 @@ Dictado de frases
 
 class Evaluacion_IPAE_TERCERO(Evaluacion):
 
-    DICTADO_ORTOGRAFIA_ARBITRARIA = models.IntegerField(default=0, validators=[MaxValueValidator(20), MinValueValidator(0)])
-    DICTADO_ORTOGRAFIA_REGLADA = models.IntegerField(default=0, validators=[MaxValueValidator(20), MinValueValidator(0)])
-    DICTADO_FRASES = models.IntegerField(default=0, validators=[MaxValueValidator(21), MinValueValidator(0)])
-    SEC_5 = models.IntegerField(default=0, validators=[MaxValueValidator(80), MinValueValidator(0)])
-    SEC_SEI_5 = models.IntegerField(default=0, validators=[MaxValueValidator(80), MinValueValidator(0)])
-    PDC_5 = models.IntegerField(default=0, validators=[MaxValueValidator(80), MinValueValidator(0)])
+    DICTADO_ORTOGRAFIA_ARBITRARIA = models.IntegerField(default=-1, validators=[MaxValueValidator(20), MinValueValidator(-1)])
+    DICTADO_ORTOGRAFIA_REGLADA = models.IntegerField(default=-1, validators=[MaxValueValidator(20), MinValueValidator(-1)])
+    DICTADO_FRASES = models.IntegerField(default=-1, validators=[MaxValueValidator(21), MinValueValidator(-1)])
+    SEC_5 = models.IntegerField(default=-1, validators=[MaxValueValidator(80), MinValueValidator(-1)])
+    SEC_SEI_5 = models.IntegerField(default=-1, validators=[MaxValueValidator(80), MinValueValidator(-1)])
+    PDC_5 = models.IntegerField(default=-1, validators=[MaxValueValidator(80), MinValueValidator(-1)])
+
+
+    def tareas(self):
+        return [self.DICTADO_ORTOGRAFIA_ARBITRARIA, self.DICTADO_ORTOGRAFIA_REGLADA, self.DICTADO_FRASES, \
+                self.SEC_5, self.SEC_SEI_5, self.PDC_5]
+
+    def tareas_progreso(self):
+        return [self.DICTADO_ORTOGRAFIA_ARBITRARIA, self.DICTADO_ORTOGRAFIA_REGLADA, self.DICTADO_FRASES, \
+                self.SEC_5, self.SEC_SEI_5, self.PDC_5]
+
 
 '''
 Dictado de palabras con ortografía arbitraria 

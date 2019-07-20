@@ -34,11 +34,11 @@ class Form_Evaluacion_IPAE_PRIMERO(forms.ModelForm):
     tarea3 = 'Dictado de palabras con ortografía reglada'
     tarea4 = 'Dictado de pseudopalabras'
     tarea5 = 'Dictado de frases'
-    TLC_1 = forms.IntegerField(required=False,min_value=0, max_value=108, label=tarea1)
-    DICTADO_ORTOGRAFIA_ARBITRARIA = forms.IntegerField(required=False,min_value=0, max_value=20, label=tarea2)
-    DICTADO_ORTOGRAFIA_REGLADA = forms.IntegerField(required=False,min_value=0, max_value=20, label=tarea3)
-    DICTADO_PSEUDOPALABRAS = forms.IntegerField(required=False,min_value=0, max_value=20, label=tarea4)
-    DICTADO_FRASES = forms.IntegerField(required=False,min_value=0, max_value=21, label=tarea5)
+    TLC_1 = forms.IntegerField(required=False,min_value=-1, max_value=108, label=tarea1)
+    DICTADO_ORTOGRAFIA_ARBITRARIA = forms.IntegerField(required=False,min_value=-1, max_value=20, label=tarea2)
+    DICTADO_ORTOGRAFIA_REGLADA = forms.IntegerField(required=False,min_value=-1, max_value=20, label=tarea3)
+    DICTADO_PSEUDOPALABRAS = forms.IntegerField(required=False,min_value=-1, max_value=20, label=tarea4)
+    DICTADO_FRASES = forms.IntegerField(required=False,min_value=-1, max_value=21, label=tarea5)
     class Meta:
         model = Evaluacion_IPAE_PRIMERO
         fields = '__all__'
@@ -50,11 +50,11 @@ class Form_Evaluacion_IPAE_SEGUNDO(forms.ModelForm):
     tarea3 = 'Dictado de palabras con ortografía reglada'
     tarea4 = 'Dictado de pseudopalabras'
     tarea5 = 'Dictado de frases'
-    TLC_1 = forms.IntegerField(required=False, min_value=0, max_value=108, label=tarea1)
-    DICTADO_ORTOGRAFIA_ARBITRARIA = forms.IntegerField(required=False, min_value=0, max_value=20, label=tarea2)
-    DICTADO_ORTOGRAFIA_REGLADA = forms.IntegerField(required=False, min_value=0, max_value=20, label=tarea3)
-    DICTADO_PSEUDOPALABRAS = forms.IntegerField(required=False, min_value=0, max_value=20, label=tarea4)
-    DICTADO_FRASES = forms.IntegerField(required=False, min_value=0, max_value=21, label=tarea5)
+    TLC_1 = forms.IntegerField(required=False, min_value=-1, max_value=108, label=tarea1)
+    DICTADO_ORTOGRAFIA_ARBITRARIA = forms.IntegerField(required=False, min_value=-1, max_value=20, label=tarea2)
+    DICTADO_ORTOGRAFIA_REGLADA = forms.IntegerField(required=False, min_value=-1, max_value=20, label=tarea3)
+    DICTADO_PSEUDOPALABRAS = forms.IntegerField(required=False, min_value=-1, max_value=20, label=tarea4)
+    DICTADO_FRASES = forms.IntegerField(required=False, min_value=-1, max_value=21, label=tarea5)
     class Meta:
         model = Evaluacion_IPAE_SEGUNDO
         fields = '__all__'
@@ -69,12 +69,12 @@ class Form_Evaluacion_IPAE_TERCERO(forms.ModelForm):
     tarea4 = 'Escritura de una historia (SPC-5)'
     tarea5 = 'Escritura de una historia (SPC-SPI-5)'
     tarea6 = 'Escritura de una historia (PDC-5)'
-    DICTADO_ORTOGRAFIA_ARBITRARIA = forms.IntegerField(required=False, min_value=0, max_value=20, label=tarea1)
-    DICTADO_ORTOGRAFIA_REGLADA = forms.IntegerField(required=False, min_value=0, max_value=20, label=tarea2)
-    DICTADO_FRASES = forms.IntegerField(required=False, min_value=0, max_value=21, label=tarea3)
-    SEC_5 = forms.IntegerField(required=False, min_value=0, max_value=80, label=tarea4)
-    SEC_SEI_5 = forms.IntegerField(required=False, min_value=0, max_value=80, label=tarea5)
-    PDC_5 = forms.IntegerField(required=False, min_value=0, max_value=80, label=tarea6)
+    DICTADO_ORTOGRAFIA_ARBITRARIA = forms.IntegerField(required=False, min_value=-1, max_value=20, label=tarea1)
+    DICTADO_ORTOGRAFIA_REGLADA = forms.IntegerField(required=False, min_value=-1, max_value=20, label=tarea2)
+    DICTADO_FRASES = forms.IntegerField(required=False, min_value=-1, max_value=21, label=tarea3)
+    SEC_5 = forms.IntegerField(required=False, min_value=-1, max_value=80, label=tarea4)
+    SEC_SEI_5 = forms.IntegerField(required=False, min_value=-1, max_value=80, label=tarea5)
+    PDC_5 = forms.IntegerField(required=False, min_value=-1, max_value=80, label=tarea6)
     class Meta:
         model = Evaluacion_IPAE_TERCERO
         fields = '__all__'
@@ -91,11 +91,11 @@ class Form_Evaluacion_IPAM_TERCERO(forms.ModelForm):
     tarea3 = 'Secuencias Numéricas (SN)'
     tarea4 = 'Operaciones de un dígito (OUD)'
     tarea5 = 'Valor de Posición (VP)'
-    CN = forms.IntegerField(required=False,min_value=0, max_value=64, label=tarea1)
-    ODD = forms.IntegerField(required=False,min_value=0, max_value=45, label=tarea2)
-    SN = forms.IntegerField(required=False,min_value=0, max_value=45, label=tarea3)
-    OUD = forms.IntegerField(required=False,min_value=0, max_value=45, label=tarea4)
-    VP = forms.IntegerField(required=False,min_value=0, max_value=45, label=tarea5)
+    CN = forms.IntegerField(required=False,min_value=-1, max_value=64, label=tarea1)
+    ODD = forms.IntegerField(required=False,min_value=-1, max_value=45, label=tarea2)
+    SN = forms.IntegerField(required=False,min_value=-1, max_value=45, label=tarea3)
+    OUD = forms.IntegerField(required=False,min_value=-1, max_value=45, label=tarea4)
+    VP = forms.IntegerField(required=False,min_value=-1, max_value=45, label=tarea5)
     class Meta:
         model = Evaluacion_IPAM_TERCERO
         fields = '__all__'
@@ -109,11 +109,11 @@ class Form_Evaluacion_IPAM_SEGUNDO(forms.ModelForm):
     tarea3 = 'Secuencias Numéricas (SN)'
     tarea4 = 'Operaciones de un dígito (OUD)'
     tarea5 = 'Valor de Posición (VP)'
-    CN = forms.IntegerField(required=False,min_value=0, max_value=64, label=tarea1)
-    ODD = forms.IntegerField(required=False,min_value=0, max_value=45, label=tarea2)
-    SN = forms.IntegerField(required=False,min_value=0, max_value=45, label=tarea3)
-    OUD = forms.IntegerField(required=False,min_value=0, max_value=45, label=tarea4)
-    VP = forms.IntegerField(required=False,min_value=0, max_value=45, label=tarea5)
+    CN = forms.IntegerField(required=False,min_value=-1, max_value=64, label=tarea1)
+    ODD = forms.IntegerField(required=False,min_value=-1, max_value=45, label=tarea2)
+    SN = forms.IntegerField(required=False,min_value=-1, max_value=45, label=tarea3)
+    OUD = forms.IntegerField(required=False,min_value=-1, max_value=45, label=tarea4)
+    VP = forms.IntegerField(required=False,min_value=-1, max_value=45, label=tarea5)
     class Meta:
         model = Evaluacion_IPAM_SEGUNDO
         fields = '__all__'
@@ -127,11 +127,11 @@ class Form_Evaluacion_IPAM_PRIMERO(forms.ModelForm):
     tarea3 = 'Secuencias Numéricas (SN)'
     tarea4 = 'Operaciones de un dígito (OUD)'
     tarea5 = 'Valor de Posición (VP)'
-    CN = forms.IntegerField(required=False,min_value=0, max_value=64, label=tarea1)
-    ODD = forms.IntegerField(required=False,min_value=0, max_value=45, label=tarea2)
-    SN = forms.IntegerField(required=False,min_value=0, max_value=45, label=tarea3)
-    OUD = forms.IntegerField(required=False,min_value=0, max_value=45, label=tarea4)
-    VP = forms.IntegerField(required=False,min_value=0, max_value=45, label=tarea5)
+    CN = forms.IntegerField(required=False,min_value=-1, max_value=64, label=tarea1)
+    ODD = forms.IntegerField(required=False,min_value=-1, max_value=45, label=tarea2)
+    SN = forms.IntegerField(required=False,min_value=-1, max_value=45, label=tarea3)
+    OUD = forms.IntegerField(required=False,min_value=-1, max_value=45, label=tarea4)
+    VP = forms.IntegerField(required=False,min_value=-1, max_value=45, label=tarea5)
     class Meta:
         model = Evaluacion_IPAM_PRIMERO
         fields = '__all__'
@@ -145,12 +145,12 @@ class Form_Evaluacion_IPAM_INFANTIL(forms.ModelForm):
     tarea4 = 'Identificación Numérica (IN)'
     tarea5 = 'Conteo Voz Alta (CVA)'
     tarea6 = 'Comparación Magnitud (CM) '
-    CN = forms.IntegerField(required=False,min_value=0, max_value=64, label=tarea1)
-    EC = forms.IntegerField(required=False,min_value=0, max_value=36, label=tarea2)
-    SN = forms.IntegerField(required=False,min_value=0, max_value=36, label=tarea3)
-    IN = forms.IntegerField(required=False,min_value=0, max_value=63, label=tarea4)
-    CVA = forms.IntegerField(required=False,min_value=0, max_value=100, label=tarea5)
-    CM = forms.IntegerField(required=False,min_value=0, max_value=40, label=tarea6)
+    CN = forms.IntegerField(required=False,min_value=-1, max_value=64, label=tarea1)
+    EC = forms.IntegerField(required=False,min_value=-1, max_value=36, label=tarea2)
+    SN = forms.IntegerField(required=False,min_value=-1, max_value=36, label=tarea3)
+    IN = forms.IntegerField(required=False,min_value=-1, max_value=63, label=tarea4)
+    CVA = forms.IntegerField(required=False,min_value=-1, max_value=100, label=tarea5)
+    CM = forms.IntegerField(required=False,min_value=-1, max_value=40, label=tarea6)
     class Meta:
         model = Evaluacion_IPAM_INFANTIL
         fields = '__all__'
@@ -167,12 +167,12 @@ class Form_Evaluacion_IPAL_INFANTIL(forms.ModelForm):
     tarea4 = 'CLE-imagen'
     tarea5 = 'CLE-texto'
     tarea6 = 'Conciencia Fonológica Aislar (CFA)'
-    ADIVINANZAS = forms.IntegerField(required=False,min_value=0, max_value=20, label=tarea1)
-    CSL = forms.IntegerField(required=False,min_value=0, max_value=100, label=tarea2)
-    CNL = forms.IntegerField(required=False,min_value=0, max_value=100, label=tarea3)
-    CLE_IMAGEN = forms.IntegerField(required=False,min_value=0, max_value=35, label=tarea4)
-    CLE_TEXTO = forms.IntegerField(required=False,min_value=0, max_value=6, label=tarea5)
-    CFA = forms.IntegerField(required=False,min_value=0, max_value=80, label=tarea6)
+    ADIVINANZAS = forms.IntegerField(required=False,min_value=-1, max_value=20, label=tarea1)
+    CSL = forms.IntegerField(required=False,min_value=-1, max_value=100, label=tarea2)
+    CNL = forms.IntegerField(required=False,min_value=-1, max_value=100, label=tarea3)
+    CLE_IMAGEN = forms.IntegerField(required=False,min_value=-1, max_value=35, label=tarea4)
+    CLE_TEXTO = forms.IntegerField(required=False,min_value=-1, max_value=6, label=tarea5)
+    CFA = forms.IntegerField(required=False,min_value=-1, max_value=80, label=tarea6)
     class Meta:
         model = Evaluacion_IPAL_INFANTIL
         fields = '__all__'
@@ -188,13 +188,13 @@ class Form_Evaluacion_IPAL_PRIMERO(forms.ModelForm):
     tarea5 = 'Fluidez Lectura Oral (FLO)'
     tarea6 = 'CLE-texto'
     tarea7 = 'Conciencia Fonológica Segmentar (CFS)'
-    TM = forms.IntegerField(required=False,min_value=0, max_value=20, label=tarea1)
-    LP = forms.IntegerField(required=False,min_value=0, max_value=40, label=tarea2)
-    CSL = forms.IntegerField(required=False,min_value=0, max_value=100, label=tarea3)
-    CNL = forms.IntegerField(required=False,min_value=0, max_value=100, label=tarea4)
-    FLO = forms.IntegerField(required=False,min_value=0, max_value=133, label=tarea5)
-    CLE_TEXTO = forms.IntegerField(required=False,min_value=0, max_value=6, label=tarea6)
-    CFS = forms.IntegerField(required=False,min_value=0, max_value=85, label=tarea7)
+    TM = forms.IntegerField(required=False,min_value=-1, max_value=20, label=tarea1)
+    LP = forms.IntegerField(required=False,min_value=-1, max_value=40, label=tarea2)
+    CSL = forms.IntegerField(required=False,min_value=-1, max_value=100, label=tarea3)
+    CNL = forms.IntegerField(required=False,min_value=-1, max_value=100, label=tarea4)
+    FLO = forms.IntegerField(required=False,min_value=-1, max_value=133, label=tarea5)
+    CLE_TEXTO = forms.IntegerField(required=False,min_value=-1, max_value=6, label=tarea6)
+    CFS = forms.IntegerField(required=False,min_value=-1, max_value=85, label=tarea7)
     class Meta:
         model = Evaluacion_IPAL_PRIMERO
         fields = '__all__'
@@ -212,16 +212,16 @@ class Form_Evaluacion_IPAL_SEGUNDO(forms.ModelForm):
     tarea7 = 'CLEtexto'
     tarea8 = 'Conciencia Fonológica Segmentar (CFS)'
     tarea9 = 'Vocabulario (VOC)'
-    CNL = forms.IntegerField(required=False,min_value=0, max_value=100, label=tarea1)
-    LP = forms.IntegerField(required=False,min_value=0, max_value=40, label=tarea2)
-    TM = forms.IntegerField(required=False,min_value=0, max_value=20, label=tarea3)
-    PRO = forms.IntegerField(required=False,min_value=0, max_value=133, label=tarea4)
-    FLO = forms.IntegerField(required=False,min_value=0, max_value=133, label=tarea5)
+    CNL = forms.IntegerField(required=False,min_value=-1, max_value=100, label=tarea1)
+    LP = forms.IntegerField(required=False,min_value=-1, max_value=40, label=tarea2)
+    TM = forms.IntegerField(required=False,min_value=-1, max_value=20, label=tarea3)
+    PRO = forms.IntegerField(required=False,min_value=-1, max_value=133, label=tarea4)
+    FLO = forms.IntegerField(required=False,min_value=-1, max_value=133, label=tarea5)
     # tareas complementarias 'CSL', 'CLE_TEXTO', 'CFS', 'VOC',
-    CSL = forms.IntegerField(required=False,min_value=0, max_value=100, label=tarea6)
-    CLE_TEXTO = forms.IntegerField(required=False,min_value=0, max_value=20, label=tarea7)
-    CFS = forms.IntegerField(required=False,min_value=0, max_value=85, label=tarea8)
-    VOC = forms.IntegerField(required=False,min_value=0, max_value=30, label=tarea9)
+    CSL = forms.IntegerField(required=False,min_value=-1, max_value=100, label=tarea6)
+    CLE_TEXTO = forms.IntegerField(required=False,min_value=-1, max_value=20, label=tarea7)
+    CFS = forms.IntegerField(required=False,min_value=-1, max_value=85, label=tarea8)
+    VOC = forms.IntegerField(required=False,min_value=-1, max_value=30, label=tarea9)
     class Meta:
         model = Evaluacion_IPAL_SEGUNDO
         fields = '__all__'

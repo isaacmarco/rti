@@ -53,10 +53,10 @@ SECRET_KEY = find_or_create_secret_key()
 #	SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # direccion base
-PRODUCCION = True
+PRODUCCION = False
 
 def direccion_server():
 	if PRODUCCION == True:

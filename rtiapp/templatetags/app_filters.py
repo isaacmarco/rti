@@ -3,6 +3,39 @@ from django.conf import settings
 
 register = template.Library()
 
+# devuelve si una evaluacion esta completa
+@register.assignment_tag
+def evaluacion_completa(evaluacion):
+    return evaluacion.evaluacion_completa()
+
+@register.assignment_tag
+def es_evaluacion_completa(lista_tareas):
+    # recorremos la lista, es completa si todas
+    # las tareas son diferentes a -1
+    for tarea in lista_tareas:
+        if tarea == -1:
+            return False
+    return True
+
+
+@register.assignment_tag
+def es_evaluacion_incompleta(lista_tareas):
+
+    # si 1: si es completa
+
+    if (es_evaluacion_completa(lista_tareas)):
+        return False
+
+    # 2: por lo menos unas de las tareas esta completa
+    for tarea in lista_tareas:
+        if tarea != -1:
+            return True
+
+    # en este caso esta toda a -1
+    return False
+
+
+
 # redondea el omnibus
 @register.simple_tag
 def omnibus_redondeado(omnibus):

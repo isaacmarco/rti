@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load app_filters %}
+{% block content %}
+
+<h1>Listado de actualizacion</h1>
+
+
+<style>
+	table {
+		border-collapse: collapse;
+		text-align: center;
+		width: 700px;
+		margin:0 auto;
+		font: 13px 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+	}
+	th, td {
+		padding: 8px;
+		text-align: center;
+		border-bottom: 1px solid #ddd;
+	}
+	tr:nth-child(even){background-color: #f2f2f2}		
+}
+
+</style>
+
+	<h2>IPAL 1</h2>
+	<table>
+	<tr>
+		<th>Código</th>
+		<th>Grupo</th>
+		<th>Curso</th>
+
+	</tr>
+
+		{% for e in evs1 %}
+		<tr>
+			<td>{{ e.mes }}</td>
+			<td>X</td>
+            <td>X</td>
+			<td>X</td>
+		</tr>
+		{% endfor %}
+	</table>
+
+	<h2>IPAM 1</h2>
+	<table>
+	<tr>
+		<th>Código</th>
+		<th>Grupo</th>
+		<th>Curso</th>
+
+	</tr>
+
+		{% for e in evs2 %}
+		<tr>
+			<td>{{ e.mes }}</td>
+			<td>X</td>
+            <td>X</td>
+			<td>X</td>
+		</tr>
+		{% endfor %}
+	</table>
+
+	<h2>IAPE 1</h2>
+	<table>
+	<tr>
+		<th>Código</th>
+		<th>Grupo</th>
+		<th>Curso</th>
+
+	</tr>
+
+		{% for e in evs3 %}
+		<tr>
+			<td>{{ e.mes }}</td>
+			<td>X</td>
+            <td>X</td>
+			<td>X</td>
+		</tr>
+		{% endfor %}
+	</table>
+
+{% endblock %}

@@ -556,7 +556,69 @@ def nueva_evaluacion(request):
     return redirect(url_retorno)
 
 
+#
+# DEBUG: ACTUALIZA LA BD DE LOS USUARIOS DE PANAMA
+# VOLVIENDO LOS VALORES 0 A -1
+#
 
+
+# es una evaluacion por defecto erronea:
+# todos los campos a cero por defecto
+def es_defecto_erronea(lista_tareas):
+    for tarea in lista_tareas:
+        if tarea != 0:
+            return False
+    return True
+
+
+
+def procesar_actualizacion_evaluaciones(evaluaciones):
+    for evaluacion in evaluaciones:
+        # comprobar cada campo
+        print('------ procesando tareas de la evaluacion:' + evaluacion.alumno.codigo + " | mes " + str(evaluacion.mes))
+        if evaluacion.mes > 1:
+
+            # comprobamos si es una evaluacion vacio
+            cribado = evaluacion.tipo == 'CR'
+            es_erronea = es_defecto_erronea(evaluacion.tareas())
+            if not cribado:
+                es_erronea = es_defecto_erronea(evaluacion.tareas_progreso())
+
+            if es_erronea:
+                # la evaluacion esta toda a cero, la reiniciamos
+                print('--------- reiniciando la evaluacion erronea: ' + str(evaluacion.mes))
+                evaluacion.reiniciar()
+                evaluacion.save()
+            else :
+                print('--------- evaluacion correcta: ' + str(evaluacion.mes))
+
+def actualizar_bd(request):
+    print('>>> Actualizando los valores de la bd para panama')
+
+    # obtener  los evaluadores de panama y las excepciones
+    # evaluadores = Evaluador.objects.filter(usuario__username__contains = 'panama')
+    evaluadores = Evaluador.objects.filter(
+        Q(usuario__username__contains='panama') |
+       Q(usuario__username__contains='GIGLESIAS')
+    )
+    # obtener evaluaciones por evaluador
+    for ev in evaluadores:
+        # obtenemos las evaluaciones de ese evaluador
+        # que sean del ultimo mes
+        print('--- obteniendo evaluaciones de:' + ev.usuario.username)
+
+        evaluaciones = Evaluacion_IPAL_PRIMERO.objects.filter(evaluador = ev.usuario)
+        procesar_actualizacion_evaluaciones(evaluaciones)
+
+        evaluaciones = Evaluacion_IPAM_PRIMERO.objects.filter(evaluador = ev.usuario)
+        procesar_actualizacion_evaluaciones(evaluaciones)
+
+        evaluaciones = Evaluacion_IPAE_PRIMERO.objects.filter(evaluador = ev.usuario)
+        procesar_actualizacion_evaluaciones(evaluaciones)
+
+    # retorno
+    url_retorno = server_url + 'exportar/'
+    return redirect(url_retorno)
 
 #
 # procesa una evaluacion al guardarla
@@ -664,6 +726,12 @@ def procesar_evaluacion(evaluacion):
         # el riesgo en el objeto evaluacion siempre se actualiza
         evaluacion.riesgo = riesgo
 
+        # si alguna de las tareas no esta completada (-1)
+        # tampoco evaluamos
+        if not es_evaluacion_completa(evaluacion.tareas()):
+            print('>>> El alumno no ha completado todas las tareas del cribado. No se marca como evaluado!')
+            evaluacion.riesgo = Globales.SIN_EVALUAR
+            evaluacion.evaluado = False
 
         evaluacion.alumno.save()
 
@@ -675,19 +743,47 @@ def procesar_evaluacion(evaluacion):
         print('>>> Evaluacion de progreso de ' + evaluacion.get_mes_display())
         evaluacion.tipo = Globales.PROGRESO
 
+        # si alguna de las tareas no esta completada (-1)
+        # tampoco evaluamos
+        if not es_evaluacion_completa(evaluacion.tareas_progreso()):
+            print('>>> El alumno no ha completado todas las tareas de progreso. No se marca como evaluado!')
+            evaluacion.evaluado = False
+            evaluacion.riesgo = Globales.SIN_EVALUAR
+
 
     # si no esta activada la opccion de evaluado,
     # el riesgo se sobreescrbe como SIN_EVALUAR
     if evaluacion.evaluado == False:
         evaluacion.riesgo = Globales.SIN_EVALUAR
 
+
+
+
+
     # actualizamos el campo. TODO: VER SI ESTE CAMPO ES NECESARIO
     # PORQUE REALMENTE PODEMOS USAR SIEMPRE get_mes_display()
     evaluacion.mes_leible = evaluacion.get_mes_display()
     evaluacion.save()
 
+# devuelve verdadero si la evaluacion es incompleta
+def es_evaluacion_incompleta(lista_tareas):
+    # recorremos la lista, es incompleta si:
+    # si 1: no es completa,
+    # 2: por lo menos unas de las tareas esta completa
+    for tarea in lista_tareas:
+        if tarea != -1:
+            return True
+    # en este caso esta toda a -1
+    return False
 
-
+# es una evaluacion completa
+def es_evaluacion_completa(lista_tareas):
+    # recorremos la lista, es completa si todas
+    # las tareas son diferentes a -1
+    for tarea in lista_tareas:
+        if tarea == -1:
+            return False
+    return True
 
 
 #

@@ -64,21 +64,40 @@
 
 			<td>{{ evaluacion.mes_leible }}</td>
 
-			<!-- como no hay omnibus calculado en el progreso,
-			cambiamos la etiqueta, ademas inlcuimos en este punto informacion
-			sobre si se ha evaluado en este momento -->
-
-			{% if evaluacion.evaluado == True %}
-
+			<!-- mostramos avisos si la tarea se ha completado,
+			si no se ha completado porque faltan tareas o
+			si no se ha metido ninguna tarea
+			-->
 
 			{% if evaluacion.tipo == "CR" %}
-				<td>{{ evaluacion.omnibus }}</td>
+				{% es_evaluacion_completa evaluacion.tareas as completa%}
+				{% es_evaluacion_incompleta evaluacion.tareas as incompleta%}
 			{% else %}
-				<td>Evaluado</td>
+				{% es_evaluacion_completa evaluacion.tareas_progreso as completa%}
+				{% es_evaluacion_incompleta evaluacion.tareas_progreso as incompleta%}
 			{% endif %}
 
+
+			{% if evaluacion.evaluado == True and completa %}
+
+				{% if evaluacion.tipo == "CR" %}
+					<td>{{ evaluacion.omnibus }}</td>
+				{% else %}
+					<td>Evaluado</td>
+				{% endif %}
+
 			{% else %}
-				<td>Sin evaluar</td>
+
+				<!-- se ha evaluado al alumno pero faltan tareas! -->
+
+
+				{% if incompleta %}
+					<td style="color:red"><b>Faltan tareas ⚠</b></td>
+				{% else %}
+					<!-- simplemente no se ha evaluado al alumno -->
+					<td>Sin evaluar</td>
+				{% endif %}
+
 			{% endif %}
 
 
