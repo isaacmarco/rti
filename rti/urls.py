@@ -11,8 +11,8 @@ from rtiapp.views import \
     listar_evaluaciones,nueva_evaluacion, editar_evaluacion, alta_evaluador,informe_grupo,\
     establecer_curso,actualizar_curso,compartir_grupo,actualizar_grupo_compartido,exportar,exportar_CSV, \
     cerrar_sesion,informe_individual, importar_csv, eliminar_alumno,listar_alumnos_evaluador, documentos, \
-    lista_grupos_evaluador_consejeria, compartir_grupo_centro, actualizar_curso_academico_grupo, ayuda, \
-    actualizar_bd
+    lista_grupos_evaluador_consejeria, compartir_grupo_centro, actualizar_curso_academico_grupo, ayuda
+
 
 
 
@@ -33,7 +33,7 @@ urlpatterns = [
     url(r'^exportar-csv/', exportar_CSV),
 
     # actualizar la bd para panama, QUITAR ESTO!
-    url(r'^actualizar_bd/', actualizar_bd),
+    # url(r'^actualizar_bd/', actualizar_bd),
 
 
     # informes

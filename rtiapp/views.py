@@ -591,7 +591,7 @@ def procesar_actualizacion_evaluaciones(evaluaciones):
                 evaluacion.save()
             else :
                 print('--------- evaluacion correcta: ' + str(evaluacion.mes))
-
+'''
 def actualizar_bd(request):
     print('>>> Actualizando los valores de la bd para panama')
 
@@ -619,6 +619,8 @@ def actualizar_bd(request):
     # retorno
     url_retorno = server_url + 'exportar/'
     return redirect(url_retorno)
+'''
+
 
 #
 # procesa una evaluacion al guardarla
