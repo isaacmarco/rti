@@ -1,2 +1,2 @@
-Django==1.8.1
+Django==1.11.23
 python==3.6.5
