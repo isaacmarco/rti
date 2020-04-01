@@ -123,18 +123,18 @@ def es_creador_grupo(request, grupo):
 
 def es_propietario_grupo(request, grupo):
     print('>>> Comprobando propietario del grupo')
-    evaluadores = grupo.evaluadores.all()
-    return request.user in evaluadores
-    # return True
-    #
+    # codigo para compartir aulas: lo voy a desactivar
+    # evaluadores = grupo.evaluadores.all()
     # return request.user in evaluadores
-    #return grupo.evaluador == request.user # el grupo es del usuario
+    # el nuevo codigo solo contempla al creador del grupo
+    return grupo.evaluador == request.user # el grupo es del usuario
 
 def es_propietario_alumno(request, alumno):
     print('>>> Comprobando propietario del alumno')
-    evaluadores = alumno.grupo.evaluadores.all()
-    return request.user in evaluadores
-    # return alumno.evaluador == request.user # el alumno es del usuario
+    # desactivamos el uso compartido de aulas de momento
+    # evaluadores = alumno.grupo.evaluadores.all()
+    # return request.user in evaluadores
+    return alumno.evaluador == request.user # el alumno es del usuario
 
 def es_propietario_evaluacion(request, evaluacion):
     print('>>> Comprobando propietario de la evaluacion')
@@ -958,6 +958,7 @@ def actualizar_curso_academico_grupo(request):
 
 # listar alumnos de un grupo
 def listar_alumnos_evaluador_en_grupo(request):
+    print('>>> Listando alumnos del grupo')
     # grupo al que se agregara el alumno
     id_grupo = request.GET['idGrupo']
     grupo = Grupo.objects.get(pk=id_grupo)
@@ -1142,8 +1143,13 @@ def lista_grupos_evaluador_consejeria(request):
 def lista_grupos_evaluador(request):
     print('>>> Obteniendo lista de grupos del evaluador')
     try:
-        # obtenemos los grupos del usuario
-        grupos = Grupo.objects.filter(evaluadores__pk=request.user.pk).order_by('curso_academico').reverse()
+        # obtenemos los grupos del usuario: he desactivado
+        # la opcion de que un evaluador pueda acceder a varias aulas,
+        # ahora solo puede acceder a la suya: por lo tanto el campo
+        # 'evaluadores' no se usa. solo el de 'evaluador'
+        #grupos = Grupo.objects.filter(evaluadores__pk=request.user.pk).order_by('curso_academico').reverse()
+
+        grupos = Grupo.objects.filter(evaluador__pk=request.user.pk).order_by('curso_academico').reverse()
         return render(request, 'lista_grupos.html',
                       {'grupos': grupos,
                        'index': server_url,

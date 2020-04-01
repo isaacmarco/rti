@@ -11,11 +11,104 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="form_editar_evaluacion_IPAM_SEGUNDO.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAM_SEGUNDO.html">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/obesidad/obesidad/obesidadapp/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="9" column="113" selection-start-line="9" selection-start-column="113" selection-end-line="9" selection-end-column="113" />
+            <state relative-caret-position="2430">
+              <caret line="91" column="86" selection-start-line="91" selection-start-column="86" selection-end-line="91" selection-end-column="86" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/obesidad/obesidad/obesidadapp/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3456">
+              <caret line="145" selection-start-line="145" selection-end-line="145" />
+              <folding>
+                <element signature="e#0#36#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/obesidad/obesidad/obesidadapp/admin.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="621">
+              <caret line="24" column="31" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="subir_foto_receta.html" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/obesidad/obesidad/templates/subir_foto_receta.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="189">
+              <caret line="7" column="43" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="nueva_receta.html" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/obesidad/obesidad/templates/nueva_receta.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1080">
+              <caret line="40" column="8" selection-start-line="40" selection-start-column="8" selection-end-line="40" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="lista_actividades.html" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/obesidad/obesidad/templates/lista_actividades.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="891">
+              <caret line="33" selection-start-line="42" selection-start-column="103" selection-end-line="42" selection-end-column="104" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/obesidad/obesidad/obesidadapp/forms.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="621">
+              <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/obesidad/obesidad/obesidadapp/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="245">
+              <caret line="49" column="66" selection-start-line="49" selection-start-column="66" selection-end-line="49" selection-end-column="66" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="lista_grupos.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../templates/lista_grupos.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="126" column="17" selection-start-line="126" selection-start-column="6" selection-end-line="126" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -32,36 +125,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>riesgo_PRIMERO</find>
-      <find>omnibus_PRIMERO</find>
-      <find>Group</find>
-      <find>colores_riesgo</find>
-      <find>def info</find>
-      <find>&quot;fillColors&quot;: &quot;#538DE0&quot;,</find>
-      <find>fff200</find>
-      <find>ERROR_ELIMINAR_ALUMNO</find>
-      <find>SEXO_OPCIONES</find>
-      <find>FormAlumnoConsejeria</find>
-      <find>ERROR_CONSEJERIA_EDITAR_ALUMNO</find>
-      <find>nuevo_alu</find>
-      <find>lista_ev</find>
-      <find>get_server_url</find>
-      <find>))</find>
-      <find>0.173477</find>
-      <find>nueva</find>
-      <find>nueva:</find>
-      <find>ERROR_ALUMNO_YA_TIENE_EVALUACION_ANUAL</find>
-      <find>r(0</find>
-      <find>min_value=0</find>
-      <find>omnibus_redondeado</find>
-      <find>procesar_evaluacion</find>
-      <find>CRIBADO</find>
-      <find>EVALUACION_OPCIONES</find>
-      <find>NOVIEMBRE</find>
       <find>FECHA_OPCIONES</find>
       <find>reinic</find>
       <find>es_defecto_erronea</find>
       <find>es_evaluacion_completa</find>
+      <find>nuevo</find>
+      <find>es_creador_grupo</find>
+      <find>ERROR_LISTADO_GRUPOS</find>
+      <find>pk</find>
+      <find>nombre_usuario_valido</find>
+      <find>vista_rec</find>
+      <find>vista_aula</find>
+      <find>actividad_recreos_activos</find>
+      <find>countChecked</find>
+      <find>galeria</find>
+      <find>aula</find>
+      <find>nuevo_aula</find>
+      <find>dar_puntuacion_aula</find>
+      <find>rank</find>
+      <find>_aulas</find>
+      <find>listar_</find>
+      <find>registrar_actividad_aula</find>
+      <find>lista_recetas</find>
+      <find>ObjectDoesNotExist</find>
+      <find>group</find>
+      <find>Group</find>
+      <find>lista_rece</find>
+      <find>usuario_es_docente</find>
+      <find>foto</find>
+      <find>cleaned_data</find>
+      <find>evaluadores</find>
     </findStrings>
     <replaceStrings>
       <replace>IN</replace>
@@ -91,50 +184,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/../templates/importar_evaluadores.html" />
-        <option value="$PROJECT_DIR$/../templates/ayuda.html" />
-        <option value="$PROJECT_DIR$/../templates/base.html" />
-        <option value="$PROJECT_DIR$/../templates/form_editar_evaluador.html" />
-        <option value="$PROJECT_DIR$/../templates/signup.html" />
-        <option value="$PROJECT_DIR$/../templates/informe_individual_IPAL_INFANTIL.html" />
-        <option value="$PROJECT_DIR$/informes.py" />
-        <option value="$PROJECT_DIR$/../templates/informe_individual_IPAM_PRIMERO.html" />
-        <option value="$PROJECT_DIR$/../templates/informe_individual_IPAM_INFANTIL.html" />
-        <option value="$PROJECT_DIR$/../templates/informe_individual_IPAM_SEGUNDO.html" />
-        <option value="$PROJECT_DIR$/../templates/informe_individual_IPAM_TERCERO.html" />
-        <option value="$PROJECT_DIR$/../templates/informe_individual_IPAL_PRIMERO.html" />
-        <option value="$PROJECT_DIR$/../templates/informe_individual_IPAL_SEGUNDO.html" />
-        <option value="$PROJECT_DIR$/grupos.py" />
-        <option value="$PROJECT_DIR$/omnibus_ipae.py" />
-        <option value="$PROJECT_DIR$/omnibus_ipal.py" />
-        <option value="$PROJECT_DIR$/omnibus_ipam.py" />
-        <option value="$PROJECT_DIR$/../templates/informe_grupo.html" />
-        <option value="$PROJECT_DIR$/../templates/lista_alumnos_grupo.html" />
-        <option value="$PROJECT_DIR$/../templates/informe_individual_IPAE_PRIMERO.html" />
-        <option value="$PROJECT_DIR$/../templates/informe_individual_IPAE_SEGUNDO.html" />
-        <option value="$PROJECT_DIR$/../templates/informe_individual_IPAE_TERCERO.html" />
-        <option value="$PROJECT_DIR$/../templates/principal.html" />
-        <option value="$PROJECT_DIR$/riesgo_ipae.py" />
-        <option value="$PROJECT_DIR$/riesgo_ipam.py" />
-        <option value="$PROJECT_DIR$/riesgo_ipal.py" />
-        <option value="$PROJECT_DIR$/encabezados.py" />
-        <option value="$PROJECT_DIR$/datos.py" />
-        <option value="$PROJECT_DIR$/constantes.py" />
-        <option value="$PROJECT_DIR$/admin.py" />
-        <option value="$PROJECT_DIR$/forms.py" />
-        <option value="$PROJECT_DIR$/../templates/nuevo_grupo.html" />
-        <option value="$PROJECT_DIR$/../templates/form_grupo.html" />
-        <option value="$PROJECT_DIR$/../templates/form_editar_grupo.html" />
-        <option value="$PROJECT_DIR$/../templates/listado_actualizacion.html" />
-        <option value="$PROJECT_DIR$/templatetags/app_filters.py" />
-        <option value="$PROJECT_DIR$/../templates/lista_evaluaciones.html" />
-        <option value="$PROJECT_DIR$/models.py" />
-        <option value="$PROJECT_DIR$/../rti/urls.py" />
-        <option value="$PROJECT_DIR$/views.py" />
-        <option value="$PROJECT_DIR$/../templates/exportar_datos.html" />
-        <option value="$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAL_INFANTIL.html" />
-        <option value="$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAE_TERCERO.html" />
-        <option value="$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAE_SEGUNDO.html" />
         <option value="$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAE_PRIMERO.html" />
         <option value="$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAM_TERCERO.html" />
         <option value="$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAL_PRIMERO.html" />
@@ -142,12 +191,56 @@
         <option value="$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAM_INFANTIL.html" />
         <option value="$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAM_PRIMERO.html" />
         <option value="$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAM_SEGUNDO.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/obesidad/obesidad.py" />
+        <option value="$USER_HOME$/obesidad/obesidad/obesidad/urls.py" />
+        <option value="$USER_HOME$/obesidad/obesidad/templates/error.html" />
+        <option value="$USER_HOME$/pobesidad/pobesidad/pobesidadapp/admin.py" />
+        <option value="$USER_HOME$/pobesidad/pobesidad/pobesidadapp/urls.py" />
+        <option value="$USER_HOME$/pobesidad/pobesidad/pobesidadapp/views.py" />
+        <option value="$USER_HOME$/pobesidad/pobesidad/pobesidadapp/forms.py" />
+        <option value="$USER_HOME$/pobesidad/pobesidad/pobesidadapp/models.py" />
+        <option value="$PROJECT_DIR$/../templates/principal.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/templates/nuevo_alumno.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/templates/editar_alumno.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/templates/nuevo_registro_peso.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/obesidadapp/templatetags/app_filters.py" />
+        <option value="$USER_HOME$/obesidad/obesidad/templates/editar_registro_peso.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/templates/nuevo_docente.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/templates/nuevo_aula.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/templates/editar_aula.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/templates/lista_registros_peso.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/templates/vista_recreos_activos.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/templates/lista_docentes.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/templates/principal.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/templates/base.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/templates/registration/login.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/templates/editar_receta.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/templates/editar_docente.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/templates/ranking_aulas.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/templates/lista_aulas.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/templates/vista_receta.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/templates/vista_aula.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/templates/actividad.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/templates/nueva_receta.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/templates/lista_actividades.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/templates/actividad_recreos_activos.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/templates/actividad_desayunos_saludables.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/templates/lista_recetas_aula.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/templates/galeria_fotos.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/templates/subir_foto_receta.html" />
+        <option value="$USER_HOME$/obesidad/obesidad/obesidadapp/forms.py" />
+        <option value="$USER_HOME$/obesidad/obesidad/obesidadapp/views.py" />
+        <option value="$USER_HOME$/obesidad/obesidad/obesidadapp/models.py" />
+        <option value="$USER_HOME$/obesidad/obesidad/obesidadapp/admin.py" />
+        <option value="$USER_HOME$/obesidad/obesidad/obesidadapp/urls.py" />
+        <option value="$PROJECT_DIR$/../templates/lista_grupos.html" />
+        <option value="$PROJECT_DIR$/views.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="120" />
-    <option name="y" value="65" />
+    <option name="x" value="575" />
+    <option name="y" value="135" />
     <option name="width" value="1750" />
     <option name="height" value="970" />
   </component>
@@ -159,6 +252,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="ToolWindowEvent Log.ShowToolbar" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/constantes.py" />
     <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
@@ -219,384 +313,377 @@
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13151042" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Python Console" order="7" />
     </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../templates/form_editar_evaluador.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="7" column="64" lean-forward="true" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/lista_evaluaciones_IPAE_primero.html" />
-    <entry file="file://$PROJECT_DIR$/../templates/lista_grupos.html">
+    <entry file="file://$PROJECT_DIR$/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="27">
-          <caret line="10" column="88" selection-start-line="10" selection-start-column="88" selection-end-line="10" selection-end-column="88" />
+          <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="43" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/informe_individual_IPAM_INFANTIL.html">
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/error.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="449">
-          <caret line="1051" column="52" selection-start-line="1051" selection-start-column="52" selection-end-line="1051" selection-end-column="52" />
+        <state relative-caret-position="270">
+          <caret line="10" column="24" lean-forward="true" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/informe_individual_IPAM_PRIMERO.html">
+    <entry file="file://$USER_HOME$/pobesidad/pobesidad/manage.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="225" lean-forward="true" selection-start-line="225" selection-end-line="225" />
+        <state relative-caret-position="513">
+          <caret line="20" column="10" lean-forward="true" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/informe_individual_IPAM_TERCERO.html">
+    <entry file="file://$USER_HOME$/pobesidad/pobesidad/pobesidadapp/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="875" column="54" selection-start-line="875" selection-start-column="54" selection-end-line="875" selection-end-column="54" />
+        <state relative-caret-position="594">
+          <caret line="26" column="129" selection-start-line="26" selection-start-column="129" selection-end-line="26" selection-end-column="129" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/informe_individual_IPAM_SEGUNDO.html">
+    <entry file="file://$USER_HOME$/pobesidad/pobesidad/pobesidadapp/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="887" column="52" selection-start-line="887" selection-start-column="52" selection-end-line="887" selection-end-column="52" />
+        <state relative-caret-position="216">
+          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/informes.py">
+    <entry file="file://$PROJECT_DIR$/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="83" column="49" selection-start-line="83" selection-start-column="49" selection-end-line="83" selection-end-column="49" />
+        <state relative-caret-position="189">
+          <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/informe_individual_IPAL_PRIMERO.html">
+    <entry file="file://$USER_HOME$/pobesidad/pobesidad/pobesidad/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2673">
-          <caret line="279" lean-forward="true" selection-start-line="279" selection-end-line="279" />
+        <state>
+          <caret column="14" selection-start-column="14" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/informe_individual_IPAL_SEGUNDO.html">
+    <entry file="file://$USER_HOME$/pobesidad/pobesidad/pobesidadapp/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25596">
-          <caret line="1170" column="44" selection-start-line="1170" selection-start-column="44" selection-end-line="1170" selection-end-column="44" />
+        <state relative-caret-position="324">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/informe_individual_IPAL_INFANTIL.html">
+    <entry file="file://$USER_HOME$/pobesidad/pobesidad/pobesidadapp/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="945">
-          <caret line="35" column="24" lean-forward="true" selection-start-line="35" selection-start-column="24" selection-end-line="35" selection-end-column="24" />
+        <state relative-caret-position="216">
+          <caret line="9" column="53" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="53" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/informe_grupo.html">
+    <entry file="file://$USER_HOME$/pobesidad/pobesidad/pobesidadapp/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        <state relative-caret-position="3350">
+          <caret line="175" column="48" lean-forward="true" selection-start-line="175" selection-start-column="12" selection-end-line="175" selection-end-column="48" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/form_editar_alumno.html">
+    <entry file="file://$USER_HOME$/obesidad/obesidad/obesidad/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="13" column="9" lean-forward="true" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2079">
-          <caret line="77" column="52" selection-start-line="77" selection-start-column="52" selection-end-line="77" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/informe_individual_IPAE_PRIMERO.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="679" column="2" selection-start-line="679" selection-start-column="2" selection-end-line="679" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/informe_individual_IPAE_SEGUNDO.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
-          <caret line="199" column="32" selection-start-line="199" selection-start-column="32" selection-end-line="199" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/informe_individual_IPAE_TERCERO.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="773" column="2" selection-start-line="773" selection-start-column="2" selection-end-line="773" selection-end-column="2" />
+        <state relative-caret-position="54">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../templates/principal.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
-          <caret line="63" selection-start-line="63" selection-end-line="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/riesgo_ipam.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1242">
-          <caret line="46" column="29" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/riesgo_ipal.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="124" selection-start-line="124" selection-end-line="124" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/riesgo_ipae.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="85" column="5" selection-start-line="85" selection-start-column="5" selection-end-line="85" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/encabezados.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="999">
-          <caret line="37" column="67" selection-start-line="37" selection-start-column="67" selection-end-line="37" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/datos.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="171" column="38" lean-forward="true" selection-start-line="171" selection-start-column="38" selection-end-line="171" selection-end-column="38" />
+          <caret line="90" column="12" selection-start-line="90" selection-start-column="12" selection-end-line="90" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2943">
-          <caret line="116" column="29" selection-start-line="116" selection-start-column="29" selection-end-line="116" selection-end-column="29" />
-        </state>
+        <state relative-caret-position="-3157" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/forms.py">
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/nuevo_alumno.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="303" lean-forward="true" selection-start-line="303" selection-end-line="303" />
+        <state relative-caret-position="81">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/constantes.py">
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/editar_alumno.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="34" column="10" selection-start-line="34" selection-start-column="10" selection-end-line="34" selection-end-column="10" />
+        <state relative-caret-position="81">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/omnibus_ipae.py">
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/vista_recreos_activos2.html" />
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/editar_registro_peso.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3240">
-          <caret line="120" column="14" lean-forward="true" selection-start-line="120" selection-start-column="14" selection-end-line="120" selection-end-column="14" />
+        <state relative-caret-position="-243">
+          <caret line="6" column="46" selection-start-line="6" selection-start-column="46" selection-end-line="6" selection-end-column="46" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/omnibus_ipal.py">
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/nuevo_registro_peso.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1377">
-          <caret line="51" column="16" lean-forward="true" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="16" />
+        <state relative-caret-position="137">
+          <caret line="17" column="26" lean-forward="true" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/omnibus_ipam.py">
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/nuevo_docente.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2997">
-          <caret line="111" lean-forward="true" selection-start-line="111" selection-end-line="111" />
+        <state relative-caret-position="459">
+          <caret line="35" column="102" selection-start-line="35" selection-start-column="102" selection-end-line="35" selection-end-column="102" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/lista_alumnos_grupo.html">
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/nuevo_aula.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="119" lean-forward="true" selection-start-line="119" selection-end-line="119" />
+        <state relative-caret-position="567">
+          <caret line="33" column="123" selection-start-line="33" selection-start-column="123" selection-end-line="33" selection-end-column="123" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/nuevo_grupo.html">
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/vista_recreos_activos.html" />
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="9" column="10" lean-forward="true" selection-start-line="6" selection-start-column="2" selection-end-line="9" selection-end-column="10" />
-        </state>
+        <state relative-caret-position="-336" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/form_editar_grupo.html">
+    <entry file="file://$USER_HOME$/obesidad/obesidad/obesidadapp/templatetags/app_filters.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="10" column="10" lean-forward="true" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
+        <state relative-caret-position="297">
+          <caret line="12" column="23" lean-forward="true" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/form_grupo.html">
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/lista_docentes.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="13" column="18" selection-start-line="3" selection-start-column="3" selection-end-line="6" selection-end-column="10" />
+        <state relative-caret-position="297">
+          <caret line="11" column="70" selection-start-line="11" selection-start-column="70" selection-end-line="11" selection-end-column="70" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/lista_alumnos.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/listado_actualizacion.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="70" selection-start-line="70" selection-end-line="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18495">
-          <caret line="689" selection-start-line="689" selection-end-line="689" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../rti/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="35" column="43" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="43" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/exportar_datos.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="65" selection-start-line="65" selection-end-line="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/lista_evaluaciones.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="69" column="15" selection-start-line="69" selection-start-column="15" selection-end-line="69" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templatetags/app_filters.py">
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/lista_registros_peso.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
-          <caret line="28" column="53" selection-start-line="28" selection-start-column="53" selection-end-line="28" selection-end-column="53" />
+          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views.py">
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/principal.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="638" column="37" selection-start-line="638" selection-start-column="37" selection-end-line="638" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAL_INFANTIL.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="113" lean-forward="true" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="113" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAE_TERCERO.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="8" column="113" selection-start-line="8" selection-start-column="113" selection-end-line="8" selection-end-column="113" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAE_SEGUNDO.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="8" column="113" selection-start-line="8" selection-start-column="113" selection-end-line="8" selection-end-column="113" />
+        <state relative-caret-position="540">
+          <caret line="20" column="44" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="44" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAE_PRIMERO.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
-          <caret line="8" column="113" selection-start-line="8" selection-start-column="113" selection-end-line="8" selection-end-column="113" />
+          <caret line="11" column="30" lean-forward="true" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAM_TERCERO.html">
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/registration/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="648">
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/editar_aula.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-93">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/editar_docente.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="32" column="8" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/ranking_aulas.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="34" column="20" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2187">
+          <caret line="81" column="60" selection-start-line="81" selection-start-column="59" selection-end-line="81" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/lista_aulas.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/vista_receta.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="702">
+          <caret line="26" column="82" selection-start-line="26" selection-start-column="82" selection-end-line="26" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/editar_receta.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="243">
-          <caret line="9" column="113" selection-start-line="9" selection-start-column="113" selection-end-line="9" selection-end-column="113" />
+          <caret line="9" column="6" lean-forward="true" selection-start-line="5" selection-end-line="9" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAL_PRIMERO.html">
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/actividad.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="8" column="14" lean-forward="true" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
+        <state relative-caret-position="231">
+          <caret line="25" column="83" lean-forward="true" selection-start-line="25" selection-start-column="83" selection-end-line="25" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/actividad_recreos_activos.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2808">
+          <caret line="104" column="25" selection-start-line="104" selection-start-column="25" selection-end-line="104" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/actividad_desayunos_saludables.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2916">
+          <caret line="108" column="101" selection-start-line="108" selection-start-column="101" selection-end-line="108" selection-end-column="101" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/lista_recetas_aula.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1377">
+          <caret line="51" column="12" selection-start-line="51" selection-start-column="12" selection-end-line="51" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/galeria_fotos.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="20" column="19" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/vista_aula.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1431">
+          <caret line="53" column="79" selection-start-line="53" selection-start-column="78" selection-end-line="53" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/lista_actividades.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="891">
+          <caret line="33" selection-start-line="42" selection-start-column="103" selection-end-line="42" selection-end-column="104" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/subir_foto_receta.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="7" column="43" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/obesidad/obesidad/templates/nueva_receta.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1080">
+          <caret line="40" column="8" selection-start-line="40" selection-start-column="8" selection-end-line="40" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/obesidad/obesidad/obesidadapp/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/obesidad/obesidad/obesidadapp/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3456">
+          <caret line="145" selection-start-line="145" selection-end-line="145" />
           <folding>
-            <element signature="n#style#0;n#b#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#0#36#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAL_SEGUNDO.html">
+    <entry file="file://$USER_HOME$/obesidad/obesidad/obesidadapp/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2430">
+          <caret line="91" column="86" selection-start-line="91" selection-start-column="86" selection-end-line="91" selection-end-column="86" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/obesidad/obesidad/obesidadapp/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="24" column="31" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/obesidad/obesidad/obesidadapp/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="49" column="66" selection-start-line="49" selection-start-column="66" selection-end-line="49" selection-end-column="66" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../templates/lista_grupos.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
-          <caret line="9" column="113" selection-start-line="9" selection-start-column="113" selection-end-line="9" selection-end-column="113" />
+          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAM_INFANTIL.html">
+    <entry file="file://$PROJECT_DIR$/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="10" column="113" selection-start-line="10" selection-start-column="113" selection-end-line="10" selection-end-column="113" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAM_PRIMERO.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="113" selection-start-line="9" selection-start-column="113" selection-end-line="9" selection-end-column="113" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/form_editar_evaluacion_IPAM_SEGUNDO.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="9" column="113" selection-start-line="9" selection-start-column="113" selection-end-line="9" selection-end-column="113" />
+        <state relative-caret-position="216">
+          <caret line="126" column="17" selection-start-line="126" selection-start-column="6" selection-end-line="126" selection-end-column="17" />
         </state>
       </provider>
     </entry>
